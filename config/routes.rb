@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   use_doorkeeper
   devise_for :users
   resources :books
