@@ -14,7 +14,7 @@ class PostsTest < ApplicationSystemTestCase
     visit posts_url
     click_on "New post"
 
-    check "Auciton" if @post.auciton
+    check "auction" if @post.auction
     fill_in "Body", with: @post.body
     fill_in "Ends at", with: @post.ends_at
     fill_in "User", with: @post.user_id
@@ -28,7 +28,7 @@ class PostsTest < ApplicationSystemTestCase
     visit post_url(@post)
     click_on "Edit this post", match: :first
 
-    check "Auciton" if @post.auciton
+    check "auction" if @post.auction
     fill_in "Body", with: @post.body
     fill_in "Ends at", with: @post.ends_at
     fill_in "User", with: @post.user_id

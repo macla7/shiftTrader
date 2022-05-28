@@ -1,8 +1,13 @@
-class Api::V1::PostsController < ApplicationController
+class Api::V1::PostsController < ApiController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
   def index
+    p "STEP 1"
+    p request.cookies
+    p "STEP 2"
+    p current_user
+    p "STEP 3"
     @posts = Post.all
     render json: @posts
   end
@@ -22,7 +27,8 @@ class Api::V1::PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    p "HEELLLLLLOOOOOO"
+    @post = current_user.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -66,6 +72,6 @@ class Api::V1::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :user_id, :ends_at, :auciton)
+      params.require(:post).permit(:body, :ends_at, :auction)
     end
 end

@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[7.0]
       t.text :body
       t.references :user, null: false, foreign_key: true
       t.datetime :ends_at, null: false
-      t.boolean :auciton, null: false
+      t.boolean :auction, null: false
 
       t.timestamps
     end

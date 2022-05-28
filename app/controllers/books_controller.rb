@@ -4,6 +4,10 @@ class BooksController < ApplicationController
 
   # GET /books or /books.json
   def index
+        p "STEP 1"
+    p request.cookies
+    p "STEP 2"
+    p current_user
     @books = Book.all
   end
 

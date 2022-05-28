@@ -3,6 +3,10 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+    p "STEP 1"
+    p request.cookies
+    p "STEP 2"
+    p current_user
     @posts = Post.all
   end
 
@@ -65,6 +69,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :user_id, :ends_at, :auciton)
+      params.require(:post).permit(:body, :user_id, :ends_at, :auction)
     end
 end
