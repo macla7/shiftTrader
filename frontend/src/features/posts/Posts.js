@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from "../../app/hooks";
 import Post from "./Post";
 import PostForm from "./PostForm";
@@ -10,8 +10,10 @@ import {
   Statuses,
   updatePostAsync,
 } from "./postSlice";
+import { getters } from "../sessions/sessionSlice";
 
 function Posts() {
+  const authToken = useSelector(getters.getAuthToken);
   const posts = useAppSelector(selectPosts);
   const status = useAppSelector(selectStatus);
   const dispatch = useDispatch();
@@ -19,8 +21,9 @@ function Posts() {
   const [postToEdit, setPostToEdit] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchPostsAsync());
-  }, [dispatch]);
+    console.log(authToken);
+    dispatch(fetchPostsAsync(authToken));
+  }, [dispatch, authToken, posts.length]);
 
   // NOT SURE ABOUT THIS OPTIONAL PARAMETER
   function toggleEditForm(post_id = null) {

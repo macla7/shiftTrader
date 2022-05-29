@@ -1,6 +1,8 @@
 module DoorkeeperRegisterable
   extend ActiveSupport::Concern
 
+  SECRET_KEY = Rails.application.secret_key_base
+
   def generate_refresh_token
     loop do
       token = SecureRandom.hex(32)
@@ -20,11 +22,11 @@ module DoorkeeperRegisterable
         id: user.id,
         email: user.email,
         role: user.role,
-        access_token: access_token.token,
+        access_token: jwt_encode(access_token.token),
         token_type: token_type,
         expires_in: access_token.expires_in,
-        refresh_token: access_token.refresh_token,
+        refresh_token: jwt_encode(access_token.refresh_token),
         created_at: access_token.created_at.to_time.to_i
       }
-    end
+  end
 end

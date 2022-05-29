@@ -10,13 +10,7 @@ export async function registerUser(payload) {
     },
     body: JSON.stringify({ payload }),
   })
-    .then(async (response) => {
-      let res = {
-        body: await response.json(),
-        auth_jwt: await response.headers.values("Authorization"),
-      };
-      return res;
-    })
+    .then(async (response) => response.json())
     .catch((error) => {
       console.log("Error: ", error);
       // Not a longer term proper soloution

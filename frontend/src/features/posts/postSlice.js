@@ -27,7 +27,7 @@ const initialState = {
 
 export const fetchPostsAsync = createAsyncThunk(
   "posts/fetchPosts",
-  async () => {
+  async (payload) => {
     const response = await fetchPosts();
     return response;
   }

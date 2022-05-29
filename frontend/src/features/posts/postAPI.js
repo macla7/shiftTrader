@@ -1,10 +1,13 @@
 const API_URL = "http://localhost:3000/api/v1";
 
-export async function fetchPosts() {
+export async function fetchPosts(payload) {
+  console.log(payload);
+  console.log(localStorage.getItem("auth_token"));
   return fetch(`${API_URL}/posts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: localStorage.getItem("auth_token"),
     },
   })
     .then((response) => response.json())
@@ -17,11 +20,13 @@ export async function fetchPosts() {
 
 export async function createPost(payload) {
   const post = payload.post;
+  console.log(payload);
 
   return fetch(`${API_URL}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: localStorage.getItem("auth_token"),
     },
     body: JSON.stringify({ post }),
   })

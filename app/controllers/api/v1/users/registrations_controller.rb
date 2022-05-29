@@ -5,6 +5,7 @@ module Api
         skip_before_action :doorkeeper_authorize!, only: %i[create]
 
         include DoorkeeperRegisterable
+        include JsonWebToken
 
         def create
           client_app = Doorkeeper::Application.find_by(uid: user_params[:client_id])
