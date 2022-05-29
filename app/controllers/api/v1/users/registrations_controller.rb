@@ -26,7 +26,7 @@ module Api
         private
 
         def user_params
-          params.permit(:email, :password, :client_id)
+          params.require(:payload).permit(:email, :password, :client_id)
         end
       end
     end
