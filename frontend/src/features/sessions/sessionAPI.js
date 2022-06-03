@@ -24,7 +24,7 @@ export async function loginUser(payload) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ payload }),
+    body: JSON.stringify(payload),
   })
     .then((response) => response.json())
     .catch((error) => {
@@ -35,7 +35,7 @@ export async function loginUser(payload) {
 }
 
 export async function logoutUser(payload) {
-  const auth_token = payload.auth_token;
+  const auth_token = payload.token;
 
   return fetch(`${API_URL}/oauth/revoke.json`, {
     method: "POST",
@@ -43,7 +43,7 @@ export async function logoutUser(payload) {
       "Content-Type": "application/json",
       Authorization: auth_token,
     },
-    body: JSON.stringify({ payload }),
+    body: JSON.stringify(payload),
   })
     .then((response) => response.json())
     .catch((error) => {
@@ -54,12 +54,12 @@ export async function logoutUser(payload) {
 }
 
 export async function loginUserWithToken(payload) {
-  console.log("ARE WE HEERE");
-  return fetch(`${BASE_URL}/member-data.json`, {
+  console.log("calling the login user with token method?");
+  return fetch(`${API_URL}/users/session-data`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${payload.auth_token}`,
+      Authorization: `${payload.auth_token}`,
     },
   })
     .then((response) => response.json())

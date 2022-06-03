@@ -8,7 +8,7 @@ import {
 } from "./sessionAPI";
 
 const client_id = "2d8pHiMnIytZQ5neDtmJ_TdnOzygmowzwrx-R4eGz9o";
-const client_secret = "KSJ-Ya-p08szNS3mfQSLf3cXPuDJlPdqNPrLgG28iR8";
+const client_secret = "sVZxVgCxaFsoaLWQu4FLlaxjfwPlpuER199YUFHya3M";
 
 const initialState = {
   auth_token: null,
@@ -43,7 +43,7 @@ export const logoutUserAsync = createAsyncThunk(
   "sessions/logoutUser",
   async () => {
     const payload = {
-      token: getters.getAuthToken,
+      token: localStorage.auth_token,
       client_id: client_id,
       client_secret: client_secret,
     };
@@ -81,7 +81,12 @@ export const sessionSlice = createSlice({
       // you got the thing
       .addCase(registerUserAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.user = action.payload.user;
+          // not liking this atm cause initialState is const....
+          // how is this supposed to work tho.. check out thunks..
+          draftState["user"] = {
+            id: action.payload.id,
+            email: action.payload.email,
+          };
           draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
           localStorage.setItem("auth_token", action.payload.access_token);
@@ -102,13 +107,13 @@ export const sessionSlice = createSlice({
       // you got the thing
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.user = action.payload.user;
-          draftState.auth_token = action.payload.headers.authorization;
+          // draftState["user"] = {
+          //   id: action.payload.id,
+          //   email: action.payload.email,
+          // };
+          draftState.auth_token = action.access_token;
           // default headers set >>>??!!
-          localStorage.setItem(
-            "auth_token",
-            action.payload.headers.authorization
-          );
+          localStorage.setItem("auth_token", action.payload.access_token);
         });
       })
       // error
@@ -151,8 +156,10 @@ export const sessionSlice = createSlice({
       // you got the thing
       .addCase(loginUserWithTokenAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          console.log("ARE WEEEEEEEEE HEERE");
-          draftState.user = action.payload.user;
+          draftState["user"] = {
+            id: action.payload.user.id,
+            email: action.payload.user.email,
+          };
           draftState.auth_token = localStorage.getItem("auth_token");
           // default headers set >>>??!!
         });
@@ -179,7 +186,7 @@ export const getters = {
   isLoggedIn(state) {
     const loggedOut =
       state.sessions.auth_token == null ||
-      state.sessions.auth_token == JSON.stringify(null);
+      state.sessions.auth_token === JSON.stringify(null);
     return !loggedOut;
   },
 };

@@ -10,15 +10,15 @@ import { loginUserWithTokenAsync } from "./features/sessions/sessionSlice";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-// let localAuthToken = localStorage.auth_token;
-// let cookieExists = localAuthToken !== "undefined" && localAuthToken !== null;
-// if (cookieExists) {
-//   const auth_token = localStorage.getItem("auth_token");
-//   const authTokenExists = auth_token !== "undefined" && auth_token !== null;
-//   if (authTokenExists) {
-//     store.dispatch(loginUserWithTokenAsync(auth_token));
-//   }
-// }
+let localAuthToken = localStorage.auth_token;
+let cookieExists = localAuthToken !== "undefined" && localAuthToken !== null;
+if (cookieExists) {
+  const auth_token = localStorage.getItem("auth_token");
+  const authTokenExists = auth_token !== "undefined" && auth_token !== null;
+  if (authTokenExists) {
+    store.dispatch(loginUserWithTokenAsync(auth_token));
+  }
+}
 
 root.render(
   <React.StrictMode>
