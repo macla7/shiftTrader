@@ -19,9 +19,11 @@ module DoorkeeperRegisterable
       scopes: '')
       
       {
-        id: user.id,
-        email: user.email,
-        role: user.role,
+        user: {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+        },
         access_token: access_token.token,
         token_type: token_type,
         expires_in: access_token.expires_in,

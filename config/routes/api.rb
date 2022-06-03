@@ -3,6 +3,7 @@ namespace :api do
     scope :users, module: :users do
       post '/', to: 'registrations#create', as: :user_registration
       get '/session-data', to: 'sessions#show'
+      post '/session-data', to: 'sessions#create'
     end
 
     resources :books
@@ -17,6 +18,7 @@ end
 scope :api do
   scope :v1 do
     use_doorkeeper do
+      controllers tokens: 'tokens'
       skip_controllers :authorization, :applications, :authorized_applications
     end
   end

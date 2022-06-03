@@ -19,7 +19,7 @@ export async function registerUser(payload) {
 }
 
 export async function loginUser(payload) {
-  return fetch(`${API_URL}/oauth/token.json`, {
+  return fetch(`${API_URL}/users/session-data`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -85,8 +85,8 @@ export const sessionSlice = createSlice({
           // not liking this atm cause initialState is const....
           // how is this supposed to work tho.. check out thunks..
           draftState["user"] = {
-            id: action.payload.id,
-            email: action.payload.email,
+            id: action.payload.user.id,
+            email: action.payload.user.email,
           };
           draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
@@ -112,7 +112,7 @@ export const sessionSlice = createSlice({
             id: action.payload.user.id,
             email: action.payload.user.email,
           };
-          draftState.auth_token = action.access_token;
+          draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
           localStorage.setItem("auth_token", action.payload.access_token);
         });
