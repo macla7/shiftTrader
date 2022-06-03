@@ -17,3 +17,11 @@ User.first_or_create(email: 'mitch@bing.com',
   password: 'Bing123!',
   password_confirmation: 'Bing123!',
   role: User.roles[:admin])
+User.create(email: 'bob@bing.com',
+  password: 'Bing123!',
+  password_confirmation: 'Bing123!',
+  role: User.roles[:user])
+User.create(email: 'fred@bing.com',
+  password: 'Bing123!',
+  password_confirmation: 'Bing123!',
+  role: User.roles[:user])
