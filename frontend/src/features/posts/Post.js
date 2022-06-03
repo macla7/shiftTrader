@@ -28,7 +28,7 @@ function Post(props) {
     setBody(props.post.body);
   }
 
-  const bodyElement = <p>{props.post.body}</p>;
+  const bodyElement = <p>{body}</p>;
 
   const editableBody = (
     <textarea value={body} onChange={(e) => setBody(e.target.value)} />

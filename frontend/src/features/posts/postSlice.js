@@ -27,7 +27,7 @@ const initialState = {
 
 export const fetchPostsAsync = createAsyncThunk(
   "posts/fetchPosts",
-  async (payload) => {
+  async () => {
     const response = await fetchPosts();
     return response;
   }
@@ -74,6 +74,7 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchPostsAsync.fulfilled, (state, action) => {
+        console.log(action.payload);
         return produce(state, (draftState) => {
           draftState.posts = action.payload;
           draftState.status = Statuses.UpToDate;

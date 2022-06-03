@@ -34,7 +34,6 @@ export const loginUserAsync = createAsyncThunk(
     payload.grant_type = "password";
     payload.client_id = client_id;
     payload.client_secret = client_secret;
-    console.log(payload);
     const response = await loginUser(payload);
     return response;
   }

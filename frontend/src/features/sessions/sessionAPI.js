@@ -2,7 +2,6 @@ const API_URL = "http://localhost:3000/api/v1";
 const BASE_URL = "http://localhost:3000";
 
 export async function registerUser(payload) {
-  console.log(payload);
   return fetch(`${API_URL}/users`, {
     method: "POST",
     headers: {
@@ -54,7 +53,7 @@ export async function logoutUser(payload) {
 }
 
 export async function loginUserWithToken(payload) {
-  console.log("calling the login user with token method?");
+  console.log("heelllllllllllllllooooooooooo");
   console.log(payload);
   return fetch(`${API_URL}/users/session-data`, {
     method: "GET",

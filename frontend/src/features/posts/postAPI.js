@@ -1,13 +1,11 @@
 const API_URL = "http://localhost:3000/api/v1";
 
-export async function fetchPosts(payload) {
-  console.log(payload);
-  console.log(localStorage.getItem("auth_token"));
+export async function fetchPosts() {
   return fetch(`${API_URL}/posts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("auth_token"),
+      Authorization: `Bearer ${localStorage.auth_token}`,
     },
   })
     .then((response) => response.json())
@@ -20,13 +18,12 @@ export async function fetchPosts(payload) {
 
 export async function createPost(payload) {
   const post = payload.post;
-  console.log(payload);
 
   return fetch(`${API_URL}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("auth_token"),
+      Authorization: `Bearer ${localStorage.auth_token}`,
     },
     body: JSON.stringify({ post }),
   })
@@ -45,6 +42,7 @@ export async function updatePost(payload) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
     },
     body: JSON.stringify({ post }),
   })
@@ -63,6 +61,7 @@ export async function destroyPost(payload) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
     },
     body: JSON.stringify({ post }),
   })

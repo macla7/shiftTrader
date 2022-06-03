@@ -3,11 +3,6 @@ class Api::V1::PostsController < ApiController
 
   # GET /posts or /posts.json
   def index
-    p "STEP 1"
-    p request.cookies
-    p "STEP 2"
-    p current_user
-    p "STEP 3"
     @posts = Post.all
     render json: @posts
   end
@@ -28,7 +23,6 @@ class Api::V1::PostsController < ApiController
 
   # POST /posts or /posts.json
   def create
-    p "HEELLLLLLOOOOOO"
     @post = current_user.posts.new(post_params)
 
     respond_to do |format|

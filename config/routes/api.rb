@@ -18,7 +18,6 @@ end
 scope :api do
   scope :v1 do
     use_doorkeeper do
-      controllers tokens: 'tokens'
       skip_controllers :authorization, :applications, :authorized_applications
     end
   end

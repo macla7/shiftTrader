@@ -3,10 +3,6 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    p "STEP 1"
-    p request.cookies
-    p "STEP 2"
-    p current_user
     @posts = Post.all
   end
 

@@ -13,17 +13,18 @@ import {
 import { getters } from "../sessions/sessionSlice";
 
 function Posts() {
-  const authToken = useSelector(getters.getAuthToken);
-  const posts = useAppSelector(selectPosts);
-  const status = useAppSelector(selectStatus);
+  const posts = useSelector(selectPosts);
+  const status = useSelector(selectStatus);
   const dispatch = useDispatch();
 
   const [postToEdit, setPostToEdit] = useState(0);
 
+  // Called on initialise, because dispatch changes (on intialise)
+  // and on posts.length change
   useEffect(() => {
-    console.log(authToken);
-    dispatch(fetchPostsAsync(authToken));
-  }, [dispatch, authToken, posts.length]);
+    console.log("bek");
+    dispatch(fetchPostsAsync());
+  }, [dispatch, posts.length]);
 
   // NOT SURE ABOUT THIS OPTIONAL PARAMETER
   function toggleEditForm(post_id = null) {
@@ -32,7 +33,6 @@ function Posts() {
     } else {
       setPostToEdit(post_id);
     }
-    console.log("hehe");
   }
 
   function submitEdit(formData) {

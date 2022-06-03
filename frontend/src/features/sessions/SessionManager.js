@@ -16,26 +16,23 @@ function SessionManager() {
   const [password, setPassword] = useState("");
 
   function handleSignUp(e) {
-    console.log(e.target);
     e.preventDefault();
 
     const registerUserDetails = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log(registerUserDetails);
     dispatch(registerUserAsync(registerUserDetails));
   }
 
   function handleLogin(e) {
-    console.log(e.target);
     e.preventDefault();
 
     const registerUserDetails = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-    console.log(registerUserDetails);
+
     dispatch(loginUserAsync(registerUserDetails));
   }
 
