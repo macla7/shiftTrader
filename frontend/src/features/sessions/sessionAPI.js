@@ -55,11 +55,12 @@ export async function logoutUser(payload) {
 
 export async function loginUserWithToken(payload) {
   console.log("calling the login user with token method?");
+  console.log(payload);
   return fetch(`${API_URL}/users/session-data`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${payload.auth_token}`,
+      Authorization: `Bearer ${payload.auth_token}`,
     },
   })
     .then((response) => response.json())

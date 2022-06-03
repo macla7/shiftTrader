@@ -100,6 +100,8 @@ GEM
     digest (3.1.0)
     doorkeeper (5.5.4)
       railties (>= 5)
+    doorkeeper-jwt (0.4.1)
+      jwt (>= 2.1)
     dry-auto_inject (0.9.0)
       dry-container (>= 0.3.4)
     dry-configurable (0.15.0)
@@ -254,6 +256,7 @@ DEPENDENCIES
   devise (~> 4.8)
   devise-jwt (~> 0.9.0)
   doorkeeper (~> 5.5)
+  doorkeeper-jwt
   importmap-rails
   jbuilder
   jwt

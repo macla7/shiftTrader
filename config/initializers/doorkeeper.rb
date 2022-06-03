@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Doorkeeper.configure do
+
   # Change the ORM that doorkeeper will use (requires ORM extensions installed).
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
@@ -122,7 +123,7 @@ Doorkeeper.configure do
   # Use a custom class for generating the access token.
   # See https://doorkeeper.gitbook.io/guides/configuration/other-configurations#custom-access-token-generator
   #
-  # access_token_generator '::Doorkeeper::JWT'
+  access_token_generator '::Doorkeeper::JWT'
 
   # The controller +Doorkeeper::ApplicationController+ inherits from.
   # Defaults to +ActionController::Base+ unless +api_only+ is set, which changes the default to
@@ -499,3 +500,34 @@ Doorkeeper.configure do
   #
   # realm "Doorkeeper"
 end
+
+  Doorkeeper::JWT.configure do
+    # Set the payload for the JWT token. This should contain unique information
+    # about the user. Defaults to a randomly generated token in a hash:
+    #     { token: "RANDOM-TOKEN" }
+    token_payload do |opts|
+      user = User.find(opts[:resource_owner_id])
+      {
+        client: opts[:application].name,
+        datetime: Time.current.utc.to_i,
+
+        # @see JWT reserved claims - https://tools.ietf.org/html/draft-jones-json-web-token-07#page-7
+        auth_token: SecureRandom.uuid,
+
+        user: {
+          id: user.id,
+          email: user.email
+        }
+      }
+    end
+
+    # Set the encryption secret. This would be shared with any other applications
+    # that should be able to read the payload of the token. Defaults to "secret".
+    secret_key Rails.application.secret_key_base
+
+    # Specify encryption type (https://github.com/progrium/ruby-jwt). Defaults to
+    # `nil`.
+    encryption_method :HS256
+  end
+
+

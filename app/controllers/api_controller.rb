@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   include JsonWebToken
 
-  before_action :decode_authorization_header
+  # before_action :decode_authorization_header
   before_action :doorkeeper_authorize!
 
   skip_before_action :verify_authenticity_token

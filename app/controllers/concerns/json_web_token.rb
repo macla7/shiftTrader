@@ -11,8 +11,9 @@ module JsonWebToken
 
   def jwt_decode(token)
     puts 'NARRATION: JWT DECODING'
-    decoded = JWT.decode(token, SECRET_KEY, true, { algorithm: 'HS256' }
-)[0]
+    token_itself = token.split(' ')[1]
+    decoded = JWT.decode(token_itself, SECRET_KEY, true, { algorithm: 'HS256' }
+)
     decoded
   end
 end

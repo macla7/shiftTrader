@@ -34,6 +34,7 @@ export const loginUserAsync = createAsyncThunk(
     payload.grant_type = "password";
     payload.client_id = client_id;
     payload.client_secret = client_secret;
+    console.log(payload);
     const response = await loginUser(payload);
     return response;
   }
@@ -107,10 +108,10 @@ export const sessionSlice = createSlice({
       // you got the thing
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          // draftState["user"] = {
-          //   id: action.payload.id,
-          //   email: action.payload.email,
-          // };
+          draftState["user"] = {
+            id: action.payload.user.id,
+            email: action.payload.user.email,
+          };
           draftState.auth_token = action.access_token;
           // default headers set >>>??!!
           localStorage.setItem("auth_token", action.payload.access_token);
@@ -133,7 +134,6 @@ export const sessionSlice = createSlice({
         return produce(state, (draftState) => {
           draftState.user = {
             id: null,
-            username: null,
             email: null,
           };
           draftState.auth_token = null;

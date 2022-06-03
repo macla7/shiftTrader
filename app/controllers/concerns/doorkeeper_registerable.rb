@@ -22,10 +22,10 @@ module DoorkeeperRegisterable
         id: user.id,
         email: user.email,
         role: user.role,
-        access_token: jwt_encode(access_token.token),
+        access_token: access_token.token,
         token_type: token_type,
         expires_in: access_token.expires_in,
-        refresh_token: jwt_encode(access_token.refresh_token),
+        refresh_token: access_token.refresh_token,
         created_at: access_token.created_at.to_time.to_i
       }
   end

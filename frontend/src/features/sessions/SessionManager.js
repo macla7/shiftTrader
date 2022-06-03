@@ -51,8 +51,8 @@ function SessionManager() {
       <span>{userEmail}</span>
       <br />
       <span>{userID}</span>
-      <form onSubmit={(e) => handleSignUp(e)}>
-        {/* <label>
+      {/* <form onSubmit={(e) => handleSignUp(e)}>
+        <label>
           Email{" "}
           <input
             type="email"
@@ -74,8 +74,8 @@ function SessionManager() {
           ></input>
         </label>
 
-        <input type="submit" value="Sign up" /> */}
-      </form>
+        <input type="submit" value="Sign up" />
+      </form> */}
       <form onSubmit={(e) => handleLogin(e)}>
         <label>
           Email{" "}

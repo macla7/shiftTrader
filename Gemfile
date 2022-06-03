@@ -80,3 +80,5 @@ gem "rack-cors", "~> 1.1"
 gem "devise-jwt", "~> 0.9.0"
 
 gem 'jwt'
+
+gem 'doorkeeper-jwt'
