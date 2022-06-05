@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :memberships
+  resources :groups
   resources :posts, :books
 
   devise_for :users

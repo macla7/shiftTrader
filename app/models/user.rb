@@ -10,6 +10,8 @@ class User < ApplicationRecord
   enum role: %i[user admin]
 
   has_many :posts
+  has_many :memberships
+  has_many :groups, through: :memberships
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
