@@ -7,7 +7,9 @@ import {
   selectStatus,
   Statuses,
   updateGroupAsync,
+  setGroup,
 } from "./groupSlice";
+import { Link, Outlet } from "react-router-dom";
 
 function Groups() {
   const groups = useSelector(selectGroups);
@@ -25,8 +27,12 @@ function Groups() {
   if (groups && groups.length > 0) {
     listOfGroups = groups.map((group) => {
       return (
-        <div key={group.id} style={{ margin: "5em" }}>
-          <p>{group.name}</p>
+        <div
+          key={group.id}
+          style={{ margin: "5em" }}
+          onClick={() => dispatch(setGroup(group.id))}
+        >
+          <Link to={`/groups/${group.id}`}>{group.name}</Link>
         </div>
       );
     });
