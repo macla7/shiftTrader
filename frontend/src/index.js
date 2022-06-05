@@ -6,6 +6,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { loginUserWithTokenAsync } from "./features/sessions/sessionSlice";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Posts from "./features/posts/Posts";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -23,7 +25,21 @@ if (cookieExists) {
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="posts" element={<Posts />} />
+            <Route
+              path="*"
+              element={
+                <main>
+                  <p>There's nothing here!</p>
+                </main>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
