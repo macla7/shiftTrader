@@ -12,10 +12,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :memberships
   has_many :groups, through: :memberships
-  has_many :requests, class_name: 'Invite', foreign_key: 'external_user',
-    -> {where request: true}
-  has_many :invites, class_name: 'Invite', foreign_key: 'external_user',
-    -> {where request: false }
+  has_many :requests, -> { where request: true}, class_name: 'Invite', foreign_key: 'external_user'
+  has_many :invites, -> { where request: false }, class_name: 'Invite', foreign_key: 'external_user'
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
