@@ -8,10 +8,14 @@ class Api::V1::GroupsController < ApiController
   end
 
   # GET /groups/1 or /groups/1.json
-  # Want this to show members
-  # Invite reqests
-  # details of group.. ie name lol
   def show
+    members = @group.memberships
+    requests = @group.requests
+    render json: {
+      group: @group,
+      members: members,
+      requests: requests
+    }
   end
 
   # GET /groups/new
@@ -30,7 +34,7 @@ class Api::V1::GroupsController < ApiController
     respond_to do |format|
       if @group.save
         # create associated membership
-        @membership = current_user.memberships.create(group_id: @group.id, status: 0, active: true)
+        @membership = current_user.memberships.create(group_id: @group.id, status: 0, active: true, role: 0)
 
         format.json { render json: Group.all, status: :ok }
         #format.json { render :show, status: :created, location: @group }
