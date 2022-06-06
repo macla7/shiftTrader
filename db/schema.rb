@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_05_054716) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_094901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_05_054716) do
     t.bigint "internal_user_id"
     t.bigint "external_user_id"
     t.boolean "request", null: false
-    t.boolean "accepeted"
+    t.boolean "accepted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_user_id"], name: "index_invites_on_external_user_id"

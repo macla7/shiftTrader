@@ -6,7 +6,7 @@ namespace :api do
       post '/session-data', to: 'sessions#create'
     end
 
-    resources :posts, :books, :groups
+    resources :posts, :books, :groups, :invites, :memberships
 
     namespace :android do
       resources :books
