@@ -1,31 +1,45 @@
 const API_URL = "http://localhost:3000/api/v1";
 
-// export async function fetchInvites() {
-//   return fetch(`${API_URL}/invites.json`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${localStorage.auth_token}`,
-//     },
-//   })
-//     .then((response) => response.json())
-//     .catch((error) => {
-//       console.log("Error: ", error);
-//       // Not a longer term proper soloution
-//       return {};
-//     });
-// }
-
-export async function createInvite(payload) {
-  const invite = payload;
-
+export async function fetchInvites() {
   return fetch(`${API_URL}/invites.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
+export async function fetchRequests(group_id) {
+  return fetch(`${API_URL}/groups/${group_id}/requests`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
+export async function createInvite(inviteDetails) {
+  return fetch(`${API_URL}/groups/${inviteDetails.group_id}/invites.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.auth_token}`,
     },
-    body: JSON.stringify({ invite }),
+    body: JSON.stringify({ invite: inviteDetails }),
   })
     .then((response) => response.json())
     .catch((error) => {

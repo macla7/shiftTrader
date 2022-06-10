@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { selectGroup } from "./groupSlice";
 import { Link, useParams } from "react-router-dom";
-import { createInvite } from "./invites/inviteAPI";
+import { createInvite, fetchRequests } from "./invites/inviteAPI";
 import { getters } from "../sessions/sessionSlice";
 import { fetchMemberships } from "./memberships/membershipsAPI";
 
@@ -10,9 +10,10 @@ function Group() {
   // const group = useSelector(selectGroup);
   const userID = useSelector(getters.getUserID);
   const [members, setMembers] = useState("");
+  const [requestees, setRequestees] = useState("");
   let params = useParams();
 
-  function listMembers(members) {
+  function listUsers(members) {
     return members.map((number) => (
       <li key={number.toString()}>{number.user_id}</li>
     ));
@@ -21,7 +22,11 @@ function Group() {
   useEffect(() => {
     console.log("in group component useEffect");
     fetchMemberships(params.groupId).then((response) => {
-      setMembers(listMembers(response));
+      setMembers(listUsers(response));
+      console.log(response);
+    });
+    fetchRequests(params.groupId).then((response) => {
+      setRequestees(listUsers(response));
       console.log(response);
     });
   }, []);
@@ -57,6 +62,8 @@ function Group() {
       <div>
         <h2>Members</h2>
         <ul>{members}</ul>
+        <h2>Requests</h2>
+        <ul>{requestees}</ul>
       </div>
     </div>
   );

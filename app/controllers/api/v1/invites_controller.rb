@@ -7,6 +7,14 @@ class Api::V1::InvitesController < ApiController
     render json: @invites
   end
 
+  def index_requests
+    p 'INDEX REQUSTS BABBY'
+    p params
+    set_group
+    p @group.requests
+    render json: @group.requests
+  end
+
   # GET /invites/1 or /invites/1.json
   def show
   end
@@ -60,6 +68,10 @@ class Api::V1::InvitesController < ApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_invite
       @invite = Invite.find(params[:id])
+    end
+
+    def set_group
+      @group = Group.find(params[:group_id])
     end
 
     # Only allow a list of trusted parameters through.
