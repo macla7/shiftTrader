@@ -3,8 +3,8 @@ class Api::V1::MembershipsController < ApiController
 
   # GET /memberships or /memberships.json
   def index
-    @memberships = Membership.all
-    render json: @memberships
+    set_group
+    render json: @group.memberships
   end
 
   # GET /memberships/1 or /memberships/1.json
@@ -62,6 +62,10 @@ class Api::V1::MembershipsController < ApiController
       @membership = Membership.find(params[:id])
     end
 
+    def set_group
+      @group = Group.find(params[:group_id])
+    end
+    
     # Only allow a list of trusted parameters through.
     def membership_params
       params.require(:membership).permit()

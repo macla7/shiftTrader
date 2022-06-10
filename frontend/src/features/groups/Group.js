@@ -1,29 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGroup } from "./groupSlice";
-import { Link } from "react-router-dom";
+// import { selectGroup } from "./groupSlice";
+import { Link, useParams } from "react-router-dom";
 import { createInvite } from "./invites/inviteAPI";
 import { getters } from "../sessions/sessionSlice";
 import { fetchMemberships } from "./memberships/membershipsAPI";
 
 function Group() {
-  const group = useSelector(selectGroup);
+  // const group = useSelector(selectGroup);
   const userID = useSelector(getters.getUserID);
+  const [members, setMembers] = useState("");
+  let params = useParams();
 
-  let members;
   function listMembers(members) {
-    members.map((number) => <li key={number.toString()}>{number}</li>);
+    return members.map((number) => (
+      <li key={number.toString()}>{number.user_id}</li>
+    ));
   }
 
   useEffect(() => {
-    fetchMemberships().then((response) => (members = listMembers(response)));
+    console.log("in group component useEffect");
+    fetchMemberships(params.groupId).then((response) => {
+      setMembers(listMembers(response));
+      console.log(response);
+    });
   }, []);
 
   function inviteUser(e) {
     e.preventDefault();
 
+    // Hard coded to invite user 2
     let inviteDetails = {
-      group_id: group,
+      group_id: params.groupId,
       internal_user_id: userID,
       external_user_id: 2,
       request: false,
@@ -36,7 +44,8 @@ function Group() {
   return (
     <div>
       <Link to="/groups">Back to Groups</Link>
-      <p>Group id: {group}</p>
+      <p>Group id: {params.groupId}</p>
+      <p></p>
       <form onSubmit={(e) => inviteUser(e)}>
         <label>
           Name:

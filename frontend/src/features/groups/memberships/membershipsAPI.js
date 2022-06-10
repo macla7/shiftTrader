@@ -1,7 +1,8 @@
 const API_URL = "http://localhost:3000/api/v1";
 
-export async function fetchMemberships() {
-  return fetch(`${API_URL}/memberships.json`, {
+export async function fetchMemberships(groupId) {
+  console.log("in members api");
+  return fetch(`${API_URL}/groups/${groupId}/memberships.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
