@@ -12,7 +12,7 @@ class Api::V1::InvitesController < ApiController
     p params
     set_group
     p @group.requests
-    render json: @group.requests
+    render json: @group.requests.not_accepted
   end
 
   # GET /invites/1 or /invites/1.json
@@ -30,7 +30,10 @@ class Api::V1::InvitesController < ApiController
 
   # POST /invites or /invites.json
   def create
-    @invite = current_user.sent_invites.new(invite_params)
+    p 'INVITES CREATE'
+    p invite_params
+    @invite = Invite.new(invite_params)
+    p @invite
 
     respond_to do |format|
       if @invite.save
@@ -45,10 +48,8 @@ class Api::V1::InvitesController < ApiController
   def update
     respond_to do |format|
       if @invite.update(invite_params)
-        format.html { redirect_to invite_url(@invite), notice: "Invite was successfully updated." }
-        format.json { render :show, status: :ok, location: @invite }
+        format.json { render json: Invite.all, status: :ok }
       else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @invite.errors, status: :unprocessable_entity }
       end
     end

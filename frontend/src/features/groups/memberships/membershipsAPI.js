@@ -1,8 +1,8 @@
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = "http://localhost:3000/api/v1/groups";
 
 export async function fetchMemberships(groupId) {
   console.log("in members api");
-  return fetch(`${API_URL}/groups/${groupId}/memberships.json`, {
+  return fetch(`${API_URL}/${groupId}/memberships.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -17,10 +17,8 @@ export async function fetchMemberships(groupId) {
     });
 }
 
-export async function createMembership(payload) {
-  const membership = payload.membership;
-
-  return fetch(`${API_URL}/memberships.json`, {
+export async function createMembership(membership) {
+  return fetch(`${API_URL}/${membership.group_id}/memberships.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -9,11 +9,14 @@ import {
   updateGroupAsync,
   setGroup,
 } from "./groupSlice";
-import { Link, Outlet } from "react-router-dom";
+import { getters } from "../sessions/sessionSlice";
+import { Link } from "react-router-dom";
+import { createInvite } from "./invites/inviteAPI";
 
 function Groups() {
   const groups = useSelector(selectGroups);
   const status = useSelector(selectStatus);
+  const userID = useSelector(getters.getUserID);
   const dispatch = useDispatch();
 
   // Called on initialise, because dispatch changes (on intialise)
@@ -33,6 +36,7 @@ function Groups() {
           onClick={() => dispatch(setGroup(group.id))}
         >
           <Link to={`/groups/${group.id}`}>{group.name}</Link>
+          <button onClick={() => requestToJoinGroup(group.id)}>Join</button>
         </div>
       );
     });
@@ -53,6 +57,17 @@ function Groups() {
         </div>
       </div>
     );
+  }
+
+  function requestToJoinGroup(groupId) {
+    let inviteDetails = {
+      group_id: groupId,
+      internal_user_id: null,
+      external_user_id: userID,
+      request: true,
+    };
+
+    createInvite(inviteDetails);
   }
 
   return (

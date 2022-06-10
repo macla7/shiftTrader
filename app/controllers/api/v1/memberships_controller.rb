@@ -22,7 +22,7 @@ class Api::V1::MembershipsController < ApiController
 
   # POST /memberships or /memberships.json
   def create
-    @membership = current_user.sent_memberships.new(membership_params)
+    @membership = Membership.new(membership_params)
 
     respond_to do |format|
       if @membership.save
@@ -68,6 +68,6 @@ class Api::V1::MembershipsController < ApiController
     
     # Only allow a list of trusted parameters through.
     def membership_params
-      params.require(:membership).permit()
+      params.require(:membership).permit(:group_id, :user_id, :role, :status)
     end
 end

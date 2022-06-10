@@ -34,7 +34,7 @@ class Api::V1::GroupsController < ApiController
     respond_to do |format|
       if @group.save
         # create associated membership
-        @membership = current_user.memberships.create(group_id: @group.id, status: 0, active: true, role: 0)
+        @membership = current_user.memberships.create(group_id: @group.id, status: 0, role: 0)
 
         format.json { render json: Group.all, status: :ok }
         #format.json { render :show, status: :created, location: @group }
