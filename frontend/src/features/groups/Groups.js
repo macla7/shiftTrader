@@ -11,12 +11,12 @@ import {
 } from "./groupSlice";
 import { getters } from "../sessions/sessionSlice";
 import { Link } from "react-router-dom";
-import { createInvite } from "./invites/inviteAPI";
+import { createInviteAsync } from "./invites/inviteSlice";
 
 function Groups() {
   const groups = useSelector(selectGroups);
   const status = useSelector(selectStatus);
-  const userID = useSelector(getters.getUserID);
+  const userId = useSelector(getters.getUserId);
   const dispatch = useDispatch();
 
   // Called on initialise, because dispatch changes (on intialise)
@@ -63,11 +63,11 @@ function Groups() {
     let inviteDetails = {
       group_id: groupId,
       internal_user_id: null,
-      external_user_id: userID,
+      external_user_id: userId,
       request: true,
     };
 
-    createInvite(inviteDetails);
+    dispatch(createInviteAsync(inviteDetails));
   }
 
   return (

@@ -8,7 +8,7 @@ import Login from "./Login";
 function SessionManager() {
   const authToken = useSelector(getters.getAuthToken);
   const userEmail = useSelector(getters.getUserEmail);
-  const userID = useSelector(getters.getUserID);
+  const userId = useSelector(getters.getUserId);
   const dispatch = useDispatch();
 
   function logout() {
@@ -20,7 +20,7 @@ function SessionManager() {
       <div>
         <p>{authToken}</p>
         <p>{userEmail}</p>
-        <p>{userID}</p>
+        <p>{userId}</p>
       </div>
       <Register />
       <Login />

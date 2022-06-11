@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAppSelector } from "../../app/hooks";
-import Post from "./Post";
-import PostForm from "./PostForm";
 import {
   fetchPostsAsync,
   selectPosts,
   selectStatus,
   Statuses,
   updatePostAsync,
-} from "./postSlice";
-import { getters } from "../sessions/sessionSlice";
+} from "../posts/postSlice";
+import Post from "../posts/Post";
+import PostForm from "../posts/PostForm";
 
-function Posts() {
+function Posts(props) {
+  const userId = useSelector((state) => state.sessions.user.id);
   const posts = useSelector(selectPosts);
   const status = useSelector(selectStatus);
   const dispatch = useDispatch();
   const [postToEdit, setPostToEdit] = useState(0);
-
-  // Called on initialise, because dispatch changes (on intialise)
-  // and on posts.length change
-  useEffect(() => {
-    console.log("bek");
-    dispatch(fetchPostsAsync());
-  }, [dispatch, posts.length]);
 
   // NOT SURE ABOUT THIS OPTIONAL PARAMETER
   function toggleEditForm(post_id = null) {
@@ -34,10 +26,23 @@ function Posts() {
     }
   }
 
-  function submitEdit(formData) {
-    dispatch(updatePostAsync(formData));
+  function submitEdit(e) {
+    let post = {
+      postDetails: {
+        body: e.post.body,
+      },
+      id: e.post.id,
+      group_id: props.groupId,
+    };
+    dispatch(updatePostAsync(post));
     toggleEditForm();
   }
+
+  // Posts
+  useEffect(() => {
+    console.log("bek");
+    dispatch(fetchPostsAsync(props.groupId));
+  }, [dispatch, posts.length, props.groupId]);
 
   let listOfPosts;
   if (posts && posts.length > 0) {
@@ -48,7 +53,7 @@ function Posts() {
             dispatch={dispatch}
             post={post}
             postToEdit={postToEdit}
-            submitEdit={submitEdit}
+            submitEdit={(e) => submitEdit(e)}
             toggleEditForm={() => toggleEditForm(post.id)}
           />
         </div>
@@ -66,7 +71,7 @@ function Posts() {
       <div className="card">
         <div className="card-body">
           <h3>{status}</h3>
-          <PostForm />
+          <PostForm groupId={props.groupId} />
           {listOfPosts}
         </div>
       </div>

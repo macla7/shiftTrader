@@ -179,7 +179,7 @@ export const getters = {
   getUserEmail(state) {
     return state.sessions.user?.email;
   },
-  getUserID(state) {
+  getUserId(state) {
     return state.sessions.user?.id;
   },
   isLoggedIn(state) {

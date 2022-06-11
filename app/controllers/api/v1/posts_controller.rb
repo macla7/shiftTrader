@@ -39,10 +39,8 @@ class Api::V1::PostsController < ApiController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
-        format.json { render :show, status: :ok, location: @post }
+        format.json { render json: @post, status: :ok, location: @post }
       else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

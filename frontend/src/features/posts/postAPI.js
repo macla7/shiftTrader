@@ -16,14 +16,14 @@ export async function fetchPosts(groupId) {
     });
 }
 
-export async function createPost(postDetails) {
-  return fetch(`${API_URL}/${postDetails.group_id}/posts.json`, {
+export async function createPost(post) {
+  return fetch(`${API_URL}/${post.group_id}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.auth_token}`,
     },
-    body: JSON.stringify({ post: postDetails }),
+    body: JSON.stringify({ post }),
   })
     .then((response) => response.json())
     .catch((error) => {
@@ -33,16 +33,14 @@ export async function createPost(postDetails) {
     });
 }
 
-export async function updatePost(payload) {
-  const post = payload.post;
-
-  return fetch(`${API_URL}/posts/${post.id}.json`, {
+export async function updatePost(post) {
+  return fetch(`${API_URL}/${post.group_id}/posts/${post.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.auth_token}`,
     },
-    body: JSON.stringify({ post }),
+    body: JSON.stringify({ post: post.postDetails }),
   })
     .then((response) => response.json())
     .catch((error) => {

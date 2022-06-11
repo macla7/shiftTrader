@@ -12,29 +12,18 @@ import {
   createMembershipAsync,
   selectMemberships,
 } from "./memberships/membershipSlice";
-import {
-  fetchPostsAsync,
-  selectPosts,
-  selectStatus,
-  Statuses,
-  updatePostAsync,
-} from "../posts/postSlice";
-import Post from "../posts/Post";
-import PostForm from "../posts/PostForm";
+import Posts from "../posts/Posts";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work
 // if I try and grab from state.
 function Group(props) {
-  const userID = useSelector((state) => state.sessions.user.id);
-  const posts = useSelector(selectPosts);
-  const status = useSelector(selectStatus);
+  const userId = useSelector((state) => state.sessions.user.id);
   const requests = useSelector(selectRequests);
   const memberships = useSelector(selectMemberships);
   const [membershipsList, setMembershipsList] = useState("");
   const [requestsList, setRequestsList] = useState("");
   const [isAdmin, setIsAdmin] = useState("");
-  const [postToEdit, setPostToEdit] = useState(0);
   const dispatch = useDispatch();
   let params = useParams();
 
@@ -72,7 +61,7 @@ function Group(props) {
     let invite = {
       inviteDetails: {
         accepted: true,
-        internal_user_id: userID,
+        internal_user_id: userId,
       },
       id: inviteId,
       group_id: params.groupId,
@@ -80,34 +69,28 @@ function Group(props) {
     dispatch(updateInviteAsync(invite));
   }
 
-  // Posts
-  useEffect(() => {
-    console.log("bek");
-    dispatch(fetchPostsAsync(params.groupId));
-  }, [dispatch, posts.length, params.groupId]);
-
   // Requests
   useEffect(() => {
     console.log("in group component useEffect, fetch requests");
     if (isAdmin) {
       dispatch(fetchRequestsAsync(params.groupId));
     }
-  }, [dispatch, userID, isAdmin, params.groupId]);
+  }, [dispatch, userId, isAdmin, params.groupId]);
 
   // Members
   useEffect(() => {
     console.log("in group component useEffect, fetch Members");
     dispatch(fetchMembershipsAsync(params.groupId));
-  }, [dispatch, userID, params.groupId]);
+  }, [dispatch, userId, params.groupId, memberships.length]);
 
   useEffect(() => {
     setMembershipsList(listMemberships(memberships));
     setIsAdmin(
       memberships.filter(
-        (member) => member.user_id === userID && member.role == "admin"
+        (member) => member.user_id === userId && member.role == "admin"
       ).length > 0
     );
-  }, [userID, memberships]);
+  }, [userId, memberships]);
 
   useEffect(() => {
     if (isAdmin) {
@@ -121,7 +104,7 @@ function Group(props) {
     // Hard coded to invite user 2
     let inviteDetails = {
       group_id: params.groupId,
-      internal_user_id: userID,
+      internal_user_id: userId,
       external_user_id: 2,
       request: false,
       accepted: false,
@@ -130,40 +113,12 @@ function Group(props) {
     dispatch(createInviteAsync(inviteDetails));
   }
 
-  let listOfPosts;
-  if (posts && posts.length > 0) {
-    listOfPosts = posts.map((post) => {
-      return (
-        <div key={post.id} style={{ margin: "5em" }}>
-          <Post dispatch={dispatch} post={post} postToEdit={postToEdit} />
-        </div>
-      );
-    });
-  } else {
-    listOfPosts = "";
-  }
-
-  let contents;
-  if (status !== Statuses.UpToDate) {
-    contents = <div>{status}</div>;
-  } else {
-    contents = (
-      <div className="card">
-        <div className="card-body">
-          <h3>{status}</h3>
-          <PostForm groupId={params.groupId} />
-          {listOfPosts}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div>
       <Link to="/groups">Back to Groups</Link>
       <p>Group id: {params.groupId}</p>
       <p>Admin: {isAdmin ? "true" : "false"}</p>
-      <p>User: {userID}</p>
+      <p>User: {userId}</p>
       <form onSubmit={(e) => inviteUser(e)}>
         <label>
           Name:
@@ -177,8 +132,7 @@ function Group(props) {
         <ul>{membershipsList}</ul>
         <h2>Requests</h2>
         <ul>{requestsList}</ul>
-        <h1>Posts</h1>
-        {contents}
+        <Posts groupId={params.groupId}></Posts>
       </div>
     </div>
   );
