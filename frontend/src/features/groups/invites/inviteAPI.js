@@ -66,21 +66,21 @@ export async function updateInvite(invite) {
     });
 }
 
-// export async function destroyInvite(payload) {
-//   const invite = payload.invite;
+export async function destroyInvite(payload) {
+  const invite = payload.invite;
 
-//   return fetch(`${API_URL}/invites/${invite.invite_id}.json`, {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${localStorage.auth_token}`,
-//     },
-//     body: JSON.stringify({ invite }),
-//   })
-//     .then((response) => response.json())
-//     .catch((error) => {
-//       console.log("Error: ", error);
-//       // Not a longer term proper soloution
-//       return {};
-//     });
-// }
+  return fetch(`${API_URL}/invites/${invite.invite_id}.json`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
+    },
+    body: JSON.stringify({ invite }),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}

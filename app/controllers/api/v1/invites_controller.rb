@@ -11,7 +11,7 @@ class Api::V1::InvitesController < ApiController
     p 'INDEX REQUSTS BABBY'
     p params
     set_group
-    p @group.requests
+    p @group.requests.not_accepted
     render json: @group.requests.not_accepted
   end
 
