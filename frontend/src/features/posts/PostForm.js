@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPostAsync } from "./postSlice";
 
-function PostForm() {
+function PostForm(props) {
   const dispatch = useDispatch();
   const [body, setBody] = useState("");
   const [auction, setAuction] = useState("");
@@ -10,14 +10,13 @@ function PostForm() {
 
   function submitHandler(e) {
     e.preventDefault();
-    const formData = {
-      post: {
-        body: body,
-        ends_at: endsAt,
-        auction: auction,
-      },
+    const post = {
+      body: body,
+      ends_at: endsAt,
+      auction: auction,
+      group_id: props.groupId,
     };
-    dispatch(createPostAsync(formData));
+    dispatch(createPostAsync(post));
     resetState();
   }
 

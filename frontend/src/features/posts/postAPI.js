@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = "http://localhost:3000/api/v1/groups";
 
-export async function fetchPosts() {
-  return fetch(`${API_URL}/posts.json`, {
+export async function fetchPosts(groupId) {
+  return fetch(`${API_URL}/${groupId}/posts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -16,16 +16,14 @@ export async function fetchPosts() {
     });
 }
 
-export async function createPost(payload) {
-  const post = payload.post;
-
-  return fetch(`${API_URL}/posts.json`, {
+export async function createPost(postDetails) {
+  return fetch(`${API_URL}/${postDetails.group_id}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.auth_token}`,
     },
-    body: JSON.stringify({ post }),
+    body: JSON.stringify({ post: postDetails }),
   })
     .then((response) => response.json())
     .catch((error) => {

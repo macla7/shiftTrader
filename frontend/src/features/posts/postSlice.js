@@ -27,16 +27,16 @@ const initialState = {
 
 export const fetchPostsAsync = createAsyncThunk(
   "posts/fetchPosts",
-  async () => {
-    const response = await fetchPosts();
+  async (groupId) => {
+    const response = await fetchPosts(groupId);
     return response;
   }
 );
 
 export const createPostAsync = createAsyncThunk(
   "posts/createPost",
-  async (payload) => {
-    const response = await createPost(payload);
+  async (postDetails) => {
+    const response = await createPost(postDetails);
     return response;
   }
 );

@@ -6,10 +6,10 @@ namespace :api do
       post '/session-data', to: 'sessions#create'
     end
 
-    resources :posts, :books
+    resources :books
 
     resources :groups do
-      resources :memberships, :invites
+      resources :memberships, :invites, :posts
       get '/requests', to: 'invites#index_requests'
     end
 

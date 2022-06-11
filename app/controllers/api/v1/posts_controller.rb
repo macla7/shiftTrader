@@ -3,8 +3,9 @@ class Api::V1::PostsController < ApiController
 
   # GET /posts or /posts.json
   def index
+    set_group
     @posts = Post.all
-    render json: @posts
+    render json: @group.posts
   end
 
   # GET /posts/1 or /posts/1.json
@@ -63,8 +64,12 @@ class Api::V1::PostsController < ApiController
       @post = Post.find(params[:id])
     end
 
+    def set_group
+      @group = Group.find(params[:group_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :ends_at, :auction)
+      params.require(:post).permit(:body, :ends_at, :auction, :group_id)
     end
 end

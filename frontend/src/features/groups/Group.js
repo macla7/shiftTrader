@@ -8,6 +8,15 @@ import {
   createMembership,
 } from "./memberships/membershipsAPI";
 import { getters } from "../sessions/sessionSlice";
+import {
+  fetchPostsAsync,
+  selectPosts,
+  selectStatus,
+  Statuses,
+  updatePostAsync,
+} from "../posts/postSlice";
+import Post from "../posts/Post";
+import PostForm from "../posts/PostForm";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work
@@ -15,9 +24,13 @@ import { getters } from "../sessions/sessionSlice";
 function Group(props) {
   // const group = useSelector(selectGroup);
   const userID = useSelector((state) => state.sessions.user.id);
+  const posts = useSelector(selectPosts);
+  const status = useSelector(selectStatus);
   const [members, setMembers] = useState("");
   const [requestees, setRequestees] = useState("");
   const [isAdmin, setIsAdmin] = useState("");
+  const [postToEdit, setPostToEdit] = useState(0);
+  const dispatch = useDispatch();
   let params = useParams();
 
   function listUsers(members) {
@@ -62,6 +75,13 @@ function Group(props) {
     ));
   }
 
+  // Called on initialise, because dispatch changes (on intialise)
+  // and on posts.length change
+  useEffect(() => {
+    console.log("bek");
+    dispatch(fetchPostsAsync(params.groupId));
+  }, [dispatch, posts.length]);
+
   useEffect(() => {
     console.log("in group component useEffect");
     fetchMemberships(params.groupId).then((response) => {
@@ -97,6 +117,34 @@ function Group(props) {
     createInvite(inviteDetails);
   }
 
+  let listOfPosts;
+  if (posts && posts.length > 0) {
+    listOfPosts = posts.map((post) => {
+      return (
+        <div key={post.id} style={{ margin: "5em" }}>
+          <Post dispatch={dispatch} post={post} postToEdit={postToEdit} />
+        </div>
+      );
+    });
+  } else {
+    listOfPosts = "";
+  }
+
+  let contents;
+  if (status !== Statuses.UpToDate) {
+    contents = <div>{status}</div>;
+  } else {
+    contents = (
+      <div className="card">
+        <div className="card-body">
+          <h3>{status}</h3>
+          <PostForm groupId={params.groupId} />
+          {listOfPosts}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Link to="/groups">Back to Groups</Link>
@@ -116,6 +164,8 @@ function Group(props) {
         <ul>{members}</ul>
         <h2>Requests</h2>
         <ul>{requestees}</ul>
+        <h1>Posts</h1>
+        {contents}
       </div>
     </div>
   );
