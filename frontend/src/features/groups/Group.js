@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import {
-  createInviteAsync,
-  updateInviteAsync,
-  fetchRequestsAsync,
-  selectRequests,
-} from "./invites/inviteSlice";
+import { createInviteAsync } from "./invites/inviteSlice";
 import {
   fetchMembershipsAsync,
-  createMembershipAsync,
   selectMemberships,
 } from "./memberships/membershipSlice";
 import Posts from "../posts/Posts";
+import Requests from "./invites/Requests";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work
 // if I try and grab from state.
 function Group(props) {
   const userId = useSelector((state) => state.sessions.user.id);
-  const requests = useSelector(selectRequests);
   const memberships = useSelector(selectMemberships);
   const [membershipsList, setMembershipsList] = useState("");
-  const [requestsList, setRequestsList] = useState("");
   const [isAdmin, setIsAdmin] = useState("");
   const dispatch = useDispatch();
   let params = useParams();
@@ -32,50 +25,6 @@ function Group(props) {
       <li key={member.user_id}>{member.user_id}</li>
     ));
   }
-
-  function listRequests(requestees) {
-    return requestees.map((requestee) => (
-      <li key={requestee.external_user_id}>
-        {requestee.external_user_id}{" "}
-        <button
-          onClick={() =>
-            handleAcceptRequest(requestee.external_user_id, requestee.id)
-          }
-        >
-          Accept
-        </button>
-      </li>
-    ));
-  }
-
-  function handleAcceptRequest(externalUserId, inviteId) {
-    // create membership
-    let membershipDetails = {
-      group_id: params.groupId,
-      user_id: externalUserId,
-      role: 1,
-      status: 0,
-    };
-    dispatch(createMembershipAsync(membershipDetails));
-    // update invite
-    let invite = {
-      inviteDetails: {
-        accepted: true,
-        internal_user_id: userId,
-      },
-      id: inviteId,
-      group_id: params.groupId,
-    };
-    dispatch(updateInviteAsync(invite));
-  }
-
-  // Requests
-  useEffect(() => {
-    console.log("in group component useEffect, fetch requests");
-    if (isAdmin) {
-      dispatch(fetchRequestsAsync(params.groupId));
-    }
-  }, [dispatch, userId, isAdmin, params.groupId]);
 
   // Members
   useEffect(() => {
@@ -91,12 +40,6 @@ function Group(props) {
       ).length > 0
     );
   }, [userId, memberships]);
-
-  useEffect(() => {
-    if (isAdmin) {
-      setRequestsList(listRequests(requests));
-    }
-  }, [requests, isAdmin]);
 
   function inviteUser(e) {
     e.preventDefault();
@@ -130,8 +73,7 @@ function Group(props) {
       <div>
         <h2>Members</h2>
         <ul>{membershipsList}</ul>
-        <h2>Requests</h2>
-        <ul>{requestsList}</ul>
+        {isAdmin ? <Requests groupId={params.groupId} /> : ""}
         <Posts groupId={params.groupId}></Posts>
       </div>
     </div>
