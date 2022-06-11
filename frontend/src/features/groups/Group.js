@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { createInviteAsync } from "./invites/inviteSlice";
-import {
-  fetchMembershipsAsync,
-  selectMemberships,
-} from "./memberships/membershipSlice";
+import { selectAdmin } from "./groupSlice";
+import Memberships from "./memberships/Memberships";
+
 import Posts from "../posts/Posts";
 import Requests from "./invites/Requests";
 
@@ -14,32 +13,9 @@ import Requests from "./invites/Requests";
 // if I try and grab from state.
 function Group(props) {
   const userId = useSelector((state) => state.sessions.user.id);
-  const memberships = useSelector(selectMemberships);
-  const [membershipsList, setMembershipsList] = useState("");
-  const [isAdmin, setIsAdmin] = useState("");
+  const isAdmin = useSelector(selectAdmin);
   const dispatch = useDispatch();
   let params = useParams();
-
-  function listMemberships(members) {
-    return members.map((member) => (
-      <li key={member.user_id}>{member.user_id}</li>
-    ));
-  }
-
-  // Members
-  useEffect(() => {
-    console.log("in group component useEffect, fetch Members");
-    dispatch(fetchMembershipsAsync(params.groupId));
-  }, [dispatch, userId, params.groupId, memberships.length]);
-
-  useEffect(() => {
-    setMembershipsList(listMemberships(memberships));
-    setIsAdmin(
-      memberships.filter(
-        (member) => member.user_id === userId && member.role == "admin"
-      ).length > 0
-    );
-  }, [userId, memberships]);
 
   function inviteUser(e) {
     e.preventDefault();
@@ -71,8 +47,7 @@ function Group(props) {
       </form>
 
       <div>
-        <h2>Members</h2>
-        <ul>{membershipsList}</ul>
+        <Memberships groupId={params.groupId} />
         {isAdmin ? <Requests groupId={params.groupId} /> : ""}
         <Posts groupId={params.groupId}></Posts>
       </div>

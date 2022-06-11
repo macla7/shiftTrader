@@ -26,7 +26,7 @@ class Api::V1::MembershipsController < ApiController
 
     respond_to do |format|
       if @membership.save
-        format.json { render json: Membership.all, status: :ok }
+        format.json { render json: @membership, status: :ok }
       else
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end

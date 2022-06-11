@@ -16,6 +16,7 @@ export const Statuses = {
 };
 
 const initialState = {
+  isAdmin: false,
   group: 0,
   groups: [
     {
@@ -68,6 +69,12 @@ export const groupSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.group = action.payload;
+    },
+    isNotAdmin: (state) => {
+      state.isAdmin = false;
+    },
+    isAdmin: (state) => {
+      state.isAdmin = true;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -155,12 +162,14 @@ export const groupSlice = createSlice({
   },
 });
 
-export const { setGroup } = groupSlice.actions;
+export const { setGroup, isAdmin, isNotAdmin } = groupSlice.actions;
 
 export const selectGroups = (state) => state.groups.groups;
 
 export const selectStatus = (state) => state.groups.status;
 
 export const selectGroup = (state) => state.groups.group;
+
+export const selectAdmin = (state) => state.groups.isAdmin;
 
 export default groupSlice.reducer;

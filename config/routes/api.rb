@@ -11,6 +11,7 @@ namespace :api do
     resources :groups do
       resources :memberships, :invites, :posts
       get '/requests', to: 'invites#index_requests'
+      put '/requests/:id', to: 'invites#update_request'
     end
 
     namespace :android do

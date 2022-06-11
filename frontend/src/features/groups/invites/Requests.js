@@ -4,6 +4,7 @@ import {
   updateInviteAsync,
   fetchRequestsAsync,
   selectRequests,
+  updateRequestAsync,
 } from "./inviteSlice";
 import { createMembershipAsync } from "../memberships/membershipSlice";
 
@@ -47,14 +48,14 @@ function Requests(props) {
       id: inviteId,
       group_id: props.groupId,
     };
-    dispatch(updateInviteAsync(invite));
+    dispatch(updateRequestAsync(invite));
   }
 
   // Requests
   useEffect(() => {
     console.log("in requests component useEffect, fetch requests");
     dispatch(fetchRequestsAsync(props.groupId));
-  }, [dispatch, userId, props.groupId]);
+  }, [dispatch, userId, props.groupId, requests.length]);
 
   useEffect(() => {
     setRequestsList(listRequests(requests));

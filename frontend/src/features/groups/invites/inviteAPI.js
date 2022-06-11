@@ -66,6 +66,23 @@ export async function updateInvite(invite) {
     });
 }
 
+export async function updateRequest(invite) {
+  return fetch(`${API_URL}/${invite.group_id}/requests/${invite.id}.json`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
+    },
+    body: JSON.stringify({ invite: invite.inviteDetails }),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
 export async function destroyInvite(payload) {
   const invite = payload.invite;
 

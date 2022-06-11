@@ -1,5 +1,5 @@
 class Api::V1::InvitesController < ApiController
-  before_action :set_invite, only: %i[ show edit update destroy ]
+  before_action :set_invite, only: %i[ show edit update destroy update_request]
 
   # GET /invites or /invites.json
   def index
@@ -54,6 +54,20 @@ class Api::V1::InvitesController < ApiController
       end
     end
   end
+
+  def update_request
+    set_group
+    p 'hellllllllllllllllllllllloooooooo'
+    p @group.requests.not_accepted
+    respond_to do |format|
+      if @invite.update(invite_params)
+        format.json { render json: @group.requests.not_accepted, status: :ok }
+      else
+        format.json { render json: @invite.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /invites/1 or /invites/1.json
   def destroy

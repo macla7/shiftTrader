@@ -6,6 +6,7 @@ import {
   destroyInvite,
   updateInvite,
   fetchRequests,
+  updateRequest,
 } from "./inviteAPI";
 
 export const Statuses = {
@@ -69,6 +70,14 @@ export const updateInviteAsync = createAsyncThunk(
   "invites/updateInvite",
   async (payload) => {
     const response = await updateInvite(payload);
+    return response;
+  }
+);
+
+export const updateRequestAsync = createAsyncThunk(
+  "invites/updateRequest",
+  async (payload) => {
+    const response = await updateRequest(payload);
     return response;
   }
 );
@@ -149,6 +158,7 @@ export const inviteSlice = createSlice({
           draftState.status = Statuses.Error;
         });
       })
+      // while you wait
       .addCase(destroyInviteAsync.pending, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Loading;
@@ -167,6 +177,7 @@ export const inviteSlice = createSlice({
           draftState.status = Statuses.Error;
         });
       })
+      // while you wait
       .addCase(updateInviteAsync.pending, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Loading;
@@ -175,15 +186,31 @@ export const inviteSlice = createSlice({
       // you got the thing
       .addCase(updateInviteAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          const index = draftState.invites.findIndex(
-            (invite) => invite.id === action.payload.id
-          );
-          draftState.invites[index] = action.payload;
+          draftState.invites = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })
       // error
       .addCase(updateInviteAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(updateRequestAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(updateRequestAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          draftState.requests = action.payload;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(updateRequestAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });

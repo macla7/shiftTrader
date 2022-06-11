@@ -34,3 +34,5 @@ But the following articles helped me even more:
   <li><a href="https://rubyyagi.com/rails-api-authentication-devise-doorkeeper/" target="_blank">This guide</a> seems to be basially what he built his doorkeerer video off. Also it can be found in the guides in doorkeeper gem on github</li>
   <li>Followed only some parts of <a href="https://www.bluebash.co/blog/rails-6-7-api-authentication-with-jwt/" target="_blank">this</a>, roughly, to get my JWT up and running.</li>
 </ul>
+
+Invites is the trickest of my tables.. There is a boolean "request" that essentially determines whether the invite was sent to an external user, or requested by an external user. This means the API and controller is a bit more clunky.
