@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
-import { fetchPosts, createPost, destroyPost, updatePost } from "./postAPI";
+import {
+  fetchPosts,
+  createPost,
+  destroyPost,
+  updatePost,
+  fetchPostsHome,
+} from "./postAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -29,6 +35,14 @@ export const fetchPostsAsync = createAsyncThunk(
   "posts/fetchPosts",
   async (groupId) => {
     const response = await fetchPosts(groupId);
+    return response;
+  }
+);
+
+export const fetchPostsHomeAsync = createAsyncThunk(
+  "posts/fetchPostsHome",
+  async (groupId) => {
+    const response = await fetchPostsHome(groupId);
     return response;
   }
 );
@@ -82,6 +96,26 @@ export const postSlice = createSlice({
       })
       // error
       .addCase(fetchPostsAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(fetchPostsHomeAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(fetchPostsHomeAsync.fulfilled, (state, action) => {
+        console.log(action.payload);
+        return produce(state, (draftState) => {
+          draftState.posts = action.payload;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(fetchPostsHomeAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });

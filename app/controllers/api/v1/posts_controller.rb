@@ -8,6 +8,11 @@ class Api::V1::PostsController < ApiController
     render json: @group.posts
   end
 
+  def index_home
+    @posts = Post.joins(group: :memberships).where('memberships.user_id = ?', current_user.id)
+    render json: @posts
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
 

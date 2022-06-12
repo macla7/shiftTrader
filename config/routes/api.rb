@@ -14,6 +14,8 @@ namespace :api do
       put '/requests/:id', to: 'invites#update_request'
     end
 
+    get '/home', to: 'posts#index_home'
+
     namespace :android do
       resources :books
     end

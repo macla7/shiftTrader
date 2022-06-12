@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchPostsAsync,
+  fetchPostsHomeAsync,
   selectPosts,
   selectStatus,
   Statuses,
@@ -17,45 +18,46 @@ function Posts(props) {
   const dispatch = useDispatch();
   const [postToEdit, setPostToEdit] = useState(0);
 
-  // NOT SURE ABOUT THIS OPTIONAL PARAMETER
-  function toggleEditForm(post_id = null) {
-    if (postToEdit === post_id) {
-      setPostToEdit(0);
-    } else {
-      setPostToEdit(post_id);
-    }
-  }
+  // // NOT SURE ABOUT THIS OPTIONAL PARAMETER
+  // function toggleEditForm(post_id = null) {
+  //   if (postToEdit === post_id) {
+  //     setPostToEdit(0);
+  //   } else {
+  //     setPostToEdit(post_id);
+  //   }
+  // }
 
-  function submitEdit(e) {
-    let post = {
-      postDetails: {
-        body: e.post.body,
-      },
-      id: e.post.id,
-      group_id: props.groupId,
-    };
-    dispatch(updatePostAsync(post));
-    toggleEditForm();
-  }
+  // function submitEdit(e) {
+  //   let post = {
+  //     postDetails: {
+  //       body: e.post.body,
+  //     },
+  //     id: e.post.id,
+  //     group_id: props.groupId,
+  //   };
+  //   dispatch(updatePostAsync(post));
+  //   toggleEditForm();
+  // }
 
   // Posts
   useEffect(() => {
     console.log("bek");
-    dispatch(fetchPostsAsync(props.groupId));
+    console.log(props);
+    if (props.groupId) {
+      dispatch(fetchPostsAsync(props.groupId));
+    } else {
+      dispatch(fetchPostsHomeAsync());
+    }
   }, [dispatch, posts.length, props.groupId]);
 
   let listOfPosts;
+  // submitEdit={(e) => submitEdit(e)}
+  // toggleEditForm={() => toggleEditForm(post.id)}
   if (posts && posts.length > 0) {
     listOfPosts = posts.map((post) => {
       return (
         <div key={post.id} style={{ margin: "5em" }}>
-          <Post
-            dispatch={dispatch}
-            post={post}
-            postToEdit={postToEdit}
-            submitEdit={(e) => submitEdit(e)}
-            toggleEditForm={() => toggleEditForm(post.id)}
-          />
+          <Post dispatch={dispatch} post={post} postToEdit={postToEdit} />
         </div>
       );
     });

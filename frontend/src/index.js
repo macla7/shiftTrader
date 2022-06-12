@@ -7,9 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { loginUserWithTokenAsync } from "./features/sessions/sessionSlice";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Posts from "./features/posts/Posts";
 import Groups from "./features/groups/Groups";
 import Group from "./features/groups/Group";
+import Home from "./features/home/Home";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,7 +30,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="posts" element={<Posts />} />
+            <Route path="home" element={<Home />} />
             <Route path="groups" element={<Groups />} />
             <Route path="groups/:groupId" element={<Group />} />
             <Route

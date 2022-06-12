@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersAsync, selectUsers } from "./userSlice";
 import { createInviteAsync } from "../groups/invites/inviteSlice";
 
+// Definitely coupled a bit too much with invite and group logic I think
 function Search(props) {
   const userId = useSelector((state) => state.sessions.user.id);
   const users = useSelector(selectUsers);
