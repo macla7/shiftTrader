@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { selectAdmin } from "./groupSlice";
 import Memberships from "./memberships/Memberships";
+import Search from "../users/Search";
 
 import Posts from "../posts/Posts";
 import Requests from "./invites/Requests";
@@ -47,6 +48,7 @@ function Group(props) {
       </form>
 
       <div>
+        <Search />
         <Memberships groupId={params.groupId} />
         {isAdmin ? <Requests groupId={params.groupId} /> : ""}
         <Posts groupId={params.groupId}></Posts>

@@ -6,7 +6,7 @@ namespace :api do
       post '/session-data', to: 'sessions#create'
     end
 
-    resources :books
+    resources :users
 
     resources :groups do
       resources :memberships, :invites, :posts
