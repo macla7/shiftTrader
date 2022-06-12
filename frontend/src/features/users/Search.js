@@ -1,12 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersAsync, selectUsers } from "./userSlice";
+import { createInviteAsync } from "../groups/invites/inviteSlice";
 
-function Search() {
+function Search(props) {
+  const userId = useSelector((state) => state.sessions.user.id);
   const users = useSelector(selectUsers);
   const [userList, setUserList] = useState("");
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
+  const [inviteNotice, setInviteNotice] = useState("");
+
+  function attemptInvite(e) {
+    e.preventDefault();
+
+    console.log("email is " + searchQuery);
+    if (validateEmail(searchQuery)) {
+      inviteUser(findUserByEmail(searchQuery)[0]);
+    } else {
+      setInviteNotice(<p>Invite failed</p>);
+    }
+  }
+
+  function inviteUser(user) {
+    let inviteDetails = {
+      group_id: props.groupId,
+      internal_user_id: userId,
+      external_user_id: user.id,
+      request: false,
+      accepted: false,
+    };
+    setInviteNotice(<p>Invited {user.email}</p>);
+    dispatch(createInviteAsync(inviteDetails));
+  }
 
   function filterUsers(users, searchQuery = null) {
     if (!searchQuery) {
@@ -21,7 +47,21 @@ function Search() {
   }
 
   function listUsers(users) {
-    setUserList(users.map((user) => <li key={user.id}>{user.email}</li>));
+    setUserList(
+      users.map((user) => (
+        <li key={user.id} onClick={(e) => setSearchQuery(user.email)}>
+          {user.email}
+        </li>
+      ))
+    );
+  }
+
+  function findUserByEmail(email) {
+    return users.filter((user) => user.email === email);
+  }
+
+  function validateEmail(email) {
+    return findUserByEmail(email).length === 1;
   }
 
   // Members
@@ -36,20 +76,21 @@ function Search() {
 
   return (
     <div>
-      <form action="/" method="get">
-        <label htmlFor="header-search">
-          <span className="visually-hidden"></span>
+      <form onSubmit={(e) => attemptInvite(e)}>
+        {inviteNotice ? inviteNotice : ""}
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            placeholder="Search people..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </label>
-        <input
-          type="text"
-          id="header-search"
-          placeholder="Search people..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          name="s"
-        />
-        <button type="submit">Add</button>
+        <input type="submit" value="Add" />
       </form>
+
       <div>{userList}</div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { createInviteAsync } from "./invites/inviteSlice";
+
 import { selectAdmin } from "./groupSlice";
 import Memberships from "./memberships/Memberships";
 import Search from "../users/Search";
@@ -18,37 +18,15 @@ function Group(props) {
   const dispatch = useDispatch();
   let params = useParams();
 
-  function inviteUser(e) {
-    e.preventDefault();
-
-    // Hard coded to invite user 2
-    let inviteDetails = {
-      group_id: params.groupId,
-      internal_user_id: userId,
-      external_user_id: 2,
-      request: false,
-      accepted: false,
-    };
-
-    dispatch(createInviteAsync(inviteDetails));
-  }
-
   return (
     <div>
       <Link to="/groups">Back to Groups</Link>
       <p>Group id: {params.groupId}</p>
       <p>Admin: {isAdmin ? "true" : "false"}</p>
       <p>User: {userId}</p>
-      <form onSubmit={(e) => inviteUser(e)}>
-        <label>
-          Name:
-          <input type="text" name="name" />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
 
       <div>
-        <Search />
+        <Search groupId={params.groupId} />
         <Memberships groupId={params.groupId} />
         {isAdmin ? <Requests groupId={params.groupId} /> : ""}
         <Posts groupId={params.groupId}></Posts>
