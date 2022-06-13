@@ -53,8 +53,6 @@ export async function logoutUser(payload) {
 }
 
 export async function loginUserWithToken(payload) {
-  console.log("heelllllllllllllllooooooooooo");
-  console.log(payload);
   return fetch(`${API_URL}/users/session-data`, {
     method: "GET",
     headers: {

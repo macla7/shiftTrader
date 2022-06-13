@@ -53,7 +53,6 @@ function Requests(props) {
 
   // Requests
   useEffect(() => {
-    console.log("in requests component useEffect, fetch requests");
     dispatch(fetchRequestsAsync(props.groupId));
   }, [dispatch, userId, props.groupId, requests.length]);
 

@@ -8,10 +8,7 @@ class Api::V1::InvitesController < ApiController
   end
 
   def index_requests
-    p 'INDEX REQUSTS BABBY'
-    p params
     set_group
-    p @group.requests.not_accepted
     render json: @group.requests.not_accepted
   end
 
@@ -30,10 +27,7 @@ class Api::V1::InvitesController < ApiController
 
   # POST /invites or /invites.json
   def create
-    p 'INVITES CREATE'
-    p invite_params
     @invite = Invite.new(invite_params)
-    p @invite
 
     respond_to do |format|
       if @invite.save
@@ -57,8 +51,6 @@ class Api::V1::InvitesController < ApiController
 
   def update_request
     set_group
-    p 'hellllllllllllllllllllllloooooooo'
-    p @group.requests.not_accepted
     respond_to do |format|
       if @invite.update(invite_params)
         format.json { render json: @group.requests.not_accepted, status: :ok }

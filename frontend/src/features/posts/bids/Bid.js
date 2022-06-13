@@ -38,7 +38,6 @@ function Bid(props) {
 
   // Fetch Bids
   useEffect(() => {
-    console.log("fetching bids");
     dispatch(fetchBidsAsync(props.post.id));
   }, [dispatch, bids.length]);
 
@@ -51,7 +50,6 @@ function Bid(props) {
   }
 
   useEffect(() => {
-    console.log("loopering here?");
     setBidsList(listBids(bids));
   }, [dispatch, bids.length]);
 

@@ -58,11 +58,7 @@ class Api::V1::LikesController < ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_like
-      p 'setting like baby'
-      p params[:like][:user_id]
       @like = Like.where("user_id = ? AND post_id = ?", params[:like][:user_id], params[:like][:post_id]).first
-      p @like
-      p 'like should be set'
     end
 
     def set_post

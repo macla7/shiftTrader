@@ -52,7 +52,6 @@ export const fetchInvitesAsync = createAsyncThunk(
 export const fetchRequestsAsync = createAsyncThunk(
   "invites/fetchRequests",
   async (groupId) => {
-    console.log("in fetchRequestsAsync groupdId: " + groupId);
     const response = await fetchRequests(groupId);
     return response;
   }
@@ -107,7 +106,7 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchInvitesAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log("In Async, action.payload is: " + action.payload);
         return produce(state, (draftState) => {
           draftState.invites = action.payload;
           draftState.status = Statuses.UpToDate;
@@ -127,7 +126,7 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchRequestsAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log("In Async, action.payload is: " + action.payload);
         return produce(state, (draftState) => {
           draftState.requests = action.payload;
           draftState.status = Statuses.UpToDate;

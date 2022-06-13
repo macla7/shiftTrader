@@ -19,8 +19,6 @@ function Posts(props) {
 
   // Posts
   useEffect(() => {
-    console.log("bek");
-    console.log(props);
     if (props.groupId) {
       dispatch(fetchPostsAsync(props.groupId));
     } else {

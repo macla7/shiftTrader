@@ -15,7 +15,6 @@ function Search(props) {
   function attemptInvite(e) {
     e.preventDefault();
 
-    console.log("email is " + searchQuery);
     if (validateEmail(searchQuery)) {
       inviteUser(findUserByEmail(searchQuery)[0]);
     } else {
@@ -67,7 +66,6 @@ function Search(props) {
 
   // Members
   useEffect(() => {
-    console.log("in group search useEffect, fetch Users");
     dispatch(fetchUsersAsync());
   }, [dispatch]);
 

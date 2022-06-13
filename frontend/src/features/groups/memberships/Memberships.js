@@ -17,7 +17,6 @@ function Memberships(props) {
 
   // Members
   useEffect(() => {
-    console.log("in group component useEffect, fetch Members");
     dispatch(fetchMembershipsAsync(props.groupId));
   }, [dispatch, userId, props.groupId, memberships.length]);
 

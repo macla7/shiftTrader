@@ -3,10 +3,8 @@ class Api::V1::BidsController < ApiController
 
   # GET /bids or /bids.json
   def index
-    p 'BIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDSSSSS'
     set_post
     @bids = Bid.all
-    p @post.bids
     render json: @post.bids
   end
 
@@ -61,11 +59,7 @@ class Api::V1::BidsController < ApiController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bid
-      p 'setting bid baby'
-      p params[:bid][:user_id]
       @bid = Bid.where("user_id = ? AND post_id = ?", params[:bid][:user_id], params[:bid][:post_id]).first
-      p @bid
-      p 'bid should be set'
     end
 
     def set_post

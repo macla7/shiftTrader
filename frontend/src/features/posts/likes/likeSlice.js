@@ -61,7 +61,7 @@ export const likeSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchLikesAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
+        console.log("In Async, action.payload is: " + action.payload);
         return produce(state, (draftState) => {
           draftState.likes = action.payload;
           draftState.status = Statuses.UpToDate;

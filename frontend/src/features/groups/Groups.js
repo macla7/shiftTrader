@@ -22,7 +22,6 @@ function Groups() {
   // Called on initialise, because dispatch changes (on intialise)
   // and on groups.length change
   useEffect(() => {
-    console.log("bek");
     dispatch(fetchGroupsAsync());
   }, [dispatch, groups.length]);
 
