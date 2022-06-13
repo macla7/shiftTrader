@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBidAsync, fetchBidsAsync, selectBids } from "./bidSlice";
 
 function Bid(props) {
-  const bids = useSelector(selectBids);
+  const bids = useSelector((state) => {
+    if (state.bids.postBids && state.bids.postBids[props.post.id]) {
+      return state.bids.postBids[props.post.id];
+    }
+    return [];
+  });
   const [priceDollars, setPriceDollars] = useState(0);
   const [priceCents, setPriceCents] = useState(0);
   const [bidNotice, setBidNotice] = useState("");
@@ -33,6 +38,7 @@ function Bid(props) {
 
   // Fetch Bids
   useEffect(() => {
+    console.log("fetching bids");
     dispatch(fetchBidsAsync(props.post.id));
   }, [dispatch, bids.length]);
 
@@ -45,8 +51,9 @@ function Bid(props) {
   }
 
   useEffect(() => {
+    console.log("loopering here?");
     setBidsList(listBids(bids));
-  }, [dispatch, bids]);
+  }, [dispatch, bids.length]);
 
   return (
     <div>

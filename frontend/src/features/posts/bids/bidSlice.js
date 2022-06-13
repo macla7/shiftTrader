@@ -11,14 +11,17 @@ export const Statuses = {
 };
 
 const initialState = {
-  posts: [],
+  postBids: {
+    0: [
+      {
+        id: 0,
+        post_id: 0,
+        user_id: 0,
+        price: 0,
+      },
+    ],
+  },
 };
-// {
-//   id: 0,
-//   post_id: 0,
-//   user_id: 0,
-//   price: 0,
-// }
 
 export const fetchBidsAsync = createAsyncThunk(
   "bids/fetchBids",
@@ -53,14 +56,12 @@ export const bidSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchBidsAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
         return produce(state, (draftState) => {
-          draftState.bids = action.payload;
-          draftState.status = Statuses.UpToDate;
-          const index = draftState.posts.findIndex(
-            (post) => post.id === action.payload.id
-          );
-          draftState.posts[index] = action.payload;
+          let index;
+          if (action.payload.length > 0) {
+            index = action.payload[0].post_id.toString();
+            draftState.postBids[index] = action.payload;
+          }
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -79,7 +80,11 @@ export const bidSlice = createSlice({
       // you got the thing
       .addCase(createBidAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.bids = action.payload;
+          let index;
+          if (action.payload.length > 0) {
+            index = action.payload[0].post_id.toString();
+            draftState.postBids[index] = action.payload;
+          }
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -94,7 +99,7 @@ export const bidSlice = createSlice({
 
 export const {} = bidSlice.actions;
 
-export const selectBids = (state) => state.bids.bids;
+export const selectBids = (state) => state.bids.postBids;
 
 export const selectStatus = (state) => state.bids.status;
 

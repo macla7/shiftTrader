@@ -3,8 +3,10 @@ class Api::V1::BidsController < ApiController
 
   # GET /bids or /bids.json
   def index
+    p 'BIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDSSSSS'
     set_post
     @bids = Bid.all
+    p @post.bids
     render json: @post.bids
   end
 
@@ -24,11 +26,12 @@ class Api::V1::BidsController < ApiController
 
   # POST /bids or /bids.json
   def create
+    set_post_with_bid
     @bid = current_user.bids.new(bid_params)
 
     respond_to do |format|
       if @bid.save
-        format.json { render json: Bid.all, status: :ok }
+        format.json { render json: @post.bids, status: :ok }
       else
         format.json { render json: @bid.errors, status: :unprocessable_entity }
       end
@@ -67,6 +70,10 @@ class Api::V1::BidsController < ApiController
 
     def set_post
       @post = Post.find(params[:post_id])
+    end
+
+    def set_post_with_bid
+      @post = Post.find(params[:bid][:post_id])
     end
 
     # Only allow a list of trusted parameters through.
