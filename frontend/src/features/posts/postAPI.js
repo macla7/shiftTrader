@@ -1,8 +1,7 @@
-const API_GROUP_URL = "http://localhost:3000/api/v1/groups";
 const API_URL = "http://localhost:3000/api/v1";
 
 export async function fetchPosts(groupId) {
-  return fetch(`${API_GROUP_URL}/${groupId}/posts.json`, {
+  return fetch(`${API_URL}/groups/${groupId}/posts.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +33,7 @@ export async function fetchPostsHome() {
 }
 
 export async function createPost(post) {
-  return fetch(`${API_GROUP_URL}/${post.group_id}/posts.json`, {
+  return fetch(`${API_URL}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -51,7 +50,7 @@ export async function createPost(post) {
 }
 
 export async function updatePost(post) {
-  return fetch(`${API_GROUP_URL}/${post.group_id}/posts/${post.id}.json`, {
+  return fetch(`${API_URL}/posts/${post.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -70,7 +69,7 @@ export async function updatePost(post) {
 export async function destroyPost(payload) {
   const post = payload.post;
 
-  return fetch(`${API_GROUP_URL}/posts/${post.post_id}.json`, {
+  return fetch(`${API_URL}/posts/${post.post_id}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

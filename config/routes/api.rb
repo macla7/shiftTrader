@@ -7,9 +7,16 @@ namespace :api do
     end
 
     resources :users
+    resources :likes
+    resources :posts do
+      resources :likes, only: [:index]
+    end
 
+    get '/likes/destroy', to: 'likes#destroy'
+    
     resources :groups do
-      resources :memberships, :invites, :posts
+      resources :memberships, :invites
+      resources :posts, only: [:index]
       get '/requests', to: 'invites#index_requests'
       put '/requests/:id', to: 'invites#update_request'
     end
@@ -19,6 +26,7 @@ namespace :api do
     namespace :android do
       resources :books
     end
+
   end
 end
 
