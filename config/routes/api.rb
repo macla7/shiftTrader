@@ -8,8 +8,10 @@ namespace :api do
 
     resources :users
     resources :likes
+    resources :bids
     resources :posts do
       resources :likes, only: [:index]
+      resources :bids, only: [:index]
     end
 
     get '/likes/destroy', to: 'likes#destroy'

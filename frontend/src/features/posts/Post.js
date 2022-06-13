@@ -7,6 +7,7 @@ import {
   selectLikes,
 } from "./likes/likeSlice";
 import Like from "./likes/Like";
+import Bid from "./bids/Bid.js";
 
 function Post(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
@@ -20,9 +21,8 @@ function Post(props) {
       <p>Group: {props.post.group_id}</p>
       <p>{props.post.body}</p>
       <p>Ends at: {props.post.ends_at}</p>
-
-      <button>Bid</button>
-      <Like post={props.post} />
+      {/* <Like post={props.post} /> */}
+      <Bid post={props.post} />
       <p>Comments</p>
     </div>
   );

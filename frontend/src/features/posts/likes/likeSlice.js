@@ -15,6 +15,7 @@ const initialState = {
     {
       id: 0,
       post_id: 0,
+      user_id: 0,
     },
   ],
 };
@@ -81,7 +82,7 @@ export const likeSlice = createSlice({
       // you got the thing
       .addCase(createLikeAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.likes.push(action.payload);
+          draftState.likes = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })
