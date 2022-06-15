@@ -88,7 +88,7 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchPostsAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Async Posts");
         return produce(state, (draftState) => {
           draftState.posts = action.payload;
           draftState.status = Statuses.UpToDate;
@@ -108,7 +108,7 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchPostsHomeAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Async Posts");
         return produce(state, (draftState) => {
           draftState.posts = action.payload;
           draftState.status = Statuses.UpToDate;

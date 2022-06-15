@@ -13,6 +13,7 @@ import PostForm from "../posts/PostForm";
 
 function Posts(props) {
   const userId = useSelector((state) => state.sessions.user.id);
+  const [postsList, setPostsList] = useState("");
   const posts = useSelector(selectPosts);
   const status = useSelector(selectStatus);
   const dispatch = useDispatch();
@@ -24,40 +25,28 @@ function Posts(props) {
     } else {
       dispatch(fetchPostsHomeAsync());
     }
-  }, [dispatch, posts.length, props.groupId]);
+  }, [posts.length, props.groupId]);
 
-  let listOfPosts;
-  if (posts && posts.length > 0) {
-    listOfPosts = posts.map((post) => {
-      return (
-        <div key={post.id} style={{ margin: "5em" }}>
-          <Post dispatch={dispatch} post={post} />
-        </div>
-      );
-    });
-  } else {
-    listOfPosts = "";
-  }
+  useEffect(() => {
+    setPostsList(listPosts(posts));
+  }, [posts.length]);
 
-  let contents;
-  if (status !== Statuses.UpToDate) {
-    contents = <div>{status}</div>;
-  } else {
-    contents = (
-      <div className="card">
-        <div className="card-body">
-          <h3>{status}</h3>
-          <PostForm groupId={props.groupId} />
-          {listOfPosts}
-        </div>
+  function listPosts(posts) {
+    return posts.map((post) => (
+      <div key={post.id} style={{ margin: "5em" }}>
+        <Post dispatch={dispatch} post={post} />
       </div>
-    );
+    ));
   }
 
   return (
     <div>
       <h1>Posts</h1>
-      {contents}
+      <div>
+        <h3>{status}</h3>
+        <PostForm groupId={props.groupId} />
+        {postsList}
+      </div>
     </div>
   );
 }

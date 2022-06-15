@@ -89,7 +89,7 @@ export const groupSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchGroupsAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Groups");
         return produce(state, (draftState) => {
           draftState.groups = action.payload;
           draftState.status = Statuses.UpToDate;

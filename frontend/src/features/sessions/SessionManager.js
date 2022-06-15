@@ -22,7 +22,7 @@ function SessionManager() {
         <p>{userEmail}</p>
         <p>{userId}</p>
       </div>
-      <Register />
+      {/* <Register /> */}
       <Login />
       <button onClick={logout}>Log out</button>
     </div>

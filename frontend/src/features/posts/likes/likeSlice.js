@@ -10,14 +10,26 @@ export const Statuses = {
   Error: "Error",
 };
 
+// const initialState = {
+//   likes: [
+//     {
+//       id: 0,
+//       post_id: 0,
+//       user_id: 0,
+//     },
+//   ],
+// };
+
 const initialState = {
-  likes: [
-    {
-      id: 0,
-      post_id: 0,
-      user_id: 0,
-    },
-  ],
+  postLikes: {
+    0: [
+      {
+        id: 0,
+        post_id: 0,
+        user_id: 0,
+      },
+    ],
+  },
 };
 
 export const fetchLikesAsync = createAsyncThunk(
@@ -61,9 +73,13 @@ export const likeSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchLikesAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        // console.log("In Async, action.payload is: ");
         return produce(state, (draftState) => {
-          draftState.likes = action.payload;
+          let index;
+          if (action.payload.length > 0) {
+            index = action.payload[0].post_id.toString();
+            draftState.postLikes[index] = action.payload;
+          }
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -82,7 +98,11 @@ export const likeSlice = createSlice({
       // you got the thing
       .addCase(createLikeAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.likes = action.payload;
+          let index;
+          if (action.payload.length > 0) {
+            index = action.payload[0].post_id.toString();
+            draftState.postLikes[index] = action.payload;
+          }
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -101,7 +121,9 @@ export const likeSlice = createSlice({
       // you got the thing
       .addCase(destroyLikeAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          draftState.likes = action.payload;
+          let index;
+          index = action.meta.arg.post_id.toString();
+          draftState.postLikes[index] = [];
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -116,7 +138,7 @@ export const likeSlice = createSlice({
 
 export const {} = likeSlice.actions;
 
-export const selectLikes = (state) => state.likes.likes;
+export const selectLikes = (state) => state.likes.postLikes;
 
 export const selectStatus = (state) => state.likes.status;
 

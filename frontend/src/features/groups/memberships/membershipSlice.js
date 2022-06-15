@@ -77,7 +77,7 @@ export const membershipSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchMembershipsAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Memberships");
         return produce(state, (draftState) => {
           draftState.memberships = action.payload;
           draftState.status = Statuses.UpToDate;

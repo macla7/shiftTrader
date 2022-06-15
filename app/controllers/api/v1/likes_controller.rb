@@ -24,11 +24,12 @@ class Api::V1::LikesController < ApiController
 
   # POST /likes or /likes.json
   def create
+    set_post_with_like
     @like = current_user.likes.new(like_params)
 
     respond_to do |format|
       if @like.save
-        format.json { render json: Like.all, status: :ok }
+        format.json { render json: @post.likes, status: :ok }
       else
         format.json { render json: @like.errors, status: :unprocessable_entity }
       end
@@ -48,10 +49,15 @@ class Api::V1::LikesController < ApiController
 
   # DELETE /likes/1 or /likes/1.json
   def destroy
+    set_post_with_like
+    p 'innnnn pooooooooooooooooo'
+    p @post.likes
     @like.destroy
+    p 'innnnn pooooooooooooooooo'
+    p @post.likes
 
     respond_to do |format|
-      format.json { render json: Like.all, status: :ok }
+      format.json { render json: @post.likes, status: :ok }
     end
   end
 
@@ -63,6 +69,10 @@ class Api::V1::LikesController < ApiController
 
     def set_post
       @post = Post.find(params[:post_id])
+    end
+
+    def set_post_with_like
+      @post = Post.find(params[:like][:post_id])
     end
 
     # Only allow a list of trusted parameters through.

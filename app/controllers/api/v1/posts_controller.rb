@@ -4,13 +4,29 @@ class Api::V1::PostsController < ApiController
   # GET /posts or /posts.json
   def index
     set_group
-    @posts = Post.all
-    render json: @group.posts
+    postWithAssociations = []
+    @group.posts = Post.all.includes(:bids, :likes).each do |post|
+      postWithAssociations.push(post.as_json.merge({
+        bids: post.bids,
+        likes: post.likes
+        })
+      )
+    end
+    render json: postWithAssociations
   end
 
   def index_home
     @posts = Post.joins(group: :memberships).where('memberships.user_id = ?', current_user.id)
-    render json: @posts
+
+    postWithAssociations = []
+    @posts = Post.all.includes(:bids, :likes).each do |post|
+      postWithAssociations.push(post.as_json.merge({
+        bids: post.bids,
+        likes: post.likes
+        })
+      )
+    end
+    render json: postWithAssociations
   end
 
   # GET /posts/1 or /posts/1.json

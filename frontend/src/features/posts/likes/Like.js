@@ -9,9 +9,15 @@ import {
 
 function Like(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const likes = useSelector(selectLikes);
+  const likes = useSelector((state) => {
+    if (state.likes.postLikes && state.likes.postLikes[props.post.id]) {
+      return state.likes.postLikes[props.post.id];
+    }
+    return [];
+  });
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
+  const [numberOfLikes, setNumberOfLikes] = useState(0);
 
   let likeDetails = {
     post_id: props.post.id,
@@ -39,11 +45,9 @@ function Like(props) {
   // Fetch Likes
   useEffect(() => {
     dispatch(fetchLikesAsync(props.post.id));
-  }, [dispatch, likes.length]);
-
-  useEffect(() => {
+    setNumberOfLikes(likes.length);
     hasCurrentUserLiked();
-  }, [likes]);
+  }, [likes.length]);
 
   function hasCurrentUserLiked() {
     if (likes.filter((like) => like.user_id === userId).length > 0) {
@@ -53,7 +57,7 @@ function Like(props) {
   return (
     <p>
       <button onClick={() => action()}>Like</button>
-      #Likes: {likes.length}
+      #Likes: {numberOfLikes}
       {currentUserLiked ? " (Liked)" : ""}
     </p>
   );

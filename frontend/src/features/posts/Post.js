@@ -21,7 +21,7 @@ function Post(props) {
       <p>Group: {props.post.group_id}</p>
       <p>{props.post.body}</p>
       <p>Ends at: {props.post.ends_at}</p>
-      {/* <Like post={props.post} /> */}
+      <Like post={props.post} />
       <Bid post={props.post} />
       <p>Comments</p>
     </div>

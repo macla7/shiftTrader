@@ -56,6 +56,7 @@ export const bidSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchBidsAsync.fulfilled, (state, action) => {
+        console.log("In Bids");
         return produce(state, (draftState) => {
           let index;
           if (action.payload.length > 0) {
