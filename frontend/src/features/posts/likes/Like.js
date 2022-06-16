@@ -4,17 +4,19 @@ import {
   createLikeAsync,
   fetchLikesAsync,
   destroyLikeAsync,
-  selectLikes,
 } from "./likeSlice";
+import { selectPosts, initialState } from "../../posts/postSlice";
 
 function Like(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const likes = useSelector((state) => {
-    if (state.likes.postLikes && state.likes.postLikes[props.post.id]) {
-      return state.likes.postLikes[props.post.id];
+  const [currentPost, setCurrentPost] = useState(0);
+  const post = useSelector((state) => {
+    if (state.posts.posts.length > 0) {
+      return getCurrentPostFromStore(state.posts.posts);
     }
-    return [];
+    return initialState.posts[0];
   });
+
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
   const [numberOfLikes, setNumberOfLikes] = useState(0);
@@ -35,25 +37,37 @@ function Like(props) {
   function likePost() {
     setCurrentUserLiked(true);
     dispatch(createLikeAsync(likeDetails));
+    console.log(post.likes);
   }
 
   function unlikePost() {
     setCurrentUserLiked(false);
     dispatch(destroyLikeAsync(likeDetails));
+    console.log(post.likes);
   }
 
   // Fetch Likes
   useEffect(() => {
-    dispatch(fetchLikesAsync(props.post.id));
-    setNumberOfLikes(likes.length);
+    setNumberOfLikes(post.likes.length);
     hasCurrentUserLiked();
-  }, [likes.length]);
+  }, [post.likes.length, dispatch]);
 
   function hasCurrentUserLiked() {
-    if (likes.filter((like) => like.user_id === userId).length > 0) {
+    if (props.post.likes.filter((like) => like.user_id === userId).length > 0) {
       setCurrentUserLiked(true);
     }
   }
+
+  function getCurrentPostFromStore(posts) {
+    if (posts !== undefined) {
+      let filteredPost = posts.filter((post) => post.id === props.post.id);
+      if (filteredPost.length > 0) {
+        return filteredPost[0];
+      }
+    }
+    return initialState.posts[0];
+  }
+
   return (
     <p>
       <button onClick={() => action()}>Like</button>

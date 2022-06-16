@@ -97,6 +97,8 @@ export const likeSlice = createSlice({
       })
       // you got the thing
       .addCase(createLikeAsync.fulfilled, (state, action) => {
+        console.log("in create like slice");
+        selectPostsFromLikes();
         return produce(state, (draftState) => {
           let index;
           if (action.payload.length > 0) {
@@ -138,7 +140,7 @@ export const likeSlice = createSlice({
 
 export const {} = likeSlice.actions;
 
-export const selectLikes = (state) => state.likes.postLikes;
+export const selectPostsFromLikes = (state) => state.posts;
 
 export const selectStatus = (state) => state.likes.status;
 

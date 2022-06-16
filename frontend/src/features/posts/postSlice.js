@@ -16,7 +16,7 @@ export const Statuses = {
   Error: "Error",
 };
 
-const initialState = {
+export const initialState = {
   posts: [
     {
       id: 0,
@@ -26,6 +26,8 @@ const initialState = {
       auction: true,
       created_at: "",
       updated_at: "",
+      bids: [],
+      likes: [],
     },
   ],
   status: Statuses.Initial,

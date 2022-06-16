@@ -1,3 +1,9 @@
+# CURRENT TODO
+
+Put regular old reducer actions into the likes slice, so that when each like component
+renders with it's likes from Post state, we can set likes state in likeSlice... but then
+are we managing to different states for likes.... hmmm
+
 # README
 
 This README would normally document whatever steps are necessary to get the

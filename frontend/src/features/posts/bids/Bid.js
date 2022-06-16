@@ -36,11 +36,6 @@ function Bid(props) {
     return value ? parseInt(value) : "";
   }
 
-  // Fetch Bids
-  useEffect(() => {
-    dispatch(fetchBidsAsync(props.post.id));
-  }, []);
-
   function listBids(bids) {
     return bids.map((bid) => (
       <li key={bid.id}>
@@ -50,8 +45,8 @@ function Bid(props) {
   }
 
   useEffect(() => {
-    setBidsList(listBids(bids));
-  }, [bids.length]);
+    setBidsList(listBids(props.post.bids));
+  }, [props.post.bids.length]);
 
   return (
     <div>

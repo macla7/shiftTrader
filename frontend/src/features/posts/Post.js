@@ -4,20 +4,17 @@ import {
   createLikeAsync,
   fetchLikesAsync,
   destroyLikeAsync,
-  selectLikes,
 } from "./likes/likeSlice";
 import Like from "./likes/Like";
 import Bid from "./bids/Bid.js";
 
 function Post(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const likes = useSelector(selectLikes);
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
 
   return (
     <div>
-      <div></div>
       <p>Group: {props.post.group_id}</p>
       <p>{props.post.body}</p>
       <p>Ends at: {props.post.ends_at}</p>
