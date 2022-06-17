@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createLikeAsync,
-  fetchLikesAsync,
-  destroyLikeAsync,
-} from "./likes/likeSlice";
 import Like from "./likes/Like";
 import Bid from "./bids/Bid.js";
 

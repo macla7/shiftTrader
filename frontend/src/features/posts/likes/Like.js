@@ -4,7 +4,7 @@ import {
   createLikeAsync,
   fetchLikesAsync,
   destroyLikeAsync,
-} from "./likeSlice";
+} from "../postSlice";
 import { selectPosts, initialState } from "../../posts/postSlice";
 
 function Like(props) {

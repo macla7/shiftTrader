@@ -7,6 +7,7 @@ import {
   updatePost,
   fetchPostsHome,
 } from "./postAPI";
+import { fetchLikes, createLike, destroyLike } from "./likes/likeAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -14,6 +15,12 @@ export const Statuses = {
   UpToDate: "Up To Date",
   Deleted: "Deleted",
   Error: "Error",
+};
+
+export const initialLikeState = {
+  id: 0,
+  post_id: 0,
+  user_id: 0,
 };
 
 export const initialState = {
@@ -27,7 +34,7 @@ export const initialState = {
       created_at: "",
       updated_at: "",
       bids: [],
-      likes: [],
+      likes: [initialLikeState],
     },
   ],
   status: Statuses.Initial,
@@ -69,6 +76,30 @@ export const destroyPostAsync = createAsyncThunk(
   "posts/destroyPost",
   async (payload) => {
     const response = await destroyPost(payload);
+    return response;
+  }
+);
+
+export const fetchLikesAsync = createAsyncThunk(
+  "posts/fetchLikes",
+  async (postId) => {
+    const response = await fetchLikes(postId);
+    return response;
+  }
+);
+
+export const createLikeAsync = createAsyncThunk(
+  "posts/createLike",
+  async (likeDetails) => {
+    const response = await createLike(likeDetails);
+    return response;
+  }
+);
+
+export const destroyLikeAsync = createAsyncThunk(
+  "posts/destroyLike",
+  async (payload) => {
+    const response = await destroyLike(payload);
     return response;
   }
 );
@@ -176,6 +207,79 @@ export const postSlice = createSlice({
       })
       // error
       .addCase(updatePostAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+
+      // ---------- LIKES ----------
+
+      .addCase(fetchLikesAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(fetchLikesAsync.fulfilled, (state, action) => {
+        // Need to find the post to get likes for
+        return produce(state, (draftState) => {
+          let postId = action.meta.arg.post_id;
+          let post = draftState.posts.filter((post) => post.id === postId);
+          if (post.length > 0) {
+            post[0].likes = action.payload;
+          }
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(fetchLikesAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(createLikeAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(createLikeAsync.fulfilled, (state, action) => {
+        console.log("in create like slice");
+        return produce(state, (draftState) => {
+          let postId = action.meta.arg.post_id;
+          let post = draftState.posts.filter((post) => post.id === postId);
+          if (post.length > 0) {
+            post[0].likes = action.payload;
+          }
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(createLikeAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(destroyLikeAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(destroyLikeAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          let postId = action.meta.arg.post_id;
+          let post = draftState.posts.filter((post) => post.id === postId);
+          if (post.length > 0) {
+            post[0].likes = action.payload;
+          }
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(destroyLikeAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });
