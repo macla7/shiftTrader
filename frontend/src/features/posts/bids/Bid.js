@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBidAsync, fetchBidsAsync, selectBids } from "./bidSlice";
+import {
+  createBidAsync,
+  fetchBidsAsync,
+  selectBids,
+  selectPosts,
+  initialState,
+} from "../postSlice";
 
 function Bid(props) {
-  const bids = useSelector((state) => {
-    if (state.bids.postBids && state.bids.postBids[props.post.id]) {
-      return state.bids.postBids[props.post.id];
+  const post = useSelector((state) => {
+    if (state.posts.posts.length > 0) {
+      return getCurrentPostFromStore(state.posts.posts);
     }
-    return [];
+    return initialState.posts[0];
   });
   const [priceDollars, setPriceDollars] = useState(0);
   const [priceCents, setPriceCents] = useState(0);
@@ -15,6 +21,16 @@ function Bid(props) {
   const [bidsList, setBidsList] = useState("");
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
+
+  function getCurrentPostFromStore(posts) {
+    if (posts !== undefined) {
+      let filteredPost = posts.filter((post) => post.id === props.post.id);
+      if (filteredPost.length > 0) {
+        return filteredPost[0];
+      }
+    }
+    return initialState.posts[0];
+  }
 
   function bidPost(e) {
     e.preventDefault();
@@ -45,8 +61,8 @@ function Bid(props) {
   }
 
   useEffect(() => {
-    setBidsList(listBids(props.post.bids));
-  }, [props.post.bids.length]);
+    setBidsList(listBids(post.bids));
+  }, [post.bids.length, dispatch]);
 
   return (
     <div>

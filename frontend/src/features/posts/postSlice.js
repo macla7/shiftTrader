@@ -8,6 +8,7 @@ import {
   fetchPostsHome,
 } from "./postAPI";
 import { fetchLikes, createLike, destroyLike } from "./likes/likeAPI";
+import { fetchBids, createBid } from "./bids/bidAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -23,6 +24,13 @@ export const initialLikeState = {
   user_id: 0,
 };
 
+export const initialBidState = {
+  id: 0,
+  post_id: 0,
+  user_id: 0,
+  price: 0,
+};
+
 export const initialState = {
   posts: [
     {
@@ -33,7 +41,7 @@ export const initialState = {
       auction: true,
       created_at: "",
       updated_at: "",
-      bids: [],
+      bids: [initialBidState],
       likes: [initialLikeState],
     },
   ],
@@ -100,6 +108,22 @@ export const destroyLikeAsync = createAsyncThunk(
   "posts/destroyLike",
   async (payload) => {
     const response = await destroyLike(payload);
+    return response;
+  }
+);
+
+export const fetchBidsAsync = createAsyncThunk(
+  "posts/fetchBids",
+  async (postId) => {
+    const response = await fetchBids(postId);
+    return response;
+  }
+);
+
+export const createBidAsync = createAsyncThunk(
+  "posts/createBid",
+  async (bidDetails) => {
+    const response = await createBid(bidDetails);
     return response;
   }
 );
@@ -280,6 +304,56 @@ export const postSlice = createSlice({
       })
       // error
       .addCase(destroyLikeAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+
+      // ---------- Bids ----------
+
+      // while you wait
+      .addCase(fetchBidsAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(fetchBidsAsync.fulfilled, (state, action) => {
+        console.log("In Bids");
+        return produce(state, (draftState) => {
+          let postId = action.meta.arg.post_id;
+          let post = draftState.posts.filter((post) => post.id === postId);
+          if (post.length > 0) {
+            post[0].bids = action.payload;
+          }
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(fetchBidsAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(createBidAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(createBidAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          let postId = action.meta.arg.post_id;
+          let post = draftState.posts.filter((post) => post.id === postId);
+          if (post.length > 0) {
+            post[0].bids = action.payload;
+          }
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(createBidAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });

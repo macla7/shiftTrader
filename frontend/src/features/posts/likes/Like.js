@@ -4,19 +4,18 @@ import {
   createLikeAsync,
   fetchLikesAsync,
   destroyLikeAsync,
+  selectPosts,
+  initialState,
 } from "../postSlice";
-import { selectPosts, initialState } from "../../posts/postSlice";
 
 function Like(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const [currentPost, setCurrentPost] = useState(0);
   const post = useSelector((state) => {
     if (state.posts.posts.length > 0) {
       return getCurrentPostFromStore(state.posts.posts);
     }
     return initialState.posts[0];
   });
-
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
   const [numberOfLikes, setNumberOfLikes] = useState(0);
