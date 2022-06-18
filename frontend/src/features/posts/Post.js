@@ -2,19 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Like from "./likes/Like";
 import Bid from "./bids/Bid.js";
+import { initialState } from "./postSlice";
 
 function Post(props) {
-  const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const userId = useSelector((state) => state.sessions.user.id);
-  const dispatch = useDispatch();
+  const [postInfo, setPostInfo] = useState("");
+  const post = useSelector((state) => {
+    if (state.posts.posts.length > 0) {
+      return getCurrentPostFromStore(state.posts.posts);
+    }
+    return initialState.posts[0];
+  });
+
+  function getCurrentPostFromStore(posts) {
+    if (posts !== undefined) {
+      let filteredPost = posts.filter((post) => post.id === props.post.id);
+      if (filteredPost.length > 0) {
+        return filteredPost[0];
+      }
+    }
+    return initialState.posts[0];
+  }
+
+  useEffect(() => {
+    setPostInfo(postInfoSection);
+  }, [post.id]);
+
+  function postInfoSection() {
+    return (
+      <div>
+        <p>Group: {post.group_id}</p>
+        <p>{post.body}</p>
+        <p>Ends at: {post.ends_at}</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <p>Group: {props.post.group_id}</p>
-      <p>{props.post.body}</p>
-      <p>Ends at: {props.post.ends_at}</p>
-      <Like post={props.post} />
-      <Bid post={props.post} />
+      {postInfo}
+      <Like post={post} />
+      <Bid post={post} />
       <p>Comments</p>
     </div>
   );

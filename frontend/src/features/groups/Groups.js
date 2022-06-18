@@ -9,20 +9,23 @@ import {
   updateGroupAsync,
   setGroup,
 } from "./groupSlice";
-import { getters } from "../sessions/sessionSlice";
+import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import { Link } from "react-router-dom";
 import { createInviteAsync } from "./invites/inviteSlice";
 
 function Groups() {
   const groups = useSelector(selectGroups);
   const status = useSelector(selectStatus);
-  const userId = useSelector(getters.getUserId);
+  const userId = useSelector(selectUserId);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on groups.length change
   useEffect(() => {
-    dispatch(fetchGroupsAsync());
+    if (isLoggedIn) {
+      dispatch(fetchGroupsAsync());
+    }
   }, [dispatch, groups.length]);
 
   let listOfGroups;

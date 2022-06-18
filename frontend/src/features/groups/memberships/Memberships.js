@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMembershipsAsync, selectMemberships } from "./membershipSlice";
-import { isAdmin, isNotAdmin } from "../groupSlice";
+import { isAdmin, isMember, isNotAdmin, isNotMember } from "../groupSlice";
 
 function Memberships(props) {
   const userId = useSelector((state) => state.sessions.user.id);
@@ -22,14 +22,18 @@ function Memberships(props) {
 
   useEffect(() => {
     setMembershipsList(listMemberships(memberships));
-    if (
-      memberships.filter(
-        (member) => member.user_id === userId && member.role == "admin"
-      ).length > 0
-    ) {
-      dispatch(isAdmin());
+    let membersList = memberships.filter((member) => member.user_id === userId);
+    let adminsList = membersList.filter((member) => member.role === "admin");
+    console.log("helloooooooooo");
+    if (membersList.length > 0) {
+      dispatch(isMember());
+      if (adminsList.length > 0) {
+        dispatch(isAdmin());
+      } else {
+        dispatch(isNotAdmin());
+      }
     } else {
-      dispatch(isNotAdmin());
+      dispatch(isNotMember());
     }
   }, [dispatch, userId, memberships]);
 

@@ -172,22 +172,17 @@ export const sessionSlice = createSlice({
   },
 });
 
-export const getters = {
-  getAuthToken(state) {
-    return state.sessions.auth_token;
-  },
-  getUserEmail(state) {
-    return state.sessions.user?.email;
-  },
-  getUserId(state) {
-    return state.sessions.user?.id;
-  },
-  isLoggedIn(state) {
-    const loggedOut =
-      state.sessions.auth_token == null ||
-      state.sessions.auth_token === JSON.stringify(null);
-    return !loggedOut;
-  },
+export const selectAuthToken = (state) => state.sessions.auth_token;
+
+export const selectUserEmail = (state) => state.sessions.user?.email;
+
+export const selectUserId = (state) => state.sessions.user?.id;
+
+export const selectIsLoggedIn = (state) => {
+  const loggedOut =
+    state.sessions.auth_token == null ||
+    state.sessions.auth_token === JSON.stringify(null);
+  return !loggedOut;
 };
 
 export const {} = sessionSlice.actions;

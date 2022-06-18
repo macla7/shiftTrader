@@ -16,6 +16,7 @@ export const Statuses = {
 };
 
 const initialState = {
+  isMember: false,
   isAdmin: false,
   group: 0,
   groups: [
@@ -75,6 +76,12 @@ export const groupSlice = createSlice({
     },
     isAdmin: (state) => {
       state.isAdmin = true;
+    },
+    isMember: (state) => {
+      state.isMember = true;
+    },
+    isNotMember: (state) => {
+      state.isMember = false;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -162,7 +169,8 @@ export const groupSlice = createSlice({
   },
 });
 
-export const { setGroup, isAdmin, isNotAdmin } = groupSlice.actions;
+export const { setGroup, isAdmin, isNotAdmin, isMember, isNotMember } =
+  groupSlice.actions;
 
 export const selectGroups = (state) => state.groups.groups;
 
@@ -171,5 +179,7 @@ export const selectStatus = (state) => state.groups.status;
 export const selectGroup = (state) => state.groups.group;
 
 export const selectAdmin = (state) => state.groups.isAdmin;
+
+export const selectMember = (state) => state.groups.isMember;
 
 export default groupSlice.reducer;

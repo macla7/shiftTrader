@@ -2,13 +2,7 @@
 
 ## CURRENT TODO's
 
-**Posts**
-
-- Make sure you only see posts that have an expiry date in the future
-
 **Permissions**
-
-- Make sure you can only see / post / bid / like in groups you're in
 
 **Notifications**
 
@@ -26,13 +20,13 @@
   - end_time -> datetime
   - position -> text
 
+**Create DP functionality**
+
 **Create React Native App**
 
 **Create Banking functionality....**
 
 **Create facebook login support**
-
-**Create DP functionality**
 
 **Do README**
 

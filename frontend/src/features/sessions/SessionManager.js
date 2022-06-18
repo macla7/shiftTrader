@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAsync } from "./sessionSlice";
-import { getters } from "./sessionSlice";
+import { selectAuthToken, selectUserEmail, selectUserId } from "./sessionSlice";
 import Register from "./Register";
 import Login from "./Login";
 
 function SessionManager() {
-  const authToken = useSelector(getters.getAuthToken);
-  const userEmail = useSelector(getters.getUserEmail);
-  const userId = useSelector(getters.getUserId);
+  const authToken = useSelector(selectAuthToken);
+  const userEmail = useSelector(selectUserEmail);
+  const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
 
   function logout() {
