@@ -4,7 +4,6 @@ import {
   createLikeAsync,
   fetchLikesAsync,
   destroyLikeAsync,
-  selectPosts,
   initialState,
 } from "../postSlice";
 

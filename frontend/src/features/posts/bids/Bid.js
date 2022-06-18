@@ -4,7 +4,6 @@ import {
   createBidAsync,
   fetchBidsAsync,
   selectBids,
-  selectPosts,
   initialState,
 } from "../postSlice";
 

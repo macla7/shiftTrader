@@ -106,7 +106,7 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchInvitesAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Async Invites");
         return produce(state, (draftState) => {
           draftState.invites = action.payload;
           draftState.status = Statuses.UpToDate;
@@ -126,7 +126,7 @@ export const inviteSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchRequestsAsync.fulfilled, (state, action) => {
-        console.log("In Async, action.payload is: " + action.payload);
+        console.log("In Async Invites");
         return produce(state, (draftState) => {
           draftState.requests = action.payload;
           draftState.status = Statuses.UpToDate;

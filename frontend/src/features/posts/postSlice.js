@@ -245,13 +245,9 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchLikesAsync.fulfilled, (state, action) => {
-        // Need to find the post to get likes for
+        console.log("in Async posts - likes");
         return produce(state, (draftState) => {
-          let postId = action.meta.arg.post_id;
-          let post = draftState.posts.filter((post) => post.id === postId);
-          if (post.length > 0) {
-            post[0].likes = action.payload;
-          }
+          setNestedResource(draftState, action, "likes");
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -269,13 +265,8 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(createLikeAsync.fulfilled, (state, action) => {
-        console.log("in create like slice");
         return produce(state, (draftState) => {
-          let postId = action.meta.arg.post_id;
-          let post = draftState.posts.filter((post) => post.id === postId);
-          if (post.length > 0) {
-            post[0].likes = action.payload;
-          }
+          setNestedResource(draftState, action, "likes");
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -294,11 +285,7 @@ export const postSlice = createSlice({
       // you got the thing
       .addCase(destroyLikeAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          let postId = action.meta.arg.post_id;
-          let post = draftState.posts.filter((post) => post.id === postId);
-          if (post.length > 0) {
-            post[0].likes = action.payload;
-          }
+          setNestedResource(draftState, action, "likes");
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -319,13 +306,9 @@ export const postSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchBidsAsync.fulfilled, (state, action) => {
-        console.log("In Bids");
+        console.log("in Async posts - bids");
         return produce(state, (draftState) => {
-          let postId = action.meta.arg.post_id;
-          let post = draftState.posts.filter((post) => post.id === postId);
-          if (post.length > 0) {
-            post[0].bids = action.payload;
-          }
+          setNestedResource(draftState, action, "bids");
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -344,11 +327,7 @@ export const postSlice = createSlice({
       // you got the thing
       .addCase(createBidAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          let postId = action.meta.arg.post_id;
-          let post = draftState.posts.filter((post) => post.id === postId);
-          if (post.length > 0) {
-            post[0].bids = action.payload;
-          }
+          setNestedResource(draftState, action, "bids");
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -360,6 +339,14 @@ export const postSlice = createSlice({
       });
   },
 });
+
+function setNestedResource(draftState, action, resource) {
+  let postId = action.meta.arg.post_id;
+  let post = draftState.posts.filter((post) => post.id === postId);
+  if (post.length > 0) {
+    post[0][resource] = action.payload;
+  }
+}
 
 export const {} = postSlice.actions;
 

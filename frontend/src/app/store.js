@@ -6,7 +6,6 @@ import groupsReducer from "../features/groups/groupSlice";
 import invitesReducer from "../features/groups/invites/inviteSlice";
 import membershipsReducer from "../features/groups/memberships/membershipSlice";
 import usersReducer from "../features/users/userSlice";
-import bidsReducer from "../features/posts/bids/bidSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +16,5 @@ export const store = configureStore({
     invites: invitesReducer,
     memberships: membershipsReducer,
     users: usersReducer,
-    bids: bidsReducer,
   },
 });
