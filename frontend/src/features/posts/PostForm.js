@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPostAsync } from "./postSlice";
+import ShiftForm from "./shifts/ShiftForm";
 
 function PostForm(props) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function PostForm(props) {
       ends_at: endsAt,
       auction: auction,
       group_id: props.groupId,
+      shifts_attributes: [{}],
     };
     dispatch(createPostAsync(post));
     resetState();
@@ -30,6 +32,7 @@ function PostForm(props) {
     <div>
       <h1>Post Form</h1>
       <form>
+        <ShiftForm post={props.post} />
         <input
           type="datetime-local"
           name="endsAt"

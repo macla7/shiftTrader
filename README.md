@@ -2,7 +2,9 @@
 
 ## CURRENT TODO's
 
-**Permissions**
+Thinking I want to create 'shift' objects in frontend state, and then when the time comes for post creation, tag these shift/s along the way. This way, there is only one call to API, and it's all or nothing (determined in post controller). Then when the post is attempted to be created, I take the prospective shift Id's(?) and create the association / save the shifts (with post).
+
+This way the shifts are independently able to be checked for their validaity, and all that is requried is the final save (with post assoication).
 
 **Notifications**
 
