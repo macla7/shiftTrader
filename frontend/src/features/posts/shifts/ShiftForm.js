@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initialState } from "../postSlice";
+import { initialShiftState, createShift, deleteShift } from "./shiftSlice";
 
 // Design is to be able to add multiple shifts to a post
 function ShiftForm(props) {
@@ -10,17 +11,52 @@ function ShiftForm(props) {
   const [position, setPosition] = useState("");
   const [shiftsList, setShiftsList] = useState("");
   const userId = useSelector((state) => state.sessions.user.id);
+  const shifts = useSelector((state) => state.shifts.shifts);
+  const [shiftTempId, setShiftTempId] = useState(1);
   const dispatch = useDispatch();
 
-  function listShifts(shifts) {
-    return shifts.map((shift) => (
-      <li key={shift.id}>
-        Shift: {shift.id} - Price: {shift.price}
+  function createShiftsList(shifts) {
+    return shifts.map((shift, i) => (
+      <li key={i}>
+        <p>Position: {shift.position}</p>
+        <p>Description: {shift.description}</p>
+        <p>Starts: {shift.start}</p>
+        <p>Ends: {shift.end}</p>
       </li>
     ));
   }
 
-  useEffect(() => {}, [dispatch]);
+  function formIsValid() {
+    return datesMakeSense() && position;
+  }
+
+  // In the future AND sequential
+  function datesMakeSense() {
+    let startDateTime = new Date(start);
+    let endDateTime = new Date(end);
+    return (
+      startDateTime.getTime() < endDateTime.getTime() &&
+      startDateTime.getTime() > Date.now()
+    );
+  }
+
+  useEffect(() => {
+    setShiftsList(createShiftsList(shifts));
+  }, [dispatch, shifts.length]);
+
+  function handleCreateShift(e) {
+    e.preventDefault();
+    if (formIsValid()) {
+      setShiftTempId((prevId) => prevId + 1);
+      let shift = {
+        position: position,
+        description: description,
+        start: start,
+        end: end,
+      };
+      dispatch(createShift(shift));
+    }
+  }
 
   return (
     <div>
@@ -39,8 +75,8 @@ function ShiftForm(props) {
         <input
           type="datetime-local"
           name="end"
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
+          value={start}
+          onChange={(e) => setStart(e.target.value)}
         ></input>
       </label>
       <br />
@@ -49,8 +85,8 @@ function ShiftForm(props) {
         <input
           type="datetime-local"
           name="ends"
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
+          value={end}
+          onChange={(e) => setEnd(e.target.value)}
         ></input>
       </label>
       <br />
@@ -62,6 +98,8 @@ function ShiftForm(props) {
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
+      <button onClick={(e) => handleCreateShift(e)}>Add Shift</button>
+      {shiftsList}
     </div>
   );
 }

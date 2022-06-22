@@ -46,9 +46,11 @@ class Api::V1::PostsController < ApiController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.new(post_params)
-
+    p current_user
+    p 'bing'
+    p @post
     respond_to do |format|
-      if @post.save
+      if @post.save!
         format.json { render json: Post.all, status: :ok }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -91,7 +93,7 @@ class Api::V1::PostsController < ApiController
     def post_params
       params.require(:post).permit(
         :body, :ends_at, :auction, :group_id, 
-        pets_attributes: [:position, :description, :start, :end]
+        shifts_attributes: [:position, :description, :start, :end]
       )
     end
 end

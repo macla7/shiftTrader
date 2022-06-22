@@ -29,7 +29,7 @@ function Posts(props) {
         dispatch(fetchPostsHomeAsync());
       }
     }
-  }, [posts.length, props.groupId]);
+  }, [posts.length, props.groupId, isLoggedIn]);
 
   useEffect(() => {
     setPostsList(listPosts(posts));

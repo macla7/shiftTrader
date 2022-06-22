@@ -26,7 +26,7 @@ function Groups() {
     if (isLoggedIn) {
       dispatch(fetchGroupsAsync());
     }
-  }, [dispatch, groups.length]);
+  }, [dispatch, groups.length, isLoggedIn]);
 
   let listOfGroups;
   if (groups && groups.length > 0) {

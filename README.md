@@ -2,9 +2,18 @@
 
 ## CURRENT TODO's
 
-Thinking I want to create 'shift' objects in frontend state, and then when the time comes for post creation, tag these shift/s along the way. This way, there is only one call to API, and it's all or nothing (determined in post controller). Then when the post is attempted to be created, I take the prospective shift Id's(?) and create the association / save the shifts (with post).
+**Create Shift model**
 
-This way the shifts are independently able to be checked for their validaity, and all that is requried is the final save (with post assoication).
+Todo: to make sure I can't submit a client state 'shift' in post form, without all the right details.
+
+- shift dates are sequential
+- in the future
+- position is present
+- description is optional
+
+Todo: Make sure I can submit a post without at least one shift.
+
+Todo: Group search is based off dropdown of user's groups. Similar to user dropdown. In group post form, it'll be prefilled out.
 
 **Notifications**
 
@@ -14,13 +23,6 @@ This way the shifts are independently able to be checked for their validaity, an
 - Someone posted in a group you're in, action -> view group
 - A post you've bid on is ending soon, action -> view
 - Someone bid on a post you've bid on, action -> view post
-
-**Create Shift model**
-
-- Table
-  - start_time -> datetime
-  - end_time -> datetime
-  - position -> text
 
 **Create DP functionality**
 

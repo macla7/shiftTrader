@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createPostAsync } from "./postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import postSlice, { createPostAsync } from "./postSlice";
 import ShiftForm from "./shifts/ShiftForm";
 
 function PostForm(props) {
@@ -8,16 +8,24 @@ function PostForm(props) {
   const [body, setBody] = useState("");
   const [auction, setAuction] = useState("");
   const [endsAt, setEndsAt] = useState("");
+  const [group, setGroup] = useState("");
+  const shifts = useSelector((state) => state.shifts.shifts);
 
   function submitHandler(e) {
+    // if it's in home, need to ask / set group manually
+    let groupId = props.groupId ? props.groupId : group;
+    // DO HERE ?
+
     e.preventDefault();
-    const post = {
+    let post = {
       body: body,
       ends_at: endsAt,
       auction: auction,
-      group_id: props.groupId,
-      shifts_attributes: [{}],
+      group_id: groupId,
+      shifts_attributes: shifts,
     };
+    if (!props.group) {
+    }
     dispatch(createPostAsync(post));
     resetState();
   }
@@ -33,6 +41,16 @@ function PostForm(props) {
       <h1>Post Form</h1>
       <form>
         <ShiftForm post={props.post} />
+        <br />
+        <label>
+          Group:
+          <input
+            type="text"
+            name="group"
+            value={group}
+            onChange={(e) => setGroup(e.target.value)}
+          ></input>
+        </label>
         <input
           type="datetime-local"
           name="endsAt"
