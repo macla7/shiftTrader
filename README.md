@@ -4,13 +4,6 @@
 
 **Create Shift model**
 
-Todo: to make sure I can't submit a client state 'shift' in post form, without all the right details.
-
-- shift dates are sequential
-- in the future
-- position is present
-- description is optional
-
 Todo: Make sure I can submit a post without at least one shift.
 
 Todo: Group search is based off dropdown of user's groups. Similar to user dropdown. In group post form, it'll be prefilled out.
