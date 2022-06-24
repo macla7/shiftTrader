@@ -9,4 +9,13 @@ class Post < ApplicationRecord
   
   scope :active, ->{ where('ends_at > ?', DateTime.current()) }
   scope :past_posts, ->{ where('ends_at < ?', DateTime.current())}
+
+  def post_info
+    self.as_json.merge({
+      email: self.user.email,
+      bids: self.bids,
+      likes: self.likes,
+      shifts: self.shifts
+      })  
+  end
 end
