@@ -24,7 +24,8 @@ function Like(props) {
     user_id: userId,
   };
 
-  function action() {
+  function action(e) {
+    e.preventDefault();
     if (!currentUserLiked) {
       likePost();
     } else {
@@ -35,13 +36,11 @@ function Like(props) {
   function likePost() {
     setCurrentUserLiked(true);
     dispatch(createLikeAsync(likeDetails));
-    console.log(post.likes);
   }
 
   function unlikePost() {
     setCurrentUserLiked(false);
     dispatch(destroyLikeAsync(likeDetails));
-    console.log(post.likes);
   }
 
   // Fetch Likes
@@ -68,7 +67,7 @@ function Like(props) {
 
   return (
     <p>
-      <button onClick={() => action()}>Like</button>
+      <button onClick={(e) => action(e)}>Like</button>
       #Likes: {numberOfLikes}
       {currentUserLiked ? " (Liked)" : ""}
     </p>

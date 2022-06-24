@@ -24,6 +24,7 @@ namespace :api do
     end
 
     get '/home', to: 'posts#index_home'
+    get '/myGroups', to: 'groups#my_groups'
 
     namespace :android do
       resources :books

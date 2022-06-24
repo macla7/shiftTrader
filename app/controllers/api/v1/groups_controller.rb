@@ -7,6 +7,11 @@ class Api::V1::GroupsController < ApiController
     render json: @groups
   end
 
+  def my_groups
+    @groups = current_user.groups
+    render json: @groups
+  end
+
   # GET /groups/1 or /groups/1.json
   def show
     members = @group.memberships

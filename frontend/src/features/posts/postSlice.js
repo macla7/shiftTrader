@@ -259,9 +259,7 @@ export const postSlice = createSlice({
       })
       // while you wait
       .addCase(createLikeAsync.pending, (state) => {
-        return produce(state, (draftState) => {
-          draftState.status = Statuses.Loading;
-        });
+        return produce(state, (draftState) => {});
       })
       // you got the thing
       .addCase(createLikeAsync.fulfilled, (state, action) => {
@@ -278,9 +276,7 @@ export const postSlice = createSlice({
       })
       // while you wait
       .addCase(destroyLikeAsync.pending, (state) => {
-        return produce(state, (draftState) => {
-          draftState.status = Statuses.Loading;
-        });
+        return produce(state, (draftState) => {});
       })
       // you got the thing
       .addCase(destroyLikeAsync.fulfilled, (state, action) => {
@@ -320,9 +316,7 @@ export const postSlice = createSlice({
       })
       // while you wait
       .addCase(createBidAsync.pending, (state) => {
-        return produce(state, (draftState) => {
-          draftState.status = Statuses.Loading;
-        });
+        return produce(state, (draftState) => {});
       })
       // you got the thing
       .addCase(createBidAsync.fulfilled, (state, action) => {

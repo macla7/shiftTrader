@@ -16,6 +16,22 @@ export async function fetchGroups() {
     });
 }
 
+export async function fetchMyGroups() {
+  return fetch(`${API_URL}/myGroups.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.auth_token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
 export async function createGroup(payload) {
   const group = payload.group;
 
