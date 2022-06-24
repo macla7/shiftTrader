@@ -26,7 +26,7 @@ function GroupSearch(props) {
 
   function handleClick(group) {
     setGroupSearchQuery(group.name);
-    setGroupSearchId(group.id);
+    dispatch(setGroupSearchId(group.id));
   }
 
   function listGroups(groups) {

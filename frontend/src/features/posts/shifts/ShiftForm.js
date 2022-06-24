@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initialState } from "../postSlice";
-import { initialShiftState, createShift, deleteShift } from "./shiftSlice";
+import {
+  initialShiftState,
+  createShift,
+  deleteShift,
+  resetShifts,
+} from "./shiftSlice";
 
 // Design is to be able to add multiple shifts to a post
 function ShiftForm(props) {
@@ -10,9 +15,7 @@ function ShiftForm(props) {
   const [description, setDescription] = useState("");
   const [position, setPosition] = useState("");
   const [shiftsList, setShiftsList] = useState("");
-  const userId = useSelector((state) => state.sessions.user.id);
   const shifts = useSelector((state) => state.shifts.shifts);
-  const [shiftTempId, setShiftTempId] = useState(1);
   const dispatch = useDispatch();
 
   function createShiftsList(shifts) {
@@ -44,10 +47,13 @@ function ShiftForm(props) {
     setShiftsList(createShiftsList(shifts));
   }, [dispatch, shifts.length]);
 
+  useEffect(() => {
+    dispatch(resetShifts());
+  }, []);
+
   function handleCreateShift(e) {
     e.preventDefault();
     if (formIsValid()) {
-      setShiftTempId((prevId) => prevId + 1);
       let shift = {
         position: position,
         description: description,

@@ -5,10 +5,11 @@ class Api::V1::PostsController < ApiController
   def index
     set_group
     postWithAssociations = []
-    @group.posts.active.includes(:bids, :likes).each do |post|
+    @group.posts.active.includes(:bids, :likes, :shifts).each do |post|
       postWithAssociations.push(post.as_json.merge({
         bids: post.bids,
-        likes: post.likes
+        likes: post.likes,
+        shifts: post.shifts
         })
       )
     end
@@ -19,10 +20,13 @@ class Api::V1::PostsController < ApiController
     @posts = Post.joins(group: :memberships).where('memberships.user_id = ?', current_user.id)
 
     postWithAssociations = []
-    Post.active.includes(:bids, :likes).each do |post|
+    Post.active.includes(:bids, :likes, :shifts).each do |post|
+      p 'innnnn pooooooooooooooooo'
       postWithAssociations.push(post.as_json.merge({
+        email: post.user.email,
         bids: post.bids,
-        likes: post.likes
+        likes: post.likes,
+        shifts: post.shifts
         })
       )
     end

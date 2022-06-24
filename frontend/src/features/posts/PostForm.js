@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GroupSearch from "../groups/GroupSearch";
 import postSlice, { createPostAsync } from "./postSlice";
 import ShiftForm from "./shifts/ShiftForm";
 import { selectGroupSearchId } from "../groups/groupSlice";
+import { resetShifts } from "./shifts/shiftSlice";
 
 function PostForm(props) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function PostForm(props) {
     };
     dispatch(createPostAsync(post));
     resetState();
+    dispatch(resetShifts());
   }
 
   function resetState() {
@@ -41,7 +43,7 @@ function PostForm(props) {
       <form>
         <ShiftForm post={props.post} />
         <br />
-        <GroupSearch />
+        {props.groupId ? "" : <GroupSearch />}
         <input
           type="datetime-local"
           name="endsAt"

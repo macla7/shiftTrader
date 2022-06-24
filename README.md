@@ -4,7 +4,7 @@
 
 **Create Shift model**
 
-Todo: Group search is based off dropdown of user's groups. Similar to user dropdown. In group post form, it'll be prefilled out.
+- Make shift visible with post
 
 **Notifications**
 

@@ -31,6 +31,13 @@ export const initialBidState = {
   price: 0,
 };
 
+export const initialShiftState = {
+  id: 0,
+  position: "",
+  start: "",
+  end: "",
+};
+
 export const initialState = {
   posts: [
     {
@@ -43,6 +50,7 @@ export const initialState = {
       updated_at: "",
       bids: [initialBidState],
       likes: [initialLikeState],
+      shifts: [initialShiftState],
     },
   ],
   status: Statuses.Initial,

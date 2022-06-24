@@ -33,7 +33,7 @@ function Posts(props) {
 
   useEffect(() => {
     setPostsList(listPosts(posts));
-  }, [posts.length, posts[0].id]);
+  }, [posts.length, posts[0]]);
 
   let contents;
   if (status !== Statuses.UpToDate) {
