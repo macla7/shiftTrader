@@ -2,18 +2,15 @@
 
 ## CURRENT TODO's
 
-**Create Shift model**
-
-- Make shift visible with post
-
 **Notifications**
 
-- Accept Invites to groups, action -> accept
-- Someone bid on your post, action -> view post
-- Someone liked your post, action -> view post
-- Someone posted in a group you're in, action -> view group
-- A post you've bid on is ending soon, action -> view
-- Someone bid on a post you've bid on, action -> view post
+- (user.invites.nots) (user) Accept Invites to groups, action -> accept
+- (user.posts.nots) (post) Someone bid on your post, action -> view post
+- (user.posts.nots) (user) Someone liked your post, action -> view post
+- (user.groups.nots) (group) Someone posted in a group you're in, action -> view group
+- (user.bids.posts.nots ??) A post you've bid on is ending soon, action -> view
+- (user.bids.posts.nots ??) Someone bid on a post you've bid on, action -> view post
+- (user.groups.invites.nots) Someone has requested to join group you're in, action -> accept
 
 **Create DP functionality**
 
