@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_19_110941) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_25_065907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_110941) do
     t.integer "role", null: false
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "notification_blueprints", force: :cascade do |t|
+    t.string "notificationable_type"
+    t.bigint "notificationable_id"
+    t.integer "notification_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notificationable_type", "notificationable_id"], name: "index_notification_blueprints_on_notificationable"
+  end
+
+  create_table "notification_origins", force: :cascade do |t|
+    t.bigint "notification_blueprint_id", null: false
+    t.bigint "notifier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_blueprint_id"], name: "index_notification_origins_on_notification_blueprint_id"
+    t.index ["notifier_id"], name: "index_notification_origins_on_notifier_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "notification_blueprint_id", null: false
+    t.bigint "recipient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_blueprint_id"], name: "index_notifications_on_notification_blueprint_id"
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -151,6 +178,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_19_110941) do
   add_foreign_key "likes", "users"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
+  add_foreign_key "notification_origins", "notification_blueprints"
+  add_foreign_key "notification_origins", "users", column: "notifier_id"
+  add_foreign_key "notifications", "notification_blueprints"
+  add_foreign_key "notifications", "users", column: "recipient_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "posts", "groups"
   add_foreign_key "posts", "users"

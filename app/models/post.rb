@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :bids
   has_many :shifts
+  has_many :notification_blueprints, :as => :notificationable
   
   accepts_nested_attributes_for :shifts
   

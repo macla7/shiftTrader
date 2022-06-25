@@ -4,9 +4,9 @@
 
 **Notifications**
 
-- (user.invites.nots) (user) Accept Invites to groups, action -> accept
+- (user.invites.nots) (group) Accept Invites to groups, action -> accept
 - (user.posts.nots) (post) Someone bid on your post, action -> view post
-- (user.posts.nots) (user) Someone liked your post, action -> view post
+- (user.posts.nots) (post) Someone liked your post, action -> view post
 - (user.groups.nots) (group) Someone posted in a group you're in, action -> view group
 - (user.bids.posts.nots ??) A post you've bid on is ending soon, action -> view
 - (user.bids.posts.nots ??) Someone bid on a post you've bid on, action -> view post

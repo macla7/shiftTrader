@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :sent_invites, -> { where request: false }, class_name: 'Invite', foreign_key: 'internal_user'
   has_many :likes
   has_many :bids
+  has_many :notifications
+  has_many :notification_origins
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
