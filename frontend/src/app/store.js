@@ -7,6 +7,7 @@ import invitesReducer from "../features/groups/invites/inviteSlice";
 import membershipsReducer from "../features/groups/memberships/membershipSlice";
 import usersReducer from "../features/users/userSlice";
 import shiftsReducer from "../features/posts/shifts/shiftSlice";
+import notificationsReducer from "../features/notifications/notificationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     memberships: membershipsReducer,
     users: usersReducer,
     shifts: shiftsReducer,
+    notifications: notificationsReducer,
   },
 });

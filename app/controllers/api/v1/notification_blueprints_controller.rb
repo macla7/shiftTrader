@@ -4,10 +4,6 @@ class Api::V1::NotificationBlueprintsController < ApiController
   include NotificationRecipients
 
   # GET /notification_blueprints or /notification_blueprints.json
-  def index
-    @notification_blueprints = current_user.notification_blueprints
-    render json: @post.shifts
-  end
 
   # POST /notification_blueprints or /notification_blueprints.json
   def create

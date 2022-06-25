@@ -12,6 +12,12 @@
 - (user.bids.posts.nots ??) Someone bid on a post you've bid on, action -> view post
 - (user.groups.invites.nots) Someone has requested to join group you're in, action -> accept
 
+- actions on notifications
+
+-link the createNotificationBlueprintAsync to regular notifcationSlice, so that notifications state array is updated on the response.
+
+- Create some kind of text return from database(?, or backend at least) that dynmic makes notifcation description based off type and inputs.
+
 **Create DP functionality**
 
 **Create React Native App**
@@ -19,6 +25,10 @@
 **Create Banking functionality....**
 
 **Create facebook login support**
+
+**Misc Known Issues**
+
+- the cache of user on index from post controller.
 
 **Do README**
 

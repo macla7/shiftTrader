@@ -10,13 +10,13 @@ namespace :api do
     resources :likes
     resources :bids
     resources :notification_blueprints
+    resources :notifications
+    
     resources :posts do
       resources :likes, only: [:index]
       resources :bids, only: [:index]
     end
 
-    get '/likes/destroy', to: 'likes#destroy'
-    
     resources :groups do
       resources :memberships, :invites
       resources :posts, only: [:index]
@@ -24,9 +24,10 @@ namespace :api do
       put '/requests/:id', to: 'invites#update_request'
     end
 
+    get '/likes/destroy', to: 'likes#destroy'
     get '/home', to: 'posts#index_home'
     get '/myGroups', to: 'groups#my_groups'
-
+    
     namespace :android do
       resources :books
     end
