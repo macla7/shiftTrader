@@ -9,6 +9,7 @@ namespace :api do
     resources :users
     resources :likes
     resources :bids
+    resources :notification_blueprints
     resources :posts do
       resources :likes, only: [:index]
       resources :bids, only: [:index]

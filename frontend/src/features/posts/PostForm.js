@@ -5,6 +5,7 @@ import postSlice, { createPostAsync } from "./postSlice";
 import ShiftForm from "./shifts/ShiftForm";
 import { selectGroupSearchId } from "../groups/groupSlice";
 import { resetShifts } from "./shifts/shiftSlice";
+import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 
 function PostForm(props) {
   const dispatch = useDispatch();
@@ -27,6 +28,15 @@ function PostForm(props) {
       shifts_attributes: shifts,
     };
     dispatch(createPostAsync(post));
+
+    // if above succeeds ..?
+    let notification_blueprint = {
+      notificationable_type: "Group",
+      notificationable_id: groupId,
+      notification_type: 4,
+    };
+
+    createNotificationBlueprint(notification_blueprint);
     resetState();
     dispatch(resetShifts());
   }
