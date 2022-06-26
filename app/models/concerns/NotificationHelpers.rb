@@ -15,6 +15,8 @@ module NotificationHelpers
     case notification_blueprint.notification_type
     when 1
       return "#{notification_origin.notifier.email} invited you to #{@group.name}"
+    when 3
+      return "#{notification_origin.notifier.email} has requested to join #{@group.name}"
     when 4
       return "#{notification_origin.notifier.email} posted in #{@group.name}"
     else 
@@ -27,6 +29,8 @@ module NotificationHelpers
     case notification_blueprint_params['notification_type']
     when 1
       return [User.find(notification_blueprint_params['recipient_id'])]
+    when 3
+      return @group.admins
     when 4
       return @group.users
     else

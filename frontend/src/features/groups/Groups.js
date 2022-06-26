@@ -12,6 +12,7 @@ import {
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import { Link } from "react-router-dom";
 import { createInviteAsync } from "./invites/inviteSlice";
+import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 
 function Groups() {
   const groups = useSelector(selectGroups);
@@ -70,6 +71,15 @@ function Groups() {
     };
 
     dispatch(createInviteAsync(inviteDetails));
+
+    // if above succeeds ..?
+    let notification_blueprint = {
+      notificationable_type: "Group",
+      notificationable_id: groupId,
+      notification_type: 3,
+    };
+
+    createNotificationBlueprint(notification_blueprint);
   }
 
   return (
