@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :bids
   has_many :shifts
   has_many :notification_blueprints, :as => :notificationable
+  has_many :bidding_users, through: :bids, source: :user
   
   accepts_nested_attributes_for :shifts
   

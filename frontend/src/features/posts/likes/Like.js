@@ -6,6 +6,7 @@ import {
   destroyLikeAsync,
   initialState,
 } from "../postSlice";
+import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
 
 function Like(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
@@ -36,11 +37,21 @@ function Like(props) {
   function likePost() {
     setCurrentUserLiked(true);
     dispatch(createLikeAsync(likeDetails));
+    createNotification();
   }
 
   function unlikePost() {
     setCurrentUserLiked(false);
     dispatch(destroyLikeAsync(likeDetails));
+  }
+
+  function createNotification() {
+    let notification_blueprint = {
+      notificationable_type: "Post",
+      notificationable_id: props.post.id,
+      notification_type: 7,
+    };
+    createNotificationBlueprint(notification_blueprint);
   }
 
   // Fetch Likes

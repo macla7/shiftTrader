@@ -4,19 +4,7 @@
 
 **Notifications**
 
-- (user.invites.nots) (group) Accept Invites to groups, action -> accept
-- (user.posts.nots) (post) Someone bid on your post, action -> view post
-- (user.posts.nots) (post) Someone liked your post, action -> view post
-- (user.groups.nots) (group) Someone posted in a group you're in, action -> view group
-- (user.bids.posts.nots ??) A post you've bid on is ending soon, action -> view
-- (user.bids.posts.nots ??) Someone bid on a post you've bid on, action -> view post
-- (user.groups.invites.nots) Someone has requested to join group you're in, action -> accept
-
-- actions on notifications
-
 - link the createNotificationBlueprintAsync to regular notifcationSlice, so that notifications state array is updated on the response.
-
-- Atm, if blueprint is made, and for some reeason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
 
 **Create DP functionality**
 
@@ -29,6 +17,15 @@
 **Misc Known Issues**
 
 - the cache of user on index from post controller.
+- Atm, if blueprint is made, and for some reeason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
+
+**Non MVP features**
+
+- comments
+- Limit retrieved notifications, and then just have a 'view more' to retrieve the next older batch.
+- actions on notifications
+- follow posts ( followers (?))
+- Viewed (Shows number of views on posts)
 
 **Do README**
 

@@ -11,7 +11,7 @@ class Api::V1::NotificationBlueprintsController < ApiController
 
     respond_to do |format|
       if @notification_blueprint.save!
-        @notification_blueprint.getRecipients(notification_blueprint_params).each do |recipient|
+        @notification_blueprint.getRecipients(notification_blueprint_params, current_user).each do |recipient|
           Notification.create(recipient_id: recipient.id, notification_blueprint_id: @notification_blueprint.id)
         end
         current_user.notification_origins.create(notification_blueprint_id: @notification_blueprint.id)

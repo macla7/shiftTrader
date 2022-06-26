@@ -19,12 +19,18 @@ module NotificationHelpers
       return "#{notification_origin.notifier.email} has requested to join #{@group.name}"
     when 4
       return "#{notification_origin.notifier.email} posted in #{@group.name}"
+    when 5
+      return "#{notification_origin.notifier.email} bid on your Post"
+    when 6
+      return "#{notification_origin.notifier.email} bid on a Post you've bid on"
+    when 7
+      return "#{notification_origin.notifier.email} liked your Post"
     else 
       return "Error, can't find this notification.."
     end
   end
 
-  def getRecipients(notification_blueprint_params)
+  def getRecipients(notification_blueprint_params, current_user)
     set_entity(notification_blueprint_params['notificationable_type'], notification_blueprint_params['notificationable_id'])
     case notification_blueprint_params['notification_type']
     when 1
@@ -32,7 +38,11 @@ module NotificationHelpers
     when 3
       return @group.admins
     when 4
-      return @group.users
+      return @group.users.distinct.where.not(id: current_user.id)
+    when 5, 7
+      return [@post.user]
+    when 6
+      return @post.bidding_users.distinct.where.not(id: current_user.id)
     else
       return []
     end
