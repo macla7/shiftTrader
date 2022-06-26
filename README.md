@@ -14,9 +14,9 @@
 
 - actions on notifications
 
--link the createNotificationBlueprintAsync to regular notifcationSlice, so that notifications state array is updated on the response.
+- link the createNotificationBlueprintAsync to regular notifcationSlice, so that notifications state array is updated on the response.
 
-- Create some kind of text return from database(?, or backend at least) that dynmic makes notifcation description based off type and inputs.
+- Atm, if blueprint is made, and for some reeason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
 
 **Create DP functionality**
 

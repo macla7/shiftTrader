@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersAsync, selectUsers } from "./userSlice";
 import { createInviteAsync } from "../groups/invites/inviteSlice";
+import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 
 // Definitely coupled a bit too much with invite and group logic I think
 function Search(props) {
@@ -32,6 +33,16 @@ function Search(props) {
     };
     setInviteNotice(<p>Invited {user.email}</p>);
     dispatch(createInviteAsync(inviteDetails));
+
+    // if above succeeds ..?
+    let notification_blueprint = {
+      notificationable_type: "Group",
+      notificationable_id: props.groupId,
+      notification_type: 1,
+      recipient_id: user.id,
+    };
+
+    createNotificationBlueprint(notification_blueprint);
   }
 
   function filterUsers(users, searchQuery = null) {

@@ -26,8 +26,7 @@ function Notifications() {
   function listNotifications(notifications) {
     return notifications.map((notification) => (
       <li key={notification.id}>
-        Notification: {notification.id} - notifier:{" "}
-        {notification.notification_origin.notifier_id}
+        Notification: {notification.id} - {notification.description}
       </li>
     ));
   }
