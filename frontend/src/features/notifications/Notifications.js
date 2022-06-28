@@ -21,7 +21,7 @@ function Notifications() {
     if (isLoggedIn) {
       dispatch(fetchNotificationsAsync());
     }
-  }, [dispatch, notifications.length, isLoggedIn]);
+  }, [dispatch, notifications.length, userId]);
 
   function listNotifications(notifications) {
     return notifications.map((notification) => (

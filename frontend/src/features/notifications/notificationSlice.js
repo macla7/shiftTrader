@@ -6,6 +6,7 @@ import {
   destroyNotification,
   updateNotification,
 } from "./notificationAPI";
+import { createNotificationBlueprint } from "./notificationBlueprintAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -49,6 +50,14 @@ export const createNotificationAsync = createAsyncThunk(
   "notifications/createNotification",
   async (payload) => {
     const response = await createNotification(payload);
+    return response;
+  }
+);
+
+export const createNotificationBlueprintAsync = createAsyncThunk(
+  "notifications/createNotification",
+  async (payload) => {
+    const response = await createNotificationBlueprint(payload);
     return response;
   }
 );
@@ -98,20 +107,20 @@ export const notificationSlice = createSlice({
         });
       })
       // while you wait
-      .addCase(createNotificationAsync.pending, (state) => {
+      .addCase(createNotificationBlueprintAsync.pending, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Loading;
         });
       })
       // you got the thing
-      .addCase(createNotificationAsync.fulfilled, (state, action) => {
+      .addCase(createNotificationBlueprintAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
           draftState.notifications = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })
       // error
-      .addCase(createNotificationAsync.rejected, (state) => {
+      .addCase(createNotificationBlueprintAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });

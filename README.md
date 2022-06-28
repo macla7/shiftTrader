@@ -2,11 +2,9 @@
 
 ## CURRENT TODO's
 
-**Notifications**
-
-- link the createNotificationBlueprintAsync to regular notifcationSlice, so that notifications state array is updated on the response.
-
 **Create DP functionality**
+
+- watch https://www.youtube.com/watch?v=BYvzLYRIZK4&ab_channel=Deanin
 
 **Create React Native App**
 
@@ -17,7 +15,7 @@
 **Misc Known Issues**
 
 - the cache of user on index from post controller.
-- Atm, if blueprint is made, and for some reeason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
+- Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
 
 **Non MVP features**
 
@@ -26,6 +24,7 @@
 - actions on notifications
 - follow posts ( followers (?))
 - Viewed (Shows number of views on posts)
+- Notifications suscribing to some sort of websocket(?), so as to listen for them?
 
 **Do README**
 
