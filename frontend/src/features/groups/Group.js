@@ -42,7 +42,7 @@ function Group(props) {
 
   return (
     <div>
-      <Link to="/groups">Back to Groups</Link>
+      <h2>Group Details</h2>
       <p>Group id: {params.groupId}</p>
       <p>Admin: {isAdmin ? "true" : "false"}</p>
       <p>Member: {isMember ? "true" : "false"}</p>

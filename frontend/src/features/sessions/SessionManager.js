@@ -6,6 +6,7 @@ import {
   selectUserEmail,
   selectUserId,
   selectUserAvatarUrl,
+  selectIsLoggedIn,
 } from "./sessionSlice";
 import Register from "./Register";
 import Login from "./Login";
@@ -15,6 +16,7 @@ function SessionManager() {
   const userEmail = useSelector(selectUserEmail);
   const userId = useSelector(selectUserId);
   const userAvatarUrl = useSelector(selectUserAvatarUrl);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   function logout() {
@@ -33,7 +35,6 @@ function SessionManager() {
       <Register />
       <h3>Login</h3>
       <Login />
-      <button onClick={logout}>Log out</button>
     </div>
   );
 }

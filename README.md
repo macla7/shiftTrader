@@ -2,9 +2,9 @@
 
 ## CURRENT TODO's
 
-**Create DP functionality**
-
-- watch https://www.youtube.com/watch?v=BYvzLYRIZK4&ab_channel=Deanin
+- Edit DP functionality, which leads into the next one.
+- Edit User profile, and..
+- A User profile lol
 
 **Create React Native App**
 

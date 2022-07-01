@@ -36,12 +36,15 @@ function Posts(props) {
   }, [posts.length, posts[0]]);
 
   let contents;
-  if (status !== Statuses.UpToDate) {
+  if (!isLoggedIn) {
+    contents = <h2>login to begin!</h2>;
+  } else if (status !== Statuses.UpToDate) {
     contents = <div>{status}</div>;
   } else {
     contents = (
       <div className="card">
         <div className="card-body">
+          <h1>Posts</h1>
           <h3>{status}</h3>
           <PostForm groupId={props.groupId} />
           {postsList}
@@ -60,7 +63,6 @@ function Posts(props) {
 
   return (
     <div>
-      <h1>Posts</h1>
       <div>{contents}</div>
     </div>
   );

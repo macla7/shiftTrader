@@ -37,7 +37,7 @@ function Notifications() {
 
   return (
     <div>
-      <h1>Notifications</h1>
+      <h2>Notifications</h2>
       {notificationsList}
     </div>
   );
