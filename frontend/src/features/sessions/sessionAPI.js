@@ -4,10 +4,7 @@ const BASE_URL = "http://localhost:3000";
 export async function registerUser(payload) {
   return fetch(`${API_URL}/users`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ payload }),
+    body: payload,
   })
     .then(async (response) => response.json())
     .catch((error) => {

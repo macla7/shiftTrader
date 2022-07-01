@@ -6,15 +6,23 @@ function Register() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   function handleRegister(e) {
     e.preventDefault();
 
-    const registerUserDetails = {
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
-    dispatch(registerUserAsync(registerUserDetails));
+    const data = new FormData();
+
+    data.append("user[avatar]", e.target.avatar.files[0]);
+    data.append("user[email]", e.target.email.value);
+    data.append("user[password]", e.target.password.value);
+    data.append("user[password]", e.target.password.value);
+    data.append(
+      "user[client_id]",
+      "mBd4U-YMBIDZ-uM89ReLdszoMUCJ6WkdCHBuTuKForU"
+    );
+
+    dispatch(registerUserAsync(data));
   }
 
   return (
@@ -39,6 +47,16 @@ function Register() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          ></input>
+        </label>
+
+        <label>
+          Avatar
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            onChange={(e) => setAvatar(e.target.files[0])}
           ></input>
         </label>
 

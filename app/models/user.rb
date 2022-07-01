@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :email, format: URI::MailTo::EMAIL_REGEXP
   enum role: %i[user admin]
 
+  has_one_attached :avatar
+
   has_many :posts
   has_many :memberships
   has_many :groups, through: :memberships
@@ -23,5 +25,9 @@ class User < ApplicationRecord
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)
     user&.valid_password?(password) ? user : nil
+  end
+
+  def avatar_url
+    Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
   end
 end

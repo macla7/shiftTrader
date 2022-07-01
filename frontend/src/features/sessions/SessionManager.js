@@ -1,7 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAsync } from "./sessionSlice";
-import { selectAuthToken, selectUserEmail, selectUserId } from "./sessionSlice";
+import {
+  selectAuthToken,
+  selectUserEmail,
+  selectUserId,
+  selectUserAvatarUrl,
+} from "./sessionSlice";
 import Register from "./Register";
 import Login from "./Login";
 
@@ -9,6 +14,7 @@ function SessionManager() {
   const authToken = useSelector(selectAuthToken);
   const userEmail = useSelector(selectUserEmail);
   const userId = useSelector(selectUserId);
+  const userAvatarUrl = useSelector(selectUserAvatarUrl);
   const dispatch = useDispatch();
 
   function logout() {
@@ -18,11 +24,14 @@ function SessionManager() {
   return (
     <div>
       <div>
-        <p>{authToken}</p>
+        <p>{authToken ? "got token" : "no token"}</p>
         <p>{userEmail}</p>
         <p>{userId}</p>
+        <img src={userAvatarUrl} alt="avatar" />
       </div>
-      {/* <Register /> */}
+      <h3>Register</h3>
+      <Register />
+      <h3>Login</h3>
       <Login />
       <button onClick={logout}>Log out</button>
     </div>

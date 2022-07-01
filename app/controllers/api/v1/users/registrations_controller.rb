@@ -5,10 +5,11 @@ module Api
         skip_before_action :doorkeeper_authorize!, only: %i[create]
 
         include DoorkeeperRegisterable
-        include JsonWebToken
-
+        include JsonWebToken  
+    
         def create
           client_app = Doorkeeper::Application.find_by(uid: user_params[:client_id])
+
           unless client_app
             return render json: {error: I18n.t('doorkeeper.errors.messages.invalid_client')},
             status: :unauthorized
@@ -27,7 +28,7 @@ module Api
         private
 
         def user_params
-          params.require(:payload).permit(:email, :password, :client_id)
+          params.require(:user).permit(:email, :password, :client_id, :avatar)
         end
       end
     end

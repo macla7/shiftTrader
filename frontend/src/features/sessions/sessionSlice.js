@@ -16,6 +16,8 @@ const initialState = {
     id: null,
     username: null,
     email: null,
+    avatar: null,
+    avatar_url: null,
   },
 };
 
@@ -86,6 +88,8 @@ export const sessionSlice = createSlice({
           draftState["user"] = {
             id: action.payload.user.id,
             email: action.payload.user.email,
+            avatar: action.payload.user.avatar,
+            avatar_url: action.payload.user.avatar_url,
           };
           draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
@@ -110,6 +114,8 @@ export const sessionSlice = createSlice({
           draftState["user"] = {
             id: action.payload.user.id,
             email: action.payload.user.email,
+            avatar: action.payload.user.avatar,
+            avatar_url: action.payload.user.avatar_url,
           };
           draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
@@ -177,6 +183,10 @@ export const selectAuthToken = (state) => state.sessions.auth_token;
 export const selectUserEmail = (state) => state.sessions.user?.email;
 
 export const selectUserId = (state) => state.sessions.user?.id;
+
+export const selectUserAvatar = (state) => state.sessions.user?.avatar;
+
+export const selectUserAvatarUrl = (state) => state.sessions.user?.avatar_url;
 
 export const selectIsLoggedIn = (state) => {
   const loggedOut =
