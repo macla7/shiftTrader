@@ -5,8 +5,10 @@
 - Edit DP functionality, which leads into the next one.
 - Edit User profile, and..
 - A User profile lol
+- How to use bootstrap / bulma in react native
+- Research best way to create form in react native
 
-**Create React Native App**
+  **Create React Native App**
 
 - COnverting components from regular react
 - ((NEXT UP)) Half way through nav bar & sessions managers components

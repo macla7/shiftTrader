@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = "http://172.20.10.3:3000/api/v1";
 const BASE_URL = "http://localhost:3000";
 
 export async function registerUser(payload) {
