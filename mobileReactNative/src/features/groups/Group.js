@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -25,19 +25,23 @@ import {
   isUserAnAdmin,
   selectIsAdmin,
   selectIsMember,
+  selectStatus,
+  Statuses,
 } from "./memberships/membershipSlice";
+import { useFocusEffect } from "@react-navigation/native";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work
 // if I try and grab from state.
-function Group({ route }) {
+function Group({ route, navigation }) {
   const userId = useSelector((state) => state.sessions.user.id);
   const isAdmin = useSelector(selectIsAdmin);
   const isMember = useSelector(selectIsMember);
+  const memberships = useSelector(selectMemberships);
   const dispatch = useDispatch();
-  const [membersSection, setMembersSection] = useState();
   const { item } = route.params;
   const [groupDetails, setGroupDetails] = useState(null);
+  const status = useSelector(selectStatus);
 
   useEffect(() => {
     dispatch(fetchMembershipsAsync(item.id));
@@ -46,43 +50,31 @@ function Group({ route }) {
   useEffect(() => {
     dispatch(isUserAMember(userId));
     dispatch(isUserAnAdmin(userId));
-    createGroupDetails();
-  });
+  }, [memberships.length]);
 
-  function createMembersSection() {
-    if (isMember) {
-      setMembersSection(
-        <div>
-          <Search groupId={item.groupId} />
-          {isAdmin ? <Requests groupId={item.groupId} /> : ""}
-          <Posts groupId={item.groupId}></Posts>
-        </div>
-      );
-    } else {
-      setMembersSection(
-        <div>You need to be a member to see group details!</div>
-      );
-    }
-  }
-
-  function createGroupDetails() {
-    setGroupDetails(
-      <Box w="100%" h="100%">
-        <Heading fontSize="xl" p="4" pb="3">
-          Group
-        </Heading>
-        <Text>Group Details</Text>
-        <Text>Group id: {item.id}</Text>
-        <Text>Admin: {isAdmin ? "true" : "false"}</Text>
-        <Text>Member: {isMember ? "true" : "false"}</Text>
-        <Text>User: {userId}</Text>
-        <Text>{item.name}</Text>
-      </Box>
-    );
+  let contents;
+  if (status !== Statuses.UpToDate) {
+    contents = <Text>{status}</Text>;
+  } else {
+    contents = groupDetails;
   }
 
   return (
-    <>{groupDetails}</>
+    <Box>
+      <Button
+        onPress={() =>
+          navigation.navigate("GroupInfo", {
+            item: item,
+            isAdmin: isAdmin,
+            isMember: isMember,
+          })
+        }
+      >
+        Details
+      </Button>
+      <Text>There shall be posts</Text>
+    </Box>
+
     // <div>
     //   <h2>Group Details</h2>
     //   <p>Group id: {item.groupId}</p>
