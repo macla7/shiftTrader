@@ -108,41 +108,6 @@ function Login({ navigation }) {
         </VStack>
       </Box>
     </Center>
-    // <View>
-    //   <Controller
-    //     control={control}
-    //     rules={{
-    //       required: true,
-    //     }}
-    //     render={({ field: { onChange, onBlur, value } }) => (
-    //       <TextInput
-    //         style={styles.input}
-    //         onBlur={onBlur}
-    //         onChangeText={onChange}
-    //         value={value}
-    //       />
-    //     )}
-    //     name="email"
-    //   />
-    //   {errors.email && <Text>This is required.</Text>}
-    //   <Controller
-    //     control={control}
-    //     rules={{
-    //       maxLength: 100,
-    //     }}
-    //     render={({ field: { onChange, onBlur, value } }) => (
-    //       <TextInput
-    //         style={styles.input}
-    //         onBlur={onBlur}
-    //         onChangeText={onChange}
-    //         value={value}
-    //       />
-    //     )}
-    //     name="password"
-    //   />
-
-    //   <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-    // </View>
   );
 }
 

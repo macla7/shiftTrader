@@ -6,25 +6,34 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../home/Home.js";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
-import Dashboard from "../dashboard/Dashboard";
+import GroupsStackScreen from "../groups/GroupsStackScreen.js";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function AuthFlow() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <>
-      <Stack.Navigator initialRouteName="Login">
-        {!isLoggedIn ? (
-          <>
+      {!isLoggedIn ? (
+        <>
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="Home" component={Home} />
-          </>
-        )}
-      </Stack.Navigator>
+          </Stack.Navigator>
+        </>
+      ) : (
+        <>
+          <Tab.Navigator>
+            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen
+              name="Groups"
+              component={GroupsStackScreen}
+              options={{ headerShown: false }}
+            />
+          </Tab.Navigator>
+        </>
+      )}
     </>
   );
 }

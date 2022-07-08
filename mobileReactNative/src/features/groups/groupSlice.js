@@ -28,16 +28,16 @@ const initialState = {
 
 export const fetchGroupsAsync = createAsyncThunk(
   "groups/fetchGroups",
-  async () => {
-    const response = await fetchGroups();
+  async (auth_token) => {
+    const response = await fetchGroups(auth_token);
     return response;
   }
 );
 
 export const fetchMyGroupsAsync = createAsyncThunk(
   "groups/fetchMyGroups",
-  async () => {
-    const response = await fetchMyGroups();
+  async (authToken) => {
+    const response = await fetchMyGroups(authToken);
     return response;
   }
 );
@@ -101,6 +101,7 @@ export const groupSlice = createSlice({
       // while you wait
       .addCase(fetchGroupsAsync.pending, (state) => {
         return produce(state, (draftState) => {
+          console.log("waiting for groups");
           draftState.status = Statuses.Loading;
         });
       })

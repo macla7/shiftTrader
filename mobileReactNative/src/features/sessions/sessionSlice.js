@@ -8,16 +8,16 @@ import {
 } from "./sessionAPI";
 import * as SecureStore from "expo-secure-store";
 
-async function save(key, value) {
+export async function save(key, value) {
   await SecureStore.setItemAsync(key, value);
 }
 
-async function getValueFor(key) {
+export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
   return result;
 }
 
-async function deleteValueFor(key) {
+export async function deleteValueFor(key) {
   await SecureStore.deleteItemAsync(key);
 }
 
@@ -140,6 +140,8 @@ export const sessionSlice = createSlice({
             avatar_url: action.payload.user.avatar_url,
           };
           draftState.auth_token = action.payload.access_token;
+          console.log("autho token is.... drum roll...");
+          console.log(action.payload.access_token);
           // default headers set >>>??!!
           save("auth_token", action.payload.access_token);
         });
@@ -200,8 +202,6 @@ export const sessionSlice = createSlice({
   },
 });
 
-export const selectAuthToken = (state) => state.sessions.auth_token;
-
 export const selectUserEmail = (state) => state.sessions.user?.email;
 
 export const selectUserId = (state) => state.sessions.user?.id;
@@ -216,6 +216,8 @@ export const selectIsLoggedIn = (state) => {
     state.sessions.auth_token === JSON.stringify(null);
   return !loggedOut;
 };
+
+export const selectAuthToken = (state) => state.sessions.auth_token;
 
 export const {} = sessionSlice.actions;
 

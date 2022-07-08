@@ -28,6 +28,7 @@ class Api::V1::InvitesController < ApiController
   # POST /invites or /invites.json
   def create
     @invite = Invite.new(invite_params)
+    p 'do weeeee geeeeet here'
 
     respond_to do |format|
       if @invite.save
