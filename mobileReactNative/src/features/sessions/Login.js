@@ -20,16 +20,6 @@ function Login({ navigation }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
 
   function onSubmit() {
     const registerUserDetails = {
@@ -93,7 +83,7 @@ function Login({ navigation }) {
               Forget Password?
             </Link> */}
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={handleSubmit(onSubmit)}>
+          <Button mt="2" colorScheme="indigo" onPress={() => onSubmit()}>
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center">

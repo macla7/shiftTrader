@@ -115,7 +115,7 @@ export const sessionSlice = createSlice({
           };
           draftState.auth_token = action.payload.access_token;
           // default headers set >>>??!!
-          localStorage.setItem("auth_token", action.payload.access_token);
+          save("auth_token", action.payload.access_token);
         });
       })
       // error
