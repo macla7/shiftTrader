@@ -5,25 +5,19 @@ import { NativeRouter } from "react-router-native";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
 import { Routes, Route } from "react-router-dom";
-import Home from "./src/features/home/Home.js";
 import { NativeBaseProvider } from "native-base";
-import Login from "./src/features/sessions/Login";
-import Register from "./src/features/sessions/Register";
-import Dashboard from "./src/features/dashboard/Dashboard";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigator();
+import { selectIsLoggedIn } from "./src/features/sessions/sessionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import AuthFlow from "./src/features/authFlow/AuthFlow";
 
 export default function App() {
   return (
     <Provider store={store}>
       <NativeBaseProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-          </Stack.Navigator>
+          <AuthFlow />
         </NavigationContainer>
       </NativeBaseProvider>
       {/* <BrowserRouter>
