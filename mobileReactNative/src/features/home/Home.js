@@ -1,22 +1,19 @@
 import React from "react";
 // import Posts from "../posts/Posts";
-import { Text, View } from "react-native";
 import NavBar from "../nav/NavBar.js";
 import Register from "../sessions/Register.js";
+import Dashboard from "../dashboard/Dashboard.js";
+import Welcome from "../welcome/Welcome.js";
+import { selectIsLoggedIn } from "../sessions/sessionSlice";
+import { useSelector } from "react-redux";
+import { View, Text } from "react-native";
+import { Link } from "react-router-native";
 
 function Home() {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Home Boi</Text>
-      <Register />
-      {/* <NavBar /> */}
-      {/* <Posts /> */}
+    <View>
+      <Text>Home</Text>
     </View>
   );
 }

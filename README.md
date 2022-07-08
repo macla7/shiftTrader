@@ -16,7 +16,9 @@
 
 **Create Banking functionality....**
 
-**Create facebook login support**
+**Twilio (phone) verification**
+
+**Create facebook/instagram login support, omniauth(?)**
 
 **Misc Known Issues**
 
@@ -51,3 +53,8 @@ But the following articles helped even more I reckon
 - Invites is the trickest of my tables.. There is a boolean "request" that essentially determines whether the invite was sent to an external user, or requested by an external user. This means the API and controller is a bit more clunky.
 - For notifications, primairly followed [this guide](https://tannguyenit95.medium.com/designing-a-notification-system-1da83ca971bc) but changed a fair amount of the naming.
 - [Deanin video](https://www.youtube.com/watch?v=_rLMRd676-I&ab_channel=Deanin) that helped get me off the ground re avatar upload to api from react frontend. Articles he uses are in the comments.
+- To store my JWT cookies in native app, using [SecureStore from Expo](https://docs.expo.dev/versions/latest/sdk/securestore/)
+
+**React Hook Form**
+
+- [This video](https://www.google.com/search?q=creating+forms+in+react+native&sxsrf=ALiCzsaQdOyFOhyqEkuACwNJu1xcdAioHQ%3A1656798694035&ei=5r3AYq3qAaO34t4PoLuroA4&ved=0ahUKEwit9fyMmNv4AhWjm9gFHaDdCuQQ4dUDCA4&uact=5&oq=creating+forms+in+react+native&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgYIABAeEBYyBggAEB4QFjoHCAAQRxCwAzoKCAAQ5AIQsAMYAToICAAQHhAWEApKBAhBGABKBAhGGAFQ6gFYxglgjgtoAXABeACAAc0EiAGjCpIBBzMtMS4xLjGYAQCgAQHIAQ3AAQHaAQYIARABGAk&sclient=gws-wiz#kpvalbx=_rtzEYsyhEoSXseMPl8iGyAc16) helped me implement react hook form for login component, seemingly right before I replaced it with react naviagation.

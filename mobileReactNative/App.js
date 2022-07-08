@@ -6,17 +6,26 @@ import { Provider } from "react-redux";
 import { store } from "./src/app/store";
 import { Routes, Route } from "react-router-dom";
 import Home from "./src/features/home/Home.js";
+import { NativeBaseProvider } from "native-base";
+import Login from "./src/features/sessions/Login";
+import Register from "./src/features/sessions/Register";
+import Dashboard from "./src/features/dashboard/Dashboard";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <Provider store={store}>
-      <NativeRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            {/* <Route path="groups" element={<Groups />} /> */}
-          </Route>
-        </Routes>
-      </NativeRouter>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
       {/* <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>

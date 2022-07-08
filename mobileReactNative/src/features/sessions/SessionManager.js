@@ -10,6 +10,7 @@ import {
 } from "./sessionSlice";
 import Register from "./Register";
 import Login from "./Login";
+import { View, Text } from "react-native";
 
 function SessionManager() {
   const authToken = useSelector(selectAuthToken);
@@ -24,18 +25,18 @@ function SessionManager() {
   }
 
   return (
-    <div>
-      <div>
-        <p>{authToken ? "got token" : "no token"}</p>
-        <p>{userEmail}</p>
-        <p>{userId}</p>
-        <img src={userAvatarUrl} alt="avatar" />
-      </div>
-      <h3>Register</h3>
+    <View>
+      <View>
+        <Text>{authToken ? "got token" : "no token"}</Text>
+        <Text>{userEmail}</Text>
+        <Text>{userId}</Text>
+        {/* <img src={userAvatarUrl} alt="avatar" /> */}
+      </View>
+      <Text>Register</Text>
       <Register />
-      <h3>Login</h3>
+      <Text>Login</Text>
       <Login />
-    </div>
+    </View>
   );
 }
 
