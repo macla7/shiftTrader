@@ -15,6 +15,7 @@ import {
   Text,
   Link,
   ScrollView,
+  Pressable,
 } from "native-base";
 
 // Definitely coupled a bit too much with invite and group logic I think
@@ -31,7 +32,7 @@ function Search({ route }) {
     if (validateEmail(searchQuery)) {
       inviteUser(findUserByEmail(searchQuery)[0]);
     } else {
-      setInviteNotice(<p>Invite failed</p>);
+      setInviteNotice(<Text>Invite failed</Text>);
     }
   }
 
@@ -109,7 +110,6 @@ function Search({ route }) {
   return (
     <>
       <VStack
-        space={3}
         pl="4"
         pr="5"
         py="4"
@@ -119,13 +119,30 @@ function Search({ route }) {
         }}
         borderColor="coolGray.200"
       >
-        <FormControl>
-          <FormControl.Label>Search by Email:</FormControl.Label>
-          <Input
-            type="email"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.nativeEvent.text)}
-          />
+        <FormControl
+          onTouchEnd={() => setSearchQuery(item.email)}
+          justifyContent="space-between"
+        >
+          {/* <Avatar
+                size="48px"
+                source={{
+                  uri: item.avatarUrl,
+                }}
+              /> */}
+          <VStack display="flex" w="100%">
+            <FormControl.Label>Search by Email:</FormControl.Label>
+            <HStack w="100%">
+              <Input
+                type="email"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.nativeEvent.text)}
+                w="80%"
+              />
+              <Button onPress={() => attemptInvite()} w="20%">
+                Invite
+              </Button>
+            </HStack>
+          </VStack>
         </FormControl>
       </VStack>
       <ScrollView
@@ -143,19 +160,16 @@ function Search({ route }) {
           Invite User
         </Heading>
         {userList.map((item) => (
-          <Box
+          <Pressable
             borderBottomWidth="1"
             _dark={{
               borderColor: "gray.600",
             }}
             borderColor="coolGray.200"
             key={item.id}
+            onPress={() => setSearchQuery(item.email)}
           >
-            <HStack
-              space={3}
-              justifyContent="space-between"
-              onTouchEnd={() => setSearchQuery(item.email)}
-            >
+            <HStack space={3} justifyContent="space-between">
               {/* <Avatar
                 size="48px"
                 source={{
@@ -181,9 +195,8 @@ function Search({ route }) {
                   some text
                 </Text>
               </VStack>
-              <Button onPress={() => attemptInvite()}>Invite</Button>
             </HStack>
-          </Box>
+          </Pressable>
         ))}
       </ScrollView>
     </>
