@@ -7,17 +7,14 @@ import { selectIsLoggedIn } from "../sessions/sessionSlice";
 import { useSelector } from "react-redux";
 import { View, Text } from "react-native";
 import { Link } from "react-router-native";
+import Posts from "../posts/Posts";
 
 function Home() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <View>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-      <Text>Home</Text>
-    </View>
+    <>
+      <Posts item={{ id: 0 }} />
+    </>
   );
 }
 

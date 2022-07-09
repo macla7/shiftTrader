@@ -11,60 +11,61 @@ import {
 import Post from "../posts/Post";
 import PostForm from "../posts/PostForm";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
+import {
+  Center,
+  Box,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Button,
+  HStack,
+  Text,
+  Link,
+  FlatList,
+} from "native-base";
 
 function Posts(props) {
   const userId = useSelector((state) => state.sessions.user.id);
   const [postsList, setPostsList] = useState("");
   const posts = useSelector(selectPosts);
   const status = useSelector(selectStatus);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   // Posts
   useEffect(() => {
-    if (isLoggedIn) {
-      if (props.groupId) {
-        dispatch(fetchPostsAsync(props.groupId));
-      } else {
-        dispatch(fetchPostsHomeAsync());
-      }
+    if (props.id) {
+      dispatch(fetchPostsAsync(item.id));
+    } else {
+      dispatch(fetchPostsHomeAsync());
     }
-  }, [posts.length, props.groupId, isLoggedIn]);
-
-  useEffect(() => {
-    setPostsList(listPosts(posts));
-  }, [posts.length, posts[0]]);
-
-  let contents;
-  if (!isLoggedIn) {
-    contents = <h2>login to begin!</h2>;
-  } else if (status !== Statuses.UpToDate) {
-    contents = <div>{status}</div>;
-  } else {
-    contents = (
-      <div className="card">
-        <div className="card-body">
-          <h1>Posts</h1>
-          <h3>{status}</h3>
-          <PostForm groupId={props.groupId} />
-          {postsList}
-        </div>
-      </div>
-    );
-  }
-
-  function listPosts(posts) {
-    return posts.map((post) => (
-      <div key={post.id} style={{ margin: "5em" }}>
-        <Post dispatch={dispatch} post={post} />
-      </div>
-    ));
-  }
+  }, [posts.length, props.id]);
 
   return (
-    <div>
-      <div>{contents}</div>
-    </div>
+    <Box>
+      <Heading fontSize="xl" p="4" pb="3">
+        Posts
+      </Heading>
+      {/* <PostForm groupId={item.id} /> */}
+      {posts.map((item) => {
+        return (
+          <Box
+            borderBottomWidth="1"
+            _dark={{
+              borderColor: "gray.600",
+            }}
+            borderColor="coolGray.200"
+            pl="4"
+            pr="5"
+            py="2"
+            key={item.id}
+          >
+            <Post post={item} />
+            <Text>Is Post</Text>
+          </Box>
+        );
+      })}
+    </Box>
   );
 }
 

@@ -4,6 +4,7 @@ import sessionsReducer from "../features/sessions/sessionSlice";
 import membershipsReducer from "../features/groups/memberships/membershipSlice";
 import usersReducer from "../features/users/userSlice";
 import notificationsReducer from "../features/notifications/notificationSlice";
+import postsReducer from "../features/posts/postSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     memberships: membershipsReducer,
     users: usersReducer,
     notifications: notificationsReducer,
+    posts: postsReducer,
   },
 });

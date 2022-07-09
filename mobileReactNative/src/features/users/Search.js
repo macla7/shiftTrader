@@ -88,25 +88,6 @@ function Search({ route }) {
     console.log("hello");
   }, [searchQuery, users.length]);
 
-  // <div>
-  //   <form onSubmit={(e) => attemptInvite(e)}>
-  //     {inviteNotice ? inviteNotice : ""}
-  //     <label>
-  //       Email:
-  //       <input
-  //         type="email"
-  //         name="email"
-  //         placeholder="Search people..."
-  //         value={searchQuery}
-  //         onChange={(e) => setSearchQuery(e.target.value)}
-  //       />
-  //     </label>
-  //     <input type="submit" value="Add" />
-  //   </form>
-
-  //   <div>{userList}</div>
-  // </div>
-
   return (
     <>
       <VStack
