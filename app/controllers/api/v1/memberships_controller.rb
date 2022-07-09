@@ -4,7 +4,11 @@ class Api::V1::MembershipsController < ApiController
   # GET /memberships or /memberships.json
   def index
     set_group
-    render json: @group.memberships
+    membershipsWithUserDetails = []
+    @group.memberships.includes(:user).each do |user|
+      membershipsWithUserDetails.push(user.member_info)
+    end
+    render json: membershipsWithUserDetails
   end
 
   # GET /memberships/1 or /memberships/1.json

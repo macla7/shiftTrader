@@ -6,7 +6,6 @@
 - Edit User profile, and..
 - react native image picker for dp on phone?
 - A User profile lol
-- Finish members section in GroupInfo screen
 
   **Create React Native App**
 

@@ -6,4 +6,10 @@ class Membership < ApplicationRecord
 
   enum status: [:current, :left, :kicked]
   enum role: [:admin, :user]
+
+  def member_info
+    self.as_json.merge({
+      user: self.user,
+      })  
+  end
 end

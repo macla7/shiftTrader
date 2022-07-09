@@ -3,13 +3,16 @@ class Api::V1::GroupsController < ApiController
 
   # GET /groups or /groups.json
   def index
-    @groups = Group.all
-    render json: @groups
+    @myGroups = current_user.groups
+    @allGroups = Group.all
+
+    render json: (@allGroups - @myGroups)
   end
 
   def my_groups
-    @groups = current_user.groups
-    render json: @groups
+    @myGroups = current_user.groups
+
+    render json: @myGroups
   end
 
   # GET /groups/1 or /groups/1.json
