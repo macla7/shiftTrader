@@ -4,9 +4,9 @@
 
 - Edit DP functionality, which leads into the next one.
 - Edit User profile, and..
+- react native image picker for dp on phone?
 - A User profile lol
-- How to use bootstrap / bulma in react native
-- Research best way to create form in react native
+- Finish members section in GroupInfo screen
 
   **Create React Native App**
 

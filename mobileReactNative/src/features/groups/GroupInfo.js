@@ -12,6 +12,7 @@ import {
   Text,
   Link,
 } from "native-base";
+import Memberships from "./memberships/Memberships";
 
 function GroupInfo({ route }) {
   const userId = useSelector((state) => state.sessions.user.id);
@@ -35,16 +36,26 @@ function GroupInfo({ route }) {
   }
 
   return (
-    <Box w="100%" h="100%">
-      <Heading fontSize="xl" p="4" pb="3">
+    <Box
+      w="100%"
+      h="100%"
+      borderBottomWidth="1"
+      _dark={{
+        borderColor: "gray.600",
+      }}
+      borderColor="coolGray.200"
+      pl="4"
+      pr="5"
+      py="2"
+    >
+      <Heading fontSize="xl" py="4" pb="3">
         Details
       </Heading>
-      <Text>Group Details</Text>
       <Text>Group id: {item.id}</Text>
-      <Text>Admin: {isAdmin ? "true" : "false"}</Text>
-      <Text>Member: {isMember ? "true" : "false"}</Text>
-      <Text>User: {userId}</Text>
-      <Text>{item.name}</Text>
+      <Text>
+        Membership Type: {isAdmin ? "Admin Member" : "Regular Member"}
+      </Text>
+      <Memberships />
     </Box>
   );
 }
