@@ -8,6 +8,7 @@ import Login from "../sessions/Login";
 import Register from "../sessions/Register";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Notifications from "../notifications/Notifications";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -31,6 +32,7 @@ function AuthFlow() {
               component={GroupsStackScreen}
               options={{ headerShown: false }}
             />
+            <Tab.Screen name="Notifications" component={Notifications} />
           </Tab.Navigator>
         </>
       )}

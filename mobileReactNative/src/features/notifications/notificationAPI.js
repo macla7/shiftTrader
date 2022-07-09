@@ -1,11 +1,13 @@
-const API_URL = "http://localhost:3000/api/v1";
+import { getValueFor } from "../sessions/sessionSlice";
+const API_URL = "http://192.168.0.71:3000/api/v1";
 
 export async function fetchNotifications() {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/notifications.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
   })
     .then((response) => response.json())

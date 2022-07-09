@@ -25,8 +25,8 @@ import {
   HStack,
   Text,
   Link,
+  FlatList,
 } from "native-base";
-import { ScrollView, FlatList } from "react-native";
 import { selectAuthToken } from "../sessions/sessionSlice";
 
 function Groups({ navigation }) {
