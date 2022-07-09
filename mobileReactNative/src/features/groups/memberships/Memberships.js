@@ -16,6 +16,7 @@ import {
   Link,
 } from "native-base";
 import { FlatList } from "react-native";
+import { parseISO, format } from "date-fns";
 
 function Memberships({ route }) {
   const userId = useSelector((state) => state.sessions.user.id);
@@ -31,53 +32,60 @@ function Memberships({ route }) {
       </Heading>
       <FlatList
         data={memberships}
-        renderItem={({ item }) => (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-          >
-            <HStack space={3} justifyContent="space-between">
-              {/* <Avatar
+        renderItem={({ item }) => {
+          let timeCreated = format(
+            parseISO(item.created_at),
+            "MM/dd/yy"
+          ).toString();
+          console.log(timeCreated);
+          return (
+            <Box
+              borderBottomWidth="1"
+              _dark={{
+                borderColor: "gray.600",
+              }}
+              borderColor="coolGray.200"
+            >
+              <HStack space={3} justifyContent="space-between">
+                {/* <Avatar
                 size="48px"
                 source={{
                   uri: item.avatarUrl,
                 }}
               /> */}
-              <VStack>
+                <VStack>
+                  <Text
+                    _dark={{
+                      color: "warmGray.50",
+                    }}
+                    color="coolGray.800"
+                    bold
+                  >
+                    {item.user.email}
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {item.role}
+                  </Text>
+                </VStack>
                 <Text
+                  fontSize="xs"
                   _dark={{
                     color: "warmGray.50",
                   }}
                   color="coolGray.800"
-                  bold
+                  alignSelf="flex-start"
                 >
-                  {item.user_id}
+                  Since {timeCreated}
                 </Text>
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                >
-                  Some other text
-                </Text>
-              </VStack>
-              <Text
-                fontSize="xs"
-                _dark={{
-                  color: "warmGray.50",
-                }}
-                color="coolGray.800"
-                alignSelf="flex-start"
-              >
-                More text
-              </Text>
-            </HStack>
-          </Box>
-        )}
+              </HStack>
+            </Box>
+          );
+        }}
         keyExtractor={(item) => item.id}
       />
     </Box>

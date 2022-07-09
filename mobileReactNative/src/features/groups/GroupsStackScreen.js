@@ -20,7 +20,9 @@ function GroupsStackScreen() {
       <GroupsStack.Screen
         name="GroupInfo"
         component={GroupInfo}
-        options={({ route }) => ({ title: route.params.item.name })}
+        options={({ route }) => ({
+          title: `${route.params.item.name} Details`,
+        })}
       />
     </GroupsStack.Navigator>
   );

@@ -25,6 +25,7 @@ const initialState = {
       group_id: 0,
       role: 0,
       status: true,
+      user: {},
     },
   ],
   status: Statuses.Initial,
