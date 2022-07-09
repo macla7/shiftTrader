@@ -4,6 +4,7 @@ import Groups from "./Groups";
 import DiscoverGroups from "./DiscoverGroups";
 import Group from "./Group";
 import GroupInfo from "./GroupInfo";
+import Search from "../users/Search";
 
 const GroupsStack = createNativeStackNavigator();
 
@@ -22,6 +23,13 @@ function GroupsStackScreen() {
         component={GroupInfo}
         options={({ route }) => ({
           title: `${route.params.item.name} Details`,
+        })}
+      />
+      <GroupsStack.Screen
+        name="Invite"
+        component={Search}
+        options={({ route }) => ({
+          title: "Invite People",
         })}
       />
     </GroupsStack.Navigator>

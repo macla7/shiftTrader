@@ -15,6 +15,7 @@ import {
   HStack,
   Text,
   Link,
+  ScrollView,
 } from "native-base";
 import Posts from "../posts/Posts";
 import Requests from "./invites/Requests";
@@ -60,7 +61,17 @@ function Group({ route, navigation }) {
   }
 
   return (
-    <Box>
+    <ScrollView
+      w="100%"
+      borderBottomWidth="1"
+      _dark={{
+        borderColor: "gray.600",
+      }}
+      borderColor="coolGray.200"
+      pl="4"
+      pr="5"
+      py="2"
+    >
       <Button
         onPress={() =>
           navigation.navigate("GroupInfo", {
@@ -73,7 +84,7 @@ function Group({ route, navigation }) {
         Details
       </Button>
       <Text>There shall be posts</Text>
-    </Box>
+    </ScrollView>
 
     // <div>
     //   <h2>Group Details</h2>

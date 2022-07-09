@@ -11,10 +11,12 @@ import {
   HStack,
   Text,
   Link,
+  ScrollView,
 } from "native-base";
 import Memberships from "./memberships/Memberships";
+import Search from "../users/Search";
 
-function GroupInfo({ route }) {
+function GroupInfo({ route, navigation }) {
   const userId = useSelector((state) => state.sessions.user.id);
   const [membersSection, setMembersSection] = useState();
   const { item, isAdmin, isMember } = route.params;
@@ -36,9 +38,8 @@ function GroupInfo({ route }) {
   }
 
   return (
-    <Box
+    <ScrollView
       w="100%"
-      h="100%"
       borderBottomWidth="1"
       _dark={{
         borderColor: "gray.600",
@@ -55,8 +56,18 @@ function GroupInfo({ route }) {
       <Text>
         Membership Type: {isAdmin ? "Admin Member" : "Regular Member"}
       </Text>
+      <Button
+        onPress={() =>
+          navigation.navigate("Invite", {
+            item: item,
+          })
+        }
+      >
+        Invite People
+      </Button>
+
       <Memberships />
-    </Box>
+    </ScrollView>
   );
 }
 

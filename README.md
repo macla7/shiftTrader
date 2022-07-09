@@ -6,12 +6,11 @@
 - Edit User profile, and..
 - react native image picker for dp on phone?
 - A User profile lol
+- Searchbar to invite user to group
+- Notifications
+- Got to take memerbships out of flat list as well
 
-  **Create React Native App**
-
-- COnverting components from regular react
-- ((NEXT UP)) Half way through nav bar & sessions managers components
-- Is there a way to share this common code among the front end that's not messy..? Other not very DRY. Question for later.
+**Create React Native App**
 
 **Create Banking functionality....**
 

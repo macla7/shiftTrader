@@ -3,8 +3,13 @@ class Api::V1::UsersController < ApiController
 
   # GET /users or /users.json
   def index
-    @users = User.all
-    render json: @users
+    set_group
+    p 'helllo'
+    p @group.users
+    @groupsUsers = @group.users
+    @allUsers = User.all
+
+    render json: (@allUsers - @groupsUsers)
   end
 
   # GET /users/1 or /users/1.json
@@ -58,6 +63,10 @@ class Api::V1::UsersController < ApiController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_group
+      @group = Group.find(params[:group_id])
     end
 
     # Only allow a list of trusted parameters through.

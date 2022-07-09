@@ -22,6 +22,7 @@ namespace :api do
       resources :posts, only: [:index]
       get '/requests', to: 'invites#index_requests'
       put '/requests/:id', to: 'invites#update_request'
+      get '/users', to: 'users#index'
     end
 
     get '/likes/destroy', to: 'likes#destroy'
