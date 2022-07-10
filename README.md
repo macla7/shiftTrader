@@ -56,3 +56,7 @@ But the following articles helped even more I reckon
 **React Hook Form**
 
 - [This video](https://www.google.com/search?q=creating+forms+in+react+native&sxsrf=ALiCzsaQdOyFOhyqEkuACwNJu1xcdAioHQ%3A1656798694035&ei=5r3AYq3qAaO34t4PoLuroA4&ved=0ahUKEwit9fyMmNv4AhWjm9gFHaDdCuQQ4dUDCA4&uact=5&oq=creating+forms+in+react+native&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgYIABAeEBYyBggAEB4QFjoHCAAQRxCwAzoKCAAQ5AIQsAMYAToICAAQHhAWEApKBAhBGABKBAhGGAFQ6gFYxglgjgtoAXABeACAAc0EiAGjCpIBBzMtMS4xLjGYAQCgAQHIAQ3AAQHaAQYIARABGAk&sclient=gws-wiz#kpvalbx=_rtzEYsyhEoSXseMPl8iGyAc16) helped me implement react hook form for login component, seemingly right before I replaced it with react naviagation.
+
+**React DateTimePicker**
+
+-[Docs here](https://github.com/react-native-datetimepicker/datetimepicker)

@@ -1,50 +1,92 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initialState } from "../postSlice";
+import {
+  Center,
+  Box,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Button,
+  HStack,
+  Text,
+  Link,
+  ScrollView,
+  Pressable,
+} from "native-base";
+import { parse, format } from "date-fns";
 
 function Shift(props) {
-  const post = useSelector((state) => {
-    if (state.posts.posts.length > 0) {
-      return getCurrentPostFromStore(state.posts.posts);
-    }
-    return initialState.posts[0];
-  });
-  const [shiftsList, setShiftsList] = useState("");
-  const dispatch = useDispatch();
-
-  function getCurrentPostFromStore(posts) {
-    if (posts !== undefined) {
-      let filteredPost = posts.filter((post) => post.id === props.post.id);
-      if (filteredPost.length > 0) {
-        return filteredPost[0];
-      }
-    }
-    return initialState.posts[0];
-  }
-
-  function listShifts(shifts) {
-    return shifts.map((shift) => (
-      <li key={shift.id}>
-        <p>
-          Shift: {shift.id} - Position: {shift.position}
-        </p>
-        <p>Description: {shift.description}</p>
-        <p>
-          Time: {shift.start} -{">"} {shift.end}
-        </p>
-      </li>
-    ));
-  }
-
-  useEffect(() => {
-    setShiftsList(listShifts(post.shifts));
-  }, [post.shifts.length, dispatch]);
+  const shifts = useSelector((state) => state.shifts.shifts);
 
   return (
-    <div>
-      Shifts:
-      <ul>{shiftsList}</ul>
-    </div>
+    <Box>
+      {shifts.map((item) => {
+        return (
+          <Box
+            borderWidth="1"
+            _dark={{
+              borderColor: "gray.600",
+            }}
+            borderColor="coolGray.200"
+            key={item.id}
+            p="2"
+            my="2"
+          >
+            <VStack>
+              <Text
+                _dark={{
+                  color: "warmGray.50",
+                }}
+                color="coolGray.800"
+                bold
+              >
+                {item.position}
+              </Text>
+              <HStack space={3} justifyContent="space-between">
+                <VStack>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {format(item.start, "EEE do LLL")}
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {format(item.start, "p")}
+                  </Text>
+                </VStack>
+                <VStack>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {format(item.end, "EEE do LLL")}
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {format(item.end, "p")}
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          </Box>
+        );
+      })}
+    </Box>
   );
 }
 

@@ -30,6 +30,7 @@ function Home({ navigation }) {
           navigation.navigate("Post Form", {
             item: { id: 0 },
             date: new Date(Date.now()),
+            group: { id: 0, name: "Group Not Selected.." },
           })
         }
         mx="6"

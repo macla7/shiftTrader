@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
 import PostForm from "../posts/PostForm";
 import DateTimePicker from "../posts/DateTimePicker";
+import GroupSearch from "../groups/GroupSearch";
+import ShiftForm from "../posts/shifts/ShiftForm";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ function GroupsStackScreen() {
         component={DateTimePicker}
         options={({ route }) => ({ title: route.params.mode })}
       />
+      <HomeStack.Screen name="Group Search" component={GroupSearch} />
+      <HomeStack.Screen name="Add Shift" component={ShiftForm} />
     </HomeStack.Navigator>
   );
 }

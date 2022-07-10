@@ -22,18 +22,20 @@ import {
   View,
 } from "native-base";
 import { formatDistanceToNow } from "date-fns";
+import Shift from "./shifts/Shift";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
   const [body, setBody] = useState("");
   const [auction, setAuction] = useState("");
   const [endsAt, setEndsAt] = useState("");
-  // const shifts = useSelector((state) => state.shifts.shifts);
   const groupSearchId = useSelector(selectGroupSearchId);
   const [notice, setNotice] = useState("");
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const { item, date } = route.params;
+  const [shiftsList, setShiftsList] = useState("");
+  const shifts = useSelector((state) => state.shifts.shifts);
+  const { item, date, group } = route.params;
 
   const [isPickerShow, setIsPickerShow] = useState(false);
 
@@ -78,108 +80,111 @@ function PostForm({ route, navigation }) {
     setEndsAt("");
   }
 
-  // return (
-  //   <div>
-  //     <h1>Post Form</h1>
-  //     <form>
-  //       <ShiftForm post={item.post} />
-  //       <br />
-  //       {item.id ? "" : <GroupSearch />}
-  //       <input
-  //         type="datetime-local"
-  //         name="endsAt"
-  //         value={endsAt}
-  //         onChange={(e) => setEndsAt(e.target.value)}
-  //       ></input>
-  //       <div onChange={(e) => setAuction(e.target.value)}>
-  //         <input type="radio" id="notAuction" name="auction" value="true" />{" "}
-  //         Fixed Price
-  //         <input type="radio" id="auction" name="auction" value="false" />{" "}
-  //         Auction
-  //       </div>
-  //       <textarea
-  //         name="body"
-  //         value={body}
-  //         onChange={(e) => setBody(e.target.value)}
-  //       />
-  //       <button type="submit" onClick={(e) => submitHandler(e)}>
-  //         Submit
-  //       </button>
-  //     </form>
-  //   </div>
-  // );
-  return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Create Post
-        </Heading>
-        <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
-        >
-          Some other text
-        </Heading>
+  useEffect(() => {
+    dispatch(resetShifts());
+  }, []);
 
-        <VStack space={3} mt="5">
-          <FormControl>
-            <FormControl.Label>Group</FormControl.Label>
-            <HStack>
-              <Button>Pick Group</Button>
-            </HStack>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Auction Ends</FormControl.Label>
-            <Text>{date.toString()}</Text>
-            <Button
-              onPress={() =>
-                navigation.navigate("DateTimePicker", {
-                  currentDate: date,
-                })
-              }
-            >
-              Change Time
+  return (
+    <ScrollView w="100%">
+      <Center>
+        <Box safeArea p="2" py="8" w="90%" maxW="290">
+          <Heading
+            size="lg"
+            fontWeight="600"
+            color="coolGray.800"
+            _dark={{
+              color: "warmGray.50",
+            }}
+          >
+            Create Post
+          </Heading>
+          <Heading
+            mt="1"
+            _dark={{
+              color: "warmGray.200",
+            }}
+            color="coolGray.600"
+            fontWeight="medium"
+            size="xs"
+          >
+            To sell or pay someone to take your shifts
+          </Heading>
+
+          <VStack space={3} mt="5">
+            <FormControl>
+              <FormControl.Label>Group</FormControl.Label>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                variant="outline"
+                onPress={() =>
+                  navigation.navigate("Group Search", {
+                    group: group,
+                  })
+                }
+              >
+                {group.name}
+              </Button>
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Post Ends</FormControl.Label>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                variant="outline"
+                onPress={() =>
+                  navigation.navigate("DateTimePicker", {
+                    initDate: date,
+                    returnType: "date",
+                    returnScreen: "Post Form",
+                  })
+                }
+              >
+                {date.toString()}
+              </Button>
+            </FormControl>
+
+            <FormControl>
+              <FormControl.Label>Shifts</FormControl.Label>
+              <Shift />
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                onPress={() =>
+                  navigation.navigate("Add Shift", {
+                    start: new Date(Date.now()),
+                    end: new Date(Date.now()),
+                  })
+                }
+              >
+                Add Shift
+              </Button>
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Reserve</FormControl.Label>
+              <HStack>
+                <Button>Reserve</Button>
+              </HStack>
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Description</FormControl.Label>
+              <Input
+                type="textarea"
+                name="body"
+                value={body}
+                onChange={(e) => setBody(e.nativeEvent.text)}
+              />
+            </FormControl>
+            <Button mt="2" colorScheme="indigo" onPress={() => submitPost()}>
+              Make Post
             </Button>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Shifts</FormControl.Label>
-            <HStack>
-              <Button>Add Shift</Button>
-            </HStack>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Reserve</FormControl.Label>
-            <HStack>
-              <Button>Reserve</Button>
-            </HStack>
-          </FormControl>
-          <FormControl>
-            <FormControl.Label>Description</FormControl.Label>
-            <Input
-              type="textarea"
-              name="body"
-              value={body}
-              onChange={(e) => setBody(e.nativeEvent.text)}
-            />
-          </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={() => submitPost()}>
-            Make Post
-          </Button>
-        </VStack>
-      </Box>
-    </Center>
+          </VStack>
+        </Box>
+      </Center>
+    </ScrollView>
   );
 }
 

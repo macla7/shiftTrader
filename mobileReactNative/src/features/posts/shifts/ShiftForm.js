@@ -7,27 +7,29 @@ import {
   deleteShift,
   resetShifts,
 } from "./shiftSlice";
+import {
+  Center,
+  Box,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Button,
+  HStack,
+  Text,
+  Link,
+  ScrollView,
+  Pressable,
+  View,
+} from "native-base";
 
 // Design is to be able to add multiple shifts to a post
-function ShiftForm(props) {
-  const [end, setEnd] = useState("");
-  const [start, setStart] = useState("");
+function ShiftForm({ navigation, route }) {
   const [description, setDescription] = useState("");
   const [position, setPosition] = useState("");
-  const [shiftsList, setShiftsList] = useState("");
-  const shifts = useSelector((state) => state.shifts.shifts);
-  const dispatch = useDispatch();
+  const { start, end } = route.params;
 
-  function createShiftsList(shifts) {
-    return shifts.map((shift, i) => (
-      <li key={i}>
-        <p>Position: {shift.position}</p>
-        <p>Description: {shift.description}</p>
-        <p>Starts: {shift.start}</p>
-        <p>Ends: {shift.end}</p>
-      </li>
-    ));
-  }
+  const dispatch = useDispatch();
 
   function formIsValid() {
     return datesMakeSense() && position;
@@ -43,16 +45,7 @@ function ShiftForm(props) {
     );
   }
 
-  useEffect(() => {
-    setShiftsList(createShiftsList(shifts));
-  }, [dispatch, shifts.length]);
-
-  useEffect(() => {
-    dispatch(resetShifts());
-  }, []);
-
-  function handleCreateShift(e) {
-    e.preventDefault();
+  function handleCreateShift() {
     if (formIsValid()) {
       let shift = {
         position: position,
@@ -65,48 +58,89 @@ function ShiftForm(props) {
   }
 
   return (
-    <div>
-      <label>
-        Position:
-        <input
-          type="text"
-          name="position"
-          value={position}
-          onChange={(e) => setPosition(e.target.value)}
-        ></input>
-      </label>
-      <br />
-      <label>
-        Starts:
-        <input
-          type="datetime-local"
-          name="end"
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
-        ></input>
-      </label>
-      <br />
-      <label>
-        Ends:
-        <input
-          type="datetime-local"
-          name="ends"
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
-        ></input>
-      </label>
-      <br />
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </label>
-      <button onClick={(e) => handleCreateShift(e)}>Add Shift</button>
-      {shiftsList}
-    </div>
+    <ScrollView w="100%">
+      <Center>
+        <Box safeArea p="2" py="8" w="90%" maxW="290">
+          <Heading
+            size="lg"
+            fontWeight="600"
+            color="coolGray.800"
+            _dark={{
+              color: "warmGray.50",
+            }}
+          >
+            Create Shift
+          </Heading>
+          <Heading
+            mt="1"
+            _dark={{
+              color: "warmGray.200",
+            }}
+            color="coolGray.600"
+            fontWeight="medium"
+            size="xs"
+          >
+            Add basic info of your shift
+          </Heading>
+
+          <VStack space={3} mt="5">
+            <FormControl>
+              <FormControl.Label>Position</FormControl.Label>
+              <Input
+                type="textarea"
+                name="position"
+                value={position}
+                onChange={(e) => setPosition(e.nativeEvent.text)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Shift start time</FormControl.Label>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                variant="outline"
+                onPress={() =>
+                  navigation.navigate("DateTimePicker", {
+                    initDate: start,
+                    returnType: "start",
+                    returnScreen: "Add Shift",
+                  })
+                }
+              >
+                {start.toString()}
+              </Button>
+            </FormControl>
+            <FormControl>
+              <FormControl.Label>Shift end time</FormControl.Label>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                variant="outline"
+                onPress={() =>
+                  navigation.navigate("DateTimePicker", {
+                    initDate: end,
+                    returnType: "end",
+                    returnScreen: "Add Shift",
+                  })
+                }
+              >
+                {end.toString()}
+              </Button>
+            </FormControl>
+
+            <Button
+              mt="2"
+              colorScheme="indigo"
+              onPress={() => handleCreateShift()}
+            >
+              Add Shift
+            </Button>
+          </VStack>
+        </Box>
+      </Center>
+    </ScrollView>
   );
 }
 

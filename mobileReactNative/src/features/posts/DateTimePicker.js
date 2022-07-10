@@ -19,7 +19,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 function PostForm({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));
-  const { currentDate } = route.params;
+  const { initDate, returnType, returnScreen } = route.params;
 
   const onChange = (event, value) => {
     setDate(value);
@@ -29,8 +29,25 @@ function PostForm({ route, navigation }) {
   };
 
   useEffect(() => {
-    setDate(currentDate);
+    setDate(initDate);
   }, []);
+
+  function returnParams() {
+    switch (returnType) {
+      case "date":
+        return {
+          date: date,
+        };
+      case "start":
+        return {
+          start: date,
+        };
+      case "end":
+        return {
+          end: date,
+        };
+    }
+  }
 
   return (
     <Center w="100%">
@@ -98,8 +115,8 @@ function PostForm({ route, navigation }) {
             onPress={() => {
               // Pass and merge params back to home screen
               navigation.navigate({
-                name: "Post Form",
-                params: { date: date },
+                name: returnScreen,
+                params: returnParams(),
                 merge: true,
               });
             }}
