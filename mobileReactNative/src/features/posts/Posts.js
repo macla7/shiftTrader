@@ -35,18 +35,18 @@ function Posts(props) {
   // Posts
   useEffect(() => {
     if (props.id) {
-      dispatch(fetchPostsAsync(item.id));
+      console.log("hello");
+      dispatch(fetchPostsAsync(props.id));
     } else {
       dispatch(fetchPostsHomeAsync());
     }
-  }, [posts.length, props.id]);
+  }, [posts.length]);
 
   return (
     <Box>
       <Heading fontSize="xl" p="4" pb="3">
         Posts
       </Heading>
-      {/* <PostForm groupId={item.id} /> */}
       {posts.map((item) => {
         return (
           <Box
@@ -61,7 +61,6 @@ function Posts(props) {
             key={item.id}
           >
             <Post post={item} />
-            <Text>Is Post</Text>
           </Box>
         );
       })}

@@ -5,6 +5,8 @@ class Api::V1::PostsController < ApiController
   def index
     set_group
     postWithAssociations = []
+    p @group.posts.active
+    p 'BUUUUDDDDAAAAAAAAAAAAAAAA'
     @group.posts.active.includes(:bids, :likes, :shifts).each do |post|
       postWithAssociations.push(post.post_info)
     end

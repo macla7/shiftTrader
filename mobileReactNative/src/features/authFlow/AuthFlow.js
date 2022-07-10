@@ -7,6 +7,7 @@ import Home from "../home/Home.js";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";
+import HomeStackScreen from "../home/HomeStackScreen.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notifications from "../notifications/Notifications";
 const Stack = createNativeStackNavigator();
@@ -26,7 +27,11 @@ function AuthFlow() {
       ) : (
         <>
           <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} />
+            <Tab.Screen
+              name="Home"
+              component={HomeStackScreen}
+              options={{ headerShown: false }}
+            />
             <Tab.Screen
               name="Groups"
               component={GroupsStackScreen}

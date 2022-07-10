@@ -37,11 +37,12 @@ export async function fetchPostsHome() {
 }
 
 export async function createPost(post) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/posts.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ post }),
   })
