@@ -27,7 +27,6 @@ import Shift from "./shifts/Shift";
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
   const [body, setBody] = useState("");
-  const [auction, setAuction] = useState("");
   const [endsAt, setEndsAt] = useState("");
   const groupSearchId = useSelector(selectGroupSearchId);
   const [notice, setNotice] = useState("");
@@ -56,7 +55,6 @@ function PostForm({ route, navigation }) {
     let post = {
       body: body,
       ends_at: date,
-      auction: true,
       group_id: groupId,
       //shifts_attributes: shifts,
     };
@@ -76,7 +74,6 @@ function PostForm({ route, navigation }) {
 
   function resetState() {
     setBody("");
-    setAuction(true);
     setEndsAt("");
   }
 

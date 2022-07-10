@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_085807) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_10_123248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -165,17 +165,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_085807) do
     t.text "body"
     t.bigint "user_id", null: false
     t.datetime "ends_at", null: false
-    t.boolean "auction", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "group_id", null: false
+    t.bigint "reserve"
     t.index ["group_id"], name: "index_posts_on_group_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
     t.string "position"
-    t.text "description"
     t.datetime "start"
     t.datetime "end"
     t.bigint "post_id", null: false

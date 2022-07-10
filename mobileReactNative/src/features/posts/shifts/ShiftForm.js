@@ -25,7 +25,6 @@ import {
 
 // Design is to be able to add multiple shifts to a post
 function ShiftForm({ navigation, route }) {
-  const [description, setDescription] = useState("");
   const [position, setPosition] = useState("");
   const { start, end } = route.params;
 
@@ -49,7 +48,6 @@ function ShiftForm({ navigation, route }) {
     if (formIsValid()) {
       let shift = {
         position: position,
-        description: description,
         start: start,
         end: end,
       };
