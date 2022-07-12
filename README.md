@@ -6,9 +6,7 @@
 - Edit User profile, and..
 - react native image picker for dp on phone?
 - A User profile lol
-- Searchbar to invite user to group
-- Notifications
-- Got to take memerbships out of flat list as well
+- Follow guide for making customer scroll with snapInterval etc
 
 **Create React Native App**
 

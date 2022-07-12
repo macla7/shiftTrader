@@ -5,12 +5,14 @@ import PostForm from "../posts/PostForm";
 import DateTimePicker from "../posts/DateTimePicker";
 import GroupSearch from "../groups/GroupSearch";
 import ShiftForm from "../posts/shifts/ShiftForm";
+import MoneyInput from "../posts/MoneyInput";
 
 const HomeStack = createNativeStackNavigator();
 
 function GroupsStackScreen() {
   return (
     <HomeStack.Navigator>
+      <HomeStack.Screen name="Money Input" component={MoneyInput} />
       <HomeStack.Screen name="Home Feed" component={Home} />
       <HomeStack.Screen name="Post Form" component={PostForm} />
       <HomeStack.Screen
