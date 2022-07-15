@@ -5,7 +5,7 @@ import PostForm from "../posts/PostForm";
 import DateTimePicker from "../posts/DateTimePicker";
 import GroupSearch from "../groups/GroupSearch";
 import ShiftForm from "../posts/shifts/ShiftForm";
-import MoneyInput from "../posts/MoneyInput";
+import MoneyInput from "../posts/money/MoneyInput";
 
 const HomeStack = createNativeStackNavigator();
 

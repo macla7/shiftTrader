@@ -6,6 +6,7 @@ import usersReducer from "../features/users/userSlice";
 import notificationsReducer from "../features/notifications/notificationSlice";
 import postsReducer from "../features/posts/postSlice";
 import shiftsReducer from "../features/posts/shifts/shiftSlice";
+import moneyReducer from "../features/posts/money/moneySlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     notifications: notificationsReducer,
     posts: postsReducer,
     shifts: shiftsReducer,
+    money: moneyReducer,
   },
 });
