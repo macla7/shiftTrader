@@ -51,14 +51,12 @@ function MoneyInput() {
 
   function handleScroll(event) {
     setCurrentDollar(
-      dollars[Math.round(event.nativeEvent.contentOffset.y / 48) + 1]
+      dollars[Math.round(event.nativeEvent.contentOffset.y / 100)]
     );
   }
 
   function handleCents(event) {
-    setCurrentCents(
-      cents[Math.round(event.nativeEvent.contentOffset.y / 48) + 1]
-    );
+    setCurrentCents(cents[Math.round(event.nativeEvent.contentOffset.y / 100)]);
   }
 
   // useEffect(() => {
@@ -69,8 +67,8 @@ function MoneyInput() {
   // }, []);
 
   return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
+    <Center w="100%" bgColor="cyan.100" h="100%">
+      <Box p="2" py="8" w="90%" maxW="290" h="100%">
         <Heading
           size="lg"
           fontWeight="600"
@@ -83,8 +81,8 @@ function MoneyInput() {
         </Heading>
         <Text>{currentDollar + "." + currentCents}</Text>
 
-        <HStack>
-          <Box h="192px" w="50" px="2">
+        <HStack h="400px" bgColor="white" w="200px">
+          <Box h="400px" w="100px">
             {/* <FlatList
             data={dollars}
             renderItem={(dollar) => <Box>{dollar}</Box>}
@@ -95,30 +93,32 @@ function MoneyInput() {
               colors={[
                 "rgba(0,0,0, 0.5)",
                 "rgba(256,256,256, 0)",
+                "rgba(256,256,256, 0)",
                 "rgba(0,0,0, 0.5)",
               ]}
               style={styles.background}
             >
               <ScrollView
                 ref={ref}
-                snapToInterval="48"
+                snapToInterval="100"
                 snapToalignment="center"
                 centerContent
                 decelerationRate="fast"
-                contentOffset={{ x: 0, y: 4752 }}
+                contentOffset={{ x: 0, y: 10000 }}
                 onScroll={handleScroll}
               >
-                <View py="6">
+                <View py="150px" w="100px">
                   {dollars.map((dollar) => {
                     return (
                       <Center
                         key={dollar}
-                        h="12"
+                        h="100px"
+                        w="100px"
                         borderColor="coolGray.300"
                         borderWidth="1"
                         bgColor="transparent"
                       >
-                        {dollar}
+                        <Text fontSize="4xl">{dollar}</Text>
                       </Center>
                     );
                   })}
@@ -126,7 +126,7 @@ function MoneyInput() {
               </ScrollView>
             </LinearGradient>
           </Box>
-          <Box h="192px" w="50" px="2">
+          <Box h="400px" w="50%" px="2">
             {/* <FlatList
             data={dollars}
             renderItem={(dollar) => <Box>{dollar}</Box>}
@@ -137,30 +137,33 @@ function MoneyInput() {
               colors={[
                 "rgba(0,0,0, 0.5)",
                 "rgba(256,256,256, 0)",
+                "rgba(256,256,256, 0)",
                 "rgba(0,0,0, 0.5)",
               ]}
               style={styles.background}
             >
               <ScrollView
                 ref={ref}
-                snapToInterval="48"
+                snapToInterval="100px"
                 snapToalignment="center"
                 centerContent
                 decelerationRate="fast"
-                contentOffset={{ x: 0, y: 2832 }}
+                contentOffset={{ x: 0, y: 6000 }}
                 onScroll={handleCents}
               >
-                <View py="6">
-                  {cents.map((cent) => {
+                <View py="150px">
+                  {cents.map((cent, i) => {
                     return (
                       <Center
-                        key={cent}
-                        h="12"
+                        key={i}
+                        h="100px"
                         borderColor="coolGray.300"
                         borderWidth="1"
                         bgColor="transparent"
                       >
-                        {cent + "c"}
+                        <Text fontSize="4xl">
+                          {(cent == 0 ? "00" : cent) + "c"}
+                        </Text>
                       </Center>
                     );
                   })}
@@ -183,8 +186,8 @@ const styles = StyleSheet.create({
   },
   background: {
     position: "absolute",
-    height: 192,
-    width: 50,
+    height: "100%",
+    width: 100,
     zIndex: 1,
     pointerEvents: "none",
   },
