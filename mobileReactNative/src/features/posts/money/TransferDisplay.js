@@ -39,23 +39,21 @@ function TransferDisplay(props) {
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">You</Text>
             </Center>
-            <Flex flex="2" alignContent="center" justifyContent="center">
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <View flex="1" aspectRatio="2">
-                  <CalendarIcon width="100%" height="100%" fill="black" />
-                </View>
-                <View flex="1" aspectRatio="2">
-                  <ArrowRight width="100%" height="100%" fill="black" />
-                </View>
-              </Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <View flex="1" aspectRatio="2">
-                  <MoneyIcon width="100%" height="100%" fill="black" />
-                </View>
-                <View flex="1" aspectRatio="2">
-                  <ArrowRight width="100%" height="100%" fill="black" />
-                </View>
-              </Flex>
+            <Flex
+              flex="2"
+              direction="row"
+              alignItems="center"
+              justifyItems="center"
+            >
+              <View flex="1" aspectRatio="2">
+                <ArrowRight width="100%" height="100%" fill="black" />
+              </View>
+              <View flex="2" aspectRatio="2">
+                <MoneyIcon width="100%" height="100%" fill="#f43f5e" />
+              </View>
+              <View flex="1" aspectRatio="2">
+                <ArrowRight width="100%" height="100%" fill="black" />
+              </View>
             </Flex>
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">Co</Text>
@@ -69,23 +67,21 @@ function TransferDisplay(props) {
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">You</Text>
             </Center>
-            <Flex flex="2" alignContent="center" justifyContent="center">
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <View flex="1" aspectRatio="2">
-                  <CalendarIcon width="100%" height="100%" fill="black" />
-                </View>
-                <View flex="1" aspectRatio="2">
-                  <ArrowRight width="100%" height="100%" fill="black" />
-                </View>
-              </Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <View flex="1" aspectRatio="2">
-                  <ArrowLeft width="100%" height="100%" fill="black" />
-                </View>
-                <View flex="1" aspectRatio="2">
-                  <MoneyIcon width="100%" height="100%" fill="black" />
-                </View>
-              </Flex>
+            <Flex
+              flex="2"
+              direction="row"
+              alignItems="center"
+              justifyItems="center"
+            >
+              <View flex="1" aspectRatio="2">
+                <ArrowLeft width="100%" height="100%" fill="black" />
+              </View>
+              <View flex="2" aspectRatio="2">
+                <MoneyIcon width="100%" height="100%" fill="#22c55e" />
+              </View>
+              <View flex="1" aspectRatio="2">
+                <ArrowLeft width="100%" height="100%" fill="black" />
+              </View>
             </Flex>
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">Co</Text>
@@ -102,15 +98,10 @@ function TransferDisplay(props) {
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">You</Text>
             </Center>
-            <Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <ArrowLeft width="100px" height="50px" fill="black" />
-                <CalendarIcon width="100px" height="50px" fill="black" />
-              </Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <ArrowLeft width="100px" height="50px" fill="black" />
-                <MoneyIcon width="100px" height="50px" fill="black" />
-              </Flex>
+
+            <Flex direction="row" alignItems="center" justifyItems="center">
+              <ArrowLeft width="100px" height="50px" fill="black" />
+              <MoneyIcon width="100px" height="50px" fill="black" />
             </Flex>
             <Center flex="1" aspectRatio="1">
               <Text fontSize="2xl">Co</Text>
@@ -122,15 +113,9 @@ function TransferDisplay(props) {
         return (
           <Flex direction="row">
             <View h="100px" w="100px" bgColor="cyan.200"></View>
-            <Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <ArrowLeft width="100px" height="50px" fill="black" />
-                <CalendarIcon width="100px" height="50px" fill="black" />
-              </Flex>
-              <Flex direction="row" alignItems="center" justifyItems="center">
-                <MoneyIcon width="100px" height="50px" fill="black" />
-                <ArrowRight width="100px" height="50px" fill="black" />
-              </Flex>
+            <Flex direction="row" alignItems="center" justifyItems="center">
+              <MoneyIcon width="100px" height="50px" fill="black" />
+              <ArrowRight width="100px" height="50px" fill="black" />
             </Flex>
             <View h="100px" w="100px" bgColor="cyan.200"></View>
           </Flex>

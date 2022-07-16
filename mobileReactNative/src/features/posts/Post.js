@@ -22,11 +22,11 @@ import {
 function Post(props) {
   return (
     <Box>
-      <Text>Post by {props.post.email}</Text>
-      <Text>Group: {props.post.group_id}</Text>
-      <Text fontFamily="body" fontWeight={400} fontStyle="normal">
-        {props.post.body}
+      <Text fontFamily="Inconsolata" fontWeight={200}>
+        Post by {props.post.email}
       </Text>
+      <Text>Group: {props.post.group_id}</Text>
+      <Text fontFamily="body">{props.post.body}</Text>
       <Text>Ends at: {props.post.ends_at}</Text>
       {/* <Like post={post} />
       <Bid post={post} />

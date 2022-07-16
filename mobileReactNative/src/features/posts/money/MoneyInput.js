@@ -88,14 +88,14 @@ function MoneyInput() {
         width="100%"
         height="100%"
       >
-        <Center p="2" m="6" w="90%" borderRadius="30%" bgColor="emerald.50">
+        <Center p="2" w="100%">
           <Center
             p="1"
             m="2"
             w="95%"
             borderRadius="5%"
             bgColor="white"
-            shadow="2"
+            shadow="6"
           >
             <Heading
               size="2xl"
@@ -114,7 +114,7 @@ function MoneyInput() {
             w="95%"
             borderRadius="5%"
             bgColor="white"
-            shadow="2"
+            shadow="6"
           >
             <TransferDisplay transferType="reserve" />
           </Center>
@@ -125,7 +125,7 @@ function MoneyInput() {
             w="95%"
             borderRadius="5%"
             bgColor="white"
-            shadow="2"
+            shadow="6"
           >
             <Flex flexDirection="row" h="432px" borderRadius="30%">
               <MoneyScroll moneyType="dollars" moneyArr={dollars} />

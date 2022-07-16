@@ -65,6 +65,8 @@ function MoneyScroll(props) {
       w="100px"
       m="4"
       bgColor={currentDollars < 0 ? "rose.200" : "success.200"}
+      borderRadius="10%"
+      shadow="6"
     >
       {/* <FlatList
             data={dollars}
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
     width: 100,
     zIndex: 1,
     pointerEvents: "none",
+    borderRadius: "10%",
   },
   button: {
     padding: 15,
