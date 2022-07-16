@@ -28,6 +28,12 @@ import CalendarIcon from "../../../assets/noun-calendar-4983955.svg";
 import ArrowRight from "../../../assets/arrowRight.svg";
 import ArrowLeft from "../../../assets/arrowLeft.svg";
 import TransferDisplay from "./TransferDisplay";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../../layout/LayoutComponents";
 
 function MoneyInput() {
   const currentDollars = useSelector(selectDollars);
@@ -81,60 +87,28 @@ function MoneyInput() {
   }
 
   return (
-    <Center w="100%" h="100%">
-      <LinearGradient
-        // Button Linear Gradient
-        colors={["#064e3b", "#064e3b", "#064e3b", "#ecfdf5"]}
-        width="100%"
-        height="100%"
-      >
-        <Center p="2" w="100%">
-          <Center
-            p="1"
-            m="2"
-            w="95%"
-            borderRadius="5%"
-            bgColor="white"
-            shadow="6"
-          >
-            <Heading
-              size="2xl"
-              fontWeight="600"
-              color="coolGray.800"
-              _dark={{
-                color: "warmGray.50",
-              }}
-            >
-              {description}
-            </Heading>
-          </Center>
-          <Center
-            p="1"
-            m="2"
-            w="95%"
-            borderRadius="5%"
-            bgColor="white"
-            shadow="6"
-          >
-            <TransferDisplay transferType="reserve" />
-          </Center>
+    <CBackground>
+      <CTile>
+        <Heading
+          size="lg"
+          fontWeight="600"
+          color="coolGray.800"
+          _dark={{
+            color: "warmGray.50",
+          }}
+        >
+          {description}
+        </Heading>
+      </CTile>
 
-          <Center
-            p="1"
-            m="2"
-            w="95%"
-            borderRadius="5%"
-            bgColor="white"
-            shadow="6"
-          >
-            <Flex flexDirection="row" h="432px" borderRadius="30%">
-              <MoneyScroll moneyType="dollars" moneyArr={dollars} />
-              <MoneyScroll moneyType="cents" moneyArr={cents} />
-            </Flex>
-          </Center>
-        </Center>
-      </LinearGradient>
-    </Center>
+      <CContentTile>
+        <TransferDisplay transferType="reserve" />
+        <Flex flexDirection="row" h="432px" borderRadius="30%">
+          <MoneyScroll moneyType="dollars" moneyArr={dollars} />
+          <MoneyScroll moneyType="cents" moneyArr={cents} />
+        </Flex>
+      </CContentTile>
+    </CBackground>
   );
 }
 

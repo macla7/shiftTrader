@@ -20,9 +20,18 @@ import {
   ScrollView,
   Pressable,
   View,
+  TextArea,
 } from "native-base";
 import { formatDistanceToNow } from "date-fns";
 import Shift from "./shifts/Shift";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
+import { parse, format } from "date-fns";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
@@ -82,116 +91,123 @@ function PostForm({ route, navigation }) {
   }, []);
 
   return (
-    <ScrollView w="100%">
-      <Center>
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
-          <Heading
-            size="lg"
-            fontWeight="600"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-          >
-            Create Post
-          </Heading>
-          <Heading
-            mt="1"
-            _dark={{
-              color: "warmGray.200",
-            }}
-            color="coolGray.600"
-            fontWeight="medium"
-            size="xs"
-          >
-            To sell or pay someone to take your shifts
-          </Heading>
-
-          <VStack space={3} mt="5">
-            <FormControl>
-              <FormControl.Label>Group</FormControl.Label>
-              <Button
-                fontSize="md"
-                fontWeight="400"
-                color="coolGray.800"
-                variant="outline"
-                onPress={() =>
-                  navigation.navigate("Group Search", {
-                    group: group,
-                  })
-                }
-              >
-                {group.name}
-              </Button>
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Post Ends</FormControl.Label>
-              <Button
-                fontSize="md"
-                fontWeight="400"
-                color="coolGray.800"
-                variant="outline"
-                onPress={() =>
-                  navigation.navigate("DateTimePicker", {
-                    initDate: date,
-                    returnType: "date",
-                    returnScreen: "Post Form",
-                  })
-                }
-              >
-                {date.toString()}
-              </Button>
-            </FormControl>
-
-            <FormControl>
-              <FormControl.Label>Shifts</FormControl.Label>
-              <Shift />
-              <Button
-                fontSize="md"
-                fontWeight="400"
-                color="coolGray.800"
-                onPress={() =>
-                  navigation.navigate("Add Shift", {
-                    start: new Date(Date.now()),
-                    end: new Date(Date.now()),
-                  })
-                }
-              >
-                Add Shift
-              </Button>
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Reserve</FormControl.Label>
-              <Button
-                fontSize="md"
-                fontWeight="400"
-                color="coolGray.800"
-                onPress={() =>
-                  navigation.navigate("Add Reserve", {
-                    start: new Date(Date.now()),
-                    end: new Date(Date.now()),
-                  })
-                }
-              >
-                Add Reserve
-              </Button>
-            </FormControl>
-            <FormControl>
-              <FormControl.Label>Description</FormControl.Label>
-              <Input
-                type="textarea"
-                name="body"
-                value={body}
-                onChange={(e) => setBody(e.nativeEvent.text)}
-              />
-            </FormControl>
-            <Button mt="2" colorScheme="indigo" onPress={() => submitPost()}>
-              Make Post
+    <CScrollBackground>
+      <CTile>
+        <Heading
+          size="lg"
+          fontWeight="600"
+          color="coolGray.800"
+          _dark={{
+            color: "warmGray.50",
+          }}
+        >
+          Create Post
+        </Heading>
+        <Heading
+          mt="1"
+          _dark={{
+            color: "warmGray.200",
+          }}
+          color="coolGray.600"
+          fontWeight="medium"
+          size="xs"
+        >
+          To sell or pay someone to take your shifts
+        </Heading>
+      </CTile>
+      <CContentTile>
+        <VStack w="100%">
+          <FormControl>
+            <FormControl.Label>Group</FormControl.Label>
+            <Button
+              fontSize="md"
+              fontWeight="400"
+              color="coolGray.800"
+              variant="outline"
+              onPress={() =>
+                navigation.navigate("Group Search", {
+                  group: group,
+                })
+              }
+            >
+              {group.name}
             </Button>
-          </VStack>
-        </Box>
-      </Center>
-    </ScrollView>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Post Ends</FormControl.Label>
+            <Button
+              fontSize="md"
+              fontWeight="400"
+              color="coolGray.800"
+              variant="outline"
+              onPress={() =>
+                navigation.navigate("DateTimePicker", {
+                  initDate: date,
+                  returnType: "date",
+                  returnScreen: "Post Form",
+                })
+              }
+            >
+              {format(new Date(date), "EEE do LLL")}
+
+              {format(new Date(date), "p")}
+            </Button>
+          </FormControl>
+
+          <FormControl w="100%">
+            <FormControl.Label>Shifts</FormControl.Label>
+            <Shift />
+            <Button
+              fontSize="md"
+              fontWeight="400"
+              color="coolGray.800"
+              variant="outline"
+              onPress={() =>
+                navigation.navigate("Add Shift", {
+                  start: new Date(Date.now()),
+                  end: new Date(Date.now()),
+                })
+              }
+            >
+              Add Shift
+            </Button>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Reserve</FormControl.Label>
+            <Button
+              fontSize="md"
+              fontWeight="400"
+              color="coolGray.800"
+              variant="outline"
+              onPress={() => navigation.navigate("Add Reserve")}
+            >
+              Add Reserve
+            </Button>
+          </FormControl>
+          <FormControl>
+            <FormControl.Label>Description</FormControl.Label>
+
+            <Button
+              fontSize="md"
+              fontWeight="400"
+              color="coolGray.800"
+              variant="outline"
+              onPress={() =>
+                navigation.navigate("Add Description", {
+                  initDescription: "",
+                  returnScreen: "Post Form",
+                })
+              }
+            >
+              Add Description
+            </Button>
+          </FormControl>
+          <Button mt="2" colorScheme="indigo" onPress={() => submitPost()}>
+            Make Post
+          </Button>
+        </VStack>
+      </CContentTile>
+    </CScrollBackground>
   );
 }
 

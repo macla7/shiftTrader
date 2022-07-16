@@ -30,6 +30,12 @@ import {
   Pressable,
 } from "native-base";
 import { selectAuthToken } from "../sessions/sessionSlice";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function GroupSearch({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
@@ -48,18 +54,8 @@ function GroupSearch({ navigation }) {
   }, [dispatch, myGroups.length, isLoggedIn]);
 
   return (
-    <>
-      <ScrollView
-        w="100%"
-        borderBottomWidth="1"
-        _dark={{
-          borderColor: "gray.600",
-        }}
-        borderColor="coolGray.200"
-        pl="4"
-        pr="5"
-        py="2"
-      >
+    <CBackground>
+      <CContentTile>
         <Heading fontSize="xl" pt="4" pb="3">
           Your Groups
         </Heading>
@@ -112,8 +108,8 @@ function GroupSearch({ navigation }) {
         >
           Done
         </Button>
-      </ScrollView>
-    </>
+      </CContentTile>
+    </CBackground>
   );
 }
 

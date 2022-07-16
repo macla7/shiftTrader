@@ -6,6 +6,7 @@ import DateTimePicker from "../posts/DateTimePicker";
 import GroupSearch from "../groups/GroupSearch";
 import ShiftForm from "../posts/shifts/ShiftForm";
 import MoneyInput from "../posts/money/MoneyInput";
+import Description from "../posts/Description";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ function GroupsStackScreen() {
       <HomeStack.Screen name="Group Search" component={GroupSearch} />
       <HomeStack.Screen name="Add Shift" component={ShiftForm} />
       <HomeStack.Screen name="Add Reserve" component={MoneyInput} />
+      <HomeStack.Screen name="Add Description" component={Description} />
     </HomeStack.Navigator>
   );
 }

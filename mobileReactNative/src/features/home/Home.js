@@ -29,8 +29,9 @@ function Home({ navigation }) {
         onPress={() =>
           navigation.navigate("Post Form", {
             item: { id: 0 },
-            date: new Date(Date.now()),
+            date: Date.now(),
             group: { id: 0, name: "Group Not Selected.." },
+            description: "",
           })
         }
         mx="6"

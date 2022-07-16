@@ -16,6 +16,12 @@ import {
 } from "native-base";
 import { StyleSheet } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function PostForm({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));
@@ -29,29 +35,29 @@ function PostForm({ route, navigation }) {
   };
 
   useEffect(() => {
-    setDate(initDate);
+    setDate(new Date(initDate));
   }, []);
 
   function returnParams() {
     switch (returnType) {
       case "date":
         return {
-          date: date,
+          date: date.toString(),
         };
       case "start":
         return {
-          start: date,
+          start: date.toString(),
         };
       case "end":
         return {
-          end: date,
+          end: date.toString(),
         };
     }
   }
 
   return (
-    <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
+    <CBackground>
+      <CTile>
         <Heading
           size="lg"
           fontWeight="600"
@@ -62,8 +68,10 @@ function PostForm({ route, navigation }) {
         >
           Choose Time and Date
         </Heading>
+      </CTile>
 
-        <VStack space={3} mt="5">
+      <CContentTile>
+        <VStack w="100%">
           <FormControl>
             <View>
               <View>
@@ -124,8 +132,8 @@ function PostForm({ route, navigation }) {
             Back
           </Button>
         </VStack>
-      </Box>
-    </Center>
+      </CContentTile>
+    </CBackground>
   );
 }
 

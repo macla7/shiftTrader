@@ -52,7 +52,7 @@ function Shift(props) {
                       color: "warmGray.200",
                     }}
                   >
-                    {format(item.start, "EEE do LLL")}
+                    {format(new Date(item.start), "EEE do LLL")}
                   </Text>
                   <Text
                     color="coolGray.600"
@@ -60,7 +60,7 @@ function Shift(props) {
                       color: "warmGray.200",
                     }}
                   >
-                    {format(item.start, "p")}
+                    {format(new Date(item.start), "p")}
                   </Text>
                 </VStack>
                 <VStack>
@@ -70,7 +70,7 @@ function Shift(props) {
                       color: "warmGray.200",
                     }}
                   >
-                    {format(item.end, "EEE do LLL")}
+                    {format(new Date(item.end), "EEE do LLL")}
                   </Text>
                   <Text
                     color="coolGray.600"
@@ -78,7 +78,7 @@ function Shift(props) {
                       color: "warmGray.200",
                     }}
                   >
-                    {format(item.end, "p")}
+                    {format(new Date(item.end), "p")}
                   </Text>
                 </VStack>
               </HStack>

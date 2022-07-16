@@ -21,7 +21,15 @@ import {
   ScrollView,
   Pressable,
   View,
+  TextArea,
 } from "native-base";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../../layout/LayoutComponents";
+import { Keyboard } from "react-native";
 
 // Design is to be able to add multiple shifts to a post
 function ShiftForm({ navigation, route }) {
@@ -48,17 +56,17 @@ function ShiftForm({ navigation, route }) {
     if (formIsValid()) {
       let shift = {
         position: position,
-        start: start,
-        end: end,
+        start: start.toString(),
+        end: end.toString(),
       };
       dispatch(createShift(shift));
     }
   }
 
   return (
-    <ScrollView w="100%">
-      <Center>
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
+    <Pressable onPress={Keyboard.dismiss}>
+      <CBackground>
+        <CTile>
           <Heading
             size="lg"
             fontWeight="600"
@@ -67,7 +75,7 @@ function ShiftForm({ navigation, route }) {
               color: "warmGray.50",
             }}
           >
-            Create Shift
+            Add Shift
           </Heading>
           <Heading
             mt="1"
@@ -80,12 +88,15 @@ function ShiftForm({ navigation, route }) {
           >
             Add basic info of your shift
           </Heading>
+        </CTile>
 
-          <VStack space={3} mt="5">
+        <CContentTile>
+          <VStack w="100%">
             <FormControl>
               <FormControl.Label>Position</FormControl.Label>
-              <Input
-                type="textarea"
+              <TextArea
+                h={20}
+                placeholder="Add Description here.."
                 name="position"
                 value={position}
                 onChange={(e) => setPosition(e.nativeEvent.text)}
@@ -136,9 +147,9 @@ function ShiftForm({ navigation, route }) {
               Add Shift
             </Button>
           </VStack>
-        </Box>
-      </Center>
-    </ScrollView>
+        </CContentTile>
+      </CBackground>
+    </Pressable>
   );
 }
 
