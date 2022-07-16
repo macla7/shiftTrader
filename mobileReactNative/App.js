@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
 import { NativeRouter } from "react-router-native";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
 import { Routes, Route } from "react-router-dom";
-import { NavigationContainer } from "@react-navigation/native";
-
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { selectIsLoggedIn } from "./src/features/sessions/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AuthFlow from "./src/features/authFlow/AuthFlow";
@@ -21,8 +19,20 @@ import {
   Inconsolata_800ExtraBold,
   Inconsolata_900Black,
 } from "@expo-google-fonts/inconsolata";
-import { NativeBaseProvider } from "native-base";
+import { NativeBaseProvider, Text, View } from "native-base";
 import { theme } from "./theme";
+
+const MyTheme = {
+  dark: false,
+  colors: {
+    primary: "rgb(255, 45, 85)",
+    background: "rgb(242, 242, 242)",
+    card: "rgb(255, 255, 255)",
+    text: "rgb(28, 28, 30)",
+    border: "rgb(199, 199, 204)",
+    notification: "rgb(255, 69, 58)",
+  },
+};
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -40,13 +50,16 @@ export default function App() {
     return <></>;
   }
 
+  console.log(theme.fontWeights);
+
   return (
     <Provider store={store}>
-      <NativeBaseProvider theme={theme}>
-        <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
+        <NativeBaseProvider theme={theme}>
+          <View bgColor="primary.200"></View>
           <AuthFlow />
-        </NavigationContainer>
-      </NativeBaseProvider>
+        </NativeBaseProvider>
+      </NavigationContainer>
     </Provider>
   );
 }

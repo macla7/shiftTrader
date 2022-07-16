@@ -17,16 +17,21 @@ import {
   Text,
   Link,
   FlatList,
+  useTheme,
 } from "native-base";
 
 function Post(props) {
+  const { fonts } = useTheme();
+
+  console.log(fonts);
+
   return (
     <Box>
-      <Text fontFamily="Inconsolata" fontWeight={200}>
+      <Text color="red.700" fontFamily="body">
         Post by {props.post.email}
       </Text>
       <Text>Group: {props.post.group_id}</Text>
-      <Text fontFamily="body">{props.post.body}</Text>
+      <Text>{props.post.body}</Text>
       <Text>Ends at: {props.post.ends_at}</Text>
       {/* <Like post={post} />
       <Bid post={post} />

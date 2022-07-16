@@ -68,3 +68,8 @@ But the following articles helped even more I reckon
 -[Docs here](https://github.com/react-native-svg/react-native-svg#use-with-svg-files)
 
 - Need the [transformer](https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration) too if importing from files.
+
+**BIG ISSUES BEATEN**
+
+- Spent probably all day, 5+hrs, trying to get fonts to work by customising react native base themes. What seemed to fix it in the end was a version update of 'native-base' itself using 'yarn upgrade native-base'..
+- Now it seems native-base doesn't like it if I try to set a customer font-Weight..

@@ -3,9 +3,6 @@ import { extendTheme } from "native-base";
 export const theme = extendTheme({
   fontConfig: {
     Inconsolata: {
-      100: {
-        normal: "Inconsolata_100Thin",
-      },
       200: {
         normal: "Inconsolata_200ExtraLight",
       },
