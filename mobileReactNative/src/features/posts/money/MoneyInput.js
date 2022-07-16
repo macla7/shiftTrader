@@ -25,8 +25,9 @@ import { selectDollars, selectCents } from "./moneySlice";
 import MoneyIcon from "../../../assets/noun-money-4979734.svg";
 import BidIcon from "../../../assets/noun-auction-4831153.svg";
 import CalendarIcon from "../../../assets/noun-calendar-4983955.svg";
-import LeftArrowIcon from "../../../assets/noun-arrow-1920806 (1).svg";
-import RightArrowIcon from "../../../assets/noun-arrow-1920806.svg";
+import ArrowRight from "../../../assets/arrowRight.svg";
+import ArrowLeft from "../../../assets/arrowLeft.svg";
+import TransferDisplay from "./TransferDisplay";
 
 function MoneyInput() {
   const currentDollars = useSelector(selectDollars);
@@ -63,9 +64,9 @@ function MoneyInput() {
 
   function createDescription() {
     if (currentDollars < 0) {
-      return "The max you will pay for someone to take your shift is ";
+      return "Offering To Pay";
     }
-    return "You will not sell your shift for lower than ";
+    return "Asking For";
   }
 
   function createDollarPresentation() {
@@ -81,34 +82,58 @@ function MoneyInput() {
 
   return (
     <Center w="100%" h="100%">
-      <Center p="2" m="6" w="90%" borderRadius="30%" bgColor="white">
-        <Heading
-          size="2xl"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Reserve
-        </Heading>
-        <MoneyIcon width="100px" height="100px" fill="red" />
-        <BidIcon width="100px" height="100px" fill="red" />
-        <CalendarIcon width="100px" height="100px" fill="red" />
-        <RightArrowIcon width="100px" height="100px" fill="red" />
-        <LeftArrowIcon width="100px" height="100px" fill="red" />
-        <Text fontSize="xl" textAlign="center" h="16">
-          {description}
-        </Text>
-        <Text fontSize="3xl" textAlign="center">
-          {dollarPresentation}
-        </Text>
+      <LinearGradient
+        // Button Linear Gradient
+        colors={["#064e3b", "#064e3b", "#064e3b", "#ecfdf5"]}
+        width="100%"
+        height="100%"
+      >
+        <Center p="2" m="6" w="90%" borderRadius="30%" bgColor="emerald.50">
+          <Center
+            p="1"
+            m="2"
+            w="95%"
+            borderRadius="5%"
+            bgColor="white"
+            shadow="2"
+          >
+            <Heading
+              size="2xl"
+              fontWeight="600"
+              color="coolGray.800"
+              _dark={{
+                color: "warmGray.50",
+              }}
+            >
+              {description}
+            </Heading>
+          </Center>
+          <Center
+            p="1"
+            m="2"
+            w="95%"
+            borderRadius="5%"
+            bgColor="white"
+            shadow="2"
+          >
+            <TransferDisplay transferType="reserve" />
+          </Center>
 
-        <Flex flexDirection="row" h="432px" borderRadius="30%">
-          <MoneyScroll moneyType="dollars" moneyArr={dollars} />
-          <MoneyScroll moneyType="cents" moneyArr={cents} />
-        </Flex>
-      </Center>
+          <Center
+            p="1"
+            m="2"
+            w="95%"
+            borderRadius="5%"
+            bgColor="white"
+            shadow="2"
+          >
+            <Flex flexDirection="row" h="432px" borderRadius="30%">
+              <MoneyScroll moneyType="dollars" moneyArr={dollars} />
+              <MoneyScroll moneyType="cents" moneyArr={cents} />
+            </Flex>
+          </Center>
+        </Center>
+      </LinearGradient>
     </Center>
   );
 }

@@ -58,3 +58,13 @@ But the following articles helped even more I reckon
 **React DateTimePicker**
 
 -[Docs here](https://github.com/react-native-datetimepicker/datetimepicker)
+
+**LinearGradient in Expo**
+
+-[Docs here](https://docs.expo.dev/versions/latest/sdk/linear-gradient/#usage)
+
+**React Native SVG**
+
+-[Docs here](https://github.com/react-native-svg/react-native-svg#use-with-svg-files)
+
+- Need the [transformer](https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration) too if importing from files.

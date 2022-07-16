@@ -12,7 +12,6 @@ const HomeStack = createNativeStackNavigator();
 function GroupsStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Money Input" component={MoneyInput} />
       <HomeStack.Screen name="Home Feed" component={Home} />
       <HomeStack.Screen name="Post Form" component={PostForm} />
       <HomeStack.Screen
@@ -22,6 +21,7 @@ function GroupsStackScreen() {
       />
       <HomeStack.Screen name="Group Search" component={GroupSearch} />
       <HomeStack.Screen name="Add Shift" component={ShiftForm} />
+      <HomeStack.Screen name="Add Reserve" component={MoneyInput} />
     </HomeStack.Navigator>
   );
 }

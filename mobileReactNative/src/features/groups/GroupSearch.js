@@ -110,7 +110,7 @@ function GroupSearch({ navigation }) {
             });
           }}
         >
-          Back
+          Done
         </Button>
       </ScrollView>
     </>

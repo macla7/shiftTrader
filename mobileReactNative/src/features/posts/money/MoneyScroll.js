@@ -45,7 +45,7 @@ function MoneyScroll(props) {
 
   function handleDollarsNegative(dollars) {
     if (dollars < 0) {
-      return "-$" + dollars * -1;
+      return "$" + dollars * -1;
     }
     return "$" + dollars;
   }
@@ -89,7 +89,7 @@ function MoneyScroll(props) {
           decelerationRate="fast"
           contentOffset={{ x: 0, y: 10000 }}
           onScroll={handleScroll}
-          scrollEventThrottle="32"
+          scrollEventThrottle="100"
         >
           <View py="150px" w="100px">
             {props.moneyArr.map((money, i) => {
@@ -101,7 +101,12 @@ function MoneyScroll(props) {
                   borderColor="coolGray.300"
                   borderWidth="1"
                 >
-                  <Text fontSize="4xl">
+                  <Text
+                    fontSize="4xl"
+                    fontFamily="body"
+                    fontWeight={400}
+                    fontStyle="normal"
+                  >
                     {handleMoneyText(props.moneyType, money)}
                   </Text>
                 </Center>

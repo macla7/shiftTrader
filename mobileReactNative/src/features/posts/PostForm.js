@@ -162,9 +162,19 @@ function PostForm({ route, navigation }) {
             </FormControl>
             <FormControl>
               <FormControl.Label>Reserve</FormControl.Label>
-              <HStack>
-                <Button>Reserve</Button>
-              </HStack>
+              <Button
+                fontSize="md"
+                fontWeight="400"
+                color="coolGray.800"
+                onPress={() =>
+                  navigation.navigate("Add Reserve", {
+                    start: new Date(Date.now()),
+                    end: new Date(Date.now()),
+                  })
+                }
+              >
+                Add Reserve
+              </Button>
             </FormControl>
             <FormControl>
               <FormControl.Label>Description</FormControl.Label>
