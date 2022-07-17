@@ -78,3 +78,20 @@ export function CContentTile({ children }) {
     </Center>
   );
 }
+
+export function InternalBorderTile({ children }) {
+  return (
+    <Box
+      borderWidth="1"
+      _dark={{
+        borderColor: "gray.600",
+      }}
+      borderColor="coolGray.200"
+      p="2"
+      my="2"
+      mx="1"
+    >
+      {children}
+    </Box>
+  );
+}

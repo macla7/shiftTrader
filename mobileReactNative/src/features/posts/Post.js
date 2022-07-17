@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Like from "./likes/Like";
 import Bid from "./bids/Bid.js";
 import Shift from "./shifts/Shift.js";
+import PostEnds from "./PostEnds.js";
+import PostInfo from "./PostInfo.js";
 import { initialState } from "./postSlice";
 import { selectUsers } from "../users/userSlice";
 import {
@@ -18,12 +20,14 @@ import {
   Link,
   FlatList,
   useTheme,
+  Flex,
 } from "native-base";
 import {
   CBackground,
   CTile,
   CScrollBackground,
   CContentTile,
+  InternalBorderTile,
 } from "../layout/LayoutComponents";
 
 function Post(props) {
@@ -33,7 +37,19 @@ function Post(props) {
 
   return (
     <CTile>
+      <Text>{props.post.group_name}</Text>
       <Shift shifts={props.post.shifts} />
+      <PostEnds endsAt={props.post.ends_at} />
+      <Flex direction="row">
+        <Box flex="1">
+          <InternalBorderTile>
+            <Text>Bids .. </Text>
+          </InternalBorderTile>
+        </Box>
+        <Box flex="2">
+          <PostInfo post={props.post} />
+        </Box>
+      </Flex>
       {/* <Text color="red.700" fontFamily="body">
         Post by {props.post.email}
       </Text>

@@ -19,7 +19,7 @@ import { parse, format } from "date-fns";
 
 function Shift(props) {
   return (
-    <Box>
+    <Box w="100%">
       {props.shifts.map((item) => {
         return (
           <Box

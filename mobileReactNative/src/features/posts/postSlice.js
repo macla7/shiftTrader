@@ -44,7 +44,7 @@ export const initialState = {
       id: 0,
       body: "",
       user_id: 0,
-      ends_at: "",
+      ends_at: Date.now(),
       created_at: "",
       updated_at: "",
       bids: [initialBidState],
