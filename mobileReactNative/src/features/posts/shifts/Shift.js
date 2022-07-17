@@ -18,7 +18,7 @@ import {
 import { parse, format } from "date-fns";
 
 function Shift(props) {
-  const shifts = useSelector((state) => state.shifts.shifts);
+  let shifts = useSelector((state) => state.shifts.shifts);
 
   return (
     <Box>

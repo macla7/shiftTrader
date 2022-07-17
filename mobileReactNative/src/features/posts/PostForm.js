@@ -43,7 +43,7 @@ function PostForm({ route, navigation }) {
   const [show, setShow] = useState(false);
   const [shiftsList, setShiftsList] = useState("");
   const shifts = useSelector((state) => state.shifts.shifts);
-  const { item, date, group } = route.params;
+  const { item, date, group, description, reserve } = route.params;
 
   const [isPickerShow, setIsPickerShow] = useState(false);
 
@@ -89,6 +89,8 @@ function PostForm({ route, navigation }) {
   useEffect(() => {
     dispatch(resetShifts());
   }, []);
+
+  console.log(description);
 
   return (
     <CScrollBackground>
@@ -174,19 +176,25 @@ function PostForm({ route, navigation }) {
           </FormControl>
           <FormControl>
             <FormControl.Label>Reserve</FormControl.Label>
+            <Text>{reserve}</Text>
             <Button
               fontSize="md"
               fontWeight="400"
               color="coolGray.800"
               variant="outline"
-              onPress={() => navigation.navigate("Add Reserve")}
+              onPress={() =>
+                navigation.navigate("Add Reserve", {
+                  reserve: reserve,
+                  returnScreen: "Post Form",
+                })
+              }
             >
               Add Reserve
             </Button>
           </FormControl>
           <FormControl>
             <FormControl.Label>Description</FormControl.Label>
-
+            <Text>{description}</Text>
             <Button
               fontSize="md"
               fontWeight="400"

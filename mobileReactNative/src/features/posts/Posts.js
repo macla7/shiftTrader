@@ -24,6 +24,12 @@ import {
   Link,
   FlatList,
 } from "native-base";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function Posts(props) {
   const userId = useSelector((state) => state.sessions.user.id);
@@ -43,28 +49,11 @@ function Posts(props) {
   }, [posts.length]);
 
   return (
-    <Box>
-      <Heading fontSize="xl" p="4" pb="3">
-        Posts
-      </Heading>
+    <>
       {posts.map((item) => {
-        return (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            pl="4"
-            pr="5"
-            py="2"
-            key={item.id}
-          >
-            <Post post={item} />
-          </Box>
-        );
+        return <Post post={item} key={item.id} />;
       })}
-    </Box>
+    </>
   );
 }
 

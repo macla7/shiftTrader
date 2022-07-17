@@ -20,11 +20,17 @@ import {
   ScrollView,
   Pressable,
 } from "native-base";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function Home({ navigation }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <>
+    <CScrollBackground>
       <Button
         onPress={() =>
           navigation.navigate("Post Form", {
@@ -32,6 +38,7 @@ function Home({ navigation }) {
             date: Date.now(),
             group: { id: 0, name: "Group Not Selected.." },
             description: "",
+            reserve: 0,
           })
         }
         mx="6"
@@ -41,7 +48,7 @@ function Home({ navigation }) {
         Create Post
       </Button>
       <Posts item={{ id: 0 }} />
-    </>
+    </CScrollBackground>
   );
 }
 

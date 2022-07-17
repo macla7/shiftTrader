@@ -21,7 +21,7 @@ import { ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 import MoneyScroll from "./MoneyScroll";
-import { selectDollars, selectCents } from "./moneySlice";
+import { selectDollars, selectCents, selectMoney } from "./moneySlice";
 import MoneyIcon from "../../../assets/noun-money-4979734.svg";
 import BidIcon from "../../../assets/noun-auction-4831153.svg";
 import CalendarIcon from "../../../assets/noun-calendar-4983955.svg";
@@ -35,11 +35,13 @@ import {
   CContentTile,
 } from "../../layout/LayoutComponents";
 
-function MoneyInput() {
+function MoneyInput({ route, navigation }) {
   const currentDollars = useSelector(selectDollars);
   const currentCents = useSelector(selectCents);
+  const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
-  const [dollarPresentation, setDollarPresentation] = useState("");
+  const dispatch = useDispatch();
+  const { reserve, returnScreen } = route.params;
 
   let cents = [
     0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90,
@@ -57,8 +59,8 @@ function MoneyInput() {
   }, [currentDollars]);
 
   useEffect(() => {
-    setDollarPresentation(createDollarPresentation());
-  }, [currentDollars, currentCents]);
+    console.log(currentMicroDollars);
+  }, [currentDollars, currentCents, currentMicroDollars]);
 
   function dollarRange(value) {
     let arr = [];
@@ -73,17 +75,6 @@ function MoneyInput() {
       return "Offering To Pay";
     }
     return "Asking For";
-  }
-
-  function createDollarPresentation() {
-    if (currentDollars < 0) {
-      return "$" + currentDollars * -1 + "." + currentCents;
-    }
-
-    let cents = currentCents;
-    cents = currentCents == 0 ? "00" : currentCents == 5 ? "05" : currentCents;
-
-    return "$" + currentDollars + "." + cents;
   }
 
   return (
@@ -107,6 +98,20 @@ function MoneyInput() {
           <MoneyScroll moneyType="dollars" moneyArr={dollars} />
           <MoneyScroll moneyType="cents" moneyArr={cents} />
         </Flex>
+        <Button
+          mt="2"
+          colorScheme="indigo"
+          onPress={() => {
+            // Pass and merge params back to home screen
+            navigation.navigate({
+              name: returnScreen,
+              params: { reserve: currentMicroDollars },
+              merge: true,
+            });
+          }}
+        >
+          Done
+        </Button>
       </CContentTile>
     </CBackground>
   );

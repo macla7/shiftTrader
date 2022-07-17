@@ -31,4 +31,7 @@ export const selectDollars = (state) => state.money.dollars;
 
 export const selectCents = (state) => state.money.cents;
 
+export const selectMoney = (state) =>
+  (state.money.dollars * 100 + state.money.cents) * 1000000;
+
 export default moneySlice.reducer;

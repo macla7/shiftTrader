@@ -19,25 +19,32 @@ import {
   FlatList,
   useTheme,
 } from "native-base";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function Post(props) {
   const { fonts } = useTheme();
 
-  console.log(fonts);
+  console.log(props.post);
 
   return (
-    <Box>
-      <Text color="red.700" fontFamily="body">
+    <CTile>
+      <Shift shifts={props.post.shifts} />
+      {/* <Text color="red.700" fontFamily="body">
         Post by {props.post.email}
       </Text>
       <Text>Group: {props.post.group_id}</Text>
       <Text>{props.post.body}</Text>
       <Text>Ends at: {props.post.ends_at}</Text>
-      {/* <Like post={post} />
+      <Like post={post} />
       <Bid post={post} />
-      <Shift post={post} /> */}
-      <Text>Comments</Text>
-    </Box>
+      <Shift post={post} />
+      <Text>Comments</Text> */}
+    </CTile>
   );
 }
 

@@ -53,12 +53,12 @@ function Description({ route, navigation }) {
               // Pass and merge params back to home screen
               navigation.navigate({
                 name: returnScreen,
-                description: description,
+                params: { description: description },
                 merge: true,
               });
             }}
           >
-            Back
+            Done
           </Button>
         </CContentTile>
       </CBackground>
