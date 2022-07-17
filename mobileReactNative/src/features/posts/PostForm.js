@@ -35,37 +35,20 @@ import { parse, format } from "date-fns";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
-  const [body, setBody] = useState("");
-  const [endsAt, setEndsAt] = useState("");
   const groupSearchId = useSelector(selectGroupSearchId);
   const [notice, setNotice] = useState("");
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
-  const [shiftsList, setShiftsList] = useState("");
   const shifts = useSelector((state) => state.shifts.shifts);
   const { item, date, group, description, reserve } = route.params;
-
-  const [isPickerShow, setIsPickerShow] = useState(false);
-
-  const showPicker = () => {
-    setIsPickerShow(true);
-  };
-
-  const onChange = (event, value) => {
-    setDate(value);
-    if (Platform.OS === "android") {
-      setIsPickerShow(false);
-    }
-  };
 
   function submitPost() {
     let groupId = item.id ? item.id : 20;
 
     let post = {
-      body: body,
+      body: description,
       ends_at: date,
       group_id: groupId,
-      //shifts_attributes: shifts,
+      reserve: reserve,
+      shifts_attributes: shifts,
     };
     dispatch(createPostAsync(post));
 
@@ -77,13 +60,7 @@ function PostForm({ route, navigation }) {
     };
 
     createNotificationBlueprint(notification_blueprint);
-    resetState();
     dispatch(resetShifts());
-  }
-
-  function resetState() {
-    setBody("");
-    setEndsAt("");
   }
 
   useEffect(() => {

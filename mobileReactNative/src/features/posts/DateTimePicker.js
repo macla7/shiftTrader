@@ -27,16 +27,13 @@ function PostForm({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));
   const { initDate, returnType, returnScreen } = route.params;
 
-  const onChange = (event, value) => {
-    setDate(value);
-    if (Platform.OS === "android") {
-      setIsPickerShow(false);
-    }
-  };
-
   useEffect(() => {
     setDate(new Date(initDate));
   }, []);
+
+  const onChange = (event, value) => {
+    setDate(value);
+  };
 
   function returnParams() {
     switch (returnType) {

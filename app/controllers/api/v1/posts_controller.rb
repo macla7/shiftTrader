@@ -86,7 +86,7 @@ class Api::V1::PostsController < ApiController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(
-        :body, :ends_at, :group_id, 
+        :body, :ends_at, :group_id, :reserve,
         shifts_attributes: [:position, :start, :end]
       )
     end
