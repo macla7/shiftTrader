@@ -1,13 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createGroupAsync } from "./groupSlice";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
+import {
+  Center,
+  Box,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Button,
+  HStack,
+  Text,
+  Link,
+  ScrollView,
+  Pressable,
+  View,
+  TextArea,
+} from "native-base";
+import { Keyboard } from "react-native";
 
-function GroupForm() {
+function GroupForm({ route, navigation }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const { returnScreen } = route.params;
 
-  function submitHandler(e) {
-    e.preventDefault();
+  function submitGroup() {
     const formData = {
       group: {
         name: name,
@@ -22,19 +45,43 @@ function GroupForm() {
   }
 
   return (
-    <div>
-      <h1>Group Form</h1>
-      <form>
-        <textarea
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit" onClick={(e) => submitHandler(e)}>
-          Submit
-        </button>
-      </form>
-    </div>
+    <Pressable onPress={Keyboard.dismiss}>
+      <CBackground>
+        <CContentTile>
+          <Heading
+            size="lg"
+            fontWeight="600"
+            color="coolGray.800"
+            _dark={{
+              color: "warmGray.50",
+            }}
+          >
+            Create Group
+          </Heading>
+          <Input
+            placeholder="Enter Group Name"
+            value={name}
+            onChange={(e) => setName(e.nativeEvent.text)}
+          />
+          <Button
+            mt="2"
+            colorScheme="indigo"
+            onPress={() => {
+              // Pass and merge params back to home screen
+              navigation.navigate({
+                name: returnScreen,
+                merge: true,
+              });
+            }}
+          >
+            Done
+          </Button>
+          <Button mt="2" colorScheme="indigo" onPress={() => submitGroup()}>
+            Create
+          </Button>
+        </CContentTile>
+      </CBackground>
+    </Pressable>
   );
 }
 

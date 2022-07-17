@@ -5,6 +5,7 @@ import DiscoverGroups from "./DiscoverGroups";
 import Group from "./Group";
 import GroupInfo from "./GroupInfo";
 import Search from "../users/Search";
+import GroupForm from "./GroupForm";
 
 const GroupsStack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function GroupsStackScreen() {
           title: "Invite People",
         })}
       />
+      <GroupsStack.Screen name="Create Group" component={GroupForm} />
     </GroupsStack.Navigator>
   );
 }

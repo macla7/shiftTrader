@@ -29,7 +29,6 @@ import {
   ScrollView,
   Pressable,
 } from "native-base";
-import { selectAuthToken } from "../sessions/sessionSlice";
 import {
   CBackground,
   CTile,
@@ -39,7 +38,6 @@ import {
 
 function GroupSearch({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
-  const authToken = useSelector(selectAuthToken);
   const status = useSelector(selectStatus);
   const userId = useSelector(selectUserId);
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -50,7 +48,7 @@ function GroupSearch({ navigation }) {
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
-    dispatch(fetchMyGroupsAsync(authToken));
+    dispatch(fetchMyGroupsAsync());
   }, [dispatch, myGroups.length, isLoggedIn]);
 
   return (

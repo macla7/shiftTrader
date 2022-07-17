@@ -38,15 +38,13 @@ function PostForm({ route, navigation }) {
   const groupSearchId = useSelector(selectGroupSearchId);
   const [notice, setNotice] = useState("");
   const shifts = useSelector((state) => state.shifts.shifts);
-  const { item, date, group, description, reserve } = route.params;
+  const { date, group, description, reserve } = route.params;
 
   function submitPost() {
-    let groupId = item.id ? item.id : 20;
-
     let post = {
       body: description,
       ends_at: date,
-      group_id: groupId,
+      group_id: group.id,
       reserve: reserve,
       shifts_attributes: shifts,
     };
@@ -55,7 +53,7 @@ function PostForm({ route, navigation }) {
     // if above succeeds ..?
     let notification_blueprint = {
       notificationable_type: "Group",
-      notificationable_id: groupId,
+      notificationable_id: group.id,
       notification_type: 4,
     };
 
@@ -135,7 +133,7 @@ function PostForm({ route, navigation }) {
 
           <FormControl w="100%">
             <FormControl.Label>Shifts</FormControl.Label>
-            <Shift />
+            <Shift shifts={shifts ? shifts : []} />
             <Button
               fontSize="md"
               fontWeight="400"

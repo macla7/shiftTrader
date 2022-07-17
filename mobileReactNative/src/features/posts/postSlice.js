@@ -34,8 +34,8 @@ export const initialBidState = {
 export const initialShiftState = {
   id: 0,
   position: "",
-  start: "",
-  end: "",
+  start: Date.now(),
+  end: Date.now(),
 };
 
 export const initialState = {

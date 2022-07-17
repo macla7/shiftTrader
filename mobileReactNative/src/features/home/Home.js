@@ -34,7 +34,6 @@ function Home({ navigation }) {
       <Button
         onPress={() =>
           navigation.navigate("Post Form", {
-            item: { id: 0 },
             date: Date.now(),
             group: { id: 0, name: "Group Not Selected.." },
             description: "",

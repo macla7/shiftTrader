@@ -27,93 +27,19 @@ import {
   Link,
   FlatList,
 } from "native-base";
-import { selectAuthToken } from "../sessions/sessionSlice";
+import {
+  CBackground,
+  CTile,
+  CScrollBackground,
+  CContentTile,
+} from "../layout/LayoutComponents";
 
 function Groups({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
-  const authToken = useSelector(selectAuthToken);
   const status = useSelector(selectStatus);
   const userId = useSelector(selectUserId);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
-
-  // Called on initialise, because dispatch changes (on intialise)
-  // and on myGroups.length change
-  useEffect(() => {
-    dispatch(fetchMyGroupsAsync(authToken));
-  }, [dispatch, myGroups.length, isLoggedIn]);
-
-  let listOfGroups;
-
-  if (myGroups && myGroups.length > 0) {
-    listOfGroups = (
-      <FlatList
-        data={myGroups}
-        renderItem={({ item }) => (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            pl="4"
-            pr="5"
-            py="2"
-          >
-            <HStack
-              space={3}
-              justifyContent="space-between"
-              onTouchEnd={() =>
-                navigation.navigate("Group", {
-                  item: item,
-                })
-              }
-            >
-              {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
-                }}
-              /> */}
-              <VStack>
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
-                  {item.name}
-                </Text>
-              </VStack>
-              {/* <Spacer /> */}
-              <Text
-                fontSize="xs"
-                _dark={{
-                  color: "warmGray.50",
-                }}
-                color="coolGray.800"
-                alignSelf="flex-start"
-              >
-                no. members
-              </Text>
-            </HStack>
-          </Box>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    );
-    // <div
-    //   key={group.id}
-    //   style={{ margin: "5em" }}
-    //   onClick={() => dispatch(setGroup(group.id))}
-    // >
-    //   <Link to={`/groups/${group.id}`}>{group.name}</Link>
-    //   <button onClick={() => requestToJoinGroup(group.id)}>Join</button>
-    // </div>
-  } else {
-    listOfGroups = <Text>{authToken}</Text>;
-  }
 
   function requestToJoinGroup(groupId) {
     let inviteDetails = {
@@ -135,12 +61,75 @@ function Groups({ navigation }) {
     createNotificationBlueprint(notification_blueprint);
   }
 
+  // Called on initialise, because dispatch changes (on intialise)
+  // and on myGroups.length change
+  useEffect(() => {
+    dispatch(fetchMyGroupsAsync());
+    console.log(myGroups);
+  }, [dispatch, myGroups.length, myGroups[0].id]);
+
   return (
-    <Box w="100%" h="100%">
-      <Heading fontSize="xl" p="4" pb="3">
-        My Groups
-      </Heading>
-      {listOfGroups}
+    <CBackground>
+      <CContentTile>
+        <Heading fontSize="xl" p="4" pb="3">
+          My Groups
+        </Heading>
+        <FlatList
+          data={myGroups}
+          renderItem={({ item }) => (
+            <Box
+              borderBottomWidth="1"
+              _dark={{
+                borderColor: "gray.600",
+              }}
+              borderColor="coolGray.200"
+              pl="4"
+              pr="5"
+              py="2"
+            >
+              <HStack
+                space={3}
+                justifyContent="space-between"
+                onTouchEnd={() =>
+                  navigation.navigate("Group", {
+                    item: item,
+                  })
+                }
+              >
+                {/* <Avatar
+                size="48px"
+                source={{
+                  uri: item.avatarUrl,
+                }}
+              /> */}
+                <VStack>
+                  <Text
+                    _dark={{
+                      color: "warmGray.50",
+                    }}
+                    color="coolGray.800"
+                    bold
+                  >
+                    {item.name}
+                  </Text>
+                </VStack>
+                {/* <Spacer /> */}
+                <Text
+                  fontSize="xs"
+                  _dark={{
+                    color: "warmGray.50",
+                  }}
+                  color="coolGray.800"
+                  alignSelf="flex-start"
+                >
+                  no. members
+                </Text>
+              </HStack>
+            </Box>
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </CContentTile>
       <Button
         mx="6"
         onPress={() => navigation.navigate("Discover")}
@@ -150,7 +139,20 @@ function Groups({ navigation }) {
       >
         Discover Groups
       </Button>
-    </Box>
+      <Button
+        mx="6"
+        onPress={() =>
+          navigation.navigate("Create Group", {
+            returnScreen: "My Groups",
+          })
+        }
+        position="absolute"
+        bottom="20"
+        w="90%"
+      >
+        Create Group
+      </Button>
+    </CBackground>
   );
 }
 

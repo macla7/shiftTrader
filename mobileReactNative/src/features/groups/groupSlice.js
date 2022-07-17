@@ -28,16 +28,16 @@ const initialState = {
 
 export const fetchGroupsAsync = createAsyncThunk(
   "groups/fetchGroups",
-  async (auth_token) => {
-    const response = await fetchGroups(auth_token);
+  async () => {
+    const response = await fetchGroups();
     return response;
   }
 );
 
 export const fetchMyGroupsAsync = createAsyncThunk(
   "groups/fetchMyGroups",
-  async (authToken) => {
-    const response = await fetchMyGroups(authToken);
+  async () => {
+    const response = await fetchMyGroups();
     return response;
   }
 );

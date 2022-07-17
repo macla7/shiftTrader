@@ -18,11 +18,9 @@ import {
 import { parse, format } from "date-fns";
 
 function Shift(props) {
-  let shifts = useSelector((state) => state.shifts.shifts);
-
   return (
     <Box>
-      {shifts.map((item) => {
+      {props.shifts.map((item) => {
         return (
           <Box
             borderWidth="1"
