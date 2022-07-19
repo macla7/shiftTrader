@@ -12,6 +12,7 @@ import {
   Link,
   FlatList,
   useTheme,
+  Image,
 } from "native-base";
 import {
   CBackground,
@@ -24,6 +25,14 @@ import {
 function PostInfo(props) {
   return (
     <InternalBorderTile>
+      <Image
+        source={{
+          uri: props.post.avatar_url,
+        }}
+        size="xs"
+        alt="avatar"
+        borderRadius={100}
+      />
       <Text>{props.post.email}</Text>
       <Text>{props.post.body}</Text>
     </InternalBorderTile>

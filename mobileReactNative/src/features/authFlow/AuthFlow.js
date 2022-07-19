@@ -10,6 +10,7 @@ import GroupsStackScreen from "../groups/GroupsStackScreen.js";
 import HomeStackScreen from "../home/HomeStackScreen.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notifications from "../notifications/Notifications";
+import Profile from "../users/Profile.js";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -38,6 +39,7 @@ function AuthFlow() {
               options={{ headerShown: false }}
             />
             <Tab.Screen name="Notifications" component={Notifications} />
+            <Tab.Screen name="Profile" component={Profile} />
           </Tab.Navigator>
         </>
       )}

@@ -16,6 +16,8 @@ const initialState = {
       id: 0,
       role: 0,
       email: "",
+      avatar: null,
+      avatar_url: null,
     },
   ],
   status: Statuses.Initial,

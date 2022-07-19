@@ -20,11 +20,12 @@ export async function fetchUsers(groupId) {
 }
 
 export async function createUser(user) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/users.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ user }),
   })
@@ -36,14 +37,16 @@ export async function createUser(user) {
     });
 }
 
-export async function updateUser(user) {
-  return fetch(`${API_URL}/users/${user.id}.json`, {
+export async function updateUser(payload) {
+  const auth_token = await getValueFor("auth_token");
+
+  return fetch(`${API_URL}/users/1.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
-    body: JSON.stringify({ user: user.userDetails }),
+    body: payload,
   })
     .then((response) => response.json())
     .catch((error) => {

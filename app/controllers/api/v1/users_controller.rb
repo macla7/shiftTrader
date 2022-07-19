@@ -4,8 +4,6 @@ class Api::V1::UsersController < ApiController
   # GET /users or /users.json
   def index
     set_group
-    p 'helllo'
-    p @group.users
     @groupsUsers = @group.users
     @allUsers = User.all
 
@@ -40,9 +38,11 @@ class Api::V1::UsersController < ApiController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    p @user
+    p 'HELLLLLOOOO'
     respond_to do |format|
       if @user.update(user_params)
-        format.json { render json: @user, status: :ok, location: @user }
+        format.json { render json: @user, status: :ok }
       else
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -71,6 +71,6 @@ class Api::V1::UsersController < ApiController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:body, :ends_at, :auction, :group_id)
+      params.require(:user).permit(:id, :body, :ends_at, :auction, :group_id, :avatar)
     end
 end

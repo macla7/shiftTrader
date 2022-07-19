@@ -2,11 +2,8 @@
 
 ## CURRENT TODO's
 
-- Edit DP functionality, which leads into the next one.
-- Edit User profile, and..
-- react native image picker for dp on phone?
-- A User profile lol
-- Follow guide for making customer scroll with snapInterval etc
+- Fix posts, groups (loading for 0 and 1) bugs
+- Shift props bug
 
 **Create React Native App**
 
@@ -73,3 +70,4 @@ But the following articles helped even more I reckon
 
 - Spent probably all day, 5+hrs, trying to get fonts to work by customising react native base themes. What seemed to fix it in the end was a version update of 'native-base' itself using 'yarn upgrade native-base'..
 - Now it seems native-base doesn't like it if I try to set a customer font-Weight..
+- Uploading images via expo image picker, using form data as per [this SO Post](https://stackoverflow.com/a/46740071/17632294)

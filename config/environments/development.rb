@@ -1,13 +1,11 @@
 require "active_support/core_ext/integer/time"
 
-# Do this for Deanin video on avatar..
-# For use avatar_url method
-Rails.application.routes.default_url_options = {
-  host: 'http://localhost:3000'
-}
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+
+  Rails.application.routes.default_url_options = {
+    host: 'http://192.168.0.71:3000'
+  }
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development

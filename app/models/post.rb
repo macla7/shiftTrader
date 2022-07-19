@@ -16,6 +16,7 @@ class Post < ApplicationRecord
     self.as_json.merge({
       group_name: self.group.name,
       email: self.user.email,
+      avatar_url: self.user.avatar_url,
       bids: self.bids,
       likes: self.likes,
       shifts: self.shifts
