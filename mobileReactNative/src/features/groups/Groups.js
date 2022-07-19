@@ -66,13 +66,13 @@ function Groups({ navigation }) {
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
     console.log(myGroups);
-  }, [dispatch, myGroups.length, myGroups[0].id]);
+  }, [dispatch, myGroups.length]);
 
   return (
     <CBackground>
       <CContentTile>
         <Heading fontSize="xl" p="4" pb="3">
-          My Groups
+          My Groups {myGroups.length}
         </Heading>
         <FlatList
           data={myGroups}

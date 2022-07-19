@@ -2,8 +2,13 @@
 
 ## CURRENT TODO's
 
-- Fix posts, groups (loading for 0 and 1) bugs
 - Shift props bug
+- Functionality to accept invites to groups (notificaiton action)
+- Functionality to accept requests to groups (notification action + in group details somewhere)
+- Bids
+- Likes
+- Comments
+- actions on notifications
 
 **Create React Native App**
 
@@ -13,16 +18,27 @@
 
 **Create facebook/instagram login support, omniauth(?)**
 
+**Relevant Deanin videos I want to watch**
+
+- Intro to Rich Comments in Rails 7
+- Setup Devise Confirmable and MailCatcher
+- Deplo a Rails 7 App To Heroku
+- N+1 Query And Performance Optizizations
+- Devise Onboarding with Wicked Gem
+- Update User Accounts in React, Edit Account
+- Monethly Subscriptions with Stripe and Pay Gem
+- The VSCODe Rails Extentions Used in This Series
+- Notificaiton Sounds when Messages are Sent in Chat
+
 **Misc Known Issues**
 
 - the cache of user on index from post controller.
-- Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least.
+- Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
+- Random long logs on image upload
 
 **Non MVP features**
 
-- comments
 - Limit retrieved notifications, and then just have a 'view more' to retrieve the next older batch.
-- actions on notifications
 - follow posts ( followers (?))
 - Viewed (Shows number of views on posts)
 - Notifications suscribing to some sort of websocket(?), so as to listen for them?

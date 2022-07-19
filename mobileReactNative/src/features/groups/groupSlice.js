@@ -22,7 +22,7 @@ const initialState = {
   group: 0,
   groupSearchId: 0,
   groups: [{ id: 0, name: "" }],
-  myGroups: [{ id: 0, name: "" }],
+  myGroups: [],
   status: Statuses.Initial,
 };
 
