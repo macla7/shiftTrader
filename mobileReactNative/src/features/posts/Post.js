@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Like from "./likes/Like";
-import Bid from "./bids/Bid.js";
+import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
 import PostEnds from "./PostEnds.js";
 import PostInfo from "./PostInfo.js";
@@ -29,11 +29,32 @@ import {
   CContentTile,
   InternalBorderTile,
 } from "../layout/LayoutComponents";
+import { createConsumer } from "@rails/actioncable";
+
+global.addEventListener = () => {};
+global.removeEventListener = () => {};
+
+const consumer = createConsumer("ws://192.168.0.71:3000/cable");
 
 function Post(props) {
-  const { fonts } = useTheme();
+  const [bids, setBids] = useState([]);
+  useEffect(() => {
+    setBids(props.post.bids);
+    return () => {
+      postsChannel.unsubscribe();
+    };
+  }, []);
 
-  console.log(props.post);
+  const postsChannel = useMemo(() => {
+    return consumer.subscriptions.create(
+      { channel: "PostsChannel", post: 1 },
+      {
+        received(newBids) {
+          setBids(newBids);
+        },
+      }
+    );
+  }, []);
 
   return (
     <CTile>
@@ -43,7 +64,7 @@ function Post(props) {
       <Flex direction="row">
         <Box flex="1">
           <InternalBorderTile>
-            <Text>Bids .. </Text>
+            <Bids bids={bids} postId={props.post.id} />
           </InternalBorderTile>
         </Box>
         <Box flex="2">

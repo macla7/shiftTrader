@@ -1,11 +1,14 @@
-const API_URL = "http://localhost:3000/api/v1";
+import { getValueFor } from "../../sessions/sessionSlice";
+
+const API_URL = "http://192.168.0.71:3000/api/v1";
 
 export async function fetchBids(postId) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/posts/${postId}/bids.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
   })
     .then((response) => response.json())
@@ -17,11 +20,12 @@ export async function fetchBids(postId) {
 }
 
 export async function createBid(bidDetails) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/bids.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ bid: bidDetails }),
   })

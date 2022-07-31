@@ -2,13 +2,19 @@
 
 ## CURRENT TODO's
 
-- Shift props bug
+- NEED to address single store for all users.. make sure my current redux slices are doing this okay.
+  - ie updating groups, posts, (sson to be) bids.. etc
+  - is this actually how this works.... I think it might be just for indidivual..
+  - Might have to use websockets instead to listen for posts, bids, groups etc..
+  - posts and groups wouldn't need websockets, they can just load on refresh.. so they're probably fine.
+  - bids on the other hand.....
 - Functionality to accept invites to groups (notificaiton action)
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Bids
 - Likes
 - Comments
 - actions on notifications
+- Convert shift form to just have an 'hours' field, or something like that.. where you can write '5' for example, and it'll auto calculate the end of the shift.
 
 **Create React Native App**
 
@@ -35,6 +41,7 @@
 - the cache of user on index from post controller.
 - Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
 - Random long logs on image upload
+- Shift props bug
 
 **Non MVP features**
 
@@ -81,6 +88,13 @@ But the following articles helped even more I reckon
 -[Docs here](https://github.com/react-native-svg/react-native-svg#use-with-svg-files)
 
 - Need the [transformer](https://github.com/kristerkari/react-native-svg-transformer#installation-and-configuration) too if importing from files.
+
+**ActionCable**
+
+- [This guide](https://dev.to/tegandbiscuits/using-action-cable-with-react-native-jk0) helped me a fair bit get the code implemented.
+- The [ActionCable](https://guides.rubyonrails.org/action_cable_overview.html) docs themselves also helped a fair bit.
+- Probably a big TODO with production is to figure out / learn how it'll work if I use redis to implement it, which seems to be the way most guides do. Atm development I've just revereted back to 'async'. So I don't have to manually start some redis server I don't know much about.
+- [This](https://www.youtube.com/watch?v=NwQEZXnVXJ8&ab_channel=SaloniMehta) video was also pretty good in terms of high level example of what was going on. Don't try to implement the details tho..
 
 **BIG ISSUES BEATEN**
 

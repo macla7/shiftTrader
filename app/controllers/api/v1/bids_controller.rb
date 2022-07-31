@@ -10,17 +10,16 @@ class Api::V1::BidsController < ApiController
 
   # GET /bids/1 or /bids/1.json
   def show
-
   end
 
   # GET /bids/new
-  def new
-    @bid = Bid.new
-  end
+  # def new
+  #   @bid = Bid.new
+  # end
 
   # GET /bids/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /bids or /bids.json
   def create
@@ -29,6 +28,7 @@ class Api::V1::BidsController < ApiController
 
     respond_to do |format|
       if @bid.save
+        broadcast @post
         format.json { render json: @post.bids, status: :ok }
       else
         format.json { render json: @bid.errors, status: :unprocessable_entity }
@@ -37,24 +37,24 @@ class Api::V1::BidsController < ApiController
   end
 
   # PATCH/PUT /bids/1 or /bids/1.json
-  def update
-    respond_to do |format|
-      if @bid.update(bid_params)
-        format.json { render json: @bid, status: :ok, location: @bid }
-      else
-        format.json { render json: @bid.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @bid.update(bid_params)
+  #       format.json { render json: @bid, status: :ok, location: @bid }
+  #     else
+  #       format.json { render json: @bid.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /bids/1 or /bids/1.json
-  def destroy
-    @bid.destroy
+  # def destroy
+  #   @bid.destroy
 
-    respond_to do |format|
-      format.json { render json: Bid.all, status: :ok }
-    end
-  end
+  #   respond_to do |format|
+  #     format.json { render json: Bid.all, status: :ok }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,5 +73,9 @@ class Api::V1::BidsController < ApiController
     # Only allow a list of trusted parameters through.
     def bid_params
       params.require(:bid).permit(:user_id, :post_id, :price)
+    end
+
+    def broadcast post
+      PostsChannel.broadcast_to(post, post.bids)
     end
 end
