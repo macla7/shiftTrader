@@ -40,11 +40,11 @@ function Bids(props) {
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
 
-  function bidPost() {
+  function bidPost(microDollars) {
     let bidDetails = {
       post_id: props.postId,
       user_id: userId,
-      price: 6000000,
+      price: microDollars,
     };
 
     dispatch(createBidAsync(bidDetails));
@@ -65,12 +65,9 @@ function Bids(props) {
     createNotificationBlueprint(second_notification_blueprint);
   }
 
-  function getPriceMicroDollars() {
-    return (priceDollars * 100 + priceCents) * 10000;
-  }
-
-  function convertToInt(value) {
-    return value ? parseInt(value) : "";
+  function getLatestBid() {
+    let lastBidPrice = props.bids.length > 0;
+    return lastBidPrice ? props.bids[props.bids.length - 1].price : 0;
   }
 
   return (
@@ -78,7 +75,17 @@ function Bids(props) {
       {props.bids.map((item) => {
         return <Bid bid={item} key={item.id} />;
       })}
-      <Button mt="2" colorScheme="indigo" onPress={() => bidPost()}>
+      <Button
+        mt="2"
+        colorScheme="indigo"
+        onPress={() =>
+          props.navigation.navigate("Bid", {
+            reserve: getLatestBid(),
+            sendBid: (microDollars) => bidPost(microDollars),
+            returnScreen: "Home Feed",
+          })
+        }
+      >
         Make Bid
       </Button>
     </>

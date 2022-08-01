@@ -38,12 +38,6 @@ const consumer = createConsumer("ws://192.168.0.71:3000/cable");
 
 function Post(props) {
   const [bids, setBids] = useState([]);
-  useEffect(() => {
-    setBids(props.post.bids);
-    return () => {
-      postsChannel.unsubscribe();
-    };
-  }, []);
 
   const postsChannel = useMemo(() => {
     return consumer.subscriptions.create(
@@ -56,6 +50,13 @@ function Post(props) {
     );
   }, []);
 
+  useEffect(() => {
+    setBids(props.post.bids);
+    return () => {
+      postsChannel.unsubscribe();
+    };
+  }, []);
+
   return (
     <CTile>
       <Text>{props.post.group_name}</Text>
@@ -64,7 +65,11 @@ function Post(props) {
       <Flex direction="row">
         <Box flex="1">
           <InternalBorderTile>
-            <Bids bids={bids} postId={props.post.id} />
+            <Bids
+              bids={bids}
+              postId={props.post.id}
+              navigation={props.navigation}
+            />
           </InternalBorderTile>
         </Box>
         <Box flex="2">

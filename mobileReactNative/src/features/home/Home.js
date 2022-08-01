@@ -46,7 +46,7 @@ function Home({ navigation }) {
       >
         Create Post
       </Button>
-      <Posts item={{ id: 0 }} />
+      <Posts item={{ id: 0 }} navigation={navigation} />
     </CScrollBackground>
   );
 }

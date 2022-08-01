@@ -51,7 +51,7 @@ function Posts(props) {
   return (
     <>
       {posts.map((item) => {
-        return <Post post={item} key={item.id} />;
+        return <Post post={item} key={item.id} navigation={props.navigation} />;
       })}
     </>
   );

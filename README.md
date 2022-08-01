@@ -2,12 +2,7 @@
 
 ## CURRENT TODO's
 
-- NEED to address single store for all users.. make sure my current redux slices are doing this okay.
-  - ie updating groups, posts, (sson to be) bids.. etc
-  - is this actually how this works.... I think it might be just for indidivual..
-  - Might have to use websockets instead to listen for posts, bids, groups etc..
-  - posts and groups wouldn't need websockets, they can just load on refresh.. so they're probably fine.
-  - bids on the other hand.....
+- Get bids looking nice.
 - Functionality to accept invites to groups (notificaiton action)
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Bids
