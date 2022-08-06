@@ -45,11 +45,12 @@ function BidForm({ route, navigation }) {
     75, 80, 85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65,
     70, 75, 80, 85, 90, 95,
   ];
-  const dollars = dollarRange(0);
+  const dollars = dollarRange(reserve);
 
   function dollarRange(value) {
+    let dollarValue = Math.floor(value / 100000000);
     let arr = [];
-    for (let i = value - 100; i <= value + 100; i++) {
+    for (let i = dollarValue; i <= dollarValue + 200; i++) {
       arr.push(i);
     }
     return arr;

@@ -29,6 +29,7 @@ export const initialBidState = {
   post_id: 0,
   user_id: 0,
   price: 0,
+  created_at: Date.now(),
 };
 
 export const initialShiftState = {

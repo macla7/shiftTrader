@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  include ActiveModel::Serializers::JSON
   belongs_to :user
   belongs_to :group
   has_many :likes
@@ -13,13 +14,20 @@ class Post < ApplicationRecord
   scope :past_posts, ->{ where('ends_at < ?', DateTime.current())}
 
   def post_info
-    self.as_json.merge({
-      group_name: self.group.name,
-      email: self.user.email,
-      avatar_url: self.user.avatar_url,
-      bids: self.bids,
-      likes: self.likes,
-      shifts: self.shifts
-      })  
+    serializable_hash(include: [:shifts , bids: {methods: :avatar_url}], methods: [:group_name, :postor_email, :avatar_url]) 
   end
+
+  def group_name
+    return self.group.name
+  end
+
+  def postor_email
+    self.user.email
+  end
+
+  def avatar_url
+    self.user.avatar_url
+  end
+
+
 end

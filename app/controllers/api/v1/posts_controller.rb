@@ -9,6 +9,7 @@ class Api::V1::PostsController < ApiController
     @group.posts.active.includes(:bids, :likes, :shifts).each do |post|
       postWithAssociations.push(post.post_info)
     end
+    
     render json: postWithAssociations
   end
 

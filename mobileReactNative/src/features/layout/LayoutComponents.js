@@ -38,23 +38,17 @@ export function CBackground({ children }) {
 
 export function CScrollBackground({ children }) {
   return (
-    <ScrollView
-      w="100%"
-      h="100%"
-      contentContainerStyle={{
-        flex: 1,
-      }}
-    >
+    <ScrollView w="100%" minHeight="100%">
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={["#064e3b", "#ecfdf5"]}
         width="100%"
-        height="100%"
+        minHeight="100%"
       >
-        <Center w="100%" h="100%">
-          <Center p="2" w="100%" h="100%">
+        <Center w="100%" minHeight="100%">
+          <Center p="2" w="100%" minHeight="100%">
             {children}
           </Center>
         </Center>

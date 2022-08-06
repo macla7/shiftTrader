@@ -41,7 +41,7 @@ function Post(props) {
 
   const postsChannel = useMemo(() => {
     return consumer.subscriptions.create(
-      { channel: "PostsChannel", post: 1 },
+      { channel: "PostsChannel", post: props.post.id },
       {
         received(newBids) {
           setBids(newBids);
@@ -63,7 +63,7 @@ function Post(props) {
       <Shift shifts={props.post.shifts} />
       <PostEnds endsAt={props.post.ends_at} />
       <Flex direction="row">
-        <Box flex="1">
+        <Box flex="3">
           <InternalBorderTile>
             <Bids
               bids={bids}
@@ -72,7 +72,7 @@ function Post(props) {
             />
           </InternalBorderTile>
         </Box>
-        <Box flex="2">
+        <Box flex="4">
           <PostInfo post={props.post} />
         </Box>
       </Flex>

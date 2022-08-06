@@ -89,7 +89,7 @@ function MoneyScroll(props) {
           snapToalignment="center"
           centerContent
           decelerationRate="fast"
-          contentOffset={{ x: 0, y: 10000 }}
+          // contentOffset={{ x: 0, y: 10000 }}
           onScroll={handleScroll}
           scrollEventThrottle="100"
         >
@@ -122,12 +122,6 @@ function MoneyScroll(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "orange",
-  },
   background: {
     position: "absolute",
     height: "100%",
@@ -135,16 +129,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
     pointerEvents: "none",
     borderRadius: "10%",
-  },
-  button: {
-    padding: 15,
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  text: {
-    backgroundColor: "transparent",
-    fontSize: 15,
-    color: "#fff",
   },
 });
 

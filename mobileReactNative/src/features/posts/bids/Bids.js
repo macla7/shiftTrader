@@ -19,6 +19,7 @@ import {
   Text,
   Link,
   FlatList,
+  AspectRatio,
 } from "native-base";
 import {
   CBackground,
@@ -28,15 +29,9 @@ import {
   InternalBorderTile,
 } from "../../layout/LayoutComponents";
 import Bid from "./Bid";
+import BidIcon from "../../../assets/noun-auction-4831153.svg";
 
 function Bids(props) {
-  // Can't get bids through props as that wont update if another users bids
-  // Need to listen for changes to a posts bids from the store
-  // some kind of bids = selectBids(postId)
-  // re render on this changing length?
-
-  const [priceDollars, setPriceDollars] = useState(0);
-  const [priceCents, setPriceCents] = useState(0);
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
 
@@ -65,14 +60,15 @@ function Bids(props) {
     createNotificationBlueprint(second_notification_blueprint);
   }
 
-  function getLatestBid() {
-    let lastBidPrice = props.bids.length > 0;
-    return lastBidPrice ? props.bids[props.bids.length - 1].price : 0;
-  }
+  let bids = [...props.bids];
+  let sortedBids = bids.sort((a, b) => b.price - a.price);
 
   return (
     <>
-      {props.bids.map((item) => {
+      <AspectRatio ratio="1/1">
+        <BidIcon width="100%" height="100%" fill="#14532d" />
+      </AspectRatio>
+      {sortedBids.map((item) => {
         return <Bid bid={item} key={item.id} />;
       })}
       <Button
@@ -80,7 +76,7 @@ function Bids(props) {
         colorScheme="indigo"
         onPress={() =>
           props.navigation.navigate("Bid", {
-            reserve: getLatestBid(),
+            reserve: sortedBids[0].price,
             sendBid: (microDollars) => bidPost(microDollars),
             returnScreen: "Home Feed",
           })
