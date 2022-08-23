@@ -23,10 +23,9 @@ import TransferDisplay from "./TransferDisplay";
 function MoneyInput(props) {
   return (
     <>
-      <TransferDisplay transferType="reserve" />
+      <TransferDisplay type={props.type} />
       <Flex flexDirection="row" h="432px" borderRadius="30%">
-        <MoneyScroll moneyType="dollars" moneyArr={props.dollars} />
-        <MoneyScroll moneyType="cents" moneyArr={props.cents} />
+        <MoneyScroll money={props.money} type={props.type} />
       </Flex>
     </>
   );

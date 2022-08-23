@@ -2,10 +2,8 @@
 
 ## CURRENT TODO's
 
-- Get bids looking nice.
 - Functionality to accept invites to groups (notificaiton action)
 - Functionality to accept requests to groups (notification action + in group details somewhere)
-- Bids
 - Likes
 - Comments
 - actions on notifications
@@ -36,7 +34,7 @@
 - the cache of user on index from post controller.
 - Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
 - Random long logs on image upload
-- Shift props bug
+- Shift props bug when you create (only the first?) post.. atm need to reload to fix
 
 **Non MVP features**
 

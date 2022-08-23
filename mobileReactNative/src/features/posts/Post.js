@@ -44,7 +44,7 @@ function Post(props) {
       { channel: "PostsChannel", post: props.post.id },
       {
         received(newBids) {
-          setBids(newBids);
+          setBids(newBids.bids);
         },
       }
     );
@@ -69,6 +69,7 @@ function Post(props) {
               bids={bids}
               postId={props.post.id}
               navigation={props.navigation}
+              reserve={props.post.reserve}
             />
           </InternalBorderTile>
         </Box>

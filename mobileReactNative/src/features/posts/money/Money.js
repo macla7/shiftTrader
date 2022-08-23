@@ -27,11 +27,15 @@ import { selectDollars, selectCents, selectMoney } from "../money/moneySlice";
 
 function Money(props) {
   function dollarsFromMicro(microDollars) {
-    return Math.floor(microDollars / 100000000);
+    if (microDollars < 0) {
+      return Math.ceil(microDollars / 1000000);
+    } else {
+      return Math.floor(microDollars / 1000000);
+    }
   }
 
   function centsFromMicro(microDollars) {
-    let dollarsAndCents = microDollars / 1000000 + "";
+    let dollarsAndCents = microDollars / 10000 + "";
     let cents = dollarsAndCents.slice(-2);
     return parseInt(cents);
   }

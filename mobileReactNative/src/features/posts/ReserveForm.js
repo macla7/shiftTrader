@@ -27,38 +27,27 @@ import {
 import MoneyInput from "./money/MoneyInput";
 
 function ReserveForm({ route, navigation }) {
-  const currentDollars = useSelector(selectDollars);
-  const currentCents = useSelector(selectCents);
   const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
   const { reserve, returnScreen, sendBid } = route.params;
 
-  let cents = [
-    0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90,
-    95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85,
-    90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,
-    85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
-    80, 85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70,
-    75, 80, 85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65,
-    70, 75, 80, 85, 90, 95,
-  ];
-  const dollars = dollarRange(0);
+  const money = dollarRange(0);
 
   function dollarRange(value) {
     let arr = [];
-    for (let i = value - 100; i <= value + 100; i++) {
-      arr.push(i);
+    for (let i = value - 106; i <= value + 103; i += 1) {
+      arr.push(i * 1000000);
     }
     return arr;
   }
 
   useEffect(() => {
     setDescription(createDescription());
-  }, [currentDollars]);
+  }, [currentMicroDollars]);
 
   function createDescription() {
-    if (currentDollars < 0) {
+    if (currentMicroDollars < 0) {
       return "Offering To Pay";
     }
     return "Asking For";
@@ -80,7 +69,7 @@ function ReserveForm({ route, navigation }) {
       </CTile>
 
       <CContentTile>
-        <MoneyInput dollars={dollars} cents={cents} />
+        <MoneyInput money={money} type="reserve" />
         <Button
           mt="2"
           colorScheme="indigo"

@@ -26,31 +26,14 @@ import Description from "../Description";
 import { selectDollars, selectCents, selectMoney } from "../money/moneySlice";
 
 function BidConfirmation({ route, navigation }) {
-  const currentMicroDollars = useSelector(selectMoney);
-  const { returnScreen, currentDollars, currentCents, description, sendBid } =
+  const { returnScreen, description, sendBid, currentMicroDollars } =
     route.params;
-
-  function handleMoneyText(type, money) {
-    if (type == "cents") {
-      return handleSmallCents(money);
-    }
-    return handleDollarsNegative(money);
-  }
 
   function handleDollarsNegative(dollars) {
     if (dollars < 0) {
-      return "$" + dollars * -1;
+      return "$" + (dollars * -1) / 1000000;
     }
-    return "$" + dollars;
-  }
-
-  function handleSmallCents(cents) {
-    if (cents == 0) {
-      return "00";
-    } else if (cents == 5) {
-      return "05";
-    }
-    return cents;
+    return "$" + dollars / 1000000;
   }
 
   return (
@@ -69,8 +52,7 @@ function BidConfirmation({ route, navigation }) {
           </Heading>
           <Text>
             You are {description.toLowerCase() + " "}
-            {handleMoneyText("dollars", currentDollars)}.
-            {handleMoneyText("cents", currentCents)}
+            {handleDollarsNegative(currentMicroDollars)}
           </Text>
           <Button
             mt="2"

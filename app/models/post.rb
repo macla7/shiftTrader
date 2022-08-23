@@ -2,9 +2,9 @@ class Post < ApplicationRecord
   include ActiveModel::Serializers::JSON
   belongs_to :user
   belongs_to :group
-  has_many :likes
-  has_many :bids
-  has_many :shifts
+  has_many :likes, :dependent => :destroy
+  has_many :bids, :dependent => :destroy
+  has_many :shifts, :dependent => :destroy
   has_many :notification_blueprints, :as => :notificationable
   has_many :bidding_users, through: :bids, source: :user
   
@@ -29,5 +29,8 @@ class Post < ApplicationRecord
     self.user.avatar_url
   end
 
+  def bids_with_avatars
+    serializable_hash(include: [bids: {methods: :avatar_url}]) 
+  end
 
 end

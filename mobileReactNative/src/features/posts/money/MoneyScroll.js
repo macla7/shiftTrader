@@ -19,52 +19,49 @@ import {
 import { ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
-import { selectDollars, setMoney } from "./moneySlice";
+import { setMoney, selectMoney } from "./moneySlice";
 
 function MoneyScroll(props) {
-  // get props of 'type' which determines functionality i suppose, moneyArr
   const dispatch = useDispatch();
-  const currentDollars = useSelector(selectDollars);
+  const currentMicroDollars = useSelector(selectMoney);
+  const [color, setColor] = useState("");
 
   function handleScroll(event) {
     dispatch(
       setMoney({
         money:
-          props.moneyArr[Math.round(event.nativeEvent.contentOffset.y / 100)],
-        moneyType: props.moneyType,
+          props.money[
+            Math.round((event.nativeEvent.contentOffset.y + 550) / 100)
+          ],
       })
     );
   }
 
-  function handleMoneyText(type, money) {
-    if (type == "cents") {
-      return handleSmallCents(money) + "c";
-    }
-    return handleDollarsNegative(money);
-  }
-
   function handleDollarsNegative(dollars) {
     if (dollars < 0) {
-      return "$" + dollars * -1;
+      return "$" + (dollars * -1) / 1000000;
     }
-    return "$" + dollars;
+    return "$" + dollars / 1000000;
   }
 
-  function handleSmallCents(cents) {
-    if (cents == 0) {
-      return "00";
-    } else if (cents == 5) {
-      return "05";
+  function pickColor() {
+    if (props.type == "reserve") {
+      return currentMicroDollars < 0 ? "rose.200" : "success.200";
+    } else {
+      return currentMicroDollars > 0 ? "rose.200" : "success.200";
     }
-    return cents;
   }
+
+  useEffect(() => {
+    setColor(pickColor());
+  }, [currentMicroDollars]);
 
   return (
     <Box
       h="400px"
-      w="100px"
+      w="200px"
       m="4"
-      bgColor={currentDollars < 0 ? "rose.200" : "success.200"}
+      bgColor={color}
       borderRadius="10%"
       shadow="6"
     >
@@ -89,27 +86,30 @@ function MoneyScroll(props) {
           snapToalignment="center"
           centerContent
           decelerationRate="fast"
-          // contentOffset={{ x: 0, y: 10000 }}
-          onScroll={handleScroll}
+          contentOffset={
+            props.type == "reserve" ? { x: 0, y: 10000 } : { x: 0, y: 0 }
+          }
+          onMomentumScrollEnd={handleScroll}
           scrollEventThrottle="100"
         >
-          <View py="150px" w="100px">
-            {props.moneyArr.map((money, i) => {
+          <View w="200px">
+            {props.money.map((money, i) => {
               return (
                 <Center
                   key={i}
                   h="100px"
-                  w="100px"
+                  w="200px"
                   borderColor="coolGray.300"
                   borderWidth="1"
+                  mt={i == 0 ? "-450px" : "0"}
                 >
-                  <Text
-                    fontSize="4xl"
-                    fontFamily="body"
-                    fontWeight={400}
-                    fontStyle="normal"
-                  >
-                    {handleMoneyText(props.moneyType, money)}
+                  {i == 5 ? (
+                    <Text fontSize="xl" fontWeight={400}>
+                      Current Bid
+                    </Text>
+                  ) : null}
+                  <Text fontSize="4xl" fontWeight={400}>
+                    {handleDollarsNegative(money)}
                   </Text>
                 </Center>
               );
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   background: {
     position: "absolute",
     height: "100%",
-    width: 100,
+    width: 200,
     zIndex: 1,
     pointerEvents: "none",
     borderRadius: "10%",

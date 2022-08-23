@@ -20,6 +20,8 @@ import {
   Link,
   FlatList,
   AspectRatio,
+  View,
+  ScrollView,
 } from "native-base";
 import {
   CBackground,
@@ -62,21 +64,31 @@ function Bids(props) {
 
   let bids = [...props.bids];
   let sortedBids = bids.sort((a, b) => b.price - a.price);
+  let reserve = props.reserve;
+  console.log("reserve is: " + props.reserve);
+  if (sortedBids.length > 0) {
+    reserve = sortedBids[0].price;
+  }
 
   return (
-    <>
-      <AspectRatio ratio="1/1">
-        <BidIcon width="100%" height="100%" fill="#14532d" />
-      </AspectRatio>
-      {sortedBids.map((item) => {
-        return <Bid bid={item} key={item.id} />;
-      })}
+    <View h="64">
+      {sortedBids.length == 0 ? (
+        <AspectRatio ratio="1/1">
+          <BidIcon width="100%" height="100%" fill="#14532d" />
+        </AspectRatio>
+      ) : (
+        <ScrollView>
+          {sortedBids.map((item) => {
+            return <Bid bid={item} key={item.id} />;
+          })}
+        </ScrollView>
+      )}
       <Button
         mt="2"
         colorScheme="indigo"
         onPress={() =>
           props.navigation.navigate("Bid", {
-            reserve: sortedBids[0].price,
+            reserve: reserve,
             sendBid: (microDollars) => bidPost(microDollars),
             returnScreen: "Home Feed",
           })
@@ -84,7 +96,7 @@ function Bids(props) {
       >
         Make Bid
       </Button>
-    </>
+    </View>
 
     // <div>
     //   <form onSubmit={(e) => bidPost(e)}>

@@ -29,39 +29,33 @@ import {
 import MoneyInput from "../money/MoneyInput";
 
 function BidForm({ route, navigation }) {
-  const currentDollars = useSelector(selectDollars);
-  const currentCents = useSelector(selectCents);
   const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
   const { reserve, returnScreen, sendBid } = route.params;
 
-  let cents = [
-    0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90,
-    95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85,
-    90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80,
-    85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75,
-    80, 85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70,
-    75, 80, 85, 90, 95, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65,
-    70, 75, 80, 85, 90, 95,
-  ];
-  const dollars = dollarRange(reserve);
+  const money = dollarRange(reserve);
 
   function dollarRange(value) {
-    let dollarValue = Math.floor(value / 100000000);
+    let dollarAndCentValue = Math.floor(value / 10000);
     let arr = [];
-    for (let i = dollarValue; i <= dollarValue + 200; i++) {
-      arr.push(i);
+    for (
+      let i = dollarAndCentValue - 50;
+      i <= dollarAndCentValue + 5050;
+      i = i + 10
+    ) {
+      // lets push microDollars, microDollars in and out.
+      arr.push(i * 10000);
     }
     return arr;
   }
 
   useEffect(() => {
     setDescription(createDescription());
-  }, [currentDollars]);
+  }, [currentMicroDollars]);
 
   function createDescription() {
-    if (currentDollars < 0) {
+    if (currentMicroDollars > 0) {
       return "Offering To Pay";
     }
     return "Asking For";
@@ -69,8 +63,7 @@ function BidForm({ route, navigation }) {
 
   useEffect(() => {
     console.log("hello");
-    console.log(currentDollars);
-    console.log(currentCents);
+    console.log(currentMicroDollars);
   }, [currentMicroDollars]);
 
   return (
@@ -89,7 +82,7 @@ function BidForm({ route, navigation }) {
       </CTile>
 
       <CContentTile>
-        <MoneyInput dollars={dollars} cents={cents} />
+        <MoneyInput money={money} type="bid" />
         <Button
           mt="2"
           colorScheme="indigo"
@@ -97,8 +90,7 @@ function BidForm({ route, navigation }) {
             // Pass and merge params back to home screen
             navigation.navigate("Bid Confirmation", {
               returnScreen: returnScreen,
-              currentCents: currentCents,
-              currentDollars: currentDollars,
+              currentMicroDollars: currentMicroDollars,
               description: description,
               sendBid: sendBid,
             });
