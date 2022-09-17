@@ -8,5 +8,13 @@ class Group < ApplicationRecord
   def admins
     return memberships.is_admin.map { |member| member.user}
   end
+
+  def group_info
+    serializable_hash(methods: :number_of_memberships) 
+  end
+
+  def number_of_memberships
+    return self.memberships.length()
+  end
   
 end

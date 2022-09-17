@@ -72,7 +72,7 @@ function Groups({ navigation }) {
     <CBackground>
       <CContentTile>
         <Heading fontSize="xl" p="4" pb="3">
-          My Groups {myGroups.length}
+          My Groups
         </Heading>
         <FlatList
           data={myGroups}
@@ -122,7 +122,7 @@ function Groups({ navigation }) {
                   color="coolGray.800"
                   alignSelf="flex-start"
                 >
-                  no. members
+                  {item.number_of_memberships} members
                 </Text>
               </HStack>
             </Box>

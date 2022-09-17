@@ -12,7 +12,11 @@ class Api::V1::GroupsController < ApiController
   def my_groups
     @myGroups = current_user.groups
 
-    render json: @myGroups
+    groupsWithInfo = []
+    @myGroups.includes(:memberships).each do |group|
+      groupsWithInfo.push(group.group_info)
+    end
+    render json: groupsWithInfo
   end
 
   # GET /groups/1 or /groups/1.json

@@ -140,9 +140,6 @@ export const sessionSlice = createSlice({
             avatar_url: action.payload.user.avatar_url,
           };
           draftState.auth_token = action.payload.access_token;
-          console.log("autho token is.... drum roll...");
-          console.log(action.payload.access_token);
-          // default headers set >>>??!!
           save("auth_token", action.payload.access_token);
         });
       })
