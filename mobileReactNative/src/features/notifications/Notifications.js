@@ -19,6 +19,8 @@ import {
   Link,
   FlatList,
 } from "native-base";
+import { createMembershipAsync } from "../groups/memberships/membershipSlice";
+import { updateInviteAsync } from "../groups/invites/inviteSlice";
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
@@ -76,16 +78,14 @@ function Notifications() {
                   Some text
                 </Text>
               </VStack>
-              <Text
-                fontSize="xs"
-                _dark={{
-                  color: "warmGray.50",
+              <Button
+                mt="2"
+                onPress={() => {
+                  handleAcceptInvite(item);
                 }}
-                color="coolGray.800"
-                alignSelf="flex-start"
               >
                 Action
-              </Text>
+              </Button>
             </HStack>
           </Box>
         )}
@@ -93,6 +93,26 @@ function Notifications() {
       />
     </Box>
   );
+
+  function handleAcceptInvite(notification) {
+    // create membership
+    let membershipDetails = {
+      group_id: notification.group_id,
+      user_id: userId,
+      role: 1,
+      status: 0,
+    };
+    dispatch(createMembershipAsync(membershipDetails));
+    // update invite
+    let invite = {
+      inviteDetails: {
+        accepted: true,
+      },
+      id: notification.notification_blueprint.notificationable_id,
+      group_id: notification.group_id,
+    };
+    dispatch(updateInviteAsync(invite));
+  }
 }
 
 export default Notifications;

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsersAsync, selectUsers } from "./userSlice";
-import { createInviteAsync } from "../groups/invites/inviteSlice";
+import {
+  createInviteAsync,
+  selectStatus,
+  selectFreshInvite,
+} from "../groups/invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import {
   Center,
@@ -22,6 +26,7 @@ import {
 function Search({ route }) {
   const userId = useSelector((state) => state.sessions.user.id);
   const users = useSelector(selectUsers);
+  const freshInvite = useSelector(selectFreshInvite);
   const [userList, setUserList] = useState([]);
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,16 +59,6 @@ function Search({ route }) {
     };
     setInviteNotice(<Text>Invited {user.email}</Text>);
     dispatch(createInviteAsync(inviteDetails));
-
-    // if above succeeds ..?
-    let notification_blueprint = {
-      notificationable_type: "Group",
-      notificationable_id: item.id,
-      notification_type: 1,
-      recipient_id: user.id,
-    };
-
-    createNotificationBlueprint(notification_blueprint);
   }
 
   function filterUsers(users, searchQuery = null) {
@@ -87,6 +82,23 @@ function Search({ route }) {
     setUserList(filterUsers(users, searchQuery));
     console.log("hello");
   }, [searchQuery, users.length]);
+
+  useEffect(() => {
+    if (freshInvite.id != 0) {
+      let notification_blueprint = {
+        notificationable_type: "Invite",
+        notificationable_id: freshInvite.id,
+        notification_type: 1,
+        recipient_id: freshInvite.external_user_id,
+      };
+
+      console.log(
+        "fresh invite detected and so notifications theoretically made..? lol"
+      );
+
+      createNotificationBlueprint(notification_blueprint);
+    }
+  }, [freshInvite.id]);
 
   return (
     <>

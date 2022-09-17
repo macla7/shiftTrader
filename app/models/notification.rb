@@ -8,7 +8,8 @@ class Notification < ApplicationRecord
     self.as_json.merge({
       notification_blueprint: self.notification_blueprint,
       notification_origin: self.notification_blueprint.notification_origin,
-      description: make_notification_description(self.notification_blueprint, self.notification_blueprint.notification_origin)
+      description: make_notification_description(self.notification_blueprint, self.notification_blueprint.notification_origin),
+      group_id: get_group(self.notification_blueprint)
       })  
   end
 

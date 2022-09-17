@@ -108,7 +108,7 @@ function DiscoverGroups() {
 
     // if above succeeds ..?
     let notification_blueprint = {
-      notificationable_type: "Group",
+      notificationable_type: "Invite",
       notificationable_id: groupId,
       notification_type: 3,
     };

@@ -39,6 +39,7 @@ const initialState = {
     },
   ],
   status: Statuses.Initial,
+  freshInvite: { id: 0 },
 };
 
 export const fetchInvitesAsync = createAsyncThunk(
@@ -149,6 +150,7 @@ export const inviteSlice = createSlice({
         return produce(state, (draftState) => {
           draftState.invites.push(action.payload);
           draftState.status = Statuses.UpToDate;
+          draftState.freshInvite = action.payload;
         });
       })
       // error
@@ -224,5 +226,7 @@ export const selectInvites = (state) => state.invites.invites;
 export const selectRequests = (state) => state.invites.requests;
 
 export const selectStatus = (state) => state.invites.status;
+
+export const selectFreshInvite = (state) => state.invites.freshInvite;
 
 export default inviteSlice.reducer;

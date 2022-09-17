@@ -28,11 +28,11 @@ class Api::V1::InvitesController < ApiController
   # POST /invites or /invites.json
   def create
     @invite = Invite.new(invite_params)
-    p 'do weeeee geeeeet here'
 
     respond_to do |format|
       if @invite.save
-        format.json { render json: Invite.all, status: :ok }
+
+        format.json { render json: @invite, status: :ok }
       else
         format.json { render json: @invite.errors, status: :unprocessable_entity }
       end

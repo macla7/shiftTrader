@@ -2,14 +2,14 @@
 
 ## CURRENT TODO's
 
+- Need to figure out way to delete notification (or hide it once it's actioned)
+- how to make sure update invite / create membership are both done... (in the above notification aciton process)...?
 - Functionality to accept invites to groups (notificaiton action)
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Likes
 - Comments
 - actions on notifications
 - Convert shift form to just have an 'hours' field, or something like that.. where you can write '5' for example, and it'll auto calculate the end of the shift.
-
-**Create React Native App**
 
 **Create Banking functionality....**
 
@@ -34,7 +34,7 @@
 - the cache of user on index from post controller.
 - Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
 - Random long logs on image upload
-- Shift props bug when you create (only the first?) post.. atm need to reload to fix
+- Shift props bug when you create post.. atm need to reload to fix
 
 **Non MVP features**
 

@@ -20,11 +20,12 @@ export async function fetchMemberships(groupId) {
 }
 
 export async function createMembership(membership) {
-  return fetch(`${API_URL}/${membership.group_id}/memberships.json`, {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/groups/${membership.group_id}/memberships.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ membership }),
   })
@@ -38,12 +39,12 @@ export async function createMembership(membership) {
 
 export async function updateMembership(payload) {
   const membership = payload.membership;
-
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/memberships/${membership.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ membership }),
   })
@@ -57,12 +58,12 @@ export async function updateMembership(payload) {
 
 export async function destroyMembership(payload) {
   const membership = payload.membership;
-
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/memberships/${membership.membership_id}.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ membership }),
   })

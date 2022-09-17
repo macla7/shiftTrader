@@ -3,11 +3,18 @@ module NotificationHelpers
   extend ActiveSupport::Concern
 
   def set_entity(notificationable_type, notificationable_id)
-    if notificationable_type == "Group"
-      @group =  Group.find(notificationable_id)
+    if notificationable_type == "Invite"
+      @invite = Invite.find(notificationable_id)
+      @group =  Group.find(@invite.group_id)
     elsif notificationable_type == "Post"
       @post = Post.find(notificationable_id)
+      @group =  Group.find(@post.group_id)
     end
+  end
+
+  def get_group(notification_blueprint)
+    set_entity(notification_blueprint.notificationable_type, notification_blueprint.notificationable_id)
+    return @group.id
   end
 
   def make_notification_description(notification_blueprint, notification_origin)
@@ -47,5 +54,4 @@ module NotificationHelpers
       return []
     end
   end
-
 end
