@@ -151,10 +151,12 @@ export const notificationSlice = createSlice({
       // you got the thing
       .addCase(updateNotificationAsync.fulfilled, (state, action) => {
         return produce(state, (draftState) => {
-          const index = draftState.notifications.findIndex(
-            (notification) => notification.id === action.payload.id
-          );
-          draftState.notifications[index] = action.payload;
+          // const index = draftState.notifications.findIndex(
+          //   (notification) => notification.id === action.payload.id
+          // );
+          // draftState.notifications[index] = action.payload;
+          // draftState.status = Statuses.UpToDate;
+          draftState.notifications = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })

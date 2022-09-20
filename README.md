@@ -2,10 +2,10 @@
 
 ## CURRENT TODO's
 
-- Need to figure out way to delete notification (or hide it once it's actioned)
-- how to make sure update invite / create membership are both done... (in the above notification aciton process)...?
-- Functionality to accept invites to groups (notificaiton action)
+- db protection against duplicate user (perhaps from touching action twice and sending two accept invite requests before the notification disappears).
 - Functionality to accept requests to groups (notification action + in group details somewhere)
+- Makes group 'feed' just like home's.
+- Make notifications area consistent with theme.
 - Likes
 - Comments
 - actions on notifications

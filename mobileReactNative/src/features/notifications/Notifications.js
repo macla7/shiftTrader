@@ -4,6 +4,7 @@ import {
   fetchNotificationsAsync,
   selectNotifications,
   selectStatus,
+  updateNotificationAsync,
 } from "./notificationSlice";
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import {
@@ -32,7 +33,7 @@ function Notifications() {
 
   useEffect(() => {
     dispatch(fetchNotificationsAsync());
-  }, [dispatch, notifications.length, userId]);
+  }, [notifications.length, userId]);
 
   return (
     <Box>
@@ -112,6 +113,16 @@ function Notifications() {
       group_id: notification.group_id,
     };
     dispatch(updateInviteAsync(invite));
+
+    actionNotification(notification);
+  }
+
+  function actionNotification(notification) {
+    let notificationDetails = {
+      id: notification.id,
+      actioned: true,
+    };
+    dispatch(updateNotificationAsync(notificationDetails));
   }
 }
 

@@ -36,15 +36,15 @@ export async function createNotification(notification) {
 }
 
 export async function updateNotification(payload) {
-  const notification = payload.notification;
+  const auth_token = await getValueFor("auth_token");
 
-  return fetch(`${API_URL}/notifications/${notification.id}.json`, {
+  return fetch(`${API_URL}/notifications/${payload.id}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
-    body: JSON.stringify({ notification }),
+    body: JSON.stringify({ notification: payload }),
   })
     .then((response) => response.json())
     .catch((error) => {

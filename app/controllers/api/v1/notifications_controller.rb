@@ -51,7 +51,12 @@ class Api::V1::NotificationsController < ApiController
   def update
     respond_to do |format|
       if @notification.update(notification_params)
-        format.json { render :show, status: :ok, location: @notification }
+        # format.json { render :show, status: :ok, location: @notification }
+        notifications = []
+        current_user.notifications.includes(notification_blueprint: :notification_origin).each do |notification|
+          notifications.push(notification.notification_info)
+        end
+        render json: notifications
       else
         format.json { render json: @notification.errors, status: :unprocessable_entity }
       end
@@ -75,6 +80,6 @@ class Api::V1::NotificationsController < ApiController
 
     # Only allow a list of trusted parameters through.
     def notification_params
-      params.require(:notification).permit(:name)
+      params.require(:notification).permit(:id, :actioned)
     end
 end
