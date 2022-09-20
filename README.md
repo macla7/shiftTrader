@@ -35,6 +35,7 @@
 - Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
 - Random long logs on image upload
 - Shift props bug when you create post.. atm need to reload to fix
+- db protection against lower bids ... ? (Not super necessary, just really doesn't make sense.. won't effect who wins tho)
 
 **Non MVP features**
 
