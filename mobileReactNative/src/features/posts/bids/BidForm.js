@@ -18,7 +18,12 @@ import {
   Icon,
 } from "native-base";
 import MoneyScroll from "../money/MoneyScroll";
-import { selectDollars, selectCents, selectMoney } from "../money/moneySlice";
+import {
+  selectDollars,
+  selectCents,
+  selectMoney,
+  setMoney,
+} from "../money/moneySlice";
 import TransferDisplay from "../money/TransferDisplay";
 import {
   CBackground,
@@ -65,6 +70,15 @@ function BidForm({ route, navigation }) {
     console.log("hello");
     console.log(currentMicroDollars);
   }, [currentMicroDollars]);
+
+  // on init component sets state to reserve passed in route params
+  useEffect(() => {
+    dispatch(
+      setMoney({
+        money: reserve + 100000,
+      })
+    );
+  }, []);
 
   return (
     <CBackground>
