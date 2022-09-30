@@ -32,6 +32,8 @@ class Api::V1::MembershipsController < ApiController
       if @membership.save
         format.json { render json: @membership, status: :ok }
       else
+        p 'ON FAILING'
+        p @membership.errors
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
     end

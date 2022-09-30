@@ -2,9 +2,9 @@
 
 ## CURRENT TODO's
 
-- db protection against duplicate user (perhaps from touching action twice and sending two accept invite requests before the notification disappears).
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Makes group 'feed' just like home's.
+- Refresh Button for Home / groups ( or websockets again.. overkill tho..?)
 - Make notifications area consistent with theme.
 - Likes
 - Comments
@@ -43,6 +43,7 @@
 - follow posts ( followers (?))
 - Viewed (Shows number of views on posts)
 - Notifications suscribing to some sort of websocket(?), so as to listen for them?
+- DB protections to stop duplicate memberships.
 
 **Do README**
 

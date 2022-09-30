@@ -7,6 +7,9 @@ class Membership < ApplicationRecord
   enum status: [:current, :left, :kicked]
   enum role: [:admin, :user]
 
+  validates :user_id, uniqueness: { scope: :group,
+    message: "A User can only have one membership per group" }
+
   def member_info
     self.as_json.merge({
       user: self.user,
