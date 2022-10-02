@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import Posts from "../posts/Posts";
 import NavBar from "../nav/NavBar.js";
 import Register from "../sessions/Register.js";
 import Dashboard from "../dashboard/Dashboard.js";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
+import { selectPosts, fetchPostsHomeAsync } from "../posts/postSlice";
 import {
   Center,
   Box,
@@ -23,14 +24,28 @@ import {
 import {
   CBackground,
   CTile,
-  CScrollBackground,
+  CScrollBackgroundRefresh,
   CContentTile,
 } from "../layout/LayoutComponents";
 
 function Home({ navigation }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const posts = useSelector(selectPosts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPostsHomeAsync());
+  }, [posts.length]);
+
+  function refresh() {
+    console.log(
+      "make the fetch for home feed should be up a level in here...?"
+    );
+    dispatch(fetchPostsHomeAsync());
+  }
+
   return (
-    <CScrollBackground>
+    <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
         onPress={() =>
           navigation.navigate("Post Form", {
@@ -46,8 +61,8 @@ function Home({ navigation }) {
       >
         Create Post
       </Button>
-      <Posts item={{ id: 0 }} navigation={navigation} />
-    </CScrollBackground>
+      <Posts item={{ id: 0 }} navigation={navigation} posts={posts} />
+    </CScrollBackgroundRefresh>
   );
 }
 

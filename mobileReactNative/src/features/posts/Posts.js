@@ -39,18 +39,18 @@ function Posts(props) {
   const dispatch = useDispatch();
 
   // Posts
-  useEffect(() => {
-    if (props.id) {
-      console.log("hello");
-      dispatch(fetchPostsAsync(props.id));
-    } else {
-      dispatch(fetchPostsHomeAsync());
-    }
-  }, [posts.length]);
+  // useEffect(() => {
+  //   if (props.id) {
+  //     console.log("hello");
+  //     dispatch(fetchPostsAsync(props.id));
+  //   } else {
+  //     dispatch(fetchPostsHomeAsync());
+  //   }
+  // }, [posts.length]);
 
   return (
     <>
-      {posts.map((item) => {
+      {props.posts.map((item) => {
         return <Post post={item} key={item.id} navigation={props.navigation} />;
       })}
     </>

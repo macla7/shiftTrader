@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Center,
   Box,
@@ -10,11 +10,10 @@ import {
   HStack,
   Text,
   Link,
-  ScrollView,
   Pressable,
   View,
 } from "native-base";
-
+import { RefreshControl, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 export function CBackground({ children }) {
@@ -39,6 +38,41 @@ export function CBackground({ children }) {
 export function CScrollBackground({ children }) {
   return (
     <ScrollView w="100%" minHeight="100%">
+      <LinearGradient
+        // Button Linear Gradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        colors={["#064e3b", "#ecfdf5"]}
+        width="100%"
+        minHeight="100%"
+      >
+        <Center w="100%" minHeight="100%">
+          <Center p="2" w="100%" minHeight="100%">
+            {children}
+          </Center>
+        </Center>
+      </LinearGradient>
+    </ScrollView>
+  );
+}
+
+export function CScrollBackgroundRefresh({ children, refreshAction }) {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 2000);
+    refreshAction();
+  }, []);
+
+  return (
+    <ScrollView
+      w="100%"
+      minHeight="100%"
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
