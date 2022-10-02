@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import produce from "immer";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   money: 0,

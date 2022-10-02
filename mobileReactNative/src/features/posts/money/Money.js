@@ -1,29 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  CBackground,
-  CTile,
-  CContentTile,
-} from "../../layout/LayoutComponents";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  View,
-  TextArea,
-} from "native-base";
-import { Keyboard } from "react-native";
-import Description from "../Description";
-import { selectDollars, selectCents, selectMoney } from "../money/moneySlice";
+import React from "react";
+import { Text } from "native-base";
 
 function Money(props) {
   function dollarsFromMicro(microDollars) {

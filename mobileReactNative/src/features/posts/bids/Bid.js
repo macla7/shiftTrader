@@ -1,34 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createBidAsync,
-  fetchBidsAsync,
-  selectBids,
-  initialState,
-} from "../postSlice";
-import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  View,
-  Image,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-  InternalBorderTile,
-} from "../../layout/LayoutComponents";
+import React from "react";
+import { Center, HStack, Text, View, Image } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 import Money from "../money/Money";

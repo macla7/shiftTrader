@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUserAsync } from "./sessionSlice";
-import { useForm, Controller } from "react-hook-form";
 import {
   Center,
   Box,
@@ -14,7 +13,6 @@ import {
   Text,
   Link,
 } from "native-base";
-// import { Link } from "react-router-native";
 
 function Login({ navigation }) {
   const dispatch = useDispatch();

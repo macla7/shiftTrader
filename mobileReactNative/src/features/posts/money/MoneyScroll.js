@@ -1,21 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  View,
-  Spacer,
-  Flex,
-} from "native-base";
+import { Center, Box, Text, View } from "native-base";
 import { ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";

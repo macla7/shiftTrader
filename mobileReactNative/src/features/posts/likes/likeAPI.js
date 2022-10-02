@@ -1,5 +1,4 @@
 const API_URL = "http://localhost:3000/api/v1";
-const API_POST_URL = "http://localhost:3000/api/v1/posts";
 
 export async function fetchLikes(postId) {
   return fetch(`${API_URL}/posts/${postId}/likes.json`, {

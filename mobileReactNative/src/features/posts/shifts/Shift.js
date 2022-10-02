@@ -1,21 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { initialState } from "../postSlice";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-} from "native-base";
-import { parse, format } from "date-fns";
+import React from "react";
+import { Box, VStack, HStack, Text } from "native-base";
+import { format } from "date-fns";
 
 function Shift(props) {
   return (

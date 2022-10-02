@@ -1,9 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../home/Home.js";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";

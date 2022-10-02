@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { initialState } from "../postSlice";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createShift } from "./shiftSlice";
 import {
-  initialShiftState,
-  createShift,
-  deleteShift,
-  resetShifts,
-} from "./shiftSlice";
-import {
-  Center,
-  Box,
   Heading,
   VStack,
   FormControl,
-  Input,
   Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
   Pressable,
-  View,
   TextArea,
 } from "native-base";
 import {
   CBackground,
   CTile,
-  CScrollBackground,
   CContentTile,
 } from "../../layout/LayoutComponents";
 import { Keyboard } from "react-native";

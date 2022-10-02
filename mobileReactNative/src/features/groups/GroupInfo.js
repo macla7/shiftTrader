@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-} from "native-base";
+import { Heading, Button, Text, ScrollView } from "native-base";
 import Memberships from "./memberships/Memberships";
 import Search from "../users/Search";
 

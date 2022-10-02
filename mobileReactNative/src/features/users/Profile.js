@@ -1,33 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  TextArea,
-  View,
-  Image,
-} from "native-base";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
+import { Heading, Button, Text, Pressable, Image } from "native-base";
 import { Keyboard } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { updateUserAsync } from "./userSlice";
-import {
-  selectAuthToken,
-  selectUserEmail,
-  selectUserId,
-  selectUserAvatarUrl,
-  selectIsLoggedIn,
-} from "../sessions/sessionSlice";
+import { selectUserId, selectUserAvatarUrl } from "../sessions/sessionSlice";
 
 function Profile() {
   const userId = useSelector(selectUserId);

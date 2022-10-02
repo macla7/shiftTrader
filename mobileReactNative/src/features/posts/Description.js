@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  View,
-  TextArea,
-} from "native-base";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
+import { Heading, Button, Pressable, TextArea } from "native-base";
 import { Keyboard } from "react-native";
 
 function Description({ route, navigation }) {

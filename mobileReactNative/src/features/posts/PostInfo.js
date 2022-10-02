@@ -1,26 +1,6 @@
 import React from "react";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  useTheme,
-  Image,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-  InternalBorderTile,
-} from "../layout/LayoutComponents";
+import { Text, Image } from "native-base";
+import { InternalBorderTile } from "../layout/LayoutComponents";
 
 function PostInfo(props) {
   return (

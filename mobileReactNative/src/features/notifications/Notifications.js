@@ -8,16 +8,12 @@ import {
 } from "./notificationSlice";
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import {
-  Center,
   Box,
   Heading,
   VStack,
-  FormControl,
-  Input,
   Button,
   HStack,
   Text,
-  Link,
   FlatList,
 } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";

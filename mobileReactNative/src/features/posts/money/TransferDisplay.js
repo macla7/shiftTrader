@@ -1,33 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  View,
-  Spacer,
-  Flex,
-  Icon,
-} from "native-base";
-import { ScrollView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet } from "react-native";
-import MoneyScroll from "./MoneyScroll";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Center, Text, View, Flex } from "native-base";
 import { selectMoney } from "./moneySlice";
 import MoneyIcon from "../../../assets/noun-money-4979734.svg";
-import BidIcon from "../../../assets/noun-auction-4831153.svg";
-import CalendarIcon from "../../../assets/noun-calendar-4983955.svg";
 import ArrowRight from "../../../assets/arrowRight.svg";
 import ArrowLeft from "../../../assets/arrowLeft.svg";
-import { render } from "react-dom";
 
 function TransferDisplay(props) {
   const [display, setDisplay] = useState(<Text>Loadinnnng</Text>);

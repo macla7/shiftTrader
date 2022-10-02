@@ -2,9 +2,11 @@
 
 ## CURRENT TODO's
 
+- Research / refresh yourself on useRef
+- Clean up imports.
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Makes group 'feed' just like home's.
-- Refresh Button for Home / groups ( or websockets again.. overkill tho..?)
+- Refresh Button for group view
 - Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?
 - Logout Button
 - Make notifications area consistent with theme.

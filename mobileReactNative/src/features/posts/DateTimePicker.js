@@ -1,27 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  View,
-} from "native-base";
-import { StyleSheet } from "react-native";
+import { Heading, VStack, FormControl, Button, Text, View } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
+import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
 
 function PostForm({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));

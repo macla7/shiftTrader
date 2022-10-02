@@ -1,6 +1,5 @@
 import React from "react";
 import SessionManager from "../sessions/SessionManager";
-// import { Link } from "react-router-native";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
 import { useSelector } from "react-redux";
 import Logout from "../sessions/Logout.js";

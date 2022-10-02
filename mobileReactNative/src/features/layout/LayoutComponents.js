@@ -1,18 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  Pressable,
-  View,
-} from "native-base";
+import React, { useState, useCallback } from "react";
+import { Center, Box } from "native-base";
 import { RefreshControl, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 

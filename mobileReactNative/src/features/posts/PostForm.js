@@ -1,42 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GroupSearch from "../groups/GroupSearch";
-import postSlice, { createPostAsync } from "./postSlice";
-import ShiftForm from "./shifts/ShiftForm";
-import { selectGroupSearchId } from "../groups/groupSlice";
+import { createPostAsync } from "./postSlice";
 import { resetShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  View,
-  TextArea,
-} from "native-base";
-import { formatDistanceToNow } from "date-fns";
+import { Heading, VStack, FormControl, Button, Text } from "native-base";
 import Shift from "./shifts/Shift";
-import { LinearGradient } from "expo-linear-gradient";
 import {
-  CBackground,
   CTile,
   CScrollBackground,
   CContentTile,
 } from "../layout/LayoutComponents";
-import { parse, format } from "date-fns";
+import { format } from "date-fns";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
-  const groupSearchId = useSelector(selectGroupSearchId);
-  const [notice, setNotice] = useState("");
   const shifts = useSelector((state) => state.shifts.shifts);
   const { date, group, description, reserve } = route.params;
 

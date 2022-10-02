@@ -1,24 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import Memberships from "./memberships/Memberships";
-import Search from "../users/Search";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-} from "native-base";
-import Posts from "../posts/Posts";
-import Requests from "./invites/Requests";
+import { Button, Text, ScrollView } from "native-base";
 import {
   fetchMembershipsAsync,
   selectMemberships,
@@ -29,7 +11,6 @@ import {
   selectStatus,
   Statuses,
 } from "./memberships/membershipSlice";
-import { useFocusEffect } from "@react-navigation/native";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work

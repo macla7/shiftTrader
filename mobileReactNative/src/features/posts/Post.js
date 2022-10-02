@@ -1,34 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Like from "./likes/Like";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
 import PostEnds from "./PostEnds.js";
 import PostInfo from "./PostInfo.js";
-import { initialState } from "./postSlice";
-import { selectUsers } from "../users/userSlice";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  useTheme,
-  Flex,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-  InternalBorderTile,
-} from "../layout/LayoutComponents";
+import { Box, Text, Flex } from "native-base";
+import { CTile, InternalBorderTile } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
 
 global.addEventListener = () => {};

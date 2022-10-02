@@ -1,32 +1,10 @@
 import React, { useEffect } from "react";
-// import Posts from "../posts/Posts";
-import NavBar from "../nav/NavBar.js";
-import Register from "../sessions/Register.js";
-import Dashboard from "../dashboard/Dashboard.js";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
 import { selectPosts, fetchPostsHomeAsync } from "../posts/postSlice";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackgroundRefresh,
-  CContentTile,
-} from "../layout/LayoutComponents";
+import { Button } from "native-base";
+import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 
 function Home({ navigation }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);

@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMembershipsAsync, selectMemberships } from "./membershipSlice";
-import { isAdmin, isMember, isNotAdmin, isNotMember } from "../groupSlice";
+import { selectMemberships } from "./membershipSlice";
 import { selectIsLoggedIn } from "../../sessions/sessionSlice";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-} from "native-base";
-import { FlatList } from "react-native";
+import { Box, Heading, VStack, HStack, Text } from "native-base";
 import { parseISO, format } from "date-fns";
 
 function Memberships({ route }) {

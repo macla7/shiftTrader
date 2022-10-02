@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createLikeAsync,
-  fetchLikesAsync,
-  destroyLikeAsync,
-  initialState,
-} from "../postSlice";
+import { createLikeAsync, destroyLikeAsync, initialState } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
 
 function Like(props) {

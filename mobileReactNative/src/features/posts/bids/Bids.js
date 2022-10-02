@@ -1,35 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createBidAsync,
-  fetchBidsAsync,
-  selectBids,
-  initialState,
-} from "../postSlice";
+import { createBidAsync } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  AspectRatio,
-  View,
-  ScrollView,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-  InternalBorderTile,
-} from "../../layout/LayoutComponents";
+import { Button, AspectRatio, View, ScrollView } from "native-base";
 import Bid from "./Bid";
 import BidIcon from "../../../assets/noun-auction-4831153.svg";
 

@@ -1,13 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUserAsync } from "./sessionSlice";
-import {
-  selectAuthToken,
-  selectUserEmail,
-  selectUserId,
-  selectUserAvatarUrl,
-  selectIsLoggedIn,
-} from "./sessionSlice";
+import { selectAuthToken, selectUserEmail, selectUserId } from "./sessionSlice";
 import Register from "./Register";
 import Login from "./Login";
 import { View, Text } from "react-native";
@@ -16,8 +10,6 @@ function SessionManager() {
   const authToken = useSelector(selectAuthToken);
   const userEmail = useSelector(selectUserEmail);
   const userId = useSelector(selectUserId);
-  const userAvatarUrl = useSelector(selectUserAvatarUrl);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   function logout() {

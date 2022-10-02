@@ -1,29 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  View,
-  Spacer,
-  Flex,
-  Icon,
-} from "native-base";
-import { selectDollars, selectCents, selectMoney } from "./money/moneySlice";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
+import { Heading, Button } from "native-base";
+import { selectMoney } from "./money/moneySlice";
+import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
 import MoneyInput from "./money/MoneyInput";
 
 function ReserveForm({ route, navigation }) {

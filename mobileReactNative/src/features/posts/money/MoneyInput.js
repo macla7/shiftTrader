@@ -1,22 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  View,
-  Spacer,
-  Flex,
-  Icon,
-} from "native-base";
+import React from "react";
+import { Flex } from "native-base";
 import MoneyScroll from "./MoneyScroll";
 import TransferDisplay from "./TransferDisplay";
 

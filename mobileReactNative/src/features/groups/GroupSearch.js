@@ -1,40 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GroupForm from "./GroupForm";
-import {
-  fetchGroupsAsync,
-  selectGroups,
-  selectStatus,
-  Statuses,
-  updateGroupAsync,
-  setGroup,
-  fetchMyGroupsAsync,
-  selectMyGroups,
-} from "./groupSlice";
+import { selectStatus, fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
-import { createInviteAsync } from "./invites/inviteSlice";
-import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-  ScrollView,
-  Pressable,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
+import { Heading, VStack, Button, HStack, Text, Pressable } from "native-base";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
 
 function GroupSearch({ navigation }) {
   const myGroups = useSelector(selectMyGroups);

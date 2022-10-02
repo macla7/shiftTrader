@@ -1,35 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchPostsAsync,
-  fetchPostsHomeAsync,
-  selectPosts,
-  selectStatus,
-  Statuses,
-  updatePostAsync,
-} from "../posts/postSlice";
+import { selectPosts, selectStatus } from "../posts/postSlice";
 import Post from "../posts/Post";
-import PostForm from "../posts/PostForm";
-import { selectIsLoggedIn } from "../sessions/sessionSlice";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  FlatList,
-} from "native-base";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
 
 function Posts(props) {
   const userId = useSelector((state) => state.sessions.user.id);

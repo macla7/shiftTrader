@@ -1,28 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createGroupAsync } from "./groupSlice";
-import {
-  CBackground,
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-  ScrollView,
-  Pressable,
-  View,
-  TextArea,
-} from "native-base";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
+import { Heading, Input, Button, Pressable } from "native-base";
 import { Keyboard } from "react-native";
 
 function GroupForm({ route, navigation }) {

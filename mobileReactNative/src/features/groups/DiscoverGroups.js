@@ -1,30 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GroupForm from "./GroupForm";
-import {
-  fetchGroupsAsync,
-  selectGroups,
-  selectStatus,
-  Statuses,
-  updateGroupAsync,
-  setGroup,
-} from "./groupSlice";
+import { fetchGroupsAsync, selectGroups, selectStatus } from "./groupSlice";
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import {
-  Center,
-  Box,
-  Heading,
-  VStack,
-  FormControl,
-  Input,
-  Button,
-  HStack,
-  Text,
-  Link,
-} from "native-base";
-import { ScrollView, FlatList } from "react-native";
+import { Box, Heading, VStack, Button, HStack, Text } from "native-base";
+import { FlatList } from "react-native";
 import { selectAuthToken } from "../sessions/sessionSlice";
 
 function DiscoverGroups() {

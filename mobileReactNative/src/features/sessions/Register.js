@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUserAsync } from "./sessionSlice";
-import { StyleSheet, View, TextInput, Alert } from "react-native";
-import { useForm, Controller } from "react-hook-form";
 import {
   Center,
   Box,
@@ -11,9 +9,6 @@ import {
   FormControl,
   Input,
   Button,
-  HStack,
-  Text,
-  Link,
 } from "native-base";
 
 export default function App() {
