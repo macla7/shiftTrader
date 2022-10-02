@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Button } from "native-base";
 import { selectMoney } from "./money/moneySlice";
@@ -9,7 +9,7 @@ function ReserveForm({ route, navigation }) {
   const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
-  const { reserve, returnScreen, sendBid } = route.params;
+  const { returnScreen } = route.params;
 
   const money = dollarRange(0);
 

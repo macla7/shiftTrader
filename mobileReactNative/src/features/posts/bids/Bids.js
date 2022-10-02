@@ -1,40 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createBidAsync } from "../postSlice";
-import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
 import { Button, AspectRatio, View, ScrollView } from "native-base";
 import Bid from "./Bid";
 import BidIcon from "../../../assets/noun-auction-4831153.svg";
 
 function Bids(props) {
-  const userId = useSelector((state) => state.sessions.user.id);
-  const dispatch = useDispatch();
-
-  function bidPost(microDollars) {
-    let bidDetails = {
-      post_id: props.postId,
-      user_id: userId,
-      price: microDollars,
-    };
-
-    dispatch(createBidAsync(bidDetails));
-
-    // if above succeeds ..?
-    let notification_blueprint = {
-      notificationable_type: "Post",
-      notificationable_id: props.postId,
-      notification_type: 5,
-    };
-    let second_notification_blueprint = {
-      notificationable_type: "Post",
-      notificationable_id: props.postId,
-      notification_type: 6,
-    };
-
-    createNotificationBlueprint(notification_blueprint);
-    createNotificationBlueprint(second_notification_blueprint);
-  }
-
   let bids = [...props.bids];
   let sortedBids = bids.sort((a, b) => b.price - a.price);
   let reserve = props.reserve;
@@ -62,8 +31,8 @@ function Bids(props) {
         onPress={() =>
           props.navigation.navigate("Bid", {
             reserve: reserve,
-            sendBid: (microDollars) => bidPost(microDollars),
             returnScreen: "Home Feed",
+            postId: props.postId,
           })
         }
       >

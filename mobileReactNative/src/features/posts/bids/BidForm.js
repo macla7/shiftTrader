@@ -13,7 +13,7 @@ function BidForm({ route, navigation }) {
   const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
-  const { reserve, returnScreen, sendBid } = route.params;
+  const { reserve, returnScreen, postId } = route.params;
 
   const money = dollarRange(reserve);
 
@@ -82,7 +82,7 @@ function BidForm({ route, navigation }) {
               returnScreen: returnScreen,
               currentMicroDollars: currentMicroDollars,
               description: description,
-              sendBid: sendBid,
+              postId: postId,
             });
           }}
         >
