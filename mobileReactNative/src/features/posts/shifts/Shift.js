@@ -5,7 +5,7 @@ import { format } from "date-fns";
 function Shift(props) {
   return (
     <Box w="100%">
-      {props.shifts.map((item) => {
+      {props.shifts.map((item, index) => {
         return (
           <Box
             borderWidth="1"
@@ -13,7 +13,7 @@ function Shift(props) {
               borderColor: "gray.600",
             }}
             borderColor="coolGray.200"
-            key={item.id}
+            key={index}
             p="2"
             my="2"
           >
