@@ -45,7 +45,7 @@ class Api::V1::PostsController < ApiController
     p @post
     respond_to do |format|
       if @post.save!
-        format.json { render json: @post, status: :ok }
+        format.json { render json: @post.post_info, status: :ok }
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

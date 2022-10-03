@@ -102,7 +102,7 @@ function ShiftForm({ navigation, route }) {
                   })
                 }
               >
-                {start.toString()}
+                {start}
               </Button>
             </FormControl>
             <FormControl>
@@ -120,7 +120,7 @@ function ShiftForm({ navigation, route }) {
                   })
                 }
               >
-                {end.toString()}
+                {end}
               </Button>
             </FormControl>
 

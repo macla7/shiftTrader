@@ -3,8 +3,8 @@
 ## CURRENT TODO's
 
 - Research / refresh yourself on useRef
-- Get rid of warnings
-  - Bid params warning
+- Get rid of warnings / errors
+  - Error on shift creation.
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Makes group 'feed' just like home's.
 - Refresh Button for group view

@@ -118,8 +118,8 @@ function PostForm({ route, navigation }) {
               variant="outline"
               onPress={() =>
                 navigation.navigate("Add Shift", {
-                  start: new Date(Date.now()),
-                  end: new Date(Date.now()),
+                  start: new Date(Date.now()).toString(),
+                  end: new Date(Date.now()).toString(),
                 })
               }
             >
