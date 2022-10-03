@@ -94,6 +94,14 @@ export function CContentTile({ children }) {
   );
 }
 
+export function CWholeSpaceTile({ children }) {
+  return (
+    <Center m="2" w="95%" borderRadius="5%" h="95%" bgColor="white" shadow="6">
+      {children}
+    </Center>
+  );
+}
+
 export function InternalBorderTile({ children }) {
   return (
     <Box

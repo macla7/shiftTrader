@@ -4,9 +4,9 @@ import { fetchGroupsAsync, selectGroups, selectStatus } from "./groupSlice";
 import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import { Box, Heading, VStack, Button, HStack, Text } from "native-base";
-import { FlatList } from "react-native";
+import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import { selectAuthToken } from "../sessions/sessionSlice";
+import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
 
 function DiscoverGroups() {
   const groups = useSelector(selectGroups);
@@ -17,64 +17,10 @@ function DiscoverGroups() {
   const dispatch = useDispatch();
 
   // Called on initialise, because dispatch changes (on intialise)
-  // and on groups.length change
+  // and on myGroups.length change
   useEffect(() => {
-    dispatch(fetchGroupsAsync(authToken));
-  }, [dispatch, groups.length, isLoggedIn]);
-
-  let listOfGroups;
-
-  if (groups && groups.length > 0) {
-    listOfGroups = (
-      <FlatList
-        data={groups}
-        renderItem={({ item }) => (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            pl="4"
-            pr="5"
-            py="2"
-          >
-            <HStack space={3} justifyContent="space-between">
-              {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
-                }}
-              /> */}
-              <VStack>
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
-                  {item.name}
-                </Text>
-              </VStack>
-              <Button onPress={() => requestToJoinGroup(item.id)}>Join</Button>
-            </HStack>
-          </Box>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    );
-    // <div
-    //   key={group.id}
-    //   style={{ margin: "5em" }}
-    //   onClick={() => dispatch(setGroup(group.id))}
-    // >
-    //   <Link to={`/groups/${group.id}`}>{group.name}</Link>
-    //   <button onClick={() => requestToJoinGroup(group.id)}>Join</button>
-    // </div>
-  } else {
-    listOfGroups = <Text>{authToken}</Text>;
-  }
+    dispatch(fetchGroupsAsync());
+  }, [dispatch, groups.length]);
 
   function requestToJoinGroup(groupId) {
     console.log("triggered?");
@@ -98,12 +44,57 @@ function DiscoverGroups() {
   }
 
   return (
-    <Box>
-      <Heading fontSize="xl" p="4" pb="3">
-        Discover Groups
-      </Heading>
-      {listOfGroups}
-    </Box>
+    <CBackground>
+      <CWholeSpaceTile>
+        <Box>
+          <FlatList
+            data={groups}
+            renderItem={({ item }) => (
+              <Box
+                borderBottomWidth="1"
+                _dark={{
+                  borderColor: "gray.600",
+                }}
+                borderColor="coolGray.200"
+                pl="4"
+                pr="5"
+                py="2"
+              >
+                <HStack space={3} justifyContent="space-between">
+                  <VStack w="80%">
+                    <Text
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color="coolGray.800"
+                      bold
+                    >
+                      {item.name}
+                    </Text>
+                    <Text
+                      color="coolGray.600"
+                      _dark={{
+                        color: "warmGray.200",
+                      }}
+                    >
+                      {item.number_of_memberships} members
+                    </Text>
+                  </VStack>
+                  <Button
+                    onPress={() => requestToJoinGroup(item.id)}
+                    w="20%"
+                    h="100%"
+                  >
+                    Join
+                  </Button>
+                </HStack>
+              </Box>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </Box>
+      </CWholeSpaceTile>
+    </CBackground>
   );
 }
 

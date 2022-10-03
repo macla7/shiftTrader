@@ -5,8 +5,14 @@ class Api::V1::GroupsController < ApiController
   def index
     @myGroups = current_user.groups
     @allGroups = Group.all
+    @otherGroups = Group.where(id: (@allGroups - @myGroups).map(&:id))
 
-    render json: (@allGroups - @myGroups)
+    groupsWithInfo = []
+    @otherGroups.includes(:memberships).each do |group|
+      groupsWithInfo.push(group.group_info)
+    end
+
+    render json: groupsWithInfo
   end
 
   def my_groups

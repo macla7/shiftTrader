@@ -13,7 +13,11 @@ import {
   Text,
   FlatList,
 } from "native-base";
-import { CBackground, CContentTile } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CContentTile,
+  CWholeSpaceTile,
+} from "../layout/LayoutComponents";
 
 function Groups({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
@@ -51,10 +55,7 @@ function Groups({ navigation }) {
 
   return (
     <CBackground>
-      <CContentTile>
-        <Heading fontSize="xl" p="4" pb="3">
-          My Groups
-        </Heading>
+      <CWholeSpaceTile>
         <FlatList
           data={myGroups}
           renderItem={({ item }) => (
@@ -77,13 +78,7 @@ function Groups({ navigation }) {
                   })
                 }
               >
-                {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
-                }}
-              /> */}
-                <VStack>
+                <VStack w="100%">
                   <Text
                     _dark={{
                       color: "warmGray.50",
@@ -93,46 +88,37 @@ function Groups({ navigation }) {
                   >
                     {item.name}
                   </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {item.number_of_memberships} members
+                  </Text>
                 </VStack>
-                {/* <Spacer /> */}
-                <Text
-                  fontSize="xs"
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  alignSelf="flex-start"
-                >
-                  {item.number_of_memberships} members
-                </Text>
               </HStack>
             </Box>
           )}
           keyExtractor={(item) => item.id}
         />
-      </CContentTile>
-      <Button
-        mx="6"
-        onPress={() => navigation.navigate("Discover")}
-        position="absolute"
-        bottom="6"
-        w="90%"
-      >
-        Discover Groups
-      </Button>
-      <Button
-        mx="6"
-        onPress={() =>
-          navigation.navigate("Create Group", {
-            returnScreen: "My Groups",
-          })
-        }
-        position="absolute"
-        bottom="20"
-        w="90%"
-      >
-        Create Group
-      </Button>
+        <VStack w="100%">
+          <Button mx="4" mt="2" onPress={() => navigation.navigate("Discover")}>
+            Discover Groups
+          </Button>
+          <Button
+            mx="4"
+            my="2"
+            onPress={() =>
+              navigation.navigate("Create Group", {
+                returnScreen: "My Groups",
+              })
+            }
+          >
+            Create Group
+          </Button>
+        </VStack>
+      </CWholeSpaceTile>
     </CBackground>
   );
 }

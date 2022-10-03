@@ -18,6 +18,7 @@ import {
 } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
+import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
@@ -32,63 +33,63 @@ function Notifications() {
   }, [notifications.length, userId]);
 
   return (
-    <Box>
-      <Heading fontSize="xl" p="4" pb="3">
-        Recent
-      </Heading>
-      <FlatList
-        data={notifications}
-        renderItem={({ item }) => (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            pl="4"
-            pr="5"
-            py="2"
-          >
-            <HStack space={3} justifyContent="space-between">
-              {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
+    <CBackground>
+      <CWholeSpaceTile>
+        <Box>
+          <Heading fontSize="xl" p="4" pb="3">
+            Recent
+          </Heading>
+          <FlatList
+            data={notifications}
+            renderItem={({ item }) => (
+              <Box
+                borderBottomWidth="1"
+                _dark={{
+                  borderColor: "gray.600",
                 }}
-              /> */}
-              <VStack>
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
-                  {item.description}
-                </Text>
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
-                >
-                  Some text
-                </Text>
-              </VStack>
-              <Button
-                mt="2"
-                onPress={() => {
-                  handleAcceptInvite(item);
-                }}
+                borderColor="coolGray.200"
+                pl="4"
+                pr="5"
+                py="2"
               >
-                Action
-              </Button>
-            </HStack>
-          </Box>
-        )}
-        keyExtractor={(item) => item.id}
-      />
-    </Box>
+                <HStack space={3} justifyContent="space-between">
+                  <VStack w="80%">
+                    <Text
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color="coolGray.800"
+                      bold
+                    >
+                      {item.description}
+                    </Text>
+                    <Text
+                      color="coolGray.600"
+                      _dark={{
+                        color: "warmGray.200",
+                      }}
+                    >
+                      Some Text
+                    </Text>
+                  </VStack>
+                  <Button
+                    mt="2"
+                    onPress={() => {
+                      handleAcceptInvite(item);
+                    }}
+                    w="20%"
+                    h="10"
+                  >
+                    Action
+                  </Button>
+                </HStack>
+              </Box>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </Box>
+      </CWholeSpaceTile>
+    </CBackground>
   );
 
   function handleAcceptInvite(notification) {
