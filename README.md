@@ -2,13 +2,10 @@
 
 ## CURRENT TODO's
 
-- Research / refresh yourself on useRef
-- Get rid of warnings / errors
-  - Error on shift creation.
-  - Key warning on shift creation
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Makes group 'feed' just like home's.
-- Refresh Button for group view
+- refresh groupsearch on scrolldown
+- refresh group on scrolldown
 - Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?
 - Logout Button
 - Make notifications area consistent with theme.
