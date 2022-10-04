@@ -40,7 +40,8 @@ export async function createUser(user) {
 export async function updateUser(payload) {
   const auth_token = await getValueFor("auth_token");
 
-  return fetch(`${API_URL}/users/1.json`, {
+  // This is getting the user_id from the profile formdata message
+  return fetch(`${API_URL}/users/${payload["_parts"][0][1]}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
