@@ -2801,6 +2801,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-native@^0.70.4":
+  version "0.70.4"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.70.4.tgz#316f0e9b4b51bbe5cecf09284555f01283afe3b2"
+  integrity sha512-z5tKfblHLG6jts2AQcioDw4N+F2EzflO9n495yNyqyMYRkSIVTLX64MHBeqMp5wfOY5mshy0GsOgnFSXrXKQSg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*":
   version "18.0.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.15.tgz#d355644c26832dc27f3e6cbf0c4f4603fc4ab7fe"
@@ -4206,6 +4213,11 @@ expo-asset@~8.5.0:
     md5-file "^3.2.3"
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
+
+expo-cached-image@^46.0.1:
+  version "46.0.1"
+  resolved "https://registry.yarnpkg.com/expo-cached-image/-/expo-cached-image-46.0.1.tgz#a2f62450b198e93dad382300fd99aa6d06d258fa"
+  integrity sha512-HMWLpaMIzNFEP7tzLOlf3/hroqVI5FAXhwltuI3VwdMjZBC0yrEKETtKIbx1qX4R+5sTWStUysx89hLUyLR7hw==
 
 expo-constants@~13.1.1:
   version "13.1.1"

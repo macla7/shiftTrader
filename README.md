@@ -47,6 +47,7 @@
 - Viewed (Shows number of views on posts)
 - Notifications suscribing to some sort of websocket(?), so as to listen for them?
 - DB protections to stop duplicate memberships.
+- Ejecting from Expo?
 
 **Do README**
 

@@ -1,17 +1,37 @@
 import React from "react";
-import { Text, Image } from "native-base";
+import { Text } from "native-base";
 import { InternalBorderTile } from "../layout/LayoutComponents";
+import CachedImage from "expo-cached-image";
 
 function PostInfo(props) {
+  function getImageThumbnail(uri) {
+    if (uri !== undefined) {
+      let lastURIsegment =
+        props.post.avatar_url.split("/")[
+          props.post.avatar_url.split("/").length - 1
+        ];
+      let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
+      return lastURIsegmentNoFileType;
+    }
+  }
+
   return (
     <InternalBorderTile>
-      <Image
+      <CachedImage
         source={{
           uri: props.post.avatar_url,
+          expiresIn: 2_628_288,
         }}
-        size="xs"
+        cacheKey={`${getImageThumbnail(props.post.avatar_url)}`}
+        placeholderContent={<Text>Hello</Text>}
         alt="avatar"
-        borderRadius={100}
+        style={{
+          width: 40,
+          height: 40,
+          resizeMode: "contain",
+          borderRadius: 50,
+        }}
+        resizeMode="cover"
       />
       <Text>{props.post.email}</Text>
       <Text>{props.post.body}</Text>
