@@ -11,28 +11,34 @@ import {
   selectStatus,
   Statuses,
 } from "./memberships/membershipSlice";
+import { selectPosts, fetchPostsAsync } from "../posts/postSlice";
+import Posts from "../posts/Posts";
+import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 
 // Atm getting user through props so I can have it 'on mount' to determine
 // admin status from memberships API. It doesn't seem to work
 // if I try and grab from state.
 function Group({ route, navigation }) {
-  const userId = useSelector((state) => state.sessions.user.id);
-  const isAdmin = useSelector(selectIsAdmin);
-  const isMember = useSelector(selectIsMember);
-  const memberships = useSelector(selectMemberships);
   const dispatch = useDispatch();
   const { item } = route.params;
   const [groupDetails, setGroupDetails] = useState(null);
   const status = useSelector(selectStatus);
+  const posts = useSelector(selectPosts);
+
+  useEffect(() => {
+    dispatch(fetchPostsAsync(item.id));
+  }, [posts.length]);
 
   useEffect(() => {
     dispatch(fetchMembershipsAsync(item.id));
   }, []);
 
-  useEffect(() => {
-    dispatch(isUserAMember(userId));
-    dispatch(isUserAnAdmin(userId));
-  }, [memberships.length]);
+  function refresh() {
+    console.log(
+      "make the fetch for home feed should be up a level in here...?"
+    );
+    dispatch(fetchPostsAsync(item.id));
+  }
 
   let contents;
   if (status !== Statuses.UpToDate) {
@@ -42,30 +48,24 @@ function Group({ route, navigation }) {
   }
 
   return (
-    <ScrollView
-      w="100%"
-      borderBottomWidth="1"
-      _dark={{
-        borderColor: "gray.600",
-      }}
-      borderColor="coolGray.200"
-      pl="4"
-      pr="5"
-      py="2"
-    >
+    <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
         onPress={() =>
-          navigation.navigate("GroupInfo", {
-            item: item,
-            isAdmin: isAdmin,
-            isMember: isMember,
+          navigation.navigate("Post Form", {
+            date: Date.now(),
+            group: { id: 0, name: "Group Not Selected.." },
+            description: "",
+            reserve: 0,
           })
         }
+        mx="6"
+        my="4"
+        w="90%"
       >
-        Details
+        Create Post
       </Button>
-      <Text>There shall be posts</Text>
-    </ScrollView>
+      <Posts item={{ id: 0 }} navigation={navigation} posts={posts} />
+    </CScrollBackgroundRefresh>
 
     // <div>
     //   <h2>Group Details</h2>

@@ -68,11 +68,9 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
         width="100%"
         minHeight="100%"
       >
-        <Center w="100%" minHeight="100%">
-          <Center p="2" w="100%" minHeight="100%">
-            {children}
-          </Center>
-        </Center>
+        <Box w="100%" minHeight="100%">
+          {children}
+        </Box>
       </LinearGradient>
     </ScrollView>
   );

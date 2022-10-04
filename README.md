@@ -2,12 +2,21 @@
 
 ## CURRENT TODO's
 
-- Add postman env variables and clean up requests
+- Change format of Post to have .. dp .. name .. posted in .. group name
 - Functionality to accept requests to groups (notification action + in group details somewhere)
-- Makes group 'feed' just like home's.
-- refresh groupsearch on scrolldown
-- refresh group on scrolldown
-- Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?
+- Work to be done on PostForm
+
+  - Make Shift editable once made
+  - Make the shift time form start from when the post_ends was set
+  - Make the shift time end start from when the shift start was set
+  - Make Reserve Pretty
+  - Give Users feedback that shift was created (or take them back to post form)
+  - Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?
+  - Edit Descrption to use description already made.
+  - Take back to previous page (home or group) on creation
+
+- Make groupInfo pretty like others.
+- refresh DiscoverGroups on scrolldown.. means converting from flatlist to somekind of scroll (possibly new layout component).
 - Logout Button
 - Make notifications area consistent with theme.
 - Likes

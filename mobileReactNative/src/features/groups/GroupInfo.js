@@ -3,11 +3,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { Heading, Button, Text, ScrollView } from "native-base";
 import Memberships from "./memberships/Memberships";
 import Search from "../users/Search";
+import {
+  selectMemberships,
+  isUserAMember,
+  isUserAnAdmin,
+  selectIsAdmin,
+  selectIsMember,
+} from "./memberships/membershipSlice";
 
 function GroupInfo({ route, navigation }) {
-  const userId = useSelector((state) => state.sessions.user.id);
+  const dispatch = useDispatch();
   const [membersSection, setMembersSection] = useState();
-  const { item, isAdmin, isMember } = route.params;
+  const { item } = route.params;
+  const userId = useSelector((state) => state.sessions.user.id);
+  const isAdmin = useSelector(selectIsAdmin);
+  const isMember = useSelector(selectIsMember);
+  const memberships = useSelector(selectMemberships);
+
+  useEffect(() => {
+    dispatch(isUserAMember(userId));
+    dispatch(isUserAnAdmin(userId));
+  }, [memberships.length]);
 
   function createMembersSection() {
     if (isMember) {

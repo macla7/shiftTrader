@@ -7,7 +7,6 @@ import { Button } from "native-base";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 
 function Home({ navigation }) {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const posts = useSelector(selectPosts);
   const dispatch = useDispatch();
 
