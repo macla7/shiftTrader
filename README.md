@@ -2,6 +2,7 @@
 
 ## CURRENT TODO's
 
+- Add postman env variables and clean up requests
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Makes group 'feed' just like home's.
 - refresh groupsearch on scrolldown
