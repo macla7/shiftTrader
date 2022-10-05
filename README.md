@@ -2,7 +2,6 @@
 
 ## CURRENT TODO's
 
-- Prioity bug with groups
 - Fixing Group form, similar to PostForm
   - Need to give user errors / warnings on why group creation isn't working. Highlight box red, and add text below?
   - Take back to previous groups page on creation (and have it refreshed surely)
@@ -20,6 +19,7 @@
   - Edit Descrption to use description already made.
   - Take back to previous page (home or group) on creation
 
+- Make some sort of colour theme for buttons (and tweak bids..?)
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Make notifications area consistent with theme.

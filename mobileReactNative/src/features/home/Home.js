@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { selectIsLoggedIn } from "../sessions/sessionSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Posts from "../posts/Posts";
-import { selectPosts, fetchPostsHomeAsync } from "../posts/postSlice";
+import { selectHomePosts, fetchPostsHomeAsync } from "../posts/postSlice";
 import { Button } from "native-base";
 import { CScrollBackgroundRefresh } from "../layout/LayoutComponents";
 
 function Home({ navigation }) {
-  const posts = useSelector(selectPosts);
+  const homePosts = useSelector(selectHomePosts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPostsHomeAsync());
-  }, [posts.length]);
+  }, [homePosts.length]);
 
   function refresh() {
     console.log(
@@ -38,7 +38,7 @@ function Home({ navigation }) {
       >
         Create Post
       </Button>
-      <Posts navigation={navigation} posts={posts} />
+      <Posts navigation={navigation} posts={homePosts} />
     </CScrollBackgroundRefresh>
   );
 }

@@ -54,6 +54,19 @@ export const initialState = {
       shifts: [initialShiftState],
     },
   ],
+  homePosts: [
+    {
+      id: 0,
+      body: "",
+      user_id: 0,
+      ends_at: Date.now(),
+      created_at: formatISO(Date.now()),
+      updated_at: "",
+      bids: [initialBidState],
+      likes: [initialLikeState],
+      shifts: [initialShiftState],
+    },
+  ],
   status: Statuses.Initial,
 };
 
@@ -176,7 +189,7 @@ export const postSlice = createSlice({
       .addCase(fetchPostsHomeAsync.fulfilled, (state, action) => {
         console.log("In Async Posts");
         return produce(state, (draftState) => {
-          draftState.posts = action.payload;
+          draftState.homePosts = action.payload;
           draftState.status = Statuses.UpToDate;
         });
       })
@@ -354,6 +367,8 @@ function setNestedResource(draftState, action, resource) {
 export const {} = postSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
+
+export const selectHomePosts = (state) => state.posts.homePosts;
 
 export const selectStatus = (state) => state.posts.status;
 
