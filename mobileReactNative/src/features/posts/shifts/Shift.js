@@ -1,22 +1,57 @@
 import React from "react";
 import { Box, VStack, HStack, Text } from "native-base";
 import { format } from "date-fns";
+import { InternalBorderTile } from "../../layout/LayoutComponents";
 
 function Shift(props) {
+  let day = "";
+  function getDays(item) {
+    if (
+      format(new Date(item.start), "EEE do LLL") !==
+      format(new Date(item.end), "EEE do LLL")
+    ) {
+      return (
+        <>
+          <Text>Across Days:</Text>
+          <Text
+            color="coolGray.600"
+            _dark={{
+              color: "warmGray.200",
+            }}
+          >
+            {format(new Date(item.start), "EEE do LLL")}
+          </Text>
+          <Text
+            color="coolGray.600"
+            _dark={{
+              color: "warmGray.200",
+            }}
+          >
+            {format(new Date(item.end), "EEE do LLL")}
+          </Text>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Text>Day:</Text>
+          <Text
+            color="coolGray.600"
+            _dark={{
+              color: "warmGray.200",
+            }}
+          >
+            {format(new Date(item.start), "EEE do LLL")}
+          </Text>
+        </>
+      );
+    }
+  }
   return (
     <Box w="100%">
       {props.shifts.map((item, index) => {
         return (
-          <Box
-            borderWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            key={index}
-            p="2"
-            my="2"
-          >
+          <InternalBorderTile>
             <VStack>
               <Text
                 _dark={{
@@ -28,15 +63,9 @@ function Shift(props) {
                 {item.position}
               </Text>
               <HStack space={3} justifyContent="space-between">
+                <VStack>{getDays(item)}</VStack>
                 <VStack>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
-                    {format(new Date(item.start), "EEE do LLL")}
-                  </Text>
+                  <Text>Time:</Text>
                   <Text
                     color="coolGray.600"
                     _dark={{
@@ -44,16 +73,6 @@ function Shift(props) {
                     }}
                   >
                     {format(new Date(item.start), "p")}
-                  </Text>
-                </VStack>
-                <VStack>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: "warmGray.200",
-                    }}
-                  >
-                    {format(new Date(item.end), "EEE do LLL")}
                   </Text>
                   <Text
                     color="coolGray.600"
@@ -66,7 +85,7 @@ function Shift(props) {
                 </VStack>
               </HStack>
             </VStack>
-          </Box>
+          </InternalBorderTile>
         );
       })}
     </Box>

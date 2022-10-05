@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, AspectRatio, View, ScrollView } from "native-base";
+import { Button, AspectRatio, View, ScrollView, VStack } from "native-base";
 import Bid from "./Bid";
 import BidIcon from "../../../assets/noun-auction-4831153.svg";
 
@@ -13,7 +13,7 @@ function Bids(props) {
   }
 
   return (
-    <View h="64">
+    <VStack maxH="64" justifyContent="space-between">
       {sortedBids.length == 0 ? (
         <AspectRatio ratio="1/1">
           <BidIcon width="100%" height="100%" fill="#14532d" />
@@ -38,7 +38,7 @@ function Bids(props) {
       >
         Make Bid
       </Button>
-    </View>
+    </VStack>
 
     // <div>
     //   <form onSubmit={(e) => bidPost(e)}>

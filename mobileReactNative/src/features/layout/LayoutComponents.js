@@ -78,7 +78,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
 
 export function CTile({ children }) {
   return (
-    <Center p="1" m="2" w="95%" borderRadius="5%" bgColor="white" shadow="6">
+    <Center p="1" m="2" w="95%" borderRadius="10" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -86,7 +86,7 @@ export function CTile({ children }) {
 
 export function CContentTile({ children }) {
   return (
-    <Center p="8" m="2" w="95%" borderRadius="5%" bgColor="white" shadow="6">
+    <Center p="8" m="2" w="95%" borderRadius="10" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -94,7 +94,7 @@ export function CContentTile({ children }) {
 
 export function CWholeSpaceTile({ children }) {
   return (
-    <Center m="2" w="95%" borderRadius="5%" h="95%" bgColor="white" shadow="6">
+    <Center m="2" w="95%" borderRadius="10" h="95%" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -111,8 +111,26 @@ export function InternalBorderTile({ children }) {
       p="2"
       my="2"
       mx="1"
+      borderRadius="10"
     >
       {children}
     </Box>
+  );
+}
+
+export function InternalHeaderTile({ children }) {
+  return (
+    <Center
+      borderWidth="1"
+      _dark={{
+        borderColor: "gray.600",
+      }}
+      borderColor="coolGray.200"
+      mt="2"
+      mx="1"
+      borderRadius="10"
+    >
+      {children}
+    </Center>
   );
 }

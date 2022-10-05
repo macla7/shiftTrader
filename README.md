@@ -2,8 +2,8 @@
 
 ## CURRENT TODO's
 
-- Change format of Post to have .. dp .. name .. posted in .. group name
 - Functionality to accept requests to groups (notification action + in group details somewhere)
+- Can't accept repition of getImageThumbnail...
 - Work to be done on PostForm
 
   - Make Shift editable once made

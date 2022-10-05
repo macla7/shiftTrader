@@ -9,6 +9,7 @@ import {
 } from "./postAPI";
 import { fetchLikes, createLike, destroyLike } from "./likes/likeAPI";
 import { fetchBids, createBid } from "./bids/bidAPI";
+import { formatISO } from "date-fns";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -46,7 +47,7 @@ export const initialState = {
       body: "",
       user_id: 0,
       ends_at: Date.now(),
-      created_at: "",
+      created_at: formatISO(Date.now()),
       updated_at: "",
       bids: [initialBidState],
       likes: [initialLikeState],
