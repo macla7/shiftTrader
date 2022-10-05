@@ -43,7 +43,7 @@ function Bid(props) {
 
   console.log(getImageThumbnail(props.bid.avatar_url));
   return (
-    <View>
+    <View borderBottomColor="coolGray.200" borderBottomWidth="1" px="1" pt="1">
       <HStack>
         <CachedImage
           source={{

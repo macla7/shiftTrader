@@ -2,8 +2,6 @@
 
 ## CURRENT TODO's
 
-- Functionality to accept requests to groups (notification action + in group details somewhere)
-- Can't accept repition of getImageThumbnail...
 - Work to be done on PostForm
 
   - Make Shift editable once made
@@ -18,6 +16,7 @@
 - Make groupInfo pretty like others.
 - refresh DiscoverGroups on scrolldown.. means converting from flatlist to somekind of scroll (possibly new layout component).
 - Logout Button
+- Functionality to accept requests to groups (notification action + in group details somewhere)
 - Make notifications area consistent with theme.
 - Likes
 - Comments

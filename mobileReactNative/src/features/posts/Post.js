@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
-import PostEnds from "./PostEnds.js";
-import { Box, Text, Flex, HStack, Center, VStack } from "native-base";
+import { Box, Text, Flex, HStack, VStack } from "native-base";
 import {
   CTile,
   InternalBorderTile,
@@ -10,7 +9,7 @@ import {
 } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
 import CachedImage from "expo-cached-image";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -69,7 +68,7 @@ function Post(props) {
             }}
             resizeMode="cover"
           />
-          <Center ml="2">
+          <Box ml="2" flexGrow="1">
             <VStack>
               <Text
                 _dark={{
@@ -80,9 +79,14 @@ function Post(props) {
               >
                 {props.post.postor_email} in {props.post.group_name}
               </Text>
-              <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
+              <HStack justifyContent="space-between">
+                <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
+                <Text>
+                  Ends in {formatDistanceToNow(new Date(props.post.ends_at))}
+                </Text>
+              </HStack>
             </VStack>
-          </Center>
+          </Box>
         </HStack>
       </Box>
 
@@ -90,7 +94,6 @@ function Post(props) {
         <Text>{props.post.body}</Text>
       </Box>
 
-      <PostEnds endsAt={props.post.ends_at} />
       <Flex direction="row">
         <Box flex="4">
           <InternalHeaderTile>
