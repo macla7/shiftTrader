@@ -56,7 +56,12 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer theme={MyTheme}>
         <NativeBaseProvider theme={theme}>
-          <View bgColor="primary.200"></View>
+          <StatusBar
+            animated={true}
+            backgroundColor="#61dafb"
+            barStyle="dark-content"
+            hidden="Visible"
+          />
           <AuthFlow />
         </NativeBaseProvider>
       </NavigationContainer>

@@ -14,11 +14,13 @@ import {
   FlatList,
 } from "native-base";
 import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import { useIsFocused } from "@react-navigation/native";
 
 function Groups({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   function requestToJoinGroup(groupId) {
     let inviteDetails = {
@@ -45,7 +47,9 @@ function Groups({ navigation }) {
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
     console.log(myGroups);
-  }, [dispatch, myGroups.length]);
+  }, [dispatch, myGroups.length, isFocused]);
+
+  // useFocusEffect(useCallback(() => () => dispatch(fetchMyGroupsAsync())));
 
   return (
     <CBackground>

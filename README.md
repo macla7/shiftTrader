@@ -2,6 +2,14 @@
 
 ## CURRENT TODO's
 
+- Fix status bar
+- React nativigation useIsFocused Hook to run API requests on screen changes.
+- Fixing Group form, similar to PostForm
+  - Need to give user errors / warnings on why group creation isn't working. Highlight box red, and add text below?
+  - Take back to previous groups page on creation (and have it refreshed surely)
+  - Clean formatting
+- Make Invite User screen uniformed and pretty
+- refresh DiscoverGroups on scrolldown.. means converting from flatlist to somekind of scroll (possibly new layout component).
 - Work to be done on PostForm
 
   - Make Shift editable once made
@@ -13,12 +21,6 @@
   - Edit Descrption to use description already made.
   - Take back to previous page (home or group) on creation
 
-- Fixing Group form, similar to PostForm
-  - Need to give user errors / warnings on why group creation isn't working. Highlight box red, and add text below?
-  - Take back to previous groups page on creation (and have it refreshed surely)
-  - Clean formatting
-- Make Invite User screen uniformed and pretty
-- refresh DiscoverGroups on scrolldown.. means converting from flatlist to somekind of scroll (possibly new layout component).
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Make notifications area consistent with theme.

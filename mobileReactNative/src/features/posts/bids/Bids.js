@@ -26,7 +26,7 @@ function Bids(props) {
         </ScrollView>
       )}
       <Button
-        mt="2"
+        my="1"
         colorScheme="indigo"
         onPress={() =>
           props.navigation.navigate("Bid", {

@@ -47,16 +47,13 @@ function GroupForm({ route, navigation }) {
             mt="2"
             colorScheme="indigo"
             onPress={() => {
-              // Pass and merge params back to home screen
+              submitGroup();
               navigation.navigate({
                 name: returnScreen,
                 merge: true,
               });
             }}
           >
-            Done
-          </Button>
-          <Button mt="2" colorScheme="indigo" onPress={() => submitGroup()}>
             Create
           </Button>
         </CContentTile>
