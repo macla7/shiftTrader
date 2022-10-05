@@ -11,8 +11,6 @@ class Membership < ApplicationRecord
     message: "A User can only have one membership per group" }
 
   def member_info
-    self.as_json.merge({
-      user: self.user,
-      })  
+    serializable_hash(include: [user: {methods: :avatar_url}]) 
   end
 end

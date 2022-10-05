@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatus, fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
-import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
+import { fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
+import { selectUserId } from "../sessions/sessionSlice";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import {
@@ -13,17 +13,11 @@ import {
   Text,
   FlatList,
 } from "native-base";
-import {
-  CBackground,
-  CContentTile,
-  CWholeSpaceTile,
-} from "../layout/LayoutComponents";
+import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
 
 function Groups({ navigation }) {
   const myGroups = useSelector(selectMyGroups);
-  const status = useSelector(selectStatus);
   const userId = useSelector(selectUserId);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   function requestToJoinGroup(groupId) {

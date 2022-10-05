@@ -5,8 +5,8 @@ class Api::V1::MembershipsController < ApiController
   def index
     set_group
     membershipsWithUserDetails = []
-    @group.memberships.includes(:user).each do |user|
-      membershipsWithUserDetails.push(user.member_info)
+    @group.memberships.includes(:user).each do |member|
+      membershipsWithUserDetails.push(member.member_info)
     end
     render json: membershipsWithUserDetails
   end
