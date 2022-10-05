@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
 import {
   fetchGroups,
+  fetchOtherGroups,
   fetchMyGroups,
   createGroup,
   destroyGroup,
@@ -22,7 +23,8 @@ const initialState = {
   group: 0,
   groupSearchId: 0,
   groups: [{ id: 0, name: "" }],
-  myGroups: [],
+  myGroups: [{ id: 0, name: "" }],
+  otherGroups: [{ id: 0, name: "" }],
   status: Statuses.Initial,
 };
 
@@ -30,6 +32,14 @@ export const fetchGroupsAsync = createAsyncThunk(
   "groups/fetchGroups",
   async () => {
     const response = await fetchGroups();
+    return response;
+  }
+);
+
+export const fetchOtherGroupsAsync = createAsyncThunk(
+  "groups/fetchOtherGroups",
+  async () => {
+    const response = await fetchOtherGroups();
     return response;
   }
 );
@@ -115,6 +125,27 @@ export const groupSlice = createSlice({
       })
       // error
       .addCase(fetchGroupsAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(fetchOtherGroupsAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          console.log("waiting for groups");
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(fetchOtherGroupsAsync.fulfilled, (state, action) => {
+        console.log("In Groups");
+        return produce(state, (draftState) => {
+          draftState.otherGroups = action.payload;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(fetchOtherGroupsAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });
@@ -210,6 +241,8 @@ export const {
 } = groupSlice.actions;
 
 export const selectGroups = (state) => state.groups.groups;
+
+export const selectOtherGroups = (state) => state.groups.otherGroups;
 
 export const selectMyGroups = (state) => state.groups.myGroups;
 

@@ -28,6 +28,7 @@ namespace :api do
     get '/likes/destroy', to: 'likes#destroy'
     get '/home', to: 'posts#index_home'
     get '/myGroups', to: 'groups#my_groups'
+    get '/otherGroups', to: 'groups#other_groups'
     
     namespace :android do
       resources :books

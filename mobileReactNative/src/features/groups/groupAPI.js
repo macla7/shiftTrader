@@ -19,6 +19,23 @@ export async function fetchGroups() {
     });
 }
 
+export async function fetchOtherGroups() {
+  const auth_token = await getValueFor("auth_token");
+  return fetch(`${API_URL}/otherGroups.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log("Error: ", error);
+      // Not a longer term proper soloution
+      return {};
+    });
+}
+
 export async function fetchMyGroups() {
   const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/myGroups.json`, {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGroupsAsync, selectGroups, selectStatus } from "./groupSlice";
-import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
+import { fetchOtherGroupsAsync, selectOtherGroups } from "./groupSlice";
+import { selectUserId } from "../sessions/sessionSlice";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
@@ -9,18 +9,16 @@ import { selectAuthToken } from "../sessions/sessionSlice";
 import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
 
 function DiscoverGroups() {
-  const groups = useSelector(selectGroups);
+  const otherGroups = useSelector(selectOtherGroups);
   const authToken = useSelector(selectAuthToken);
-  const status = useSelector(selectStatus);
   const userId = useSelector(selectUserId);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
-    dispatch(fetchGroupsAsync());
-  }, [dispatch, groups.length]);
+    dispatch(fetchOtherGroupsAsync());
+  }, [dispatch, otherGroups.length]);
 
   function requestToJoinGroup(groupId) {
     console.log("triggered?");
@@ -48,7 +46,7 @@ function DiscoverGroups() {
       <CWholeSpaceTile>
         <Box>
           <FlatList
-            data={groups}
+            data={otherGroups}
             renderItem={({ item }) => (
               <Box
                 borderBottomWidth="1"

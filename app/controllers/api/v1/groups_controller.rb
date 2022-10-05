@@ -1,8 +1,13 @@
 class Api::V1::GroupsController < ApiController
   before_action :set_group, only: %i[ show edit update destroy ]
 
-  # GET /groups or /groups.json
   def index
+    @groups = Group.all
+    render json: @groups
+  end
+
+  # GET /groups or /groups.json
+  def other_groups
     @myGroups = current_user.groups
     @allGroups = Group.all
     @otherGroups = Group.where(id: (@allGroups - @myGroups).map(&:id))

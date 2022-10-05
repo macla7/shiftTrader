@@ -1,61 +1,89 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createGroupAsync } from "./groupSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createGroupAsync, fetchGroupsAsync, selectGroups } from "./groupSlice";
 import { CBackground, CContentTile } from "../layout/LayoutComponents";
-import { Heading, Input, Button, Pressable } from "native-base";
+import { Input, Button, Pressable, VStack, FormControl } from "native-base";
 import { Keyboard } from "react-native";
 
 function GroupForm({ route, navigation }) {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
   const { returnScreen } = route.params;
+  const [formData, setData] = useState({});
+  const [errors, setErrors] = useState({});
+  const groups = useSelector(selectGroups);
+
+  useEffect(() => {
+    dispatch(fetchGroupsAsync());
+  }, [dispatch]);
+
+  function groupNameExists(name) {
+    const allGroupNames = groups.map((group) => group.name);
+
+    return allGroupNames.includes(name);
+  }
 
   function submitGroup() {
-    const formData = {
+    const data = {
       group: {
-        name: name,
+        name: formData.name,
       },
     };
-    dispatch(createGroupAsync(formData));
-    resetState();
+    dispatch(createGroupAsync(data));
   }
 
-  function resetState() {
-    setName("");
-  }
+  const validate = () => {
+    if (formData.name === undefined) {
+      setErrors({ ...errors, name: "Name is required" });
+      return false;
+    } else if (formData.name.length < 3) {
+      setErrors({ ...errors, name: "Name is too short" });
+      return false;
+    } else if (groupNameExists(formData.name)) {
+      setErrors({ ...errors, name: "Name already taken" });
+      return false;
+    }
+    submitGroup();
+    navigation.navigate({
+      name: returnScreen,
+    });
+    return true;
+  };
+
+  const onSubmit = () => {
+    validate() ? console.log("Submitted") : console.log("Validation Failed");
+  };
 
   return (
     <Pressable onPress={Keyboard.dismiss}>
       <CBackground>
         <CContentTile>
-          <Heading
-            size="lg"
-            fontWeight="600"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-          >
-            Create Group
-          </Heading>
-          <Input
-            placeholder="Enter Group Name"
-            value={name}
-            onChange={(e) => setName(e.nativeEvent.text)}
-          />
-          <Button
-            mt="2"
-            colorScheme="indigo"
-            onPress={() => {
-              submitGroup();
-              navigation.navigate({
-                name: returnScreen,
-                merge: true,
-              });
-            }}
-          >
-            Create
-          </Button>
+          <VStack width="90%" mx="3" maxW="300px">
+            <FormControl isRequired isInvalid={"name" in errors}>
+              <FormControl.Label
+                _text={{
+                  bold: true,
+                }}
+              >
+                Name
+              </FormControl.Label>
+              <Input
+                placeholder="Your Workplace"
+                onChangeText={(value) => setData({ ...formData, name: value })}
+              />
+              {"name" in errors ? (
+                <FormControl.ErrorMessage>
+                  {errors.name}
+                </FormControl.ErrorMessage>
+              ) : (
+                <FormControl.HelperText>
+                  Name should contain atleast 3 character.
+                </FormControl.HelperText>
+              )}
+            </FormControl>
+            <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+              Submit
+            </Button>
+          </VStack>
         </CContentTile>
       </CBackground>
     </Pressable>
