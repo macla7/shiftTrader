@@ -2,8 +2,7 @@
 
 ## CURRENT TODO's
 
-- Fix status bar
-- React nativigation useIsFocused Hook to run API requests on screen changes.
+- Prioity bug with groups
 - Fixing Group form, similar to PostForm
   - Need to give user errors / warnings on why group creation isn't working. Highlight box red, and add text below?
   - Take back to previous groups page on creation (and have it refreshed surely)
