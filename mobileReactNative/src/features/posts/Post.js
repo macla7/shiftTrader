@@ -8,7 +8,7 @@ import {
   InternalHeaderTile,
 } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
-import CachedImage from "expo-cached-image";
+import DP from "../layout/DP";
 import { format, formatDistanceToNow } from "date-fns";
 
 global.addEventListener = () => {};
@@ -18,17 +18,6 @@ const consumer = createConsumer("ws://192.168.0.71:3000/cable");
 
 function Post(props) {
   const [bids, setBids] = useState([]);
-
-  function getImageThumbnail(uri) {
-    if (uri !== undefined) {
-      let lastURIsegment =
-        props.post.avatar_url.split("/")[
-          props.post.avatar_url.split("/").length - 1
-        ];
-      let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
-      return lastURIsegmentNoFileType;
-    }
-  }
 
   const postsChannel = useMemo(() => {
     return consumer.subscriptions.create(
@@ -52,22 +41,7 @@ function Post(props) {
     <CTile>
       <Box width="100%" p="2">
         <HStack>
-          <CachedImage
-            source={{
-              uri: props.post.avatar_url,
-              expiresIn: 2_628_288,
-            }}
-            cacheKey={`${getImageThumbnail(props.post.avatar_url)}`}
-            placeholderContent={<Text>Hello</Text>}
-            alt="avatar"
-            style={{
-              width: 40,
-              height: 40,
-              resizeMode: "contain",
-              borderRadius: 50,
-            }}
-            resizeMode="cover"
-          />
+          <DP uri={`${props.post.avatar_url}`} />
           <Box ml="2" flexGrow="1">
             <VStack>
               <Text

@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 import Money from "../money/Money";
 import { formatDistanceToNow } from "date-fns";
-import CachedImage from "expo-cached-image";
+import DP from "../../layout/DP";
 
 function Bid(props) {
   let description = <Text>BID</Text>;
@@ -30,37 +30,10 @@ function Bid(props) {
     );
   }
 
-  function getImageThumbnail(uri) {
-    if (uri !== undefined) {
-      let lastURIsegment =
-        props.bid.avatar_url.split("/")[
-          props.bid.avatar_url.split("/").length - 1
-        ];
-      let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
-      return lastURIsegmentNoFileType;
-    }
-  }
-
-  console.log(getImageThumbnail(props.bid.avatar_url));
   return (
     <View borderBottomColor="coolGray.200" borderBottomWidth="1" px="1" pt="1">
       <HStack>
-        <CachedImage
-          source={{
-            uri: props.bid.avatar_url,
-            expiresIn: 2_628_288,
-          }}
-          cacheKey={`${getImageThumbnail(props.bid.avatar_url)}`}
-          placeholderContent={<Text>Hello</Text>}
-          alt="avatar"
-          style={{
-            width: 40,
-            height: 40,
-            resizeMode: "contain",
-            borderRadius: 50,
-          }}
-          resizeMode="cover"
-        />
+        <DP uri={`${props.bid.avatar_url}`} />
         {description}
         <Center>
           <Money microDollars={props.bid.price} />

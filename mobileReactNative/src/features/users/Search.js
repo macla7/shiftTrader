@@ -18,7 +18,7 @@ import {
   Box,
 } from "native-base";
 import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
-import CachedImage from "expo-cached-image";
+import DP from "../layout/DP";
 import { Keyboard } from "react-native";
 
 // Definitely coupled a bit too much with invite and group logic I think
@@ -32,14 +32,6 @@ function Search({ route }) {
   const { item } = route.params;
   const [formData, setData] = useState({});
   const [errors, setErrors] = useState({});
-
-  function getImageThumbnail(uri) {
-    if (uri !== null) {
-      let lastURIsegment = uri.split("/")[uri.split("/").length - 1];
-      let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
-      return lastURIsegmentNoFileType;
-    }
-  }
 
   // Members
   useEffect(() => {
@@ -189,22 +181,7 @@ function Search({ route }) {
                   py="2"
                 >
                   <HStack>
-                    <CachedImage
-                      source={{
-                        uri: item.avatar_url,
-                        expiresIn: 2_628_288,
-                      }}
-                      cacheKey={`${getImageThumbnail(item.avatar_url)}`}
-                      placeholderContent={<Text>Hello</Text>}
-                      alt="avatar"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        resizeMode: "contain",
-                        borderRadius: 50,
-                      }}
-                      resizeMode="cover"
-                    />
+                    <DP uri={`${item.avatar_url}`} />
                     <VStack ml="2">
                       <Text
                         _dark={{

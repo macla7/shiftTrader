@@ -10,7 +10,7 @@ import {
 } from "./memberships/membershipSlice";
 import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
 import { parseISO, format } from "date-fns";
-import CachedImage from "expo-cached-image";
+import DP from "../layout/DP";
 
 function GroupInfo({ route, navigation }) {
   const dispatch = useDispatch();
@@ -26,14 +26,6 @@ function GroupInfo({ route, navigation }) {
 
   function since(item) {
     return format(parseISO(item.created_at), "EEE do LLL").toString();
-  }
-
-  function getImageThumbnail(uri) {
-    if (uri !== undefined) {
-      let lastURIsegment = uri.split("/")[uri.split("/").length - 1];
-      let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
-      return lastURIsegmentNoFileType;
-    }
   }
 
   return (
@@ -56,22 +48,7 @@ function GroupInfo({ route, navigation }) {
             >
               <HStack justifyContent="space-between">
                 <HStack>
-                  <CachedImage
-                    source={{
-                      uri: item.avatar_url,
-                      expiresIn: 2_628_288,
-                    }}
-                    cacheKey={`${getImageThumbnail(item.user.avatar_url)}`}
-                    placeholderContent={<Text>Hello</Text>}
-                    alt="avatar"
-                    style={{
-                      width: 40,
-                      height: 40,
-                      resizeMode: "contain",
-                      borderRadius: 50,
-                    }}
-                    resizeMode="cover"
-                  />
+                  <DP uri={`${item.user.avatar_url}`} />
                   <VStack ml="2">
                     <Text
                       _dark={{
