@@ -68,7 +68,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
         width="100%"
         minHeight="100%"
       >
-        <Box w="100%" minHeight="100%">
+        <Box p="2" w="100%" minHeight="100%">
           {children}
         </Box>
       </LinearGradient>
@@ -78,7 +78,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
 
 export function CTile({ children }) {
   return (
-    <Center p="1" m="2" w="95%" borderRadius="10" bgColor="white" shadow="6">
+    <Center p="1" m="2" borderRadius="10" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -97,6 +97,28 @@ export function CWholeSpaceTile({ children }) {
     <Center w="100%" borderRadius="10" h="95%" bgColor="white" shadow="6">
       {children}
     </Center>
+  );
+}
+
+export function CWhiteScrollRefresh({ children, refreshAction }) {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => setRefreshing(false), 2000);
+    refreshAction();
+  }, []);
+
+  return (
+    <Box w="100%" borderRadius="10" h="95%" bgColor="white" shadow="6">
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Center>{children}</Center>
+      </ScrollView>
+    </Box>
   );
 }
 

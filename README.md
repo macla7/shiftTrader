@@ -2,8 +2,7 @@
 
 ## CURRENT TODO's
 
-- Definitely need to put cachedimage with thumbnail method in some sort of component, lots of repition with that function...
-- refresh DiscoverGroups on scrolldown.. means converting from flatlist to somekind of scroll (possibly new layout component).
+- refactoring, and make naming more meaningful of custom layout components
 - Work to be done on PostForm
 
   - Make Shift editable once made

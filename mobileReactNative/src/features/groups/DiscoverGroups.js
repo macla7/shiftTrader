@@ -6,7 +6,7 @@ import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import { selectAuthToken } from "../sessions/sessionSlice";
-import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import { CBackground, CWhiteScrollRefresh } from "../layout/LayoutComponents";
 
 function DiscoverGroups() {
   const otherGroups = useSelector(selectOtherGroups);
@@ -41,57 +41,57 @@ function DiscoverGroups() {
     createNotificationBlueprint(notification_blueprint, authToken);
   }
 
+  function refresh() {
+    dispatch(fetchOtherGroupsAsync());
+  }
+
   return (
     <CBackground>
-      <CWholeSpaceTile>
+      <CWhiteScrollRefresh refreshAction={() => refresh()}>
         <Box>
-          <FlatList
-            data={otherGroups}
-            renderItem={({ item }) => (
-              <Box
-                borderBottomWidth="1"
-                _dark={{
-                  borderColor: "gray.600",
-                }}
-                borderColor="coolGray.200"
-                pl="4"
-                pr="5"
-                py="2"
-              >
-                <HStack space={3} justifyContent="space-between">
-                  <VStack w="80%">
-                    <Text
-                      _dark={{
-                        color: "warmGray.50",
-                      }}
-                      color="coolGray.800"
-                      bold
-                    >
-                      {item.name}
-                    </Text>
-                    <Text
-                      color="coolGray.600"
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
-                      {item.number_of_memberships} members
-                    </Text>
-                  </VStack>
-                  <Button
-                    onPress={() => requestToJoinGroup(item.id)}
-                    w="20%"
-                    h="100%"
+          {otherGroups.map((item, index) => (
+            <Box
+              borderBottomWidth="1"
+              _dark={{
+                borderColor: "gray.600",
+              }}
+              borderColor="coolGray.200"
+              pl="4"
+              pr="5"
+              py="2"
+            >
+              <HStack space={3} justifyContent="space-between">
+                <VStack w="80%">
+                  <Text
+                    _dark={{
+                      color: "warmGray.50",
+                    }}
+                    color="coolGray.800"
+                    bold
                   >
-                    Join
-                  </Button>
-                </HStack>
-              </Box>
-            )}
-            keyExtractor={(item) => item.id}
-          />
+                    {item.name}
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {item.number_of_memberships} members
+                  </Text>
+                </VStack>
+                <Button
+                  onPress={() => requestToJoinGroup(item.id)}
+                  w="20%"
+                  h="100%"
+                >
+                  Join
+                </Button>
+              </HStack>
+            </Box>
+          ))}
         </Box>
-      </CWholeSpaceTile>
+      </CWhiteScrollRefresh>
     </CBackground>
   );
 }
