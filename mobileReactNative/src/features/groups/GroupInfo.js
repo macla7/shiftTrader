@@ -8,7 +8,10 @@ import {
   selectIsAdmin,
   selectIsMember,
 } from "./memberships/membershipSlice";
-import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../layout/LayoutComponents";
 import { parseISO, format } from "date-fns";
 import DP from "../layout/DP";
 
@@ -30,7 +33,7 @@ function GroupInfo({ route, navigation }) {
 
   return (
     <CBackground>
-      <CWholeSpaceTile>
+      <CWholeSpaceContentTile>
         <Text>You are {isAdmin ? "an Admin" : "a Member"}</Text>
         <FlatList
           w="100%"
@@ -96,7 +99,7 @@ function GroupInfo({ route, navigation }) {
             Invite
           </Button>
         </VStack>
-      </CWholeSpaceTile>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 }

@@ -17,7 +17,10 @@ import {
   FlatList,
   Box,
 } from "native-base";
-import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../layout/LayoutComponents";
 import DP from "../layout/DP";
 import { Keyboard } from "react-native";
 
@@ -110,7 +113,7 @@ function Search({ route }) {
   return (
     <Pressable onPress={Keyboard.dismiss}>
       <CBackground>
-        <CWholeSpaceTile>
+        <CWholeSpaceContentTile>
           <VStack
             pl="4"
             pr="5"
@@ -207,7 +210,7 @@ function Search({ route }) {
             )}
             keyExtractor={(item) => item.id}
           />
-        </CWholeSpaceTile>
+        </CWholeSpaceContentTile>
       </CBackground>
     </Pressable>
   );

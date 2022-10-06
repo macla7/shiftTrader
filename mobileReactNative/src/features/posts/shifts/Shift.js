@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, VStack, HStack, Text } from "native-base";
 import { format } from "date-fns";
-import { InternalBorderTile } from "../../layout/LayoutComponents";
+import { CInternalBorderTile } from "../../layout/LayoutComponents";
 
 function Shift(props) {
   let day = "";
@@ -51,7 +51,7 @@ function Shift(props) {
     <Box w="100%">
       {props.shifts.map((item, index) => {
         return (
-          <InternalBorderTile key={index}>
+          <CInternalBorderTile key={index}>
             <VStack>
               <Text
                 _dark={{
@@ -85,7 +85,7 @@ function Shift(props) {
                 </VStack>
               </HStack>
             </VStack>
-          </InternalBorderTile>
+          </CInternalBorderTile>
         );
       })}
     </Box>

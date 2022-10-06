@@ -13,7 +13,10 @@ import {
   Text,
   FlatList,
 } from "native-base";
-import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../layout/LayoutComponents";
 import { useIsFocused } from "@react-navigation/native";
 
 function Groups({ navigation }) {
@@ -53,7 +56,7 @@ function Groups({ navigation }) {
 
   return (
     <CBackground>
-      <CWholeSpaceTile>
+      <CWholeSpaceContentTile>
         <FlatList
           data={myGroups}
           renderItem={({ item }) => (
@@ -116,7 +119,7 @@ function Groups({ navigation }) {
             Create Group
           </Button>
         </VStack>
-      </CWholeSpaceTile>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 }

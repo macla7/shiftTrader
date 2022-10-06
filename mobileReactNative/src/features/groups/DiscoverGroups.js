@@ -6,7 +6,10 @@ import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import { selectAuthToken } from "../sessions/sessionSlice";
-import { CBackground, CWhiteScrollRefresh } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CWholeSpaceRefreshTile,
+} from "../layout/LayoutComponents";
 
 function DiscoverGroups() {
   const otherGroups = useSelector(selectOtherGroups);
@@ -47,7 +50,7 @@ function DiscoverGroups() {
 
   return (
     <CBackground>
-      <CWhiteScrollRefresh refreshAction={() => refresh()}>
+      <CWholeSpaceRefreshTile refreshAction={() => refresh()}>
         <Box>
           {otherGroups.map((item, index) => (
             <Box
@@ -91,7 +94,7 @@ function DiscoverGroups() {
             </Box>
           ))}
         </Box>
-      </CWhiteScrollRefresh>
+      </CWholeSpaceRefreshTile>
     </CBackground>
   );
 }

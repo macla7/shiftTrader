@@ -18,7 +18,10 @@ import {
 } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
-import { CBackground, CWholeSpaceTile } from "../layout/LayoutComponents";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../layout/LayoutComponents";
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
@@ -34,7 +37,7 @@ function Notifications() {
 
   return (
     <CBackground>
-      <CWholeSpaceTile>
+      <CWholeSpaceContentTile>
         <Box>
           <Heading fontSize="xl" p="4" pb="3">
             Recent
@@ -88,7 +91,7 @@ function Notifications() {
             keyExtractor={(item) => item.id}
           />
         </Box>
-      </CWholeSpaceTile>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 

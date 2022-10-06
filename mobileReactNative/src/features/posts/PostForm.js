@@ -5,11 +5,7 @@ import { resetShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Heading, VStack, FormControl, Button, Text } from "native-base";
 import Shift from "./shifts/Shift";
-import {
-  CTile,
-  CScrollBackground,
-  CContentTile,
-} from "../layout/LayoutComponents";
+import { CScrollBackground, CContentTile } from "../layout/LayoutComponents";
 import { format } from "date-fns";
 
 function PostForm({ route, navigation }) {
@@ -46,7 +42,7 @@ function PostForm({ route, navigation }) {
 
   return (
     <CScrollBackground>
-      <CTile>
+      <CContentTile>
         <Heading
           size="lg"
           fontWeight="600"
@@ -68,7 +64,7 @@ function PostForm({ route, navigation }) {
         >
           To sell or pay someone to take your shifts
         </Heading>
-      </CTile>
+      </CContentTile>
       <CContentTile>
         <VStack w="100%">
           <FormControl>

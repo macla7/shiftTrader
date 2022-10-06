@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
-import { Box, Text, Flex, HStack, VStack } from "native-base";
+import { Box, Text, Flex, HStack, VStack, Center } from "native-base";
 import {
-  CTile,
-  InternalBorderTile,
-  InternalHeaderTile,
+  CInternalBorderTile,
+  CInternalBorderHeaderTile,
 } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
 import DP from "../layout/DP";
@@ -38,7 +37,7 @@ function Post(props) {
   }, []);
 
   return (
-    <CTile>
+    <Center p="1" m="2" borderRadius="10" bgColor="white" shadow="6">
       <Box width="100%" p="2">
         <HStack>
           <DP uri={`${props.post.avatar_url}`} />
@@ -70,26 +69,26 @@ function Post(props) {
 
       <Flex direction="row">
         <Box flex="4">
-          <InternalHeaderTile>
+          <CInternalBorderHeaderTile>
             <Text>SHIFTS</Text>
-          </InternalHeaderTile>
+          </CInternalBorderHeaderTile>
           <Shift shifts={props.post.shifts} />
         </Box>
         <Box flex="3">
-          <InternalHeaderTile>
+          <CInternalBorderHeaderTile>
             <Text>BIDS</Text>
-          </InternalHeaderTile>
-          <InternalBorderTile>
+          </CInternalBorderHeaderTile>
+          <CInternalBorderTile>
             <Bids
               bids={bids}
               postId={props.post.id}
               navigation={props.navigation}
               reserve={props.post.reserve}
             />
-          </InternalBorderTile>
+          </CInternalBorderTile>
         </Box>
       </Flex>
-    </CTile>
+    </Center>
   );
 }
 

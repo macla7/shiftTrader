@@ -2,7 +2,6 @@
 
 ## CURRENT TODO's
 
-- refactoring, and make naming more meaningful of custom layout components
 - Work to be done on PostForm
 
   - Make Shift editable once made

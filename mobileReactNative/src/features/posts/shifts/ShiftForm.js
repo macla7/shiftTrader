@@ -9,11 +9,7 @@ import {
   Pressable,
   TextArea,
 } from "native-base";
-import {
-  CBackground,
-  CTile,
-  CContentTile,
-} from "../../layout/LayoutComponents";
+import { CBackground, CContentTile } from "../../layout/LayoutComponents";
 import { Keyboard } from "react-native";
 
 // Design is to be able to add multiple shifts to a post
@@ -51,7 +47,7 @@ function ShiftForm({ navigation, route }) {
   return (
     <Pressable onPress={Keyboard.dismiss}>
       <CBackground>
-        <CTile>
+        <CContentTile>
           <Heading
             size="lg"
             fontWeight="600"
@@ -73,7 +69,7 @@ function ShiftForm({ navigation, route }) {
           >
             Add basic info of your shift
           </Heading>
-        </CTile>
+        </CContentTile>
 
         <CContentTile>
           <VStack w="100%">

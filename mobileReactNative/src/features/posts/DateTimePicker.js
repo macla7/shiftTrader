@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Heading, VStack, FormControl, Button, Text, View } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
 
 function PostForm({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));
@@ -34,7 +34,7 @@ function PostForm({ route, navigation }) {
 
   return (
     <CBackground>
-      <CTile>
+      <CContentTile>
         <Heading
           size="lg"
           fontWeight="600"
@@ -45,7 +45,7 @@ function PostForm({ route, navigation }) {
         >
           Choose Time and Date
         </Heading>
-      </CTile>
+      </CContentTile>
 
       <CContentTile>
         <VStack w="100%">

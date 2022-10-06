@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Heading, Button } from "native-base";
 import { selectMoney } from "./money/moneySlice";
-import { CBackground, CTile, CContentTile } from "../layout/LayoutComponents";
+import { CBackground, CContentTile } from "../layout/LayoutComponents";
 import MoneyInput from "./money/MoneyInput";
 
 function ReserveForm({ route, navigation }) {
@@ -34,7 +34,7 @@ function ReserveForm({ route, navigation }) {
 
   return (
     <CBackground>
-      <CTile>
+      <CContentTile>
         <Heading
           size="lg"
           fontWeight="600"
@@ -45,7 +45,7 @@ function ReserveForm({ route, navigation }) {
         >
           {description}
         </Heading>
-      </CTile>
+      </CContentTile>
 
       <CContentTile>
         <MoneyInput money={money} type="reserve" />
