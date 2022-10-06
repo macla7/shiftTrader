@@ -34,7 +34,7 @@ function Search({ route }) {
   const [errors, setErrors] = useState({});
 
   function getImageThumbnail(uri) {
-    if (uri !== undefined) {
+    if (uri !== null) {
       let lastURIsegment = uri.split("/")[uri.split("/").length - 1];
       let lastURIsegmentNoFileType = lastURIsegment.split(".")[0];
       return lastURIsegmentNoFileType;

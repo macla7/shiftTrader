@@ -51,7 +51,7 @@ function Shift(props) {
     <Box w="100%">
       {props.shifts.map((item, index) => {
         return (
-          <InternalBorderTile>
+          <InternalBorderTile key={index}>
             <VStack>
               <Text
                 _dark={{
