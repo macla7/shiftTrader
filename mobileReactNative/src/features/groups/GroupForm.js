@@ -32,7 +32,7 @@ function GroupForm({ route, navigation }) {
   }
 
   const validate = () => {
-    if (formData.name === undefined) {
+    if (formData.name === undefined || formData.name === "") {
       setErrors({ ...errors, name: "Name is required" });
       return false;
     } else if (formData.name.length < 3) {

@@ -46,4 +46,8 @@ class User < ApplicationRecord
       content_type: 'image/jpeg'
     )
   end
+
+  def user_info
+    serializable_hash(methods: :avatar_url)
+  end
 end

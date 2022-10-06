@@ -4,6 +4,8 @@ class Group < ApplicationRecord
   has_many :requests, -> { where request: true }, class_name: 'Invite'
   has_many :posts
   has_many :notification_blueprints, :as => :notificationable
+  has_many :invites, -> { where request: false, accepted: nil }, class_name: 'Invite'
+  has_many :invited_users, through: :invites, source: :external_user, class_name: 'User'
 
   def admins
     return memberships.is_admin.map { |member| member.user}

@@ -4,10 +4,16 @@ class Api::V1::UsersController < ApiController
   # GET /users or /users.json
   def index
     set_group
-    @groupsUsers = @group.users
-    @allUsers = User.all
+    @groups_users = @group.users
+    @invited_users = @group.invited_users
+    @all_users = User.all
+    @relevant_users = (@all_users - @groups_users - @invited_users)
 
-    render json: (@allUsers - @groupsUsers)
+    relevant_users_with_details = []
+    @relevant_users.each do |user|
+      relevant_users_with_details.push(user.user_info)
+    end
+    render json: relevant_users_with_details
   end
 
   # GET /users/1 or /users/1.json
