@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostAsync } from "./postSlice";
-import { resetShifts } from "./shifts/shiftSlice";
+import { resetShifts, selectShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Heading, VStack, FormControl, Button, Text } from "native-base";
 import Shift from "./shifts/Shift";
@@ -10,7 +10,7 @@ import { format } from "date-fns";
 
 function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
-  const shifts = useSelector((state) => state.shifts.shifts);
+  const shifts = useSelector(selectShifts);
   const { date, group, description, reserve } = route.params;
 
   function submitPost() {
@@ -106,7 +106,11 @@ function PostForm({ route, navigation }) {
 
           <FormControl w="100%">
             <FormControl.Label>Shifts</FormControl.Label>
-            <Shift shifts={shifts ? shifts : []} />
+            <Shift
+              shifts={shifts ? shifts : []}
+              navigation={navigation}
+              editable={true}
+            />
             <Button
               fontSize="md"
               fontWeight="400"
@@ -116,6 +120,8 @@ function PostForm({ route, navigation }) {
                 navigation.navigate("Add Shift", {
                   start: new Date(Date.now()).toString(),
                   end: new Date(Date.now()).toString(),
+                  initPosition: "",
+                  editingMode: false,
                 })
               }
             >

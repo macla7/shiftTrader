@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createShift } from "./shiftSlice";
+import { createShift, editShift } from "./shiftSlice";
 import {
   Heading,
   VStack,
@@ -14,8 +14,8 @@ import { Keyboard } from "react-native";
 
 // Design is to be able to add multiple shifts to a post
 function ShiftForm({ navigation, route }) {
-  const [position, setPosition] = useState("");
-  const { start, end } = route.params;
+  const { start, end, initPosition, editingMode, temp_id } = route.params;
+  const [position, setPosition] = useState(initPosition);
 
   const dispatch = useDispatch();
 
@@ -33,14 +33,24 @@ function ShiftForm({ navigation, route }) {
     );
   }
 
-  function handleCreateShift() {
+  function submitForm() {
     if (formIsValid()) {
-      let shift = {
-        position: position,
-        start: start.toString(),
-        end: end.toString(),
-      };
-      dispatch(createShift(shift));
+      if (editingMode) {
+        let shift = {
+          position: position,
+          start: start.toString(),
+          end: end.toString(),
+          temp_id: temp_id,
+        };
+        dispatch(editShift(shift));
+      } else {
+        let shift = {
+          position: position,
+          start: start.toString(),
+          end: end.toString(),
+        };
+        dispatch(createShift(shift));
+      }
     }
   }
 
@@ -56,7 +66,7 @@ function ShiftForm({ navigation, route }) {
               color: "warmGray.50",
             }}
           >
-            Add Shift
+            {editingMode ? "Edit" : "Add"} Shift
           </Heading>
           <Heading
             mt="1"
@@ -67,7 +77,7 @@ function ShiftForm({ navigation, route }) {
             fontWeight="medium"
             size="xs"
           >
-            Add basic info of your shift
+            {editingMode ? "Edit" : "Add"} Shift basic info of your shift
           </Heading>
         </CContentTile>
 
@@ -120,12 +130,8 @@ function ShiftForm({ navigation, route }) {
               </Button>
             </FormControl>
 
-            <Button
-              mt="2"
-              colorScheme="indigo"
-              onPress={() => handleCreateShift()}
-            >
-              Add Shift
+            <Button mt="2" colorScheme="indigo" onPress={() => submitForm()}>
+              {editingMode ? "Edit Shift" : "Add Shift"}
             </Button>
           </VStack>
         </CContentTile>

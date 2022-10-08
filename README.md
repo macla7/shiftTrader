@@ -4,7 +4,6 @@
 
 - Work to be done on PostForm
 
-  - Make Shift editable once made
   - Make the shift time form start from when the post_ends was set
   - Make the shift time end start from when the shift start was set
   - Make Reserve Pretty

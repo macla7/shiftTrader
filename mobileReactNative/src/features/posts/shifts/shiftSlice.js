@@ -9,7 +9,7 @@ export const Statuses = {
 };
 
 const initialState = {
-  shifts: [],
+  shifts: {},
   status: Statuses.Initial,
 };
 
@@ -25,7 +25,13 @@ export const shiftSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.shifts.push(action.payload);
+      const numOfKeys = Object.keys(state.shifts).length;
+      action.payload.temp_id = numOfKeys + 1;
+      state.shifts[numOfKeys + 1] = action.payload;
+      state.status = Statuses.UpToDate;
+    },
+    editShift: (state, action) => {
+      state.shifts[action.payload.temp_id] = action.payload;
       state.status = Statuses.UpToDate;
     },
     deleteShift: (state, action) => {
@@ -40,6 +46,9 @@ export const shiftSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { createShift, deleteShift, resetShifts } = shiftSlice.actions;
+export const { createShift, deleteShift, resetShifts, editShift } =
+  shiftSlice.actions;
+
+export const selectShifts = (state) => Object.values(state.shifts.shifts);
 
 export default shiftSlice.reducer;
