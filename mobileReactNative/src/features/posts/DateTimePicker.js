@@ -24,6 +24,7 @@ function PostForm({ route, navigation }) {
       case "start":
         return {
           start: date.toString(),
+          end: date.toString(),
         };
       case "end":
         return {

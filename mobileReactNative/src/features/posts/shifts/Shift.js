@@ -1,9 +1,8 @@
 import React from "react";
 import { Box, VStack, HStack, Text, Pressable } from "native-base";
 import { format } from "date-fns";
-import { CInternalBorderTile } from "../../layout/LayoutComponents";
 
-function Shift({ navigation, shifts, editable }) {
+function Shift({ navigation, shifts, editable, invalidShiftIds }) {
   function getDays(item) {
     if (
       format(new Date(item.start), "EEE do LLL") !==
@@ -58,12 +57,25 @@ function Shift({ navigation, shifts, editable }) {
                   start: item.start,
                   end: item.end,
                   editingMode: editable,
-                  temp_id: item.temp_id,
+                  tempId: item.tempId,
+                  returnScreen: "Post Form",
                 });
               }
             }}
           >
-            <CInternalBorderTile key={index}>
+            <Box
+              borderColor={
+                invalidShiftIds.includes(item.tempId)
+                  ? "error.600"
+                  : "muted.300"
+              }
+              borderWidth="1"
+              px="2"
+              mt="2"
+              mx="1"
+              borderRadius="10"
+              key={index}
+            >
               <VStack>
                 <Text
                   _dark={{
@@ -97,7 +109,7 @@ function Shift({ navigation, shifts, editable }) {
                   </VStack>
                 </HStack>
               </VStack>
-            </CInternalBorderTile>
+            </Box>
           </Pressable>
         );
       })}

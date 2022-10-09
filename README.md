@@ -4,8 +4,6 @@
 
 - Work to be done on PostForm
 
-  - Make the shift time form start from when the post_ends was set
-  - Make the shift time end start from when the shift start was set
   - Make Reserve Pretty
   - Give Users feedback that shift was created (or take them back to post form)
   - Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?

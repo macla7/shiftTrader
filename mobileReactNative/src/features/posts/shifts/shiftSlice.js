@@ -26,16 +26,16 @@ export const shiftSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       const numOfKeys = Object.keys(state.shifts).length;
-      action.payload.temp_id = numOfKeys + 1;
+      action.payload.tempId = numOfKeys + 1;
       state.shifts[numOfKeys + 1] = action.payload;
       state.status = Statuses.UpToDate;
     },
     editShift: (state, action) => {
-      state.shifts[action.payload.temp_id] = action.payload;
+      state.shifts[action.payload.tempId] = action.payload;
       state.status = Statuses.UpToDate;
     },
     deleteShift: (state, action) => {
-      state.shifts.filter((shift) => shift.temp_id !== action.payload);
+      state.shifts.filter((shift) => shift.tempId !== action.payload);
     },
     resetShifts: (state, action) => {
       state.shifts = [];

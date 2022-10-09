@@ -72,7 +72,11 @@ function Post(props) {
           <CInternalBorderHeaderTile>
             <Text>SHIFTS</Text>
           </CInternalBorderHeaderTile>
-          <Shift shifts={props.post.shifts} editable={false} />
+          <Shift
+            shifts={props.post.shifts}
+            editable={false}
+            invalidShiftIds={[]}
+          />
         </Box>
         <Box flex="3">
           <CInternalBorderHeaderTile>

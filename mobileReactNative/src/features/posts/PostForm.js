@@ -12,6 +12,9 @@ function PostForm({ route, navigation }) {
   const dispatch = useDispatch();
   const shifts = useSelector(selectShifts);
   const { date, group, description, reserve } = route.params;
+  const [formData, setData] = useState({});
+  const [errors, setErrors] = useState({});
+  const [invalidShiftIds, setInvalidShiftIds] = useState([]);
 
   function submitPost() {
     let post = {
@@ -38,7 +41,36 @@ function PostForm({ route, navigation }) {
     dispatch(resetShifts());
   }, []);
 
-  console.log(description);
+  useEffect(() => {
+    setData({ ...formData, endsAt: date });
+  }, []);
+
+  const validate = () => {
+    let valid = true;
+    let newErrors = {};
+
+    if (shifts.length > 0) {
+      let invalidShifts = shifts.filter(
+        (shift) => new Date(shift.start).getTime() < new Date(date).getTime()
+      );
+      setInvalidShiftIds(invalidShifts.map((shift) => shift.tempId));
+      newErrors["shifts"] = "Some shifts start before the post ends";
+      valid = false;
+    }
+
+    setErrors({ ...errors, ...newErrors });
+    // if (valid) {
+    //   submitForm();
+    //   navigation.navigate({
+    //     name: returnScreen,
+    //     merge: true,
+    //   });
+    // }
+  };
+
+  const onSubmit = () => {
+    validate() ? console.log("Submitted") : console.log("Validation Failed");
+  };
 
   return (
     <CScrollBackground>
@@ -67,7 +99,11 @@ function PostForm({ route, navigation }) {
       </CContentTile>
       <CContentTile>
         <VStack w="100%">
-          <FormControl>
+          <FormControl
+            isInvalid={["shifts"].some((error) =>
+              Object.keys(errors).includes(error)
+            )}
+          >
             <FormControl.Label>Group</FormControl.Label>
             <Button
               fontSize="md"
@@ -82,8 +118,6 @@ function PostForm({ route, navigation }) {
             >
               {group.name}
             </Button>
-          </FormControl>
-          <FormControl>
             <FormControl.Label>Post Ends</FormControl.Label>
             <Button
               fontSize="md"
@@ -102,15 +136,21 @@ function PostForm({ route, navigation }) {
 
               {format(new Date(date), "p")}
             </Button>
-          </FormControl>
 
-          <FormControl w="100%">
             <FormControl.Label>Shifts</FormControl.Label>
             <Shift
               shifts={shifts ? shifts : []}
               navigation={navigation}
               editable={true}
+              invalidShiftIds={invalidShiftIds}
             />
+            {errors["shifts"] ? (
+              <FormControl.ErrorMessage>
+                {errors.shifts}
+              </FormControl.ErrorMessage>
+            ) : (
+              <FormControl.HelperText>Time and Position</FormControl.HelperText>
+            )}
             <Button
               fontSize="md"
               fontWeight="400"
@@ -118,17 +158,18 @@ function PostForm({ route, navigation }) {
               variant="outline"
               onPress={() =>
                 navigation.navigate("Add Shift", {
-                  start: new Date(Date.now()).toString(),
-                  end: new Date(Date.now()).toString(),
+                  start: new Date(date).toString(),
+                  end: new Date(date).toString(),
+                  endsAt: new Date(date).toString(),
                   initPosition: "",
                   editingMode: false,
+                  returnScreen: "Post Form",
                 })
               }
             >
               Add Shift
             </Button>
-          </FormControl>
-          <FormControl>
+
             <FormControl.Label>Reserve</FormControl.Label>
             <Text>{reserve}</Text>
             <Button
@@ -145,8 +186,7 @@ function PostForm({ route, navigation }) {
             >
               Add Reserve
             </Button>
-          </FormControl>
-          <FormControl>
+
             <FormControl.Label>Description</FormControl.Label>
             <Text>{description}</Text>
             <Button
@@ -164,7 +204,7 @@ function PostForm({ route, navigation }) {
               Add Description
             </Button>
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={() => submitPost()}>
+          <Button mt="2" colorScheme="indigo" onPress={onSubmit}>
             Make Post
           </Button>
         </VStack>
