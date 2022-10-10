@@ -1,12 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
-import { NativeRouter } from "react-router-native";
+import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
-import { Routes, Route } from "react-router-dom";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { selectIsLoggedIn } from "./src/features/sessions/sessionSlice";
-import { useDispatch, useSelector } from "react-redux";
 import AuthFlow from "./src/features/authFlow/AuthFlow";
 import {
   useFonts,
@@ -19,8 +15,14 @@ import {
   Inconsolata_800ExtraBold,
   Inconsolata_900Black,
 } from "@expo-google-fonts/inconsolata";
-import { NativeBaseProvider, Text, View } from "native-base";
+import { NativeBaseProvider } from "native-base";
 import { theme } from "./theme";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 const MyTheme = {
   dark: false,
@@ -62,7 +64,14 @@ export default function App() {
             barStyle="dark-content"
             hidden="Visible"
           />
-          <AuthFlow />
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            flex="1"
+          >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <AuthFlow />
+            </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
         </NativeBaseProvider>
       </NavigationContainer>
     </Provider>

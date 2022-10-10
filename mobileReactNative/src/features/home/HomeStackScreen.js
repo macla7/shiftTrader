@@ -18,7 +18,7 @@ function GroupsStackScreen() {
       <HomeStack.Screen name="Home Feed" component={Home} />
       <HomeStack.Screen name="Post Form" component={PostForm} />
       <HomeStack.Screen
-        name="DateTimePicker"
+        name="Time and Date"
         component={DateTimePicker}
         options={({ route }) => ({ title: route.params.mode })}
       />

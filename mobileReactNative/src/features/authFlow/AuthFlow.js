@@ -44,6 +44,7 @@ function AuthFlow() {
               },
               tabBarActiveTintColor: "tomato",
               tabBarInactiveTintColor: "gray",
+              tabBarHideOnKeyboard: true,
             })}
           >
             <Tab.Screen

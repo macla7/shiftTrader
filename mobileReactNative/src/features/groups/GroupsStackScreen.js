@@ -2,6 +2,11 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Groups from "./Groups";
 import DiscoverGroups from "./DiscoverGroups";
+import PostForm from "../posts/PostForm";
+import DateTimePicker from "../posts/DateTimePicker";
+import ReserveForm from "../posts/ReserveForm";
+import GroupSearch from "../groups/GroupSearch";
+import ShiftForm from "../posts/shifts/ShiftForm";
 import Group from "./Group";
 import GroupInfo from "./GroupInfo";
 import Search from "../users/Search";
@@ -38,6 +43,15 @@ function GroupsStackScreen() {
           ),
         })}
       />
+      <GroupsStack.Screen name="Post Form" component={PostForm} />
+      <GroupsStack.Screen
+        name="Time and Date"
+        component={DateTimePicker}
+        options={({ route }) => ({ title: route.params.mode })}
+      />
+      <GroupsStack.Screen name="Add Reserve" component={ReserveForm} />
+      <GroupsStack.Screen name="Group Search" component={GroupSearch} />
+      <GroupsStack.Screen name="Add Shift" component={ShiftForm} />
       <GroupsStack.Screen
         name="GroupInfo"
         component={GroupInfo}

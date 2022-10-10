@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectStatus, fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
-import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
-import { Heading, VStack, Button, HStack, Text, Pressable } from "native-base";
+import { fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
+import {
+  Heading,
+  VStack,
+  Button,
+  HStack,
+  Text,
+  Pressable,
+  Box,
+} from "native-base";
 import { CBackground, CContentTile } from "../layout/LayoutComponents";
 
-function GroupSearch({ navigation }) {
+function GroupSearch({ navigation, route }) {
   const myGroups = useSelector(selectMyGroups);
-  const status = useSelector(selectStatus);
-  const userId = useSelector(selectUserId);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
-  const [group, setGroup] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const { initGroupId } = route.params;
+  const [groupId, setGroupId] = useState(initGroupId);
+  const [groupName, setGroupName] = useState("");
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
-  }, [dispatch, myGroups.length, isLoggedIn]);
+  }, [dispatch, myGroups.length]);
 
   return (
     <CBackground>
@@ -28,37 +33,47 @@ function GroupSearch({ navigation }) {
         </Heading>
         {myGroups.map((item) => (
           <Pressable
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            backgroundColor={group.id == item.id ? "primary.100" : null}
-            borderWidth={group.id == item.id ? "2" : null}
             key={item.id}
-            onPress={() => setGroup(item)}
-            p="6"
-            borderRadius="4"
+            onPress={() => {
+              setGroupName(item.name);
+              setGroupId(item.id);
+            }}
           >
-            <HStack space={3} justifyContent="space-between">
-              {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
-                }}
-              /> */}
-              <VStack>
-                <Text
-                  _dark={{
-                    color: "warmGray.50",
-                  }}
-                  color="coolGray.800"
-                  bold
-                >
-                  {item.name}
-                </Text>
-              </VStack>
-            </HStack>
+            <Box
+              borderBottomWidth="1"
+              _dark={{
+                borderColor: "gray.600",
+              }}
+              borderColor="coolGray.200"
+              backgroundColor={groupId == item.id ? "primary.100" : null}
+              borderWidth={groupId == item.id ? "1" : null}
+              pl="4"
+              pr="5"
+              py="2"
+              borderRadius="4"
+            >
+              <HStack space={3} justifyContent="space-between">
+                <VStack w="100%">
+                  <Text
+                    _dark={{
+                      color: "warmGray.50",
+                    }}
+                    color="coolGray.800"
+                    bold
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: "warmGray.200",
+                    }}
+                  >
+                    {item.number_of_memberships} members
+                  </Text>
+                </VStack>
+              </HStack>
+            </Box>
           </Pressable>
         ))}
         <Button
@@ -68,7 +83,10 @@ function GroupSearch({ navigation }) {
             // Pass and merge params back to home screen
             navigation.navigate({
               name: "Post Form",
-              params: { group: group },
+              params: {
+                groupId: groupId ? groupId : 0,
+                groupName: groupName ? groupName : "Group Not Selected..",
+              },
               merge: true,
             });
           }}

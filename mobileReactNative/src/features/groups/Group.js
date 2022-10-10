@@ -53,9 +53,11 @@ function Group({ route, navigation }) {
         onPress={() =>
           navigation.navigate("Post Form", {
             date: Date.now(),
-            group: { id: 0, name: "Group Not Selected.." },
+            groupId: item.id,
+            groupName: item.name,
             description: "",
             reserve: 0,
+            returnScreen: "Group",
           })
         }
         mx="6"

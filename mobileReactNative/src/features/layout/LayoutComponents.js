@@ -24,7 +24,7 @@ export function CBackground({ children }) {
 
 export function CScrollBackground({ children }) {
   return (
-    <ScrollView w="100%" minHeight="100%">
+    <ScrollView minHeight="100%">
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
@@ -33,11 +33,11 @@ export function CScrollBackground({ children }) {
         width="100%"
         minHeight="100%"
       >
-        <Center w="100%" minHeight="100%">
-          <Center p="2" w="100%" minHeight="100%">
+        <Box p="2" minHeight="100%">
+          <Center w="100%" p="2">
             {children}
           </Center>
-        </Center>
+        </Box>
       </LinearGradient>
     </ScrollView>
   );

@@ -70,8 +70,8 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
                   : "muted.300"
               }
               borderWidth="1"
-              px="2"
-              mt="2"
+              p="2"
+              my="2"
               mx="1"
               borderRadius="10"
               key={index}

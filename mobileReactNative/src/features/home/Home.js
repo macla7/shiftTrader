@@ -27,9 +27,11 @@ function Home({ navigation }) {
         onPress={() =>
           navigation.navigate("Post Form", {
             date: Date.now(),
-            group: { id: 0, name: "Group Not Selected.." },
+            groupId: 0,
+            groupName: "Group Not Selected..",
             description: "",
             reserve: 0,
+            returnScreen: "Home Feed",
           })
         }
         mx="6"

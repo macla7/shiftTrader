@@ -4,13 +4,9 @@
 
 - Work to be done on PostForm
 
-  - Make Reserve Pretty
-  - Give Users feedback that shift was created (or take them back to post form)
-  - Need to give user errors / warnings on why shift form isn't working. Highlight box red, and add text below?
-  - Edit Descrption to use description already made.
-  - Take back to previous page (home or group) on creation
-  - take back to group when you git back on header.. bug always sending back to home atm.
+  - Bids state working a bit better
 
+- To move all headings to the header..
 - Make some sort of colour theme for buttons (and tweak bids..?)
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)

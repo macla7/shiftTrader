@@ -3,9 +3,9 @@ import { Heading, VStack, FormControl, Button, Text, View } from "native-base";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { CBackground, CContentTile } from "../layout/LayoutComponents";
 
-function PostForm({ route, navigation }) {
+function MyDateTimePicker({ route, navigation }) {
   const [date, setDate] = useState(new Date(Date.now()));
-  const { initDate, returnType, returnScreen } = route.params;
+  const { initDate, returnType, returnScreen, text } = route.params;
 
   useEffect(() => {
     setDate(new Date(initDate));
@@ -44,7 +44,7 @@ function PostForm({ route, navigation }) {
             color: "warmGray.50",
           }}
         >
-          Choose Time and Date
+          {text}
         </Heading>
       </CContentTile>
 
@@ -52,10 +52,6 @@ function PostForm({ route, navigation }) {
         <VStack w="100%">
           <FormControl>
             <View>
-              <View>
-                <Text>{date.toString()}</Text>
-              </View>
-
               <View
                 borderWidth="1"
                 borderColor="coolGray.200"
@@ -115,4 +111,4 @@ function PostForm({ route, navigation }) {
   );
 }
 
-export default PostForm;
+export default MyDateTimePicker;
