@@ -51,7 +51,7 @@ function Group({ route, navigation }) {
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
         onPress={() =>
-          navigation.navigate("Post Form", {
+          navigation.navigate("Create Post", {
             date: Date.now(),
             groupId: item.id,
             groupName: item.name,
@@ -68,20 +68,6 @@ function Group({ route, navigation }) {
       </Button>
       <Posts navigation={navigation} posts={posts} />
     </CScrollBackgroundRefresh>
-
-    // <div>
-    //   <h2>Group Details</h2>
-    //   <p>Group id: {item.groupId}</p>
-    //   <p>Admin: {isAdmin ? "true" : "false"}</p>
-    //   <p>Member: {isMember ? "true" : "false"}</p>
-    //   <p>User: {userId}</p>
-
-    //   <div>
-    //     <Memberships groupId={item.groupId} />
-
-    //     {membersSection}
-    //   </div>
-    // </div>
   );
 }
 

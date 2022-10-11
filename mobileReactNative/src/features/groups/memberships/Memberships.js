@@ -1,45 +1,33 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectMemberships } from "./membershipSlice";
-import { selectIsLoggedIn } from "../../sessions/sessionSlice";
-import { Box, Heading, VStack, HStack, Text } from "native-base";
-import { parseISO, format } from "date-fns";
+import React from "react";
 
-function Memberships({ route }) {
-  const userId = useSelector((state) => state.sessions.user.id);
-  const memberships = useSelector(selectMemberships);
-  const [membershipsList, setMembershipsList] = useState("");
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+import { Text, FlatList, VStack, Box, HStack } from "native-base";
+import { parseISO, format } from "date-fns";
+import DP from "../../layout/DP";
+
+function Memberships({ memberships }) {
+  function since(item) {
+    return format(parseISO(item.created_at), "EEE do LLL").toString();
+  }
 
   return (
-    <Box>
-      <Heading fontSize="xl" pt="4" pb="3">
-        Members
-      </Heading>
-      {memberships.map((item) => {
-        let timeCreated = format(
-          parseISO(item.created_at),
-          "MM/dd/yy"
-        ).toString();
-        console.log(timeCreated);
-        return (
-          <Box
-            borderBottomWidth="1"
-            _dark={{
-              borderColor: "gray.600",
-            }}
-            borderColor="coolGray.200"
-            key={item.id}
-          >
-            <HStack space={3} justifyContent="space-between">
-              {/* <Avatar
-                size="48px"
-                source={{
-                  uri: item.avatarUrl,
-                }}
-              /> */}
-              <VStack>
+    <FlatList
+      w="100%"
+      data={memberships}
+      renderItem={({ item }) => (
+        <Box
+          borderBottomWidth="1"
+          _dark={{
+            borderColor: "gray.600",
+          }}
+          borderColor="coolGray.200"
+          pl="4"
+          pr="5"
+          py="2"
+        >
+          <HStack justifyContent="space-between">
+            <HStack>
+              <DP uri={`${item.user.avatar_url}`} />
+              <VStack ml="2">
                 <Text
                   _dark={{
                     color: "warmGray.50",
@@ -55,24 +43,24 @@ function Memberships({ route }) {
                     color: "warmGray.200",
                   }}
                 >
-                  {item.role}
+                  {item.role == "admin" ? "Admin" : "member"}
                 </Text>
               </VStack>
-              <Text
-                fontSize="xs"
-                _dark={{
-                  color: "warmGray.50",
-                }}
-                color="coolGray.800"
-                alignSelf="flex-start"
-              >
-                Since {timeCreated}
-              </Text>
             </HStack>
-          </Box>
-        );
-      })}
-    </Box>
+            <Text
+              fontSize="xs"
+              _dark={{
+                color: "warmGray.50",
+              }}
+              color="coolGray.800"
+            >
+              Since {since(item)}
+            </Text>
+          </HStack>
+        </Box>
+      )}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
 

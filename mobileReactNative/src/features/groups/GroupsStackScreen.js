@@ -43,14 +43,14 @@ function GroupsStackScreen() {
           ),
         })}
       />
-      <GroupsStack.Screen name="Post Form" component={PostForm} />
+      <GroupsStack.Screen name="Create Post" component={PostForm} />
       <GroupsStack.Screen
         name="Time and Date"
         component={DateTimePicker}
         options={({ route }) => ({ title: route.params.mode })}
       />
       <GroupsStack.Screen name="Add Reserve" component={ReserveForm} />
-      <GroupsStack.Screen name="Group Search" component={GroupSearch} />
+      <GroupsStack.Screen name="Your Groups" component={GroupSearch} />
       <GroupsStack.Screen name="Add Shift" component={ShiftForm} />
       <GroupsStack.Screen
         name="GroupInfo"

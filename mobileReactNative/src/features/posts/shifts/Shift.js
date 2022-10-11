@@ -58,7 +58,7 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
                   end: item.end,
                   editingMode: editable,
                   tempId: item.tempId,
-                  returnScreen: "Post Form",
+                  returnScreen: "Create Post",
                 });
               }
             }}

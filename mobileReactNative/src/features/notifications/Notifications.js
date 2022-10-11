@@ -6,16 +6,8 @@ import {
   selectStatus,
   updateNotificationAsync,
 } from "./notificationSlice";
-import { selectUserId, selectIsLoggedIn } from "../sessions/sessionSlice";
-import {
-  Box,
-  Heading,
-  VStack,
-  Button,
-  HStack,
-  Text,
-  FlatList,
-} from "native-base";
+import { selectUserId } from "../sessions/sessionSlice";
+import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
 import {
@@ -25,10 +17,7 @@ import {
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
-  const status = useSelector(selectStatus);
   const userId = useSelector(selectUserId);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const [notificationsList, setNotificationsList] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,9 +28,6 @@ function Notifications() {
     <CBackground>
       <CWholeSpaceContentTile>
         <Box>
-          <Heading fontSize="xl" p="4" pb="3">
-            Recent
-          </Heading>
           <FlatList
             data={notifications}
             renderItem={({ item }) => (

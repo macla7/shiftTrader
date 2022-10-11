@@ -4,15 +4,7 @@ import { fetchMyGroupsAsync, selectMyGroups } from "./groupSlice";
 import { selectUserId } from "../sessions/sessionSlice";
 import { createInviteAsync } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import {
-  Box,
-  Heading,
-  VStack,
-  Button,
-  HStack,
-  Text,
-  FlatList,
-} from "native-base";
+import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import {
   CBackground,
   CWholeSpaceContentTile,

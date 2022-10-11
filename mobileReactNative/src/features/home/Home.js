@@ -25,7 +25,7 @@ function Home({ navigation }) {
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
         onPress={() =>
-          navigation.navigate("Post Form", {
+          navigation.navigate("Create Post", {
             date: Date.now(),
             groupId: 0,
             groupName: "Group Not Selected..",

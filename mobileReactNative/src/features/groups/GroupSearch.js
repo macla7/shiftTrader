@@ -29,7 +29,7 @@ function GroupSearch({ navigation, route }) {
     <CBackground>
       <CContentTile>
         <Heading fontSize="xl" pt="4" pb="3">
-          Your Groups
+          Pick Group
         </Heading>
         {myGroups.map((item) => (
           <Pressable
@@ -82,7 +82,7 @@ function GroupSearch({ navigation, route }) {
           onPress={() => {
             // Pass and merge params back to home screen
             navigation.navigate({
-              name: "Post Form",
+              name: "Create Post",
               params: {
                 groupId: groupId ? groupId : 0,
                 groupName: groupName ? groupName : "Group Not Selected..",

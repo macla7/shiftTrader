@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPostAsync } from "./postSlice";
 import { resetShifts, selectShifts } from "./shifts/shiftSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
-import { Heading, VStack, FormControl, Button, TextArea } from "native-base";
+import { VStack, FormControl, Button, TextArea } from "native-base";
 import Money from "../posts/money/Money";
 import Shift from "./shifts/Shift";
 import { CScrollBackground, CContentTile } from "../layout/LayoutComponents";
@@ -101,29 +101,6 @@ function PostForm({ route, navigation }) {
   return (
     <CScrollBackground>
       <CContentTile>
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Create Post
-        </Heading>
-        <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
-        >
-          To sell or pay someone to take your shifts
-        </Heading>
-      </CContentTile>
-      <CContentTile>
         <VStack w="100%">
           <FormControl
             isInvalid={["shifts"].some((error) =>
@@ -145,7 +122,7 @@ function PostForm({ route, navigation }) {
               mx="1"
               borderRadius="10"
               onPress={() => {
-                navigation.navigate("Group Search", {
+                navigation.navigate("Your Groups", {
                   initGroupId: groupId,
                 });
                 setErrors({ ...errors, group: null });
@@ -172,7 +149,7 @@ function PostForm({ route, navigation }) {
                 navigation.navigate("Time and Date", {
                   initDate: date,
                   returnType: "date",
-                  returnScreen: "Post Form",
+                  returnScreen: "Create Post",
                   text: "Post will end at",
                 });
                 setErrors({ ...errors, date: null });
@@ -211,7 +188,7 @@ function PostForm({ route, navigation }) {
                   endsAt: new Date(date).toString(),
                   initPosition: "",
                   editingMode: false,
-                  returnScreen: "Post Form",
+                  returnScreen: "Create Post",
                 });
                 setErrors({ ...errors, shifts: null });
               }}
@@ -241,7 +218,7 @@ function PostForm({ route, navigation }) {
               onPress={() =>
                 navigation.navigate("Add Reserve", {
                   reserve: reserve,
-                  returnScreen: "Post Form",
+                  returnScreen: "Create Post",
                 })
               }
             >

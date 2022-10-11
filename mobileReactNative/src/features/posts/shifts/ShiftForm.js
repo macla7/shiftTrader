@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createShift, editShift } from "./shiftSlice";
-import { Heading, VStack, FormControl, Button, TextArea } from "native-base";
+import { VStack, FormControl, Button, TextArea } from "native-base";
 import { CScrollBackground, CContentTile } from "../../layout/LayoutComponents";
 
 // Design is to be able to add multiple shifts to a post
@@ -66,30 +66,6 @@ function ShiftForm({ navigation, route }) {
 
   return (
     <CScrollBackground>
-      <CContentTile>
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          {editingMode ? "Edit" : "Add"} Shift
-        </Heading>
-        <Heading
-          mt="1"
-          _dark={{
-            color: "warmGray.200",
-          }}
-          color="coolGray.600"
-          fontWeight="medium"
-          size="xs"
-        >
-          {editingMode ? "Edit" : "Add"} Shift basic info of your shift
-        </Heading>
-      </CContentTile>
-
       <CContentTile>
         <VStack w="100%">
           <FormControl

@@ -2,11 +2,6 @@
 
 ## CURRENT TODO's
 
-- Work to be done on PostForm
-
-  - Bids state working a bit better
-
-- To move all headings to the header..
 - Make some sort of colour theme for buttons (and tweak bids..?)
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
