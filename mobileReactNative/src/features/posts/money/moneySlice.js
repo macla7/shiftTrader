@@ -11,7 +11,6 @@ export const moneySlice = createSlice({
   reducers: {
     setMoney: (state, action) => {
       state.money = action.payload.money;
-      console.log("setting money in moneySlice", state.money);
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

@@ -2,14 +2,17 @@
 
 ## CURRENT TODO's
 
+- Find better default Avatar
 - Make some sort of colour theme for buttons (and tweak bids..?)
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Make notifications area consistent with theme.
+- Profile
+  - Change DP
+  - Change UserName, doesn't have to be unique
 - Likes
 - Comments
 - actions on notifications
-- Convert shift form to just have an 'hours' field, or something like that.. where you can write '5' for example, and it'll auto calculate the end of the shift.
 
 **Create Banking functionality....**
 

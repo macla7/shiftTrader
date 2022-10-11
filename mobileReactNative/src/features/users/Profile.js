@@ -49,8 +49,6 @@ function Profile() {
     dispatch(updateUserAsync(formData));
   }
 
-  console.log(userAvatarUrl);
-
   return (
     <Pressable onPress={Keyboard.dismiss}>
       <CBackground>

@@ -38,11 +38,6 @@ function BidForm({ route, navigation }) {
     return "Asking For";
   }
 
-  useEffect(() => {
-    console.log("hello");
-    console.log(currentMicroDollars);
-  }, [currentMicroDollars]);
-
   // on init component sets state to reserve passed in route params
   useEffect(() => {
     dispatch(

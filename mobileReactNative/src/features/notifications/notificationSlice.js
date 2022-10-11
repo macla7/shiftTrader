@@ -94,7 +94,6 @@ export const notificationSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchNotificationsAsync.fulfilled, (state, action) => {
-        console.log("In Notifications");
         return produce(state, (draftState) => {
           draftState.notifications = action.payload;
           draftState.status = Statuses.UpToDate;

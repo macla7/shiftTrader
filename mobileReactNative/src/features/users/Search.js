@@ -102,10 +102,6 @@ function Search({ route }) {
         recipient_id: freshInvite.external_user_id,
       };
 
-      console.log(
-        "fresh invite detected and so notifications theoretically made..? lol"
-      );
-
       createNotificationBlueprint(notification_blueprint);
     }
   }, [freshInvite.id]);

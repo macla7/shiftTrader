@@ -15,9 +15,6 @@ function Home({ navigation }) {
   }, [homePosts.length]);
 
   function refresh() {
-    console.log(
-      "make the fetch for home feed should be up a level in here...?"
-    );
     dispatch(fetchPostsHomeAsync());
   }
 

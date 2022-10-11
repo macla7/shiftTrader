@@ -72,7 +72,6 @@ export const userSlice = createSlice({
       })
       // you got the thing
       .addCase(fetchUsersAsync.fulfilled, (state, action) => {
-        console.log("In Users");
         return produce(state, (draftState) => {
           draftState.users = action.payload;
           draftState.status = Statuses.UpToDate;

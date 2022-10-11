@@ -34,9 +34,6 @@ function Group({ route, navigation }) {
   }, []);
 
   function refresh() {
-    console.log(
-      "make the fetch for home feed should be up a level in here...?"
-    );
     dispatch(fetchPostsAsync(item.id));
   }
 

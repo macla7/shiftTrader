@@ -24,7 +24,6 @@ function DiscoverGroups() {
   }, [dispatch, otherGroups.length]);
 
   function requestToJoinGroup(groupId) {
-    console.log("triggered?");
     let inviteDetails = {
       group_id: groupId,
       internal_user_id: null,

@@ -50,6 +50,7 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
       {shifts.map((item, index) => {
         return (
           <Pressable
+            key={index}
             onPress={() => {
               if (editable) {
                 navigation.navigate("Add Shift", {
@@ -74,7 +75,6 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
               my="2"
               mx="1"
               borderRadius="10"
-              key={index}
             >
               <VStack>
                 <Text

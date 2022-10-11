@@ -41,7 +41,6 @@ function Groups({ navigation }) {
   // and on myGroups.length change
   useEffect(() => {
     dispatch(fetchMyGroupsAsync());
-    console.log(myGroups);
   }, [dispatch, myGroups.length, isFocused]);
 
   // useFocusEffect(useCallback(() => () => dispatch(fetchMyGroupsAsync())));

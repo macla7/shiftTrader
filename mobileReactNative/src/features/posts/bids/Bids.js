@@ -7,7 +7,6 @@ function Bids(props) {
   let bids = [...props.bids];
   let sortedBids = bids.sort((a, b) => b.price - a.price);
   let reserve = props.reserve;
-  console.log("reserve is: " + props.reserve);
   if (sortedBids.length > 0) {
     reserve = sortedBids[0].price;
   }
