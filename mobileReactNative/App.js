@@ -52,8 +52,6 @@ export default function App() {
     return <></>;
   }
 
-  console.log(theme.fontWeights);
-
   return (
     <Provider store={store}>
       <NavigationContainer theme={MyTheme}>
