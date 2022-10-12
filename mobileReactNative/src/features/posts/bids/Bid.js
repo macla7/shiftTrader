@@ -1,5 +1,5 @@
 import React from "react";
-import { Center, HStack, Text, View } from "native-base";
+import { Center, HStack, Text, View, Box } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet } from "react-native";
 import Money from "../money/Money";
@@ -10,34 +10,46 @@ function Bid(props) {
   let description = <Text>BID</Text>;
   if (props.bid.price < 0) {
     description = (
-      <LinearGradient
-        // Button Linear Gradient
-        colors={["#f9a8d4", "#fbcfe8", "#f9a8d4"]}
-        style={styles.bid}
-      >
-        <Text color="rose.800">ASK</Text>
-      </LinearGradient>
+      <Box justifyContent="center" alignItems="center">
+        <Box borderRadius="full" shadow="3" p="0" mx="1">
+          <LinearGradient
+            // Button Linear Gradient
+            colors={["#f9a8d4", "#fdf2f8", "#f9a8d4"]}
+            borderWidth={1}
+            borderColor="#f9a8d4"
+            style={styles.bid}
+          >
+            <Text color="rose.800">ASK</Text>
+          </LinearGradient>
+        </Box>
+      </Box>
     );
   } else {
     description = (
-      <LinearGradient
-        // Button Linear Gradient
-        colors={["#86efac", "#bbf7d0", "#86efac"]}
-        style={styles.bid}
-      >
-        <Text color="green.800">BID</Text>
-      </LinearGradient>
+      <Box justifyContent="center" alignItems="center">
+        <Box borderRadius="full" shadow="3" p="0" mx="1">
+          <LinearGradient
+            // Button Linear Gradient
+            colors={["#86efac", "#f0fdf4", "#86efac"]}
+            borderWidth={1}
+            borderColor="#86efac"
+            style={styles.bid}
+          >
+            <Text color="green.800">BID</Text>
+          </LinearGradient>
+        </Box>
+      </Box>
     );
   }
 
   return (
     <View borderBottomColor="coolGray.200" borderBottomWidth="1" px="1" pt="1">
-      <HStack>
+      <HStack justifyContent="space-between">
         <DP uri={`${props.bid.avatar_url}`} />
-        {description}
         <Center>
           <Money microDollars={props.bid.price} />
         </Center>
+        {description}
       </HStack>
 
       <Text>
@@ -51,9 +63,12 @@ function Bid(props) {
 
 const styles = StyleSheet.create({
   bid: {
-    padding: 6,
-    borderRadius: "10pt",
-    margin: 4,
+    width: 40,
+    height: 40,
+    resizeMode: "contain",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

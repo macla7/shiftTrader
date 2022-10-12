@@ -30,7 +30,7 @@ function Bids(props) {
         onPress={() =>
           props.navigation.navigate("Bid", {
             reserve: reserve,
-            returnScreen: "Home Feed",
+            returnScreen: "Home",
             postId: props.postId,
           })
         }

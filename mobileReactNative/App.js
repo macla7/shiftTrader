@@ -6,15 +6,15 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import AuthFlow from "./src/features/authFlow/AuthFlow";
 import {
   useFonts,
-  Inconsolata_200ExtraLight,
-  Inconsolata_300Light,
-  Inconsolata_400Regular,
-  Inconsolata_500Medium,
-  Inconsolata_600SemiBold,
-  Inconsolata_700Bold,
-  Inconsolata_800ExtraBold,
-  Inconsolata_900Black,
-} from "@expo-google-fonts/inconsolata";
+  Inter_200ExtraLight,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_800ExtraBold,
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
 import { NativeBaseProvider } from "native-base";
 import { theme } from "./theme";
 import {
@@ -38,14 +38,14 @@ const MyTheme = {
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    Inconsolata_200ExtraLight,
-    Inconsolata_300Light,
-    Inconsolata_400Regular,
-    Inconsolata_500Medium,
-    Inconsolata_600SemiBold,
-    Inconsolata_700Bold,
-    Inconsolata_800ExtraBold,
-    Inconsolata_900Black,
+    Inter_200ExtraLight,
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
+    Inter_900Black,
   });
 
   if (!fontsLoaded) {
@@ -56,16 +56,16 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer theme={MyTheme}>
         <NativeBaseProvider theme={theme}>
-          <StatusBar
-            animated={true}
-            backgroundColor="#61dafb"
-            barStyle="dark-content"
-            hidden="Visible"
-          />
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             flex="1"
           >
+            <StatusBar
+              animated={true}
+              backgroundColor="#61dafb"
+              style="dark"
+              hidden="Visible"
+            />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <AuthFlow />
             </TouchableWithoutFeedback>

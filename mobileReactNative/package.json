@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo-google-fonts/inconsolata": "^0.2.2",
     "@expo-google-fonts/inter": "^0.2.2",
     "@expo-google-fonts/open-sans": "^0.2.2",
     "@rails/actioncable": "^7.0.3-1",

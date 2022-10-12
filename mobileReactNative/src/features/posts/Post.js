@@ -37,7 +37,7 @@ function Post(props) {
   }, []);
 
   return (
-    <Center p="1" m="2" borderRadius="10" bgColor="white" shadow="6">
+    <Center p="1" my="1" bgColor="white" shadow="6">
       <Box width="100%" p="2">
         <HStack>
           <DP uri={`${props.post.avatar_url}`} />

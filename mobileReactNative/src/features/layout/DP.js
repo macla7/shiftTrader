@@ -1,6 +1,6 @@
 import React from "react";
 import CachedImage from "expo-cached-image";
-import { Text } from "native-base";
+import { Text, Box } from "native-base";
 
 function DP({ uri }) {
   function getImageThumbnail(uri) {
@@ -12,22 +12,24 @@ function DP({ uri }) {
   }
 
   return (
-    <CachedImage
-      source={{
-        uri: uri,
-        expiresIn: 2_628_288,
-      }}
-      cacheKey={`${getImageThumbnail(uri)}`}
-      placeholderContent={<Text>Hello</Text>}
-      alt="avatar"
-      style={{
-        width: 40,
-        height: 40,
-        resizeMode: "contain",
-        borderRadius: 50,
-      }}
-      resizeMode="cover"
-    />
+    <Box shadow="3" borderRadius="50%">
+      <CachedImage
+        source={{
+          uri: uri,
+          expiresIn: 2_628_288,
+        }}
+        cacheKey={`${getImageThumbnail(uri)}`}
+        placeholderContent={<Text>Hello</Text>}
+        alt="avatar"
+        style={{
+          width: 40,
+          height: 40,
+          resizeMode: "contain",
+          borderRadius: 50,
+        }}
+        resizeMode="cover"
+      />
+    </Box>
   );
 }
 

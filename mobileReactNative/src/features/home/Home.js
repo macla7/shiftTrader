@@ -21,6 +21,7 @@ function Home({ navigation }) {
   return (
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
+        colorScheme="indigo"
         onPress={() =>
           navigation.navigate("Create Post", {
             date: Date.now(),
@@ -28,7 +29,7 @@ function Home({ navigation }) {
             groupName: "Group Not Selected..",
             description: "",
             reserve: 0,
-            returnScreen: "Home Feed",
+            returnScreen: "Home",
           })
         }
         mx="6"

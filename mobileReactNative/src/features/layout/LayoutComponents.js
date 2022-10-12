@@ -62,8 +62,8 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#064e3b", "#ecfdf5"]}
+        end={{ x: 1, y: 0 }}
+        colors={["#064e3b", "#059669"]}
         width="100%"
         minHeight="100%"
       >

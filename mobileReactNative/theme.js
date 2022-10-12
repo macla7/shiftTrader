@@ -2,38 +2,38 @@ import { extendTheme } from "native-base";
 
 export const theme = extendTheme({
   fontConfig: {
-    Inconsolata: {
+    Inter: {
       200: {
-        normal: "Inconsolata_200ExtraLight",
+        normal: "Inter_200ExtraLight",
       },
       300: {
-        normal: "Inconsolata_300Light",
+        normal: "Inter_300Light",
       },
       400: {
-        normal: "Inconsolata_400Regular",
+        normal: "Inter_400Regular",
       },
       500: {
-        normal: "Inconsolata_500Medium",
+        normal: "Inter_500Medium",
       },
       600: {
-        normal: "Inconsolata_600SemiBold",
+        normal: "Inter_600SemiBold",
       },
       700: {
-        normal: "Inconsolata_700Bold",
+        normal: "Inter_700Bold",
       },
       800: {
-        normal: "Inconsolata_800ExtraBold",
+        normal: "Inter_800ExtraBold",
       },
       900: {
-        normal: "Inconsolata_900Black",
+        normal: "Inter_900Black",
       },
     },
   },
 
   // Make sure values below matches any of the keys in `fontConfig`
   fonts: {
-    heading: "Inconsolata",
-    body: "Inconsolata",
-    mono: "Inconsolata",
+    heading: "Inter",
+    body: "Inter",
+    mono: "Inter",
   },
 });

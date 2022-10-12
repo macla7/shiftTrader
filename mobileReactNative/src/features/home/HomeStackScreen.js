@@ -14,7 +14,11 @@ const HomeStack = createNativeStackNavigator();
 function GroupsStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home Feed" component={Home} />
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={({ route }) => ({ title: "Shift Market" })}
+      />
       <HomeStack.Screen name="Create Post" component={PostForm} />
       <HomeStack.Screen
         name="Time and Date"
