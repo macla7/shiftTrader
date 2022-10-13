@@ -32,9 +32,9 @@ function Home({ navigation }) {
             returnScreen: "Home Feed",
           })
         }
-        mx="6"
-        my="4"
-        w="90%"
+        mx="2"
+        mt="2"
+        mb="1"
       >
         Create Post
       </Button>

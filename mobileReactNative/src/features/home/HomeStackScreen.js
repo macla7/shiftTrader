@@ -17,7 +17,16 @@ function GroupsStackScreen() {
       <HomeStack.Screen
         name="Home Feed"
         component={Home}
-        options={({ route }) => ({ title: "Shift Market" })}
+        options={({ route }) => ({
+          title: "Shift Market",
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+          headerTintColor: "#047857",
+          headerTitleStyle: {
+            fontSize: "28",
+          },
+        })}
       />
       <HomeStack.Screen name="Create Post" component={PostForm} />
       <HomeStack.Screen

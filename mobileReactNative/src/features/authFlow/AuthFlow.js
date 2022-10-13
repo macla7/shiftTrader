@@ -33,13 +33,15 @@ function AuthFlow() {
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
                 if (route.name === "Home") {
-                  return <HomeIcon width="25" height="25" />;
+                  return <HomeIcon width="25" height="25" fill="#064e3b" />;
                 } else if (route.name === "Groups") {
-                  return <GroupsIcon width="40" height="40" />;
+                  return <GroupsIcon width="40" height="40" fill="#064e3b" />;
                 } else if (route.name === "Notifications") {
-                  return <NotificationsIcon width="25" height="25" />;
+                  return (
+                    <NotificationsIcon width="25" height="25" fill="#064e3b" />
+                  );
                 } else if (route.name === "Profile") {
-                  return <ProfileIcon width="25" height="25" />;
+                  return <ProfileIcon width="25" height="25" fill="#064e3b" />;
                 }
               },
               tabBarActiveTintColor: "tomato",
