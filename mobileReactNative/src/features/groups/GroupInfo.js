@@ -35,6 +35,7 @@ function GroupInfo({ route, navigation }) {
         <Memberships memberships={memberships} />
         <VStack w="100%">
           <Button
+            colorScheme="indigo"
             mx="4"
             my="2"
             onPress={() =>

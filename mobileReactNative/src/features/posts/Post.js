@@ -38,6 +38,17 @@ function Post(props) {
 
   return (
     <Center p="1" my="1" bgColor="white" shadow="6">
+      <Center width="100%" px="2">
+        <Text
+          _dark={{
+            color: "warmGray.50",
+          }}
+          color="coolGray.800"
+          bold
+        >
+          {props.post.group_name}
+        </Text>
+      </Center>
       <Box width="100%" p="2">
         <HStack>
           <DP uri={`${props.post.avatar_url}`} />
@@ -50,7 +61,7 @@ function Post(props) {
                 color="coolGray.800"
                 bold
               >
-                {props.post.postor_email} in {props.post.group_name}
+                {props.post.postor_email}
               </Text>
               <HStack justifyContent="space-between">
                 <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>

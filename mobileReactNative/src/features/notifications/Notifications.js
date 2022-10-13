@@ -62,6 +62,7 @@ function Notifications() {
                     </Text>
                   </VStack>
                   <Button
+                    colorScheme="indigo"
                     mt="2"
                     onPress={() => {
                       handleAcceptInvite(item);

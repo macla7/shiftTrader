@@ -74,8 +74,8 @@ function MoneyScroll(props) {
           contentOffset={
             props.type == "reserve" ? { x: 0, y: 10000 } : { x: 0, y: 0 }
           }
-          // onMomentumScrollEnd={handleScroll}
-          onScroll={handleScroll}
+          onMomentumScrollEnd={handleScroll}
+          onScrollEndDrag={handleScroll}
           scrollEventThrottle="100"
         >
           <View w="200px">

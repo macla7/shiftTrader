@@ -12,4 +12,7 @@ class Bid < ApplicationRecord
     return self.user.avatar_url
   end
 
+  def bidder
+    return self.user.email
+  end
 end

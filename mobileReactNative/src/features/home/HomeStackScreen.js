@@ -15,7 +15,7 @@ function GroupsStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
-        name="Home"
+        name="Home Feed"
         component={Home}
         options={({ route }) => ({ title: "Shift Market" })}
       />

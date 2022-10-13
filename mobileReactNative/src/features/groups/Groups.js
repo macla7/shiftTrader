@@ -95,10 +95,16 @@ function Groups({ navigation }) {
           keyExtractor={(item) => item.id}
         />
         <VStack w="100%">
-          <Button mx="4" mt="2" onPress={() => navigation.navigate("Discover")}>
+          <Button
+            colorScheme="indigo"
+            mx="4"
+            mt="2"
+            onPress={() => navigation.navigate("Discover")}
+          >
             Discover Groups
           </Button>
           <Button
+            colorScheme="indigo"
             mx="4"
             my="2"
             onPress={() =>

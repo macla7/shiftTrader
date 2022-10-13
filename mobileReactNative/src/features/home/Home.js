@@ -29,7 +29,7 @@ function Home({ navigation }) {
             groupName: "Group Not Selected..",
             description: "",
             reserve: 0,
-            returnScreen: "Home",
+            returnScreen: "Home Feed",
           })
         }
         mx="6"

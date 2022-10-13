@@ -154,7 +154,7 @@ function Search({ route }) {
                 )}
               </VStack>
             </FormControl>
-            <Button onPress={onSubmit} mt="5" colorScheme="cyan">
+            <Button onPress={onSubmit} mt="5" colorScheme="indigo">
               Invite
             </Button>
           </VStack>

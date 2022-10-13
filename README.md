@@ -3,10 +3,7 @@
 ## CURRENT TODO's
 
 - Test Android similuator
-- change onScroll back for bids.... runs a million calls if just on regular scroll...
-- Edit bid to include name.. center time since.
 - Login and Signup screen need keyboard dismiss stuff.
-- Make some sort of colour theme for buttons (and tweak bids..?)
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Make notifications area consistent with theme.

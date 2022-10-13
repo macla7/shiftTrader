@@ -28,6 +28,7 @@ function GroupsStackScreen() {
           title: route.params.item.name,
           headerRight: () => (
             <Button
+              colorScheme="indigo"
               variant="unstyled"
               h="44px"
               w="44px"

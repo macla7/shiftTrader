@@ -83,6 +83,7 @@ function DiscoverGroups() {
                   </Text>
                 </VStack>
                 <Button
+                  colorScheme="indigo"
                   onPress={() => requestToJoinGroup(item.id)}
                   w="20%"
                   h="100%"

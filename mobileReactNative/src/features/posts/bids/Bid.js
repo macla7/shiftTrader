@@ -52,7 +52,8 @@ function Bid(props) {
         {description}
       </HStack>
 
-      <Text>
+      <Text fontSize="2xs">{props.bid.bidder}</Text>
+      <Text fontSize="2xs">
         {formatDistanceToNow(new Date(props.bid.created_at), {
           addSuffix: true,
         })}

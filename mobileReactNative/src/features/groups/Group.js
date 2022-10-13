@@ -47,6 +47,7 @@ function Group({ route, navigation }) {
   return (
     <CScrollBackgroundRefresh refreshAction={() => refresh()}>
       <Button
+        colorScheme="indigo"
         onPress={() =>
           navigation.navigate("Create Post", {
             date: Date.now(),

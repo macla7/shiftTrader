@@ -80,7 +80,9 @@ function Profile() {
           >
             Save
           </Button>
-          <Button onPress={pickImage}>Edit</Button>
+          <Button colorScheme="indigo" onPress={pickImage}>
+            Edit
+          </Button>
           {image && (
             <Image
               source={{ uri: image }}
