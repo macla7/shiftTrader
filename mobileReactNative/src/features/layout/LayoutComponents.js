@@ -9,12 +9,12 @@ export function CBackground({ children }) {
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#064e3b", "#ecfdf5"]}
+        end={{ x: 1, y: 0 }}
+        colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
         width="100%"
         height="100%"
       >
-        <Center p="2" w="100%" h="100%">
+        <Center py="1" w="100%" h="100%">
           {children}
         </Center>
       </LinearGradient>
@@ -28,13 +28,13 @@ export function CScrollBackground({ children }) {
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#064e3b", "#ecfdf5"]}
+        end={{ x: 1, y: 0 }}
+        colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
         width="100%"
         flex="1"
         paddingVertical={20}
       >
-        <Center w="100%" p="0" flex="1">
+        <Center w="100%" py="1" flex="1">
           {children}
         </Center>
       </LinearGradient>
@@ -77,7 +77,7 @@ export function CScrollBackgroundRefresh({ children, refreshAction }) {
 
 export function CContentTile({ children }) {
   return (
-    <Center p="4" m="2" w="95%" borderRadius="10" bgColor="white" shadow="6">
+    <Center p="4" w="100%" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -85,7 +85,7 @@ export function CContentTile({ children }) {
 
 export function CWholeSpaceContentTile({ children }) {
   return (
-    <Center w="100%" borderRadius="10" h="95%" bgColor="white" shadow="6">
+    <Center w="100%" h="100%" bgColor="white" shadow="6">
       {children}
     </Center>
   );
@@ -101,7 +101,7 @@ export function CWholeSpaceRefreshTile({ children, refreshAction }) {
   }, []);
 
   return (
-    <Box w="100%" borderRadius="10" h="95%" bgColor="white" shadow="6">
+    <Box w="100%" h="100%" bgColor="white" shadow="6">
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
