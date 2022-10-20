@@ -24,7 +24,7 @@ function GroupsStackScreen() {
           },
           headerTintColor: "#047857",
           headerTitleStyle: {
-            fontSize: "28",
+            fontSize: 28,
           },
         })}
       />

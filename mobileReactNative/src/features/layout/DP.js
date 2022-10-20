@@ -12,7 +12,7 @@ function DP({ uri }) {
   }
 
   return (
-    <Box shadow="3" borderRadius="50%">
+    <Box shadow="3" borderRadius="50">
       <CachedImage
         source={{
           uri: uri,

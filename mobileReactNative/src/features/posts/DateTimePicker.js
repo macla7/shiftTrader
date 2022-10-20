@@ -65,7 +65,8 @@ function MyDateTimePicker({ route, navigation }) {
                   textColor="black"
                   value={date}
                   mode={"time"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  display={Platform.OS === "ios" ? "spinner" : "spinner"}
+                  positiveButtonLabel={Platform.OS === "ios" ? "" : "Ok!"}
                   is24Hour={true}
                   onChange={onChange}
                 />
@@ -84,7 +85,8 @@ function MyDateTimePicker({ route, navigation }) {
                   textColor="black"
                   value={date}
                   mode={"date"}
-                  display={Platform.OS === "ios" ? "spinner" : "default"}
+                  display={Platform.OS === "ios" ? "spinner" : "spinner"}
+                  positiveButtonLabel={Platform.OS === "ios" ? "" : "Ok!"}
                   is24Hour={true}
                   onChange={onChange}
                 />

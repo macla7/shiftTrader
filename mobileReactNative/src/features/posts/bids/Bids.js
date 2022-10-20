@@ -14,7 +14,7 @@ function Bids(props) {
   return (
     <VStack maxH="64" justifyContent="space-between">
       {sortedBids.length == 0 ? (
-        <AspectRatio ratio="1/1">
+        <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }}>
           <BidIcon width="100%" height="100%" fill="#14532d" />
         </AspectRatio>
       ) : (

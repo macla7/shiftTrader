@@ -52,7 +52,7 @@ function Post(props) {
       <Box width="100%" p="2">
         <HStack>
           <DP uri={`${props.post.avatar_url}`} />
-          <Box ml="2" flexGrow="1">
+          <Box ml="2" flexGrow={1}>
             <VStack>
               <Text
                 _dark={{
@@ -79,7 +79,7 @@ function Post(props) {
       </Box>
 
       <Flex direction="row">
-        <Box flex="4">
+        <Box flex={4}>
           <CInternalBorderHeaderTile>
             <Text>SHIFTS</Text>
           </CInternalBorderHeaderTile>
@@ -89,7 +89,7 @@ function Post(props) {
             invalidShiftIds={[]}
           />
         </Box>
-        <Box flex="3">
+        <Box flex={3}>
           <CInternalBorderHeaderTile>
             <Text>BIDS</Text>
           </CInternalBorderHeaderTile>

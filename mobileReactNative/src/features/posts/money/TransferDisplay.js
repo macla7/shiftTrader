@@ -17,26 +17,26 @@ function TransferDisplay(props) {
     ) {
       return (
         <Flex direction="row">
-          <Center flex="1" aspectRatio="1">
+          <Center flex={1} aspectRatio={1}>
             <Text fontSize="2xl">You</Text>
           </Center>
           <Flex
-            flex="2"
+            flex={2}
             direction="row"
             alignItems="center"
             justifyItems="center"
           >
-            <View flex="1" aspectRatio="2">
+            <View flex={1} aspectRatio={2}>
               <ArrowRight width="100%" height="100%" fill="black" />
             </View>
-            <View flex="2" aspectRatio="2">
+            <View flex={2} aspectRatio={2}>
               <MoneyIcon width="100%" height="100%" fill="#f43f5e" />
             </View>
-            <View flex="1" aspectRatio="2">
+            <View flex={1} aspectRatio={2}>
               <ArrowRight width="100%" height="100%" fill="black" />
             </View>
           </Flex>
-          <Center flex="1" aspectRatio="1">
+          <Center flex={1} aspectRatio={1}>
             <Text fontSize="2xl">Co</Text>
             <Text fontSize="2xl">Worker</Text>
           </Center>
@@ -48,26 +48,26 @@ function TransferDisplay(props) {
     ) {
       return (
         <Flex direction="row">
-          <Center flex="1" aspectRatio="1">
+          <Center flex={1} aspectRatio={1}>
             <Text fontSize="2xl">You</Text>
           </Center>
           <Flex
-            flex="2"
+            flex={2}
             direction="row"
             alignItems="center"
             justifyItems="center"
           >
-            <View flex="1" aspectRatio="2">
+            <View flex={1} aspectRatio={2}>
               <ArrowLeft width="100%" height="100%" fill="black" />
             </View>
-            <View flex="2" aspectRatio="2">
+            <View flex={2} aspectRatio={2}>
               <MoneyIcon width="100%" height="100%" fill="#22c55e" />
             </View>
-            <View flex="1" aspectRatio="2">
+            <View flex={1} aspectRatio={2}>
               <ArrowLeft width="100%" height="100%" fill="black" />
             </View>
           </Flex>
-          <Center flex="1" aspectRatio="1">
+          <Center flex={1} aspectRatio={1}>
             <Text fontSize="2xl">Co</Text>
             <Text fontSize="2xl">Worker</Text>
           </Center>

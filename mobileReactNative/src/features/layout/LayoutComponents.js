@@ -31,10 +31,10 @@ export function CScrollBackground({ children }) {
         end={{ x: 1, y: 0 }}
         colors={["#064e3b", "#064e3b", "#065f46", "#047857"]}
         width="100%"
-        flex="1"
+        flex={1}
         paddingVertical={20}
       >
-        <Center w="100%" py="1" flex="1">
+        <Center w="100%" py="1" flex={1}>
           {children}
         </Center>
       </LinearGradient>

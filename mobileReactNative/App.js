@@ -23,6 +23,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { Text } from "native-base";
 
 const MyTheme = {
   dark: false,
@@ -58,14 +59,9 @@ export default function App() {
         <NativeBaseProvider theme={theme}>
           <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
-            flex="1"
+            height="100%"
           >
-            <StatusBar
-              animated={true}
-              backgroundColor="#61dafb"
-              style="dark"
-              hidden="Visible"
-            />
+            <StatusBar animated={true} backgroundColor="#61dafb" style="dark" />
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <AuthFlow />
             </TouchableWithoutFeedback>

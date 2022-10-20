@@ -114,7 +114,7 @@ function PostForm({ route, navigation }) {
               color="coolGray.800"
               variant="Unstyled"
               display="flex"
-              justifyContent="start"
+              justifyContent="flex-start"
               borderColor={errors["group"] ? "error.600" : "muted.300"}
               borderWidth="1"
               p="2"
@@ -138,7 +138,7 @@ function PostForm({ route, navigation }) {
               color="coolGray.800"
               variant="Unstyled"
               display="flex"
-              justifyContent="start"
+              justifyContent="flex-start"
               borderColor={errors["date"] ? "error.600" : "muted.300"}
               borderWidth="1"
               p="2"
@@ -208,7 +208,7 @@ function PostForm({ route, navigation }) {
               color="coolGray.800"
               variant="Unstyled"
               display="flex"
-              justifyContent="start"
+              justifyContent="flex-start"
               borderColor="muted.300"
               borderWidth="1"
               p="2"

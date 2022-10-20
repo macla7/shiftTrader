@@ -42,14 +42,7 @@ function MoneyScroll(props) {
   }, [currentMicroDollars]);
 
   return (
-    <Box
-      h="400px"
-      w="200px"
-      m="4"
-      bgColor={color}
-      borderRadius="10%"
-      shadow="6"
-    >
+    <Box h="400px" w="200px" m="4" bgColor={color} borderRadius="10" shadow="6">
       {/* <FlatList
             data={dollars}
             renderItem={(dollar) => <Box>{dollar}</Box>}
@@ -67,7 +60,7 @@ function MoneyScroll(props) {
         style={styles.background}
       >
         <ScrollView
-          snapToInterval="100"
+          snapToInterval={100}
           snapToalignment="center"
           centerContent
           decelerationRate="fast"
@@ -76,7 +69,7 @@ function MoneyScroll(props) {
           }
           onMomentumScrollEnd={handleScroll}
           onScrollEndDrag={handleScroll}
-          scrollEventThrottle="100"
+          scrollEventThrottle={100}
         >
           <View w="200px">
             {props.money.map((money, i) => {
@@ -114,7 +107,7 @@ const styles = StyleSheet.create({
     width: 200,
     zIndex: 1,
     pointerEvents: "none",
-    borderRadius: "10%",
+    borderRadius: 10,
   },
 });
 
