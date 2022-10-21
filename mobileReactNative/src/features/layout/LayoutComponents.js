@@ -113,18 +113,17 @@ export function CWholeSpaceRefreshTile({ children, refreshAction }) {
   );
 }
 
-export function CInternalBorderTile({ children }) {
+export function CInternalBorderTile({ children, borderColor }) {
   return (
     <Box
+      borderColor={borderColor}
       borderWidth="1"
-      _dark={{
-        borderColor: "gray.600",
-      }}
-      borderColor="coolGray.200"
-      px="2"
-      my="2"
+      p="1"
+      mb="1"
       mx="1"
       borderRadius="10"
+      bgColor="white"
+      shadow="1"
     >
       {children}
     </Box>
@@ -139,9 +138,11 @@ export function CInternalBorderHeaderTile({ children }) {
         borderColor: "gray.600",
       }}
       borderColor="coolGray.200"
-      mt="2"
+      my="2"
       mx="1"
       borderRadius="10"
+      bgColor="white"
+      shadow="1"
     >
       {children}
     </Center>

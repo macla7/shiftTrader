@@ -2,10 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
 import { Box, Text, Flex, HStack, VStack, Center } from "native-base";
-import {
-  CInternalBorderTile,
-  CInternalBorderHeaderTile,
-} from "../layout/LayoutComponents";
+import { CInternalBorderHeaderTile } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
 import DP from "../layout/DP";
 import { format, formatDistanceToNow } from "date-fns";
@@ -79,7 +76,7 @@ function Post(props) {
       </Box>
 
       <Flex direction="row">
-        <Box flex={1}>
+        <Box flex={4}>
           <CInternalBorderHeaderTile>
             <Text>SHIFTS</Text>
           </CInternalBorderHeaderTile>
@@ -89,18 +86,18 @@ function Post(props) {
             invalidShiftIds={[]}
           />
         </Box>
-        <Box flex={1}>
+        <Box flex={3}>
           <CInternalBorderHeaderTile>
             <Text>BIDS</Text>
           </CInternalBorderHeaderTile>
-          <CInternalBorderTile>
+          <Box>
             <Bids
               bids={bids}
               postId={props.post.id}
               navigation={props.navigation}
               reserve={props.post.reserve}
             />
-          </CInternalBorderTile>
+          </Box>
         </Box>
       </Flex>
     </Center>

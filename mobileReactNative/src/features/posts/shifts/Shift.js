@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, VStack, HStack, Text, Pressable } from "native-base";
 import { format } from "date-fns";
+import { CInternalBorderTile } from "../../layout/LayoutComponents";
 
 function Shift({ navigation, shifts, editable, invalidShiftIds }) {
   function getDays(item) {
@@ -64,17 +65,14 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
               }
             }}
           >
-            <Box
+            <CInternalBorderTile
               borderColor={
                 invalidShiftIds.includes(item.tempId)
                   ? "error.600"
-                  : "muted.300"
+                  : editable
+                  ? "muted.300"
+                  : "coolGray.200"
               }
-              borderWidth="1"
-              p="2"
-              my="2"
-              mx="1"
-              borderRadius="10"
             >
               <VStack>
                 <Text
@@ -109,7 +107,7 @@ function Shift({ navigation, shifts, editable, invalidShiftIds }) {
                   </VStack>
                 </HStack>
               </VStack>
-            </Box>
+            </CInternalBorderTile>
           </Pressable>
         );
       })}
