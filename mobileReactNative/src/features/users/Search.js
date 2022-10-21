@@ -180,7 +180,7 @@ function Search({ route }) {
                   py="2"
                 >
                   <HStack>
-                    <DP uri={`${item.avatar_url}`} />
+                    {item.avatar_url ? <DP uri={`${item.avatar_url}`} /> : ""}
                     <VStack ml="2">
                       <Text
                         _dark={{

@@ -30,6 +30,7 @@ export const initialBidState = {
   post_id: 0,
   user_id: 0,
   price: 0,
+  avatar_url: "",
   created_at: Date.now(),
 };
 
@@ -49,6 +50,7 @@ export const initialState = {
       ends_at: Date.now(),
       created_at: formatISO(Date.now()),
       updated_at: "",
+      avatar_url: "",
       bids: [initialBidState],
       likes: [initialLikeState],
       shifts: [initialShiftState],

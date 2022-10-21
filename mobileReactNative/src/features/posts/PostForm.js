@@ -107,7 +107,8 @@ function PostForm({ route, navigation }) {
               Object.keys(errors).includes(error)
             )}
           >
-            <FormControl.Label mb="0">Group</FormControl.Label>
+            <FormControl.Label mb="-1">Group</FormControl.Label>
+            <FormControl.ErrorMessage>{errors.group}</FormControl.ErrorMessage>
             <Button
               fontSize="md"
               fontWeight="400"
@@ -130,8 +131,9 @@ function PostForm({ route, navigation }) {
             >
               {groupName}
             </Button>
-            <FormControl.ErrorMessage>{errors.group}</FormControl.ErrorMessage>
-            <FormControl.Label mb="0">Post Ends</FormControl.Label>
+
+            <FormControl.Label mb="-1">Post Ends</FormControl.Label>
+            <FormControl.ErrorMessage>{errors.date}</FormControl.ErrorMessage>
             <Button
               fontSize="md"
               fontWeight="400"
@@ -150,7 +152,7 @@ function PostForm({ route, navigation }) {
                   initDate: date,
                   returnType: "date",
                   returnScreen: "Create Post",
-                  text: "Post will end at",
+                  text: "Post Ends",
                 });
                 setErrors({ ...errors, date: null });
               }}
@@ -159,15 +161,8 @@ function PostForm({ route, navigation }) {
 
               {format(new Date(date), "p")}
             </Button>
-            <FormControl.ErrorMessage>{errors.date}</FormControl.ErrorMessage>
 
-            <FormControl.Label mb="0">Shifts</FormControl.Label>
-            <Shift
-              shifts={shifts ? shifts : []}
-              navigation={navigation}
-              editable={true}
-              invalidShiftIds={invalidShiftIds}
-            />
+            <FormControl.Label mb="-1">Shifts</FormControl.Label>
             {errors["shifts"] ? (
               <FormControl.ErrorMessage>
                 {errors.shifts}
@@ -175,6 +170,12 @@ function PostForm({ route, navigation }) {
             ) : (
               <FormControl.HelperText>Time and Position</FormControl.HelperText>
             )}
+            <Shift
+              shifts={shifts ? shifts : []}
+              navigation={navigation}
+              editable={true}
+              invalidShiftIds={invalidShiftIds}
+            />
 
             <Button
               fontSize="md"
@@ -196,7 +197,7 @@ function PostForm({ route, navigation }) {
               Add Shift
             </Button>
 
-            <FormControl.Label mb="0">Reserve</FormControl.Label>
+            <FormControl.Label mb="-1">Reserve</FormControl.Label>
             <FormControl.HelperText>
               {reserve < 0
                 ? "Maximum you are willing to pay"
@@ -225,8 +226,12 @@ function PostForm({ route, navigation }) {
               <Money microDollars={reserve} />
             </Button>
 
-            <FormControl.Label mb="0">Description</FormControl.Label>
+            <FormControl.Label mb="-1">Description</FormControl.Label>
+            <FormControl.ErrorMessage>
+              {errors.description}
+            </FormControl.ErrorMessage>
             <TextArea
+              mt="2"
               borderRadius="10"
               h={20}
               placeholder="Add Description here.."
@@ -237,9 +242,6 @@ function PostForm({ route, navigation }) {
               }}
               isInvalid={errors["description"]}
             />
-            <FormControl.ErrorMessage>
-              {errors.description}
-            </FormControl.ErrorMessage>
           </FormControl>
           <Button mt="2" colorScheme="indigo" onPress={onSubmit}>
             Make Post

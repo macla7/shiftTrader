@@ -2,8 +2,6 @@
 
 ## CURRENT TODO's
 
-- Get datetimepicker example project working.. tinker with it
-- implement a cleaner solution in ST.
 - big bug, where on new bid the names disappear.
 - Test Android similuator
 - Login and Signup screen need keyboard dismiss stuff.

@@ -26,7 +26,11 @@ function Memberships({ memberships }) {
         >
           <HStack justifyContent="space-between">
             <HStack>
-              <DP uri={`${item.user.avatar_url}`} />
+              {item.user.avatar_url ? (
+                <DP uri={`${item.user.avatar_url}`} />
+              ) : (
+                ""
+              )}
               <VStack ml="2">
                 <Text
                   _dark={{
