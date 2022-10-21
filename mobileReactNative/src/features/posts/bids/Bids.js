@@ -18,7 +18,7 @@ function Bids(props) {
           <BidIcon width="100%" height="100%" fill="#14532d" />
         </AspectRatio>
       ) : (
-        <ScrollView>
+        <ScrollView nestedScrollEnabled>
           {sortedBids.map((item) => {
             return <Bid bid={item} key={item.id} />;
           })}

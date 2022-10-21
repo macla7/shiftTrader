@@ -2,8 +2,6 @@
 
 ## CURRENT TODO's
 
-- big bug, where on new bid the names disappear.
-- Test Android similuator
 - Login and Signup screen need keyboard dismiss stuff.
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)

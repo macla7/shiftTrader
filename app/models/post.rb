@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   end
 
   def bids_with_avatars
-    serializable_hash(include: [bids: {methods: :avatar_url}]) 
+    serializable_hash(include: [bids: {methods: [:avatar_url, :bidder]}]) 
   end
 
 end

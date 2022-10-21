@@ -61,7 +61,7 @@ export default function App() {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             height="100%"
           >
-            <StatusBar animated={true} backgroundColor="#61dafb" style="dark" />
+            {/* <StatusBar animated={true} backgroundColor="#61dafb" style="dark" /> */}
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <AuthFlow />
             </TouchableWithoutFeedback>
