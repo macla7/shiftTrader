@@ -16,7 +16,7 @@ function DP({ uri }) {
       <CachedImage
         source={{
           uri: uri,
-          expiresIn: 2_628_288,
+          expiresIn: 2628288,
         }}
         cacheKey={`${getImageThumbnail(uri)}`}
         placeholderContent={<Text>Hello</Text>}

@@ -15,11 +15,10 @@ function Bid(props) {
         justifyContent="center"
         alignItems="center"
         flex={1}
-        borderRadius="10"
+        borderRadius="5"
         shadow="1"
         p="0"
-        mt="1"
-        mx="1"
+        mb="1"
         flexDirection="row"
       >
         <LinearGradient
@@ -42,11 +41,10 @@ function Bid(props) {
         justifyContent="center"
         alignItems="center"
         flex={1}
-        borderRadius="10"
+        borderRadius="5"
         shadow="1"
         p="0"
-        mt="1"
-        mx="1"
+        mb="1"
         flexDirection="row"
       >
         <LinearGradient
@@ -67,6 +65,7 @@ function Bid(props) {
 
   return (
     <CInternalBorderTile borderColor="coolGray.200">
+      {description}
       <HStack>
         {props.bid.avatar_url ? <DP uri={`${props.bid.avatar_url}`} /> : ""}
         <Box ml="2" flexGrow={1}>
@@ -80,8 +79,6 @@ function Bid(props) {
           </VStack>
         </Box>
       </HStack>
-
-      {description}
     </CInternalBorderTile>
   );
 }
@@ -90,7 +87,7 @@ const styles = StyleSheet.create({
   bid: {
     paddingHorizontal: 10,
     height: 25,
-    borderRadius: 10,
+    borderRadius: 5,
     justifyContent: "center",
     alignItems: "center",
     flexGrow: 1,
