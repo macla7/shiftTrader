@@ -39,6 +39,10 @@ module NotificationHelpers
 
   def getRecipients(notification_blueprint_params, current_user)
     set_entity(notification_blueprint_params['notificationable_type'], notification_blueprint_params['notificationable_id'])
+    p 'in notification helper, entity is'
+    p @group
+    p 'current user is'
+    p current_user
     case notification_blueprint_params['notification_type']
     when 1
       return [User.find(notification_blueprint_params['recipient_id'])]

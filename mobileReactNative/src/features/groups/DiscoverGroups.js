@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOtherGroupsAsync, selectOtherGroups } from "./groupSlice";
 import { selectUserId } from "../sessions/sessionSlice";
-import { createInviteAsync } from "./invites/inviteSlice";
+import { createInviteAsync, selectFreshInvite } from "./invites/inviteSlice";
 import { createNotificationBlueprint } from "../notifications/notificationBlueprintAPI";
 import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
 import { selectAuthToken } from "../sessions/sessionSlice";
@@ -16,6 +16,7 @@ function DiscoverGroups() {
   const authToken = useSelector(selectAuthToken);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
+  const freshInvite = useSelector(selectFreshInvite);
 
   // Called on initialise, because dispatch changes (on intialise)
   // and on myGroups.length change
@@ -30,18 +31,20 @@ function DiscoverGroups() {
       external_user_id: userId,
       request: true,
     };
-
     dispatch(createInviteAsync(inviteDetails));
-
-    // if above succeeds ..?
-    let notification_blueprint = {
-      notificationable_type: "Invite",
-      notificationable_id: groupId,
-      notification_type: 3,
-    };
-
-    createNotificationBlueprint(notification_blueprint, authToken);
   }
+
+  useEffect(() => {
+    if (freshInvite.id != 0) {
+      let notification_blueprint = {
+        notificationable_type: "Invite",
+        notificationable_id: freshInvite.id,
+        notification_type: 3,
+      };
+
+      createNotificationBlueprint(notification_blueprint);
+    }
+  }, [freshInvite.id]);
 
   function refresh() {
     dispatch(fetchOtherGroupsAsync());

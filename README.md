@@ -2,6 +2,7 @@
 
 ## CURRENT TODO's
 
+- Fix requestToJoinGroup notification workflow.
 - Login and Signup screen need keyboard dismiss stuff.
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
@@ -49,6 +50,8 @@
 - DB protections to stop duplicate memberships.
 - Ejecting from Expo?
 - Using variable font?
+- Maybe 10 or so default DP's to choose from
+- Reacts (likes and what not)
 
 **Do README**
 

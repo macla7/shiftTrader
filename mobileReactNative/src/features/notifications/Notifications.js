@@ -65,7 +65,7 @@ function Notifications() {
                     colorScheme="indigo"
                     mt="2"
                     onPress={() => {
-                      handleAcceptInvite(item);
+                      startAction(item);
                     }}
                     w="20%"
                     h="10"
@@ -82,6 +82,14 @@ function Notifications() {
     </CBackground>
   );
 
+  function startAction(notification) {
+    if (notification.notification_blueprint.notification_type === 1) {
+      handleAcceptInvite(notification);
+    } else if (notification.notification_blueprint.notification_type === 3) {
+      handleAcceptRequest(notification);
+    }
+  }
+
   function handleAcceptInvite(notification) {
     // create membership
     let membershipDetails = {
@@ -91,6 +99,29 @@ function Notifications() {
       status: 0,
     };
     dispatch(createMembershipAsync(membershipDetails));
+    // update invite
+    let invite = {
+      inviteDetails: {
+        accepted: true,
+      },
+      id: notification.notification_blueprint.notificationable_id,
+      group_id: notification.group_id,
+    };
+    dispatch(updateInviteAsync(invite));
+
+    actionNotification(notification);
+  }
+
+  function handleAcceptRequest(notification) {
+    // create membership
+    let membershipDetails = {
+      group_id: notification.group_id,
+      user_id: notification.notification_origin.notifier_id,
+      role: 1,
+      status: 0,
+    };
+    dispatch(createMembershipAsync(membershipDetails));
+
     // update invite
     let invite = {
       inviteDetails: {
