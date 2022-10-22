@@ -2,17 +2,18 @@
 
 ## CURRENT TODO's
 
-- Fix requestToJoinGroup notification workflow.
-- Login and Signup screen need keyboard dismiss stuff.
+- Notifications suscribing to some sort of websocket(?), so as to listen for them?
+- how to make them push notifications
+- actions on notifications
+  - View Group
+- Login and Signup screen need keyboard dismiss stuff
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
-- Make notifications area consistent with theme.
 - Profile
   - Change DP
   - Change UserName, doesn't have to be unique
 - Likes
 - Comments
-- actions on notifications
 
 **Create Banking functionality....**
 
@@ -34,11 +35,9 @@
 
 **Misc Known Issues**
 
-- bid scroll won't work on android as feed scroll is activating instead
 - the cache of user on index from post controller.
 - Atm, if blueprint is made, and for some reason notifications and notificationOrigins aren't.. it won't throw any kind of exception. Is this end of the world..? Not ideal, at least. Fails silently.
 - Random long logs on image upload
-- Shift props bug when you create post.. atm need to reload to fix
 - db protection against lower bids ... ? (Not super necessary, just really doesn't make sense.. won't effect who wins tho)
 
 **Non MVP features**
@@ -46,7 +45,7 @@
 - Limit retrieved notifications, and then just have a 'view more' to retrieve the next older batch.
 - follow posts ( followers (?))
 - Viewed (Shows number of views on posts)
-- Notifications suscribing to some sort of websocket(?), so as to listen for them?
+
 - DB protections to stop duplicate memberships.
 - Ejecting from Expo?
 - Using variable font?

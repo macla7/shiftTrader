@@ -7,7 +7,7 @@ import {
   updateNotificationAsync,
 } from "./notificationSlice";
 import { selectUserId } from "../sessions/sessionSlice";
-import { Box, VStack, Button, HStack, Text, FlatList } from "native-base";
+import { Box, VStack, Button, Flex, Text, FlatList } from "native-base";
 import { createMembershipAsync } from "../groups/memberships/membershipSlice";
 import { updateInviteAsync } from "../groups/invites/inviteSlice";
 import {
@@ -37,12 +37,15 @@ function Notifications() {
                   borderColor: "gray.600",
                 }}
                 borderColor="coolGray.200"
-                pl="4"
-                pr="5"
+                px="2"
                 py="2"
               >
-                <HStack space={3} justifyContent="space-between">
-                  <VStack w="80%">
+                <Flex
+                  flexDirection="row"
+                  justifyContent="space-between"
+                  w="100%"
+                >
+                  <VStack width="50%">
                     <Text
                       _dark={{
                         color: "warmGray.50",
@@ -64,15 +67,32 @@ function Notifications() {
                   <Button
                     colorScheme="indigo"
                     mt="2"
+                    ml="2"
                     onPress={() => {
                       startAction(item);
                     }}
-                    w="20%"
                     h="10"
+                    flexGrow={1}
+                    width="30"
+                    p="1"
                   >
-                    Action
+                    {handleActionButtonText(item)}
                   </Button>
-                </HStack>
+                  <Button
+                    colorScheme="indigo"
+                    mt="2"
+                    ml="2"
+                    onPress={() => {
+                      actionNotification(item, false);
+                    }}
+                    h="10"
+                    flexGrow={1}
+                    width="15"
+                    p="1"
+                  >
+                    Dismiss
+                  </Button>
+                </Flex>
               </Box>
             )}
             keyExtractor={(item) => item.id}
@@ -81,6 +101,15 @@ function Notifications() {
       </CWholeSpaceContentTile>
     </CBackground>
   );
+
+  function handleActionButtonText(notification) {
+    switch (notification.notification_blueprint.notificationable_type) {
+      case "Post":
+        return "View Group";
+      case "Invite":
+        return "Accept";
+    }
+  }
 
   function startAction(notification) {
     if (notification.notification_blueprint.notification_type === 1) {
@@ -132,13 +161,13 @@ function Notifications() {
     };
     dispatch(updateInviteAsync(invite));
 
-    actionNotification(notification);
+    actionNotification(notification, true);
   }
 
-  function actionNotification(notification) {
+  function actionNotification(notification, bool) {
     let notificationDetails = {
       id: notification.id,
-      actioned: true,
+      actioned: bool,
     };
     dispatch(updateNotificationAsync(notificationDetails));
   }
