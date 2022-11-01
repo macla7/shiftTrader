@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.0.71:3000/api/v1";
+const API_URL = "http://192.168.1.71:3000/api/v1";
 
 export async function registerUser(payload) {
   return fetch(`${API_URL}/users`, {

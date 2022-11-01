@@ -10,7 +10,7 @@ import { format, formatDistanceToNow } from "date-fns";
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://192.168.0.71:3000/cable");
+const consumer = createConsumer("ws://192.168.1.71:3000/cable");
 
 function Post(props) {
   const [bids, setBids] = useState([]);

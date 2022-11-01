@@ -1,6 +1,6 @@
 import { getValueFor } from "../../sessions/sessionSlice";
 
-const API_URL = "http://192.168.0.71:3000/api/v1";
+const API_URL = "http://192.168.1.71:3000/api/v1";
 
 export async function fetchBids(postId) {
   const auth_token = await getValueFor("auth_token");
