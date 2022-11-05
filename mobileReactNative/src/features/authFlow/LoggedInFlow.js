@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { selectIsLoggedIn } from "../sessions/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import GroupsStackScreen from "../groups/GroupsStackScreen.js";
 import HomeStackScreen from "../home/HomeStackScreen.js";

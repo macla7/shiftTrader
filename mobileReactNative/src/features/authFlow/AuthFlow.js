@@ -4,15 +4,6 @@ import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../sessions/Login";
 import Register from "../sessions/Register";
-import GroupsStackScreen from "../groups/GroupsStackScreen.js";
-import HomeStackScreen from "../home/HomeStackScreen.js";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Notifications from "../notifications/Notifications";
-import Profile from "../users/Profile.js";
-import HomeIcon from "../../assets/noun-home-5222306-676767.svg";
-import GroupsIcon from "../../assets/noun-group-1175010-676767.svg";
-import NotificationsIcon from "../../assets/noun-notification-1439229-676767.svg";
-import ProfileIcon from "../../assets/noun-profile-1307600-676767 (1).svg";
 import LoggedInFlow from "./LoggedInFlow";
 const Stack = createNativeStackNavigator();
 
