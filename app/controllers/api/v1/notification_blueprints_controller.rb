@@ -44,12 +44,6 @@ class Api::V1::NotificationBlueprintsController < ApiController
 
     def broadcast notification
       recipient = User.find(notification.recipient_id)
-
-      notifications = []
-      recipient.notifications.includes(notification_blueprint: :notification_origin).each do |nott|
-        notifications.push(nott.notification_info)
-      end
-
-      NotificationsChannel.broadcast_to(recipient, notifications)
+      NotificationsChannel.broadcast_to(recipient, notification.notification_info)
     end
 end

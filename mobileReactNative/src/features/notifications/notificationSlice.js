@@ -82,8 +82,8 @@ export const notificationSlice = createSlice({
   name: "notification",
   initialState,
   reducers: {
-    setNotifications: (state, action) => {
-      state.notifications = action.payload;
+    addNotification: (state, action) => {
+      state.notifications.unshift(action.payload);
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -172,7 +172,7 @@ export const notificationSlice = createSlice({
   },
 });
 
-export const { setNotifications } = notificationSlice.actions;
+export const { addNotification } = notificationSlice.actions;
 
 export const selectNotifications = (state) => state.notifications.notifications;
 

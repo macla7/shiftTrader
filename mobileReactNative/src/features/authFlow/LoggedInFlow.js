@@ -11,8 +11,8 @@ import NotificationsIcon from "../../assets/noun-notification-1439229-676767.svg
 import ProfileIcon from "../../assets/noun-profile-1307600-676767 (1).svg";
 import {
   fetchNotificationsAsync,
-  setNotifications,
   selectNotifications,
+  addNotification,
 } from "../notifications/notificationSlice";
 import { createConsumer } from "@rails/actioncable";
 import { selectUserId } from "../sessions/sessionSlice";
@@ -32,8 +32,8 @@ function LoggedInFlow() {
         user: userId,
       },
       {
-        received(newNotifications) {
-          dispatch(setNotifications(newNotifications));
+        received(newNotification) {
+          dispatch(addNotification(newNotification));
         },
       }
     );
