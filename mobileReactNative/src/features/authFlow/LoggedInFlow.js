@@ -12,13 +12,14 @@ import ProfileIcon from "../../assets/noun-profile-1307600-676767 (1).svg";
 import {
   fetchNotificationsAsync,
   setNotifications,
+  selectNotifications,
 } from "../notifications/notificationSlice";
 import { createConsumer } from "@rails/actioncable";
 import { selectUserId } from "../sessions/sessionSlice";
 const Tab = createBottomTabNavigator();
 
 function LoggedInFlow() {
-  const [notificationsLocal, setNotificationsLocal] = useState([]);
+  const notifications = useSelector(selectNotifications);
   const dispatch = useDispatch();
   const consumer = createConsumer("ws://192.168.1.71:3000/cable");
   const userId = useSelector(selectUserId);
@@ -32,7 +33,6 @@ function LoggedInFlow() {
       },
       {
         received(newNotifications) {
-          setNotificationsLocal(newNotifications);
           dispatch(setNotifications(newNotifications));
         },
       }
@@ -81,8 +81,7 @@ function LoggedInFlow() {
         <Tab.Screen
           name="Notifications"
           component={Notifications}
-          notifications={notificationsLocal}
-          options={{ tabBarBadge: notificationsLocal.length }}
+          options={{ tabBarBadge: notifications.length }}
         />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
