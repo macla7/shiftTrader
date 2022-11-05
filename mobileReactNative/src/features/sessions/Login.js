@@ -16,7 +16,7 @@ import {
 
 function Login({ navigation }) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("bob@bing.com");
+  const [email, setEmail] = useState("fred@bing.com");
   const [password, setPassword] = useState("Bing123!");
 
   function onSubmit() {

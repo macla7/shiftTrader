@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchNotificationsAsync,
   selectNotifications,
-  selectStatus,
   updateNotificationAsync,
 } from "./notificationSlice";
 import { selectUserId } from "../sessions/sessionSlice";
@@ -19,10 +17,6 @@ function Notifications() {
   const notifications = useSelector(selectNotifications);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchNotificationsAsync());
-  }, [notifications.length, userId]);
 
   return (
     <CBackground>

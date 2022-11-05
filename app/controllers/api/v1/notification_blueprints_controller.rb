@@ -11,10 +11,12 @@ class Api::V1::NotificationBlueprintsController < ApiController
 
     respond_to do |format|
       if @notification_blueprint.save!
-        @notification_blueprint.getRecipients(notification_blueprint_params, current_user).each do |recipient|
-          Notification.create(recipient_id: recipient.id, notification_blueprint_id: @notification_blueprint.id)
-        end
         current_user.notification_origins.create(notification_blueprint_id: @notification_blueprint.id)
+        
+        @notification_blueprint.getRecipients(notification_blueprint_params, current_user).each do |recipient|
+          notification = Notification.create(recipient_id: recipient.id, notification_blueprint_id: @notification_blueprint.id)
+          broadcast notification
+        end
 
         format.json { render json: @notification_blueprint, status: :ok }
       else
@@ -38,5 +40,16 @@ class Api::V1::NotificationBlueprintsController < ApiController
       params.require(:notification_blueprint).permit(
         :notificationable_type, :notificationable_id, :notification_type, :recipient_id
       )
+    end
+
+    def broadcast notification
+      recipient = User.find(notification.recipient_id)
+
+      notifications = []
+      recipient.notifications.includes(notification_blueprint: :notification_origin).each do |nott|
+        notifications.push(nott.notification_info)
+      end
+
+      NotificationsChannel.broadcast_to(recipient, notifications)
     end
 end

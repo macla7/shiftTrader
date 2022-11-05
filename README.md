@@ -3,7 +3,14 @@
 ## CURRENT TODO's
 
 - Notifications suscribing to some sort of websocket(?), so as to listen for them?
+  - watch a Deanin video on push notifications
+  - Guess the CURRENT QUESTION IS:
+    - Should the notification simply be added on to initial state array of notifications.. instead of rendering them all.. for all people.. ? That could stack up fast in terms of cost.
+    - ISSUE: Converting for it to be more efficient based off above thought.
+  - Will it unsuscribe when the app is reloaded.. surely..
 - how to make them push notifications
+  - implement any deanin video on push notifications
+  - read a couple articles on push notifications
 - actions on notifications
   - View Group
 - Login and Signup screen need keyboard dismiss stuff

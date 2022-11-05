@@ -38,7 +38,6 @@ class Api::V1::NotificationsController < ApiController
       if @notification.save
         # create associated membership
         @membership = current_user.memberships.create(notification_id: @notification.id, status: 0, role: 0)
-
         format.json { render json: Notification.all, status: :ok }
         #format.json { render :show, status: :created, location: @notification }
       else
@@ -56,7 +55,7 @@ class Api::V1::NotificationsController < ApiController
         current_user.notifications.includes(notification_blueprint: :notification_origin).each do |notification|
           notifications.push(notification.notification_info)
         end
-        render json: notifications
+        format.json { render json: notifications, status: :ok }
       else
         format.json { render json: @notification.errors, status: :unprocessable_entity }
       end
