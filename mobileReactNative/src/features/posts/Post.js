@@ -71,15 +71,12 @@ function Post(props) {
         </HStack>
       </Box>
 
-      <Box width="100%" px="2">
+      <Box width="100%" px="2" mb="2">
         <Text>{props.post.body}</Text>
       </Box>
 
       <Flex direction="row">
         <Box flex={4}>
-          <CInternalBorderHeaderTile>
-            <Text>SHIFTS</Text>
-          </CInternalBorderHeaderTile>
           <Shift
             shifts={props.post.shifts}
             editable={false}
@@ -87,9 +84,6 @@ function Post(props) {
           />
         </Box>
         <Box flex={3}>
-          <CInternalBorderHeaderTile>
-            <Text>BIDS</Text>
-          </CInternalBorderHeaderTile>
           <Box>
             <Bids
               bids={bids}
