@@ -2,10 +2,6 @@
 
 ## CURRENT TODO's
 
-- key bug on discoverGroups component
-- actions on notifications
-  - View Group
-- Login and Signup screen need keyboard dismiss stuff
 - Logout Button
 - Functionality to accept requests to groups (notification action + in group details somewhere)
 - Profile
