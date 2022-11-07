@@ -64,6 +64,7 @@ function DiscoverGroups() {
               pl="4"
               pr="5"
               py="2"
+              key={index}
             >
               <HStack space={3} justifyContent="space-between">
                 <VStack w="80%">

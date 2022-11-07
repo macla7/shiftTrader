@@ -2,15 +2,7 @@
 
 ## CURRENT TODO's
 
-- Notifications suscribing to some sort of websocket(?), so as to listen for them?
-  - watch a Deanin video on push notifications
-  - Guess the CURRENT QUESTION IS:
-    - Should the notification simply be added on to initial state array of notifications.. instead of rendering them all.. for all people.. ? That could stack up fast in terms of cost.
-    - ISSUE: Converting for it to be more efficient based off above thought.
-  - Will it unsuscribe when the app is reloaded.. surely..
-- how to make them push notifications
-  - implement any deanin video on push notifications
-  - read a couple articles on push notifications
+- key bug on discoverGroups component
 - actions on notifications
   - View Group
 - Login and Signup screen need keyboard dismiss stuff
@@ -21,6 +13,8 @@
   - Change UserName, doesn't have to be unique
 - Likes
 - Comments
+- push notifications
+  - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid apple developer account (apparently), I'm going to push this one toward the end.
 
 **Create Banking functionality....**
 
@@ -32,7 +26,7 @@
 
 - Intro to Rich Comments in Rails 7
 - Setup Devise Confirmable and MailCatcher
-- Deplo a Rails 7 App To Heroku
+- Deplo a Rails 7 App To Heroku ..? No Free tier anymore so not sure if it's the way.
 - N+1 Query And Performance Optizizations
 - Devise Onboarding with Wicked Gem
 - Update User Accounts in React, Edit Account

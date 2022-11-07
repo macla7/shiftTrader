@@ -31,7 +31,6 @@ class Api::V1::InvitesController < ApiController
 
     respond_to do |format|
       if @invite.save
-
         format.json { render json: @invite, status: :ok }
       else
         format.json { render json: @invite.errors, status: :unprocessable_entity }
