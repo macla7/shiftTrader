@@ -1,3 +1,5 @@
+import { getValueFor } from "./sessionSlice";
+
 const API_URL = "http://192.168.1.71:3000/api/v1";
 
 export async function registerUser(payload) {
@@ -30,13 +32,13 @@ export async function loginUser(payload) {
 }
 
 export async function logoutUser(payload) {
-  const auth_token = payload.token;
+  const auth_token = await getValueFor("auth_token");
 
   return fetch(`${API_URL}/oauth/revoke.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: auth_token,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify(payload),
   })

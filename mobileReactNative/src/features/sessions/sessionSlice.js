@@ -59,11 +59,9 @@ export const loginUserAsync = createAsyncThunk(
 export const logoutUserAsync = createAsyncThunk(
   "sessions/logoutUser",
   async () => {
-    const payload = {
-      token: getValueFor("auth_token"),
-      client_id: client_id,
-      client_secret: client_secret,
-    };
+    payload = {};
+    payload.client_id = client_id;
+    payload.client_secret = client_secret;
     const response = await logoutUser(payload);
     return response;
   }

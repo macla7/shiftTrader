@@ -5,7 +5,11 @@ import { Heading, Button, Text, Pressable, Image } from "native-base";
 import { Keyboard } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { updateUserAsync } from "./userSlice";
-import { selectUserId, selectUserAvatarUrl } from "../sessions/sessionSlice";
+import {
+  selectUserId,
+  selectUserAvatarUrl,
+  logoutUserAsync,
+} from "../sessions/sessionSlice";
 
 function Profile() {
   const userId = useSelector(selectUserId);
@@ -29,6 +33,10 @@ function Profile() {
       setImage(result.uri);
     }
   };
+
+  function onLogout() {
+    dispatch(logoutUserAsync());
+  }
 
   function onSubmit() {
     const formData = new FormData();
@@ -91,6 +99,9 @@ function Profile() {
             />
           )}
           <Text>{image}</Text>
+          <Button mt="2" colorScheme="indigo" onPress={() => onLogout()}>
+            Logout
+          </Button>
         </CContentTile>
       </CBackground>
     </Pressable>
