@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CBackground, CContentTile } from "../layout/LayoutComponents";
-import { Heading, Button, Text, Pressable, Image } from "native-base";
+import { CScrollBackground, CContentTile } from "../layout/LayoutComponents";
+import { Heading, Button, VStack, Pressable, Image, Box } from "native-base";
 import { Keyboard } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { updateUserAsync } from "./userSlice";
 import {
   selectUserId,
   selectUserAvatarUrl,
   logoutUserAsync,
 } from "../sessions/sessionSlice";
+import { fetchUserAsync, selectUser, updateUserAsync } from "./userSlice";
 
 function Profile() {
   const userId = useSelector(selectUserId);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
   const userAvatarUrl = useSelector(selectUserAvatarUrl);
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(fetchUserAsync(userId));
+  }, []);
 
   // Method from expo docs https://docs.expo.dev/versions/latest/sdk/imagepicker/
   const pickImage = async () => {
@@ -59,51 +64,69 @@ function Profile() {
 
   return (
     <Pressable onPress={Keyboard.dismiss}>
-      <CBackground>
-        <CContentTile>
-          <Heading
-            size="lg"
-            fontWeight="600"
-            color="coolGray.800"
-            _dark={{
-              color: "warmGray.50",
-            }}
-          >
-            Profile Picture
-          </Heading>
-          <Image
-            source={{
-              uri: userAvatarUrl,
-            }}
-            style={{ width: 200, height: 200 }}
-            alt="avatar"
-          />
-          <Text>{userAvatarUrl}</Text>
+      <CScrollBackground>
+        <VStack justifyContent="space-between" h="100%" w="100%">
+          <CContentTile>
+            <Heading
+              size="lg"
+              fontWeight="600"
+              color="coolGray.800"
+              _dark={{
+                color: "warmGray.50",
+              }}
+            >
+              {user.email}
+            </Heading>
+            <Pressable onPress={pickImage}>
+              <Box shadow="3">
+                {image ? (
+                  <Image
+                    source={{ uri: image }}
+                    style={{ width: 200, height: 200 }}
+                    alt="prospective dp"
+                    borderRadius="100"
+                  />
+                ) : (
+                  <Image
+                    source={{
+                      uri: userAvatarUrl,
+                    }}
+                    style={{ width: 200, height: 200 }}
+                    alt="avatar"
+                    borderRadius="100"
+                  />
+                )}
+              </Box>
+            </Pressable>
+            {/* <Text>{userAvatarUrl}</Text> */}
+            <VStack w="100%">
+              {image ? (
+                <Button
+                  mx="4"
+                  mt="2"
+                  colorScheme="indigo"
+                  onPress={() => {
+                    onSubmit();
+                  }}
+                >
+                  Save Changes
+                </Button>
+              ) : (
+                ""
+              )}
+            </VStack>
+          </CContentTile>
           <Button
-            mt="2"
             colorScheme="indigo"
-            onPress={() => {
-              onSubmit();
-            }}
+            onPress={() => onLogout()}
+            mx="2"
+            mt="2"
+            mb="1"
           >
-            Save
-          </Button>
-          <Button colorScheme="indigo" onPress={pickImage}>
-            Edit
-          </Button>
-          {image && (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 200, height: 200 }}
-              alt="prospective dp"
-            />
-          )}
-          <Text>{image}</Text>
-          <Button mt="2" colorScheme="indigo" onPress={() => onLogout()}>
             Logout
           </Button>
-        </CContentTile>
-      </CBackground>
+        </VStack>
+      </CScrollBackground>
     </Pressable>
   );
 }

@@ -14,9 +14,9 @@ export function CBackground({ children }) {
         width="100%"
         height="100%"
       >
-        <Center py="1" w="100%" h="100%">
+        <Box py="1" w="100%" h="100%">
           {children}
-        </Center>
+        </Box>
       </LinearGradient>
     </Center>
   );
@@ -24,7 +24,11 @@ export function CBackground({ children }) {
 
 export function CScrollBackground({ children }) {
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      minHeight="100%"
+      w="100%"
+    >
       <LinearGradient
         // Button Linear Gradient
         start={{ x: 0, y: 0 }}

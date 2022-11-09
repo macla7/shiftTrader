@@ -12,13 +12,9 @@ class Api::V1::NotificationsController < ApiController
 
   # GET /notifications/1 or /notifications/1.json
   def show
-    members = @notification.memberships
-    requests = @notification.requests
-    render json: {
-      notification: @notification,
-      members: members,
-      requests: requests
-    }
+    respond_to do |format|
+      format.json { render json: @notification, status: :ok }
+    end
   end
 
   # GET /notifications/new

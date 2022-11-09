@@ -18,6 +18,9 @@ class Api::V1::UsersController < ApiController
 
   # GET /users/1 or /users/1.json
   def show
+    respond_to do |format|
+      format.json { render json: @user, status: :ok }
+    end
   end
 
   # GET /users/new

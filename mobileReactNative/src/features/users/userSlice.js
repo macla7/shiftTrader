@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import produce from "immer";
-import { fetchUsers, createUser, destroyUser, updateUser } from "./userAPI";
+import {
+  fetchUsers,
+  fetchUser,
+  createUser,
+  destroyUser,
+  updateUser,
+} from "./userAPI";
 
 export const Statuses = {
   Initial: "Not Fetched",
@@ -20,6 +26,13 @@ const initialState = {
       avatar_url: null,
     },
   ],
+  user: {
+    id: 0,
+    role: 0,
+    email: "",
+    avatar: null,
+    avatar_url: null,
+  },
   status: Statuses.Initial,
 };
 
@@ -27,6 +40,14 @@ export const fetchUsersAsync = createAsyncThunk(
   "users/fetchUsers",
   async (groupId) => {
     const response = await fetchUsers(groupId);
+    return response;
+  }
+);
+
+export const fetchUserAsync = createAsyncThunk(
+  "users/fetchUser",
+  async (userId) => {
+    const response = await fetchUser(userId);
     return response;
   }
 );
@@ -79,6 +100,25 @@ export const userSlice = createSlice({
       })
       // error
       .addCase(fetchUsersAsync.rejected, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Error;
+        });
+      })
+      // while you wait
+      .addCase(fetchUserAsync.pending, (state) => {
+        return produce(state, (draftState) => {
+          draftState.status = Statuses.Loading;
+        });
+      })
+      // you got the thing
+      .addCase(fetchUserAsync.fulfilled, (state, action) => {
+        return produce(state, (draftState) => {
+          draftState.user = action.payload;
+          draftState.status = Statuses.UpToDate;
+        });
+      })
+      // error
+      .addCase(fetchUserAsync.rejected, (state) => {
         return produce(state, (draftState) => {
           draftState.status = Statuses.Error;
         });
@@ -147,6 +187,8 @@ export const userSlice = createSlice({
 export const {} = userSlice.actions;
 
 export const selectUsers = (state) => state.users.users;
+
+export const selectUser = (state) => state.users.user;
 
 export const selectStatus = (state) => state.users.status;
 
