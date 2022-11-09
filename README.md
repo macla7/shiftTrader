@@ -2,9 +2,7 @@
 
 ## CURRENT TODO's
 
-- Functionality to accept requests to groups (notification action + in group details somewhere)
 - Profile
-  - Change DP
   - Change UserName, doesn't have to be unique
 - Likes
 - Comments

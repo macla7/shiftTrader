@@ -1,6 +1,11 @@
-import { getValueFor } from "./sessionSlice";
+import * as SecureStore from "expo-secure-store";
 
 const API_URL = "http://192.168.1.71:3000/api/v1";
+
+export async function getValueFor(key) {
+  let result = await SecureStore.getItemAsync(key);
+  return result;
+}
 
 export async function registerUser(payload) {
   return fetch(`${API_URL}/users`, {
