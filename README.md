@@ -2,10 +2,6 @@
 
 ## CURRENT TODO's
 
-- Add name column to user
-  - update signup component
-  - switch out a lot of places where it's displaying email, for the name
-  - name is a manadotory field.
 - Profile
   - Change UserName, doesn't have to be unique
   - add name form

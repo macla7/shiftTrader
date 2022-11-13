@@ -15,6 +15,7 @@ import { Keyboard } from "react-native";
 
 export default function App() {
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -24,6 +25,7 @@ export default function App() {
     const formData = new FormData();
 
     // formData.append("user[avatar]", e.target.avatar.files[0]);
+    formData.append("user[name]", name);
     formData.append("user[email]", email);
     formData.append("user[password]", password);
     formData.append(
@@ -60,6 +62,14 @@ export default function App() {
             Sign up to continue!
           </Heading>
           <VStack space={3} mt="5">
+            <FormControl>
+              <FormControl.Label>Name</FormControl.Label>
+              <Input
+                type="name"
+                value={name}
+                onChange={(e) => setName(e.nativeEvent.text)}
+              />
+            </FormControl>
             <FormControl>
               <FormControl.Label>Email</FormControl.Label>
               <Input

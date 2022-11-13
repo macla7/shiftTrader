@@ -35,6 +35,8 @@ class Api::V1::UsersController < ApiController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    p 'hello from CREAEEETEEE'
+    p user_params
 
     respond_to do |format|
       if @user.save
@@ -80,6 +82,6 @@ class Api::V1::UsersController < ApiController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:id, :body, :ends_at, :auction, :group_id, :avatar)
+      params.require(:user).permit(:id, :body, :ends_at, :auction, :group_id, :avatar, :name)
     end
 end
