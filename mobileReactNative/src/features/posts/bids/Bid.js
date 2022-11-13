@@ -15,9 +15,7 @@ function Bid(props) {
       flex={1}
       shadow="1"
       flexDirection="row"
-      bgColor={props.bid.price < 0 ? "pink.100" : "green.100"}
-      borderColor="coolGray.200"
-      borderWidth="1"
+      bgColor={props.bid.price < 0 ? "pink.200" : "green.200"}
       p="1"
       mb="1"
       mx="1"

@@ -19,7 +19,7 @@ function Register() {
     data.append("user[password]", e.target.password.value);
     data.append(
       "user[client_id]",
-      "mBd4U-YMBIDZ-uM89ReLdszoMUCJ6WkdCHBuTuKForU"
+      "Lm-9XiqY8dZOCoeX3mZrDhCjFY99IAUnp-Y82YpZz_k"
     );
 
     dispatch(registerUserAsync(data));

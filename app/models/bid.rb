@@ -13,6 +13,6 @@ class Bid < ApplicationRecord
   end
 
   def bidder
-    return self.user.email
+    return self.user.name
   end
 end

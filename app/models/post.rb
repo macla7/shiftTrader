@@ -14,15 +14,15 @@ class Post < ApplicationRecord
   scope :past_posts, ->{ where('ends_at < ?', DateTime.current())}
 
   def post_info
-    serializable_hash(include: [:shifts , bids: {methods: [:avatar_url, :bidder]}], methods: [:group_name, :postor_email, :avatar_url]) 
+    serializable_hash(include: [:shifts , bids: {methods: [:avatar_url, :bidder]}], methods: [:group_name, :postor_name, :avatar_url]) 
   end
 
   def group_name
     return self.group.name
   end
 
-  def postor_email
-    self.user.email
+  def postor_name
+    self.user.name
   end
 
   def avatar_url

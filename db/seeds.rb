@@ -14,14 +14,17 @@ if Doorkeeper::Application.count.zero?
 end
 
 User.first_or_create(email: 'mitch@bing.com',
+  name: "Mitch Clark",
   password: 'Bing123!',
   password_confirmation: 'Bing123!',
   role: User.roles[:admin])
 User.create(email: 'bob@bing.com',
+  name: "Bob Jones",
   password: 'Bing123!',
   password_confirmation: 'Bing123!',
   role: User.roles[:user])
 User.create(email: 'fred@bing.com',
+  name: "Fred Smith",
   password: 'Bing123!',
   password_confirmation: 'Bing123!',
   role: User.roles[:user])

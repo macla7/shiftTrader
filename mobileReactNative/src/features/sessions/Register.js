@@ -28,7 +28,7 @@ export default function App() {
     formData.append("user[password]", password);
     formData.append(
       "user[client_id]",
-      "53wEXQ6wJazdFYa5VdYPuExU-ap8VkO7CRqIyzP1zGk"
+      "Lm-9XiqY8dZOCoeX3mZrDhCjFY99IAUnp-Y82YpZz_k"
     );
 
     dispatch(registerUserAsync(formData));

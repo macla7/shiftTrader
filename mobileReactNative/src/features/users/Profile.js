@@ -75,7 +75,7 @@ function Profile() {
                 color: "warmGray.50",
               }}
             >
-              {user.email}
+              {user.name}
             </Heading>
             <Pressable onPress={pickImage}>
               <Box shadow="3">

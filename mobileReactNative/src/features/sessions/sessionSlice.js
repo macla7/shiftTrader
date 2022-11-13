@@ -16,8 +16,8 @@ export async function deleteValueFor(key) {
   await SecureStore.deleteItemAsync(key);
 }
 
-const client_id = "53wEXQ6wJazdFYa5VdYPuExU-ap8VkO7CRqIyzP1zGk";
-const client_secret = "Q4x0aXC0QEH9QElvYv7wClHUeDlVJRJ3gEktjeFvmfY";
+const client_id = "Lm-9XiqY8dZOCoeX3mZrDhCjFY99IAUnp-Y82YpZz_k";
+const client_secret = "m3T95wtJwYXtvWo-1pUI4kpSPSf6BtxL96akVdi5Hjg";
 
 const initialState = {
   goToRegister: false,

@@ -2,8 +2,15 @@
 
 ## CURRENT TODO's
 
+- on accept invite, need to auto dismiss notification.
+- bug in Invite screen re admin showing for mitch.. this elludes to bigger bug of uneccessary admin on user possibly(?)
+- Add name column to user
+  - update signup component
+  - switch out a lot of places where it's displaying email, for the name
+  - name is a manadotory field.
 - Profile
   - Change UserName, doesn't have to be unique
+  - add name form
 - Likes
 - Comments
 - push notifications

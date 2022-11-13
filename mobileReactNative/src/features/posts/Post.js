@@ -58,7 +58,7 @@ function Post(props) {
                 color="coolGray.800"
                 bold
               >
-                {props.post.postor_email}
+                {props.post.postor_name}
               </Text>
               <HStack justifyContent="space-between">
                 <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
