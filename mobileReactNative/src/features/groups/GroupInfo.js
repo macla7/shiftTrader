@@ -6,7 +6,6 @@ import {
   isUserAMember,
   isUserAnAdmin,
   selectIsAdmin,
-  selectIsMember,
 } from "./memberships/membershipSlice";
 import {
   CBackground,

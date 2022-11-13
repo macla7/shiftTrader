@@ -29,7 +29,7 @@ function Search({ route }) {
   const userId = useSelector((state) => state.sessions.user.id);
   const users = useSelector(selectUsers);
   const freshInvite = useSelector(selectFreshInvite);
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(useSelector(selectUsers));
   const dispatch = useDispatch();
   const [inviteNotice, setInviteNotice] = useState("");
   const { item } = route.params;
@@ -179,27 +179,19 @@ function Search({ route }) {
                   pr="5"
                   py="2"
                 >
-                  <HStack>
+                  <HStack alignItems="center">
                     {item.avatar_url ? <DP uri={`${item.avatar_url}`} /> : ""}
-                    <VStack ml="2">
-                      <Text
-                        _dark={{
-                          color: "warmGray.50",
-                        }}
-                        color="coolGray.800"
-                        bold
-                      >
-                        {item.email}
-                      </Text>
-                      <Text
-                        color="coolGray.600"
-                        _dark={{
-                          color: "warmGray.200",
-                        }}
-                      >
-                        {item.role == "admin" ? "Admin" : "member"}
-                      </Text>
-                    </VStack>
+
+                    <Text
+                      ml="2"
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color="coolGray.800"
+                      bold
+                    >
+                      {item.email}
+                    </Text>
                   </HStack>
                 </Box>
               </Pressable>

@@ -39,7 +39,7 @@ function Memberships({ memberships }) {
                   color="coolGray.800"
                   bold
                 >
-                  {item.user.email}
+                  {item.user.name}
                 </Text>
                 <Text
                   color="coolGray.600"

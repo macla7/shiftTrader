@@ -2,6 +2,7 @@
 
 ## CURRENT TODO's
 
+- sort notifications based on age.. atm they are not and based on... something..
 - on accept invite, need to auto dismiss notification.
 - bug in Invite screen re admin showing for mitch.. this elludes to bigger bug of uneccessary admin on user possibly(?)
 - Add name column to user
