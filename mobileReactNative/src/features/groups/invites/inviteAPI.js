@@ -1,6 +1,6 @@
 import { getValueFor } from "../../sessions/sessionAPI.js";
 
-const API_URL = "http://192.168.1.71:3000/api/v1";
+const API_URL = "http://192.168.1.7:3000/api/v1";
 
 export async function fetchInvites() {
   const auth_token = await getValueFor("auth_token");
