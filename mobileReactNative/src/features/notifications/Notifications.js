@@ -12,6 +12,7 @@ import {
   CBackground,
   CWholeSpaceContentTile,
 } from "../layout/LayoutComponents";
+import { formatDistanceToNow } from "date-fns";
 
 function Notifications() {
   const notifications = useSelector(selectNotifications);
@@ -55,7 +56,7 @@ function Notifications() {
                         color: "warmGray.200",
                       }}
                     >
-                      Some Text
+                      {formatDistanceToNow(new Date(item.created_at))} ago
                     </Text>
                   </VStack>
                   <Button
@@ -132,7 +133,7 @@ function Notifications() {
     };
     dispatch(updateInviteAsync(invite));
 
-    actionNotification(notification);
+    actionNotification(notification, true);
   }
 
   function handleAcceptRequest(notification) {
