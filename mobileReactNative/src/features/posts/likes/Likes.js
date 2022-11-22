@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createLikeAsync, destroyLikeAsync, initialState } from "../postSlice";
+import { createLikeAsync, destroyLikeAsync } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
+import { FavouriteIcon, Pressable, Text, HStack, Box } from "native-base";
 
-function Like(props) {
+function Likes(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
-  const post = useSelector((state) => {
-    if (state.posts.posts.length > 0) {
-      return getCurrentPostFromStore(state.posts.posts);
-    }
-    return initialState.posts[0];
-  });
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
   const [numberOfLikes, setNumberOfLikes] = useState(0);
 
   let likeDetails = {
-    post_id: props.post.id,
+    post_id: props.postId,
     user_id: userId,
   };
 
@@ -33,17 +28,19 @@ function Like(props) {
     setCurrentUserLiked(true);
     dispatch(createLikeAsync(likeDetails));
     createNotification();
+    setNumberOfLikes((prevCount) => prevCount + 1);
   }
 
   function unlikePost() {
     setCurrentUserLiked(false);
     dispatch(destroyLikeAsync(likeDetails));
+    setNumberOfLikes((prevCount) => prevCount - 1);
   }
 
   function createNotification() {
     let notification_blueprint = {
       notificationable_type: "Post",
-      notificationable_id: props.post.id,
+      notificationable_id: props.postId,
       notification_type: 7,
     };
     createNotificationBlueprint(notification_blueprint);
@@ -51,33 +48,37 @@ function Like(props) {
 
   // Fetch Likes
   useEffect(() => {
-    setNumberOfLikes(post.likes.length);
+    setNumberOfLikes(props.likes.length);
     hasCurrentUserLiked();
-  }, [post.likes.length, dispatch]);
+  }, [dispatch]);
 
   function hasCurrentUserLiked() {
-    if (props.post.likes.filter((like) => like.user_id === userId).length > 0) {
+    if (props.likes.filter((like) => like.user_id === userId).length > 0) {
       setCurrentUserLiked(true);
     }
   }
 
-  function getCurrentPostFromStore(posts) {
-    if (posts !== undefined) {
-      let filteredPost = posts.filter((post) => post.id === props.post.id);
-      if (filteredPost.length > 0) {
-        return filteredPost[0];
-      }
-    }
-    return initialState.posts[0];
-  }
-
   return (
-    <p>
-      <button onClick={(e) => action(e)}>Like</button>
-      #Likes: {numberOfLikes}
-      {currentUserLiked ? " (Liked)" : ""}
-    </p>
+    <>
+      <Pressable onPress={(e) => action(e)} borderColor="">
+        <Box
+          // borderColor="coolGray.200"
+          // borderWidth="1"
+          // bgColor="white"
+          // shadow="1"
+          p="1"
+          mb="1"
+          mx="1"
+          borderRadius="10"
+        >
+          <HStack alignItems="center">
+            <FavouriteIcon color={currentUserLiked ? "red.500" : "light.300"} />
+            <Text> {numberOfLikes}</Text>
+          </HStack>
+        </Box>
+      </Pressable>
+    </>
   );
 }
 
-export default Like;
+export default Likes;

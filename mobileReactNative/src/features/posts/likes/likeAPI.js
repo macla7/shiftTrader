@@ -1,3 +1,5 @@
+import { getValueFor } from "../../sessions/sessionAPI.js";
+
 const API_URL = "http://localhost:3000/api/v1";
 
 export async function fetchLikes(postId) {
@@ -17,11 +19,12 @@ export async function fetchLikes(postId) {
 }
 
 export async function createLike(likeDetails) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/likes.json`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ like: likeDetails }),
   })
@@ -34,11 +37,12 @@ export async function createLike(likeDetails) {
 }
 
 export async function destroyLike(likeDetails) {
+  const auth_token = await getValueFor("auth_token");
   return fetch(`${API_URL}/likes/destroy.json`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.auth_token}`,
+      Authorization: `Bearer ${auth_token}`,
     },
     body: JSON.stringify({ like: likeDetails }),
   })

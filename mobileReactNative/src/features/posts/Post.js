@@ -2,10 +2,10 @@ import React, { useEffect, useState, useMemo } from "react";
 import Bids from "./bids/Bids.js";
 import Shift from "./shifts/Shift.js";
 import { Box, Text, Flex, HStack, VStack, Center } from "native-base";
-import { CInternalBorderHeaderTile } from "../layout/LayoutComponents";
 import { createConsumer } from "@rails/actioncable";
 import DP from "../layout/DP";
 import { format, formatDistanceToNow } from "date-fns";
+import Likes from "./likes/Likes";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -76,13 +76,18 @@ function Post(props) {
       </Box>
 
       <Flex direction="row">
-        <Box flex={4}>
-          <Shift
-            shifts={props.post.shifts}
-            editable={false}
-            invalidShiftIds={[]}
-          />
-        </Box>
+        <VStack flex={4}>
+          <Box>
+            <Shift
+              shifts={props.post.shifts}
+              editable={false}
+              invalidShiftIds={[]}
+            />
+          </Box>
+          <HStack>
+            <Likes likes={props.post.likes} postId={props.post.id} />
+          </HStack>
+        </VStack>
         <Box flex={3}>
           <Box>
             <Bids
