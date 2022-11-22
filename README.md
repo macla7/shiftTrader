@@ -2,19 +2,22 @@
 
 ## CURRENT TODO's
 
-- Profile
-  - Change UserName, doesn't have to be unique
-  - add name form
 - Likes
 - Comments
 - push notifications
-  - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid apple developer account (apparently), I'm going to push this one toward the end.
-
-**Create Banking functionality....**
+  - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
 
 **Twilio (phone) verification**
 
 **Create facebook/instagram login support, omniauth(?)**
+
+**Get mailer supported for password forget, signup, and reciept of purchasse of shift**
+
+**Create Banking functionality....**
+
+- watch Deain part 15 and 16 videos at double pace.
+- research into Stripe
+- research into pay gem
 
 **Relevant Deanin videos I want to watch**
 
@@ -23,7 +26,6 @@
 - Deplo a Rails 7 App To Heroku ..? No Free tier anymore so not sure if it's the way.
 - N+1 Query And Performance Optizizations
 - Devise Onboarding with Wicked Gem
-- Update User Accounts in React, Edit Account
 - Monethly Subscriptions with Stripe and Pay Gem
 - The VSCODe Rails Extentions Used in This Series
 - Notificaiton Sounds when Messages are Sent in Chat
