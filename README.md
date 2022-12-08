@@ -2,7 +2,6 @@
 
 ## CURRENT TODO's
 
-- Likes
 - Comments
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.

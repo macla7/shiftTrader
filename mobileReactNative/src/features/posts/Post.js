@@ -10,7 +10,7 @@ import Likes from "./likes/Likes";
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://192.168.1.220:3000/cable");
+const consumer = createConsumer("ws://192.168.1.131:3000/cable");
 
 function Post(props) {
   const [bids, setBids] = useState([]);
