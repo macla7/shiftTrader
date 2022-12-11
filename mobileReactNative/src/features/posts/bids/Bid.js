@@ -20,6 +20,8 @@ function Bid(props) {
       mb="1"
       mx="1"
       borderRadius="10"
+      borderWidth="1"
+      borderColor={props.bidNum == 0 ? "amber.200" : "coolGray.200"}
     >
       <VStack flexGrow={1}>
         <HStack justifyContent="space-between" flexGrow={1}>
@@ -28,12 +30,13 @@ function Bid(props) {
             <VStack justifyContent="flex-start" flexGrow={1}>
               <HStack>
                 <Text color={props.bid.price < 0 ? "pink.800" : "green.800"}>
-                  {props.bid.price < 0 ? "ASK " : "BID "}
+                  {props.bid.price < 0 ? "Asking " : "Offering "}
                 </Text>
                 <Money
                   microDollars={props.bid.price}
                   color={props.bid.price < 0 ? "pink.800" : "green.800"}
                 />
+                <Text>{props.bidNum == 0 ? "🥇" : ""}</Text>
               </HStack>
               <Text fontSize="2xs">{props.bid.bidder}</Text>
             </VStack>

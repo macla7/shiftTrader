@@ -12,31 +12,18 @@ function Bids(props) {
   }
 
   return (
-    <VStack maxH="64" justifyContent="space-between">
+    <VStack justifyContent="space-between">
       {sortedBids.length == 0 ? (
         <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }}>
           <BidIcon width="100%" height="100%" fill="#14532d" />
         </AspectRatio>
       ) : (
-        <ScrollView nestedScrollEnabled>
-          {sortedBids.map((item) => {
-            return <Bid bid={item} key={item.id} />;
+        <ScrollView nestedScrollEnabled maxH="48">
+          {sortedBids.map((item, i) => {
+            return <Bid bid={item} key={item.id} bidNum={i} />;
           })}
         </ScrollView>
       )}
-      <Button
-        my="1"
-        colorScheme="indigo"
-        onPress={() =>
-          props.navigation.navigate("Bid", {
-            reserve: reserve,
-            returnScreen: "Home Feed",
-            postId: props.postId,
-          })
-        }
-      >
-        Make Bid
-      </Button>
     </VStack>
 
     // <div>

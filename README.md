@@ -2,9 +2,16 @@
 
 ## CURRENT TODO's
 
+- a post screen. This will allow for clearer view. Like facebook. It will show comments below, and then a comment form just above the tab navbar. I reckon we also allow the dual area (with bids and shift) to be flexible and have a max height twice that of on the home/groups screen.
 - Comments
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
+- Icons needed:
+  - Hourglass for time left / stopwatch
+  - comment
+  - heart
+  - bid (got already?)
+  - pencil for editing (?)
 
 **Twilio (phone) verification**
 
@@ -41,7 +48,6 @@
 - Limit retrieved notifications, and then just have a 'view more' to retrieve the next older batch.
 - follow posts ( followers (?))
 - Viewed (Shows number of views on posts)
-
 - DB protections to stop duplicate memberships.
 - Ejecting from Expo?
 - Using variable font?

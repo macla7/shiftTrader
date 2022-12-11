@@ -76,6 +76,6 @@ class Api::V1::BidsController < ApiController
     end
 
     def broadcast post
-      PostsChannel.broadcast_to(post, post.bids_with_avatars)
+      PostsChannel.broadcast_to(post, { type: 'Bids', body: post.bids_with_avatars })
     end
 end

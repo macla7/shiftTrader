@@ -8,7 +8,6 @@ function Likes(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
   const userId = useSelector((state) => state.sessions.user.id);
   const dispatch = useDispatch();
-  const [numberOfLikes, setNumberOfLikes] = useState(0);
 
   let likeDetails = {
     post_id: props.postId,
@@ -28,13 +27,11 @@ function Likes(props) {
     setCurrentUserLiked(true);
     dispatch(createLikeAsync(likeDetails));
     createNotification();
-    setNumberOfLikes((prevCount) => prevCount + 1);
   }
 
   function unlikePost() {
     setCurrentUserLiked(false);
     dispatch(destroyLikeAsync(likeDetails));
-    setNumberOfLikes((prevCount) => prevCount - 1);
   }
 
   function createNotification() {
@@ -48,7 +45,6 @@ function Likes(props) {
 
   // Fetch Likes
   useEffect(() => {
-    setNumberOfLikes(props.likes.length);
     hasCurrentUserLiked();
   }, [dispatch]);
 
@@ -73,7 +69,7 @@ function Likes(props) {
         >
           <HStack alignItems="center">
             <FavouriteIcon color={currentUserLiked ? "red.500" : "light.300"} />
-            <Text> {numberOfLikes}</Text>
+            <Text ml="2">Like</Text>
           </HStack>
         </Box>
       </Pressable>

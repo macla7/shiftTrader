@@ -29,6 +29,7 @@ class Api::V1::LikesController < ApiController
 
     respond_to do |format|
       if @like.save
+        broadcast @post
         format.json { render json: @post.likes, status: :ok }
       else
         format.json { render json: @like.errors, status: :unprocessable_entity }
@@ -50,13 +51,10 @@ class Api::V1::LikesController < ApiController
   # DELETE /likes/1 or /likes/1.json
   def destroy
     set_post_with_like
-    p 'innnnn pooooooooooooooooo'
-    p @post.likes
     @like.destroy
-    p 'innnnn pooooooooooooooooo'
-    p @post.likes
 
     respond_to do |format|
+      broadcast @post
       format.json { render json: @post.likes, status: :ok }
     end
   end
@@ -78,5 +76,9 @@ class Api::V1::LikesController < ApiController
     # Only allow a list of trusted parameters through.
     def like_params
       params.require(:like).permit(:user_id, :post_id)
+    end
+
+    def broadcast post
+      PostsChannel.broadcast_to(post, { type: 'Likes', body: post.likes })
     end
 end
