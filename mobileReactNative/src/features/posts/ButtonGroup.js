@@ -1,5 +1,5 @@
 import { destroyPostAsync } from "./postSlice";
-import { Text, Flex, HStack, Button, AspectRatio } from "native-base";
+import { Text, Flex, HStack, Button, AspectRatio, Box } from "native-base";
 import Likes from "./likes/Likes";
 import BidIcon from "../../assets/noun-auction-4831153.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -45,11 +45,15 @@ function ButtonGroup({ postId, minPrice, navigation, likes }) {
         }
       >
         <HStack h="100%" alignItems="center">
-          {/* <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }}>
-            <BidIcon width="16" height="16" fill="#171717" />
-          </AspectRatio> */}
-          <FontAwesomeIcon icon={faSackDollar} color="#047857" />
-          <Text mx="2">Bid</Text>
+          <Box>
+            <AspectRatio ratio={{ base: 1 / 1, md: 1 / 1 }} h="100%">
+              <BidIcon width="100%" height="100%" fill="#047857" />
+            </AspectRatio>
+          </Box>
+          {/* <FontAwesomeIcon icon={faSackDollar} color="#047857" /> */}
+          <Text ml="-2" mr="3">
+            Bid
+          </Text>
         </HStack>
       </Button>
     </Flex>
