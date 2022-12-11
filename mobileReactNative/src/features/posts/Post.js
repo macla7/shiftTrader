@@ -121,13 +121,25 @@ function Post(props) {
               bids={bids}
               postId={props.post.id}
               navigation={props.navigation}
-              reserve={props.post.reserve}
+              reserveBid={{
+                price: props.post.reserve,
+                avatar_url: props.post.avatar_url,
+                created_at: props.post.created_at,
+                bidder: props.post.postor_name,
+              }}
             />
           </Box>
         </Box>
       </Flex>
 
-      <Flex direction="row" justifyContent="space-between" h="10" w="100%">
+      <Flex
+        direction="row"
+        justifyContent="space-between"
+        h="10"
+        w="100%"
+        borderTopWidth="1"
+        borderColor="coolGray.200"
+      >
         <HStack flex="1" justifyContent="flex-start">
           <Center mx="2">
             <Text>{likes.length} Likes</Text>

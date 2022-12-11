@@ -30,7 +30,11 @@ function Bid(props) {
             <VStack justifyContent="flex-start" flexGrow={1}>
               <HStack>
                 <Text color={props.bid.price < 0 ? "pink.800" : "green.800"}>
-                  {props.bid.price < 0 ? "Asking " : "Offering "}
+                  {props.reserve == true
+                    ? "Reserve "
+                    : props.bid.price < 0
+                    ? "Asking "
+                    : "Offering "}
                 </Text>
                 <Money
                   microDollars={props.bid.price}
