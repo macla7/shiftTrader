@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createLikeAsync, destroyLikeAsync } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
-import { FavouriteIcon, Pressable, Text, HStack, Box } from "native-base";
+import { Button, Text, HStack } from "native-base";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons/faHeart";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons/faHeart";
 
 function Likes(props) {
   const [currentUserLiked, setCurrentUserLiked] = useState(false);
@@ -55,25 +58,23 @@ function Likes(props) {
   }
 
   return (
-    <>
-      <Pressable onPress={(e) => action(e)} borderColor="">
-        <Box
-          // borderColor="coolGray.200"
-          // borderWidth="1"
-          // bgColor="white"
-          // shadow="1"
-          p="1"
-          mb="1"
-          mx="1"
-          borderRadius="10"
-        >
-          <HStack alignItems="center">
-            <FavouriteIcon color={currentUserLiked ? "red.500" : "light.300"} />
-            <Text ml="2">Like</Text>
-          </HStack>
-        </Box>
-      </Pressable>
-    </>
+    <Button
+      flex="1"
+      variant="unstyled"
+      p="0"
+      onPress={(e) => action(e)}
+      borderColor=""
+    >
+      <HStack h="100%" alignItems="center">
+        {currentUserLiked ? (
+          <FontAwesomeIcon icon={faHeartSolid} color="red" />
+        ) : (
+          <FontAwesomeIcon icon={faHeartRegular} color="#171717" />
+        )}
+
+        <Text mx="2">Like</Text>
+      </HStack>
+    </Button>
   );
 }
 

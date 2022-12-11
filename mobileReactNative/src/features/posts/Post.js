@@ -8,13 +8,14 @@ import {
   HStack,
   VStack,
   Center,
-  Button,
   ScrollView,
 } from "native-base";
 import { createConsumer } from "@rails/actioncable";
 import DP from "../layout/DP";
 import { format, formatDistanceToNow } from "date-fns";
 import ButtonGroup from "./ButtonGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -88,9 +89,12 @@ function Post(props) {
               </Text>
               <HStack justifyContent="space-between">
                 <Text>{format(new Date(props.post.created_at), "d MMM")}</Text>
-                <Text>
-                  Ends in {formatDistanceToNow(new Date(props.post.ends_at))}
-                </Text>
+                <HStack alignItems="center">
+                  <FontAwesomeIcon icon={faClock} color="#171717" />
+                  <Text ml="1">
+                    Ends in {formatDistanceToNow(new Date(props.post.ends_at))}
+                  </Text>
+                </HStack>
               </HStack>
             </VStack>
           </Box>
