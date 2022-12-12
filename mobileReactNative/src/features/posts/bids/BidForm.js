@@ -1,31 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Heading, Button } from "native-base";
+import { Button } from "native-base";
 import { selectMoney, setMoney } from "../money/moneySlice";
-import { CBackground, CContentTile } from "../../layout/LayoutComponents";
-import MoneyInput from "../money/MoneyInput";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../../layout/LayoutComponents";
+import MoneySlider from "../money/MoneySlider";
 
 function BidForm({ route, navigation }) {
   const currentMicroDollars = useSelector(selectMoney);
   const [description, setDescription] = useState("");
   const dispatch = useDispatch();
   const { reserve, returnScreen, postId } = route.params;
-
-  const money = dollarRange(reserve);
-
-  function dollarRange(value) {
-    let dollarAndCentValue = Math.floor(value / 10000);
-    let arr = [];
-    for (
-      let i = dollarAndCentValue - 50;
-      i <= dollarAndCentValue + 5050;
-      i = i + 10
-    ) {
-      // lets push microDollars, microDollars in and out.
-      arr.push(i * 10000);
-    }
-    return arr;
-  }
 
   useEffect(() => {
     setDescription(createDescription());
@@ -40,30 +27,18 @@ function BidForm({ route, navigation }) {
 
   // on init component sets state to reserve passed in route params
   useEffect(() => {
-    dispatch(
-      setMoney({
-        money: reserve + 100000,
-      })
-    );
+    dispatch(setMoney(reserve + 5 * 1000000));
   }, []);
 
   return (
     <CBackground>
-      <CContentTile>
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          {description}
-        </Heading>
-      </CContentTile>
-
-      <CContentTile>
-        <MoneyInput money={money} type="bid" />
+      <CWholeSpaceContentTile>
+        <MoneySlider
+          type="bid"
+          minValue={reserve / 1000000 + 1}
+          maxValue={reserve / 1000000 + 50}
+          defaultValue={reserve / 1000000 + 5}
+        />
         <Button
           mt="2"
           colorScheme="indigo"
@@ -79,7 +54,7 @@ function BidForm({ route, navigation }) {
         >
           Create Bid
         </Button>
-      </CContentTile>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 }

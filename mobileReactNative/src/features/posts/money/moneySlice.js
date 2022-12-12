@@ -10,7 +10,7 @@ export const moneySlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setMoney: (state, action) => {
-      state.money = action.payload.money;
+      state.money = action.payload;
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,

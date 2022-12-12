@@ -1,54 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Heading, Button } from "native-base";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Button } from "native-base";
 import { selectMoney } from "./money/moneySlice";
-import { CBackground, CContentTile } from "../layout/LayoutComponents";
-import MoneyInput from "./money/MoneyInput";
+import {
+  CBackground,
+  CWholeSpaceContentTile,
+} from "../layout/LayoutComponents";
+import MoneySlider from "./money/MoneySlider";
 
 function ReserveForm({ route, navigation }) {
   const currentMicroDollars = useSelector(selectMoney);
-  const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
   const { returnScreen } = route.params;
-
-  const money = dollarRange(0);
-
-  function dollarRange(value) {
-    let arr = [];
-    for (let i = value - 106; i <= value + 103; i += 1) {
-      arr.push(i * 1000000);
-    }
-    return arr;
-  }
-
-  useEffect(() => {
-    setDescription(createDescription());
-  }, [currentMicroDollars]);
-
-  function createDescription() {
-    if (currentMicroDollars < 0) {
-      return "Offering To Pay";
-    }
-    return "Asking For";
-  }
 
   return (
     <CBackground>
-      <CContentTile>
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          {description}
-        </Heading>
-      </CContentTile>
-
-      <CContentTile>
-        <MoneyInput money={money} type="reserve" />
+      <CWholeSpaceContentTile>
+        <MoneySlider
+          type="reserve"
+          minValue={-100}
+          maxValue={100}
+          defaultValue={0}
+        />
         <Button
           mt="2"
           colorScheme="indigo"
@@ -63,7 +35,7 @@ function ReserveForm({ route, navigation }) {
         >
           Done
         </Button>
-      </CContentTile>
+      </CWholeSpaceContentTile>
     </CBackground>
   );
 }
