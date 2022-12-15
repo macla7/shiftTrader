@@ -74,7 +74,7 @@ function Post(props) {
         </Text>
       </Center>
       <Box width="100%" p="2">
-        <HStack>
+        <HStack width="100%">
           {props.post.avatar_url ? <DP uri={`${props.post.avatar_url}`} /> : ""}
           <Box ml="2" flexGrow={1}>
             <VStack>

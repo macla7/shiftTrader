@@ -25,7 +25,17 @@ function ButtonGroup({ postId, minPrice, navigation, likes }) {
     >
       <Likes likes={likes} postId={postId} />
 
-      <Button flex="1" variant="unstyled" p="0">
+      <Button
+        flex="1"
+        variant="unstyled"
+        p="0"
+        onPress={() =>
+          navigation.navigate("Post", {
+            returnScreen: "Home Feed",
+            postId: postId,
+          })
+        }
+      >
         <HStack h="100%" alignItems="center">
           <FontAwesomeIcon icon={faMessage} color="#171717" />
           <Text mx="2">Comment</Text>

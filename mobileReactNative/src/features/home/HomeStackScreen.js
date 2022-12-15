@@ -8,6 +8,7 @@ import ShiftForm from "../posts/shifts/ShiftForm";
 import ReserveForm from "../posts/ReserveForm";
 import BidForm from "../posts/bids/BidForm";
 import BidConfirmation from "../posts/bids/BidConfirmation";
+import PostScreen from "../posts/PostScreen.js";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ function GroupsStackScreen() {
       <HomeStack.Screen name="Add Reserve" component={ReserveForm} />
       <HomeStack.Screen name="Bid" component={BidForm} />
       <HomeStack.Screen name="Bid Confirmation" component={BidConfirmation} />
+      <HomeStack.Screen name="Post" component={PostScreen} />
     </HomeStack.Navigator>
   );
 }

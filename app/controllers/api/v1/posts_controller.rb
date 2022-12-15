@@ -25,7 +25,7 @@ class Api::V1::PostsController < ApiController
 
   # GET /posts/1 or /posts/1.json
   def show
-
+    render json: @post.post_info
   end
 
   # GET /posts/new
