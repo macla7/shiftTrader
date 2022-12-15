@@ -1,7 +1,20 @@
 import React from "react";
+import { VStack, HStack, Text, View, Box } from "native-base";
+import { formatDistanceToNow } from "date-fns";
+import DP from "../../layout/DP";
+import { CInternalBorderTile } from "../../layout/LayoutComponents";
+import Comment from "./Comment";
 
-function Comments() {
-  return <div>Comments</div>;
+function Comments(props) {
+  return (
+    <Box borderTopWidth="1" borderColor="coolGray.200">
+      {props.comments.map((item) => {
+        return (
+          <Comment comment={item} key={item.id} navigation={props.navigation} />
+        );
+      })}
+    </Box>
+  );
 }
 
 export default Comments;

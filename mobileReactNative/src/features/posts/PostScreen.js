@@ -5,6 +5,7 @@ import { createConsumer } from "@rails/actioncable";
 import { CBackground } from "../layout/LayoutComponents";
 import Post from "./Post";
 import { selectPost, fetchPostAsync } from "./postSlice";
+import Comments from "./comments/Comments";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -24,7 +25,7 @@ function PostScreen({ route, navigation }) {
     <CBackground>
       <Box w="100%" h="100%" bgColor="white" shadow="6">
         <Post post={post} navigation={navigation} />
-        {/* <Comments /> */}
+        <Comments comments={[]} navigation={navigation} />
       </Box>
     </CBackground>
   );

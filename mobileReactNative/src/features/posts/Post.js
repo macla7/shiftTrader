@@ -61,7 +61,7 @@ function Post(props) {
   }
 
   return (
-    <Center my="1" bgColor="white" shadow="6">
+    <Center my="1" bgColor="white">
       <Center width="100%" px="2" py="1">
         <Text
           _dark={{

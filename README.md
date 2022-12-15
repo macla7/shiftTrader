@@ -3,7 +3,11 @@
 ## CURRENT TODO's
 
 - a post screen. This will allow for clearer view. Like facebook. It will show comments below, and then a comment form just above the tab navbar. I reckon we also allow the dual area (with bids and shift) to be flexible and have a max height twice that of on the home/groups screen.
-- Comments
+- comments
+  - make schema updates
+  - change Post model to include comments
+  - check in Postman
+  - create.. life...
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
 - Icons needed:
