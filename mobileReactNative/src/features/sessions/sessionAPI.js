@@ -1,6 +1,6 @@
 import * as SecureStore from "expo-secure-store";
 
-const API_URL = "http://192.168.1.131:3000/api/v1";
+const API_URL = "http://10.216.33.10:3000/api/v1";
 
 export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
