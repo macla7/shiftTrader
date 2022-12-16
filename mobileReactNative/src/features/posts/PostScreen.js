@@ -6,6 +6,7 @@ import { CBackground } from "../layout/LayoutComponents";
 import Post from "./Post";
 import { selectPost, fetchPostAsync } from "./postSlice";
 import Comments from "./comments/Comments";
+import CommentForm from "./comments/CommentForm";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -26,6 +27,7 @@ function PostScreen({ route, navigation }) {
       <Box w="100%" h="100%" bgColor="white" shadow="6">
         <Post post={post} navigation={navigation} />
         <Comments comments={[]} navigation={navigation} />
+        <CommentForm />
       </Box>
     </CBackground>
   );
