@@ -11,7 +11,7 @@ import CommentForm from "./comments/CommentForm";
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://10.216.33.10:3000/cable");
+const consumer = createConsumer("ws://192.168.1.173:3000/cable");
 
 function PostScreen({ route, navigation }) {
   const dispatch = useDispatch();

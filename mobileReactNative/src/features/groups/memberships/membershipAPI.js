@@ -1,6 +1,6 @@
 import { getValueFor } from "../../sessions/sessionAPI.js";
 
-const API_URL = "http://10.216.33.10:3000/api/v1";
+const API_URL = "http://192.168.1.173:3000/api/v1";
 
 export async function fetchMemberships(groupId) {
   const auth_token = await getValueFor("auth_token");
