@@ -6,6 +6,13 @@
 - comments
   - In the middle of making comments form.. format tweaking etc.
   - create.. life...
+  - is the buttonGroup not re-rendering when new likes are passed in... and therefore the Like component isn't re-rendering?????
+  - the issue seems to be that likes is rerendering (not intial render) and it's not
+    running the function hasCurrentUserLiked().
+  - think the issue is that there are two channels suscribed...? from same device? cause only one of them seems to work at once.
+  - just need to commit i think.. check all changes..
+  - issue was that we were't making currentUserLiked state to be false if the users
+    like wasn't in the props.likes array.
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
 - Icons needed:

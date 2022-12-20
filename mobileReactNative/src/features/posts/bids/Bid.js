@@ -41,7 +41,7 @@ function Bid(props) {
                 <Text>{props.bidNum == 0 ? "🥇" : ""}</Text>
               </HStack>
               <Text fontSize="2xs">
-                {props.reserve == true ? "Reserve" : props.bid.bidder}
+                {props.reserve == true ? "Reserve" : props.bid.biddor}
               </Text>
             </VStack>
           </Box>

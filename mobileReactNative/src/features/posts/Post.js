@@ -20,10 +20,10 @@ import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
 
-const consumer = createConsumer("ws://192.168.1.173:3000/cable");
+const consumer = createConsumer("ws://192.168.10.36:3000/cable");
 
 function Post(props) {
-  const [bids, setBids] = useState([]);
+  const [bids, setBids] = useState(props.post.bids);
   const [minPrice, setMinPrice] = useState(null);
   const [likes, setLikes] = useState(props.post.likes);
 
@@ -42,15 +42,19 @@ function Post(props) {
         },
       }
     );
-  }, []);
+  });
 
+  // setLike and setBids needed here as this is as the component is first rendered
+  // with the props.post.. but then on re-render (due to the things in the
+  // useEffect array), it needs to set bids and likes again.
   useEffect(() => {
     setBids(props.post.bids);
+    setLikes(props.post.likes);
     setMinPrice(setNewMinimumPrice(props.post.bids));
     return () => {
       postsChannel.unsubscribe();
     };
-  }, []);
+  }, [JSON.stringify(props.post.likes), JSON.stringify(props.post.bids)]);
 
   function setNewMinimumPrice(bids) {
     if (bids == undefined || bids.length == 0) {
@@ -160,7 +164,7 @@ function Post(props) {
         minPrice={minPrice}
         postId={props.post.id}
         navigation={props.navigation}
-        likes={props.post.likes}
+        likes={likes}
       />
     </Center>
   );

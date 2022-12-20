@@ -49,11 +49,13 @@ function Likes(props) {
   // Fetch Likes
   useEffect(() => {
     hasCurrentUserLiked();
-  }, [dispatch]);
+  }, [dispatch, JSON.stringify(props.likes)]);
 
   function hasCurrentUserLiked() {
     if (props.likes.filter((like) => like.user_id === userId).length > 0) {
       setCurrentUserLiked(true);
+    } else {
+      setCurrentUserLiked(false);
     }
   }
 

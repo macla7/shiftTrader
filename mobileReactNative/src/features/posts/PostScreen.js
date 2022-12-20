@@ -8,11 +8,6 @@ import { selectPost, fetchPostAsync } from "./postSlice";
 import Comments from "./comments/Comments";
 import CommentForm from "./comments/CommentForm";
 
-global.addEventListener = () => {};
-global.removeEventListener = () => {};
-
-const consumer = createConsumer("ws://192.168.1.173:3000/cable");
-
 function PostScreen({ route, navigation }) {
   const dispatch = useDispatch();
   const post = useSelector(selectPost);

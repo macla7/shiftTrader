@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { destroyPostAsync } from "./postSlice";
 import { Text, Flex, HStack, Button, AspectRatio, Box } from "native-base";
 import Likes from "./likes/Likes";
@@ -15,6 +16,7 @@ function ButtonGroup({ postId, minPrice, navigation, likes }) {
     };
     props.dispatch(destroyPostAsync(payload));
   }
+
   return (
     <Flex
       direction="row"
