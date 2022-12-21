@@ -4,15 +4,11 @@
 
 - a post screen. This will allow for clearer view. Like facebook. It will show comments below, and then a comment form just above the tab navbar. I reckon we also allow the dual area (with bids and shift) to be flexible and have a max height twice that of on the home/groups screen.
 - comments
-  - In the middle of making comments form.. format tweaking etc.
-  - create.. life...
-  - is the buttonGroup not re-rendering when new likes are passed in... and therefore the Like component isn't re-rendering?????
-  - the issue seems to be that likes is rerendering (not intial render) and it's not
-    running the function hasCurrentUserLiked().
-  - think the issue is that there are two channels suscribed...? from same device? cause only one of them seems to work at once.
-  - just need to commit i think.. check all changes..
-  - issue was that we were't making currentUserLiked state to be false if the users
-    like wasn't in the props.likes array.
+  - should the comments be added to a state array that's initially based off props. Then if you comment, you're comment will be place in a wrong order (if another comment was made in the meantime).. bad!!
+  - Another channel, at what point is there too many channels open... idk.
+  - Are push notifications just a channel of sorts?
+  - I think we go channel, because that's the only way it makes sense to me that the comments will be able to work effectively as push notifications.
+  - So lets make it similar to bids then.
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
 - Icons needed:

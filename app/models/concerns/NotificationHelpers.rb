@@ -32,6 +32,10 @@ module NotificationHelpers
       return "#{notification_origin.notifier.email} bid on a Post you've bid on"
     when 7
       return "#{notification_origin.notifier.email} liked your Post"
+    when 8
+      return "#{notification_origin.notifier.email} commented on your Post"
+    when 9
+      return "#{notification_origin.notifier.email} commented on a Post you've commented on"
     else 
       return "Error, can't find this notification.."
     end
@@ -41,6 +45,8 @@ module NotificationHelpers
     set_entity(notification_blueprint_params['notificationable_type'], notification_blueprint_params['notificationable_id'])
     p 'in notification helper, entity is'
     p @group
+    p 'post is'
+    p @post
     p 'current user is'
     p current_user
     case notification_blueprint_params['notification_type']
@@ -50,10 +56,12 @@ module NotificationHelpers
       return @group.admins
     when 4
       return @group.users.distinct.where.not(id: current_user.id)
-    when 5, 7
+    when 5, 7, 8
       return [@post.user]
     when 6
       return @post.bidding_users.distinct.where.not(id: current_user.id)
+    when 9
+      return @post.commenting_users.distinct.where.not(id: current_user.id)
     else
       return []
     end

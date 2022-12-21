@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box } from "native-base";
+import { ScrollView } from "native-base";
 import { createConsumer } from "@rails/actioncable";
 import { CBackground } from "../layout/LayoutComponents";
 import Post from "./Post";
@@ -19,11 +19,16 @@ function PostScreen({ route, navigation }) {
 
   return (
     <CBackground>
-      <Box w="100%" h="100%" bgColor="white" shadow="6">
+      <ScrollView
+        w="100%"
+        contentContainerStyle={{ flexGrow: 1 }}
+        minHeight="100%"
+        shadow="6"
+      >
         <Post post={post} navigation={navigation} />
         <Comments comments={[]} navigation={navigation} />
-        <CommentForm />
-      </Box>
+        <CommentForm postId={post.id} />
+      </ScrollView>
     </CBackground>
   );
 }

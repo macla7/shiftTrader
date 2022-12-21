@@ -5,9 +5,10 @@ class Post < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :bids, :dependent => :destroy
   has_many :shifts, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   has_many :notification_blueprints, :as => :notificationable
   has_many :bidding_users, through: :bids, source: :user
-  has_many :comments
+  has_many :commenting_users, through: :comments, source: :user
   
   accepts_nested_attributes_for :shifts
   
@@ -32,6 +33,10 @@ class Post < ApplicationRecord
 
   def bids_with_avatars
     serializable_hash(include: [bids: {methods: [:avatar_url, :biddor]}]) 
+  end
+
+  def comments_with_avatars
+    serializable_hash(include: [comments: {methods: [:avatar_url, :commentor]}]) 
   end
 
 end

@@ -15,23 +15,57 @@ import {
 import { Keyboard } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons/faPaperPlane";
+import { createCommentAsync } from "../postSlice";
+import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
+import { selectUserId } from "../../sessions/sessionSlice";
 
-function CommentForm() {
+function CommentForm({ postId }) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("testing");
+  const userId = useSelector(selectUserId);
+
+  function commentOnPost(text) {
+    let commentDetails = {
+      post_id: postId,
+      user_id: userId,
+      body: text,
+    };
+
+    dispatch(createCommentAsync(commentDetails));
+
+    // if above succeeds ..?
+    let notification_blueprint = {
+      notificationable_type: "Post",
+      notificationable_id: postId,
+      notification_type: 8,
+    };
+    let second_notification_blueprint = {
+      notificationable_type: "Post",
+      notificationable_id: postId,
+      notification_type: 9,
+    };
+
+    createNotificationBlueprint(notification_blueprint);
+    createNotificationBlueprint(second_notification_blueprint);
+  }
 
   return (
-    <Box p="2">
+    <Box p="2" position="absolute" bottom="0" width="100%" bgColor="white">
       <FormControl>
-        <HStack alignItems="center" justifyContent="center">
+        <HStack alignItems="stretch" justifyContent="center">
           <Input
             flex="1"
             m="0"
             type="text"
             value={comment}
             onChange={(e) => setComment(e.nativeEvent.text)}
+            borderRadius="50"
           />
-          <Button ml="2">
+          <Button
+            ml="2"
+            variant="unstyled"
+            onPress={() => commentOnPost(comment)}
+          >
             <FontAwesomeIcon icon={faPaperPlane} color="#171717" />
           </Button>
         </HStack>

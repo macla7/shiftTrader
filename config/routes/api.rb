@@ -11,10 +11,12 @@ namespace :api do
     resources :bids
     resources :notification_blueprints
     resources :notifications
+    resources :comments
     
     resources :posts do
       resources :likes, only: [:index]
       resources :bids, only: [:index]
+      resources :comments, only: [:index]
     end
 
     resources :groups do

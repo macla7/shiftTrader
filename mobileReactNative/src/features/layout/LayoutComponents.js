@@ -14,7 +14,7 @@ export function CBackground({ children }) {
         width="100%"
         height="100%"
       >
-        <Box py="1" w="100%" h="100%">
+        <Box w="100%" h="100%">
           {children}
         </Box>
       </LinearGradient>
