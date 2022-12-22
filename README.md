@@ -2,8 +2,10 @@
 
 ## CURRENT TODO's
 
-- Twilio / Omniauth
+- Omniauth
+- aws forget email address / mailer
 - Stripe
+- Twilio (maybe when I get a feaking phone number again)
 - Aws deploying.. my lord...
 - App and Android store..
 - push notifications

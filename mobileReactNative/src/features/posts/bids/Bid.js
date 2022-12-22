@@ -38,7 +38,7 @@ function Bid(props) {
                   microDollars={props.bid.price}
                   color={props.bid.price < 0 ? "lightBlue.800" : "green.800"}
                 />
-                <Text>{props.bidNum == 0 ? "🥇" : ""}</Text>
+                <Text>{props.bidNum == 0 ? "🏆" : ""}</Text>
               </HStack>
               <Text fontSize="2xs">
                 {props.reserve == true ? "Reserve" : props.bid.biddor}
