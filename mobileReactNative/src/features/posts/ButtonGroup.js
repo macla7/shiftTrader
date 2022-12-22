@@ -5,9 +5,15 @@ import Likes from "./likes/Likes";
 import BidIcon from "../../assets/noun-auction-4831153.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faMessage } from "@fortawesome/free-regular-svg-icons/faMessage";
-import { faSackDollar } from "@fortawesome/free-solid-svg-icons/faSackDollar";
 
-function ButtonGroup({ postId, minPrice, navigation, likes }) {
+function ButtonGroup({
+  postId,
+  minPrice,
+  navigation,
+  likes,
+  commentRef,
+  singularView,
+}) {
   function handleClick(e) {
     const payload = {
       post: {
@@ -16,6 +22,12 @@ function ButtonGroup({ postId, minPrice, navigation, likes }) {
     };
     props.dispatch(destroyPostAsync(payload));
   }
+
+  useEffect(() => {
+    if (singularView) {
+      commentRef.current.focus();
+    }
+  }, []);
 
   return (
     <Flex
@@ -31,12 +43,15 @@ function ButtonGroup({ postId, minPrice, navigation, likes }) {
         flex="1"
         variant="unstyled"
         p="0"
-        onPress={() =>
+        onPress={() => {
           navigation.navigate("Post", {
             returnScreen: "Home Feed",
             postId: postId,
-          })
-        }
+          });
+          if (singularView) {
+            commentRef.current.focus();
+          }
+        }}
       >
         <HStack h="100%" alignItems="center">
           <FontAwesomeIcon icon={faMessage} color="#171717" />

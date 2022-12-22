@@ -8,6 +8,7 @@ import {
   HStack,
   VStack,
   Center,
+  Button,
   ScrollView,
 } from "native-base";
 import { createConsumer } from "@rails/actioncable";
@@ -42,7 +43,7 @@ function Post(props) {
             setLikes(postData.body);
           }
           if (postData.type == "Comments") {
-            setComments(postData.body);
+            setComments(postData.body.comments);
           }
         },
       }
@@ -158,7 +159,19 @@ function Post(props) {
 
         <HStack flex="1" justifyContent="flex-end">
           <Center mx="2">
-            <Text>0 Comments</Text>
+            <Button
+              flex="1"
+              variant="unstyled"
+              p="0"
+              onPress={() =>
+                props.navigation.navigate("Post", {
+                  returnScreen: "Home Feed",
+                  postId: props.post.id,
+                })
+              }
+            >
+              <Text>{comments.length} Comments</Text>
+            </Button>
           </Center>
           <Center mr="2">
             <Text>{bids.length} Bids</Text>
@@ -171,9 +184,11 @@ function Post(props) {
         postId={props.post.id}
         navigation={props.navigation}
         likes={likes}
+        commentRef={props.commentRef}
+        singularView={props.singularView}
       />
 
-      {props.singularView ? <Comments comments={comments} /> : ""}
+      {props.singularView ? <Comments comments={comments} /> : null}
     </Center>
   );
 }

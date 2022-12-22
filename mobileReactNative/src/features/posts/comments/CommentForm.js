@@ -19,7 +19,7 @@ import { createCommentAsync } from "../postSlice";
 import { createNotificationBlueprint } from "../../notifications/notificationBlueprintAPI";
 import { selectUserId } from "../../sessions/sessionSlice";
 
-function CommentForm({ postId }) {
+function CommentForm({ postId, commentRef }) {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("testing");
   const userId = useSelector(selectUserId);
@@ -60,6 +60,7 @@ function CommentForm({ postId }) {
             value={comment}
             onChange={(e) => setComment(e.nativeEvent.text)}
             borderRadius="50"
+            ref={commentRef}
           />
           <Button
             ml="2"

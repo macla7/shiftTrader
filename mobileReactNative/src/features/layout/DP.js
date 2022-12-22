@@ -1,6 +1,6 @@
 import React from "react";
 import CachedImage from "expo-cached-image";
-import { Text, Box } from "native-base";
+import { Text, Center, Box } from "native-base";
 
 function DP({ uri }) {
   function getImageThumbnail(uri) {
