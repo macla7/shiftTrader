@@ -7,7 +7,14 @@ function Posts(props) {
   return (
     <>
       {props.posts.map((item) => {
-        return <Post post={item} key={item.id} navigation={props.navigation} />;
+        return (
+          <Post
+            post={item}
+            key={item.id}
+            navigation={props.navigation}
+            singularView={false}
+          />
+        );
       })}
     </>
   );

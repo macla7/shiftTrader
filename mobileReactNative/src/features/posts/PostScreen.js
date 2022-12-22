@@ -25,8 +25,7 @@ function PostScreen({ route, navigation }) {
         minHeight="100%"
         shadow="6"
       >
-        <Post post={post} navigation={navigation} />
-        <Comments comments={[]} navigation={navigation} />
+        <Post post={post} navigation={navigation} singularView={true} />
         <CommentForm postId={post.id} />
       </ScrollView>
     </CBackground>

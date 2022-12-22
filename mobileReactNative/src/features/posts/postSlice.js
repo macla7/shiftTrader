@@ -36,6 +36,15 @@ export const initialBidState = {
   created_at: Date.now(),
 };
 
+export const initialCommentState = {
+  id: 0,
+  post_id: 0,
+  user_id: 0,
+  body: "",
+  avatar_url: "",
+  created_at: Date.now(),
+};
+
 export const initialShiftState = {
   id: 0,
   position: "",
@@ -55,6 +64,7 @@ export const initialState = {
     bids: [initialBidState],
     likes: [initialLikeState],
     shifts: [initialShiftState],
+    comments: [initialCommentState],
   },
   posts: [
     {
@@ -68,6 +78,7 @@ export const initialState = {
       bids: [initialBidState],
       likes: [initialLikeState],
       shifts: [initialShiftState],
+      comments: [initialCommentState],
     },
   ],
   homePosts: [
@@ -81,6 +92,7 @@ export const initialState = {
       bids: [initialBidState],
       likes: [initialLikeState],
       shifts: [initialShiftState],
+      comments: [initialCommentState],
     },
   ],
   status: Statuses.Initial,

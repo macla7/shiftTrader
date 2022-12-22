@@ -16,6 +16,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import ButtonGroup from "./ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons/faClock";
+import Comments from "./comments/Comments";
 
 global.addEventListener = () => {};
 global.removeEventListener = () => {};
@@ -26,6 +27,7 @@ function Post(props) {
   const [bids, setBids] = useState(props.post.bids);
   const [minPrice, setMinPrice] = useState(null);
   const [likes, setLikes] = useState(props.post.likes);
+  const [comments, setComments] = useState(props.post.comments);
 
   const postsChannel = useMemo(() => {
     return consumer.subscriptions.create(
@@ -39,6 +41,9 @@ function Post(props) {
           if (postData.type == "Likes") {
             setLikes(postData.body);
           }
+          if (postData.type == "Comments") {
+            setComments(postData.body);
+          }
         },
       }
     );
@@ -50,6 +55,7 @@ function Post(props) {
   useEffect(() => {
     setBids(props.post.bids);
     setLikes(props.post.likes);
+    setComments(props.post.comments);
     setMinPrice(setNewMinimumPrice(props.post.bids));
     return () => {
       postsChannel.unsubscribe();
@@ -166,6 +172,8 @@ function Post(props) {
         navigation={props.navigation}
         likes={likes}
       />
+
+      {props.singularView ? <Comments comments={comments} /> : ""}
     </Center>
   );
 }
