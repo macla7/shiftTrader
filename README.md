@@ -2,8 +2,6 @@
 
 ## CURRENT TODO's
 
-- make the 'View post' notifications.. do that now.. take to postScreen.
-- useRef() to focus on commentForm when comment button pressed in PostScreen.
 - Twilio / Omniauth
 - Stripe
 - Aws deploying.. my lord...

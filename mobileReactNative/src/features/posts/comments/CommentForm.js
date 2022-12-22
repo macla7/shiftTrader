@@ -21,7 +21,7 @@ import { selectUserId } from "../../sessions/sessionSlice";
 
 function CommentForm({ postId, commentRef }) {
   const dispatch = useDispatch();
-  const [comment, setComment] = useState("testing");
+  const [comment, setComment] = useState("");
   const userId = useSelector(selectUserId);
 
   function commentOnPost(text) {
@@ -61,6 +61,7 @@ function CommentForm({ postId, commentRef }) {
             onChange={(e) => setComment(e.nativeEvent.text)}
             borderRadius="50"
             ref={commentRef}
+            placeholder="Comment on post..."
           />
           <Button
             ml="2"

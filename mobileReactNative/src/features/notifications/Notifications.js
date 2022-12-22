@@ -14,7 +14,7 @@ import {
 } from "../layout/LayoutComponents";
 import { formatDistanceToNow } from "date-fns";
 
-function Notifications() {
+function Notifications({ navigation }) {
   const notifications = useSelector(selectNotifications);
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
@@ -100,7 +100,7 @@ function Notifications() {
   function handleActionButtonText(notification) {
     switch (notification.notification_blueprint.notificationable_type) {
       case "Post":
-        return "View Group";
+        return "View Post";
       case "Invite":
         return "Accept";
     }
@@ -111,6 +111,11 @@ function Notifications() {
       handleAcceptInvite(notification);
     } else if (notification.notification_blueprint.notification_type === 3) {
       handleAcceptRequest(notification);
+    } else {
+      navigation.navigate("Post", {
+        returnScreen: "Notifications",
+        postId: notification.notification_blueprint.notificationable_id,
+      });
     }
   }
 
