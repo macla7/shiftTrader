@@ -82,3 +82,9 @@ gem "devise-jwt", "~> 0.9.0"
 gem 'jwt'
 
 gem 'doorkeeper-jwt'
+
+gem 'omniauth'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-rails_csrf_protection'

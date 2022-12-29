@@ -3,6 +3,7 @@
 ## CURRENT TODO's
 
 - Omniauth
+  - deanin vid.. got to 15:00mins in.. hit snag that I need a bundle ID. Appears to be an apple thing. Fuck. Put this on pause. Done all the 'rails code' for the video i believe.. (had to be edited for my api, jwt token auth setup).
 - aws forget email address / mailer
 - Stripe
 - Twilio (maybe when I get a feaking phone number again)
@@ -11,12 +12,6 @@
 - push notifications
   - seems the way to go will be the expo push notification package.. but since to test it all properly it'll require a paid Apple developer account (apparently), I'm going to push this one toward the end.
 - User Testing
-- Icons needed:
-  - Hourglass for time left / stopwatch
-  - comment
-  - heart
-  - bid (got already?)
-  - pencil for editing (?)
 
 **Twilio (phone) verification**
 
